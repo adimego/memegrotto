@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Meme Vault — a library of internet memes</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐸</text></svg>">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="top">
+  <button class="menu-btn" id="menuBtn" aria-label="Categories">☰</button>
+  <a class="brand" href="#"><span class="logo">🐸</span><span>Meme<b>Vault</b></span></a>
+  <div class="search">
+    <span>🔎</span>
+    <input id="q" type="search" placeholder="Search titles & tags… (try “harambe” or “will smith”)" autocomplete="off">
+    <kbd>/</kbd>
+  </div>
+  <label class="nsfw-toggle" title="Show crude / NSFW-language memes">
+    <input type="checkbox" id="nsfw" checked><span class="sw"></span><span class="lbl">🌶️ Crude</span>
+  </label>
+  <select id="sort" aria-label="Sort">
+    <option value="popular">Most popular</option>
+    <option value="az">A → Z</option>
+    <option value="new">Recently added</option>
+    <option value="shuffle">Shuffle 🎲</option>
+  </select>
+</header>
+
+<div class="layout">
+  <aside class="sidebar" id="sidebar">
+    <h3>Categories</h3>
+    <nav id="cats"></nav>
+    <h3>Spotlight</h3>
+    <div id="spot" class="spot"></div>
+    <h3>Popular tags</h3>
+    <div id="tagcloud" class="tagcloud"></div>
+    <p class="foot">Images from <a href="https://imgflip.com" target="_blank" rel="noopener">Imgflip</a> &amp; <a href="https://www.reddit.com/r/memes" target="_blank" rel="noopener">r/memes</a>. All memes belong to their creators.</p>
+  </aside>
+
+  <main>
+    <section class="hero">
+      <h1 id="heading">All memes</h1>
+      <p id="sub"></p>
+      <div id="active" class="active"></div>
+    </section>
+    <div id="grid" class="grid"></div>
+    <div id="empty" class="empty" hidden>
+      <div class="big">🤷</div><p>No memes match that. <button id="reset">Reset filters</button></p>
+    </div>
+  </main>
+</div>
+
+<div class="lightbox" id="lb" hidden>
+  <button class="lb-close" id="lbClose" aria-label="Close">✕</button>
+  <button class="lb-nav prev" id="lbPrev" aria-label="Previous">‹</button>
+  <div class="lb-body">
+    <div class="lb-img"><img id="lbImg" alt=""></div>
+    <div class="lb-info">
+      <span class="pill" id="lbCat"></span>
+      <h2 id="lbTitle"></h2>
+      <div class="tags" id="lbTags"></div>
+      <p class="caption" id="lbCaption"></p>
+      <dl>
+        <dt>Source</dt><dd id="lbSource"></dd>
+        <dt>Credit</dt><dd id="lbAttr"></dd>
+        <dt>Added</dt><dd id="lbDate"></dd>
+        <dt>Size</dt><dd id="lbSize"></dd>
+      </dl>
+      <div class="lb-actions">
+        <a id="lbOpen" class="btn primary" target="_blank" rel="noopener">View source ↗</a>
+        <a id="lbDl" class="btn" download>Download</a>
+        <button id="lbCopy" class="btn">Copy link</button>
+      </div>
+    </div>
+  </div>
+  <button class="lb-nav next" id="lbNext" aria-label="Next">›</button>
+</div>
+<div id="toast" class="toast"></div>
+<script src="app.js"></script>
+</body>
+</html>
