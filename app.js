@@ -10,6 +10,7 @@ const SPOTLIGHT = [
   { key: "harambe", label: "Harambe", sub: "Gone but not forgotten 🦍" },
   { key: "will smith", label: "Will Smith", sub: "Slaps, spaghetti & Fresh Prince" },
   { key: "sonic", label: "Sonic the Hedgehog", sub: "Gotta go fast 💨" },
+  { key: "epstein", label: "Epstein didn't kill himself", sub: "Cameras off, guards asleep 📼" },
   { key: "spaghetti", label: "Spaghetti cinema", sub: "Somebody toucha my spaghet" },
   { key: "advice animal", label: "Advice animals", sub: "Old-school 2010s classics" },
   { key: "reddit", label: "Fresh from Reddit", sub: "Top posts from meme subs" },
@@ -74,7 +75,7 @@ function paintVotes(m) {
     b.classList.toggle("voted", myVotes.has(vid(m))); b.title = myVotes.has(vid(m)) ? "You upvoted this" : "Upvote";
   });
 }
-const state = { cat: null, tag: null, q: "", sort: "popular", top: false, nsfw: localStorage.getItem("mv-nsfw") !== "0" };
+const state = { cat: null, tag: null, q: "", sort: "popular", top: false, trend: false, nsfw: localStorage.getItem("mv-nsfw") !== "0" };
 let memes = [], view = [], idx = -1;
 
 const norm = s => s.toLowerCase().normalize("NFKD").replace(/[\u0300-\u036f]/g, "");
@@ -87,6 +88,18 @@ fetch("memes.json").then(r => r.json()).then(d => {
 });
 
 const visible = () => memes.filter(m => state.nsfw || !m.nsfw);
+
+// ---- Trending: date-based. Fresh-source memes (Reddit / Imgflip captioned / KYM galleries) added in the last
+// TREND_DAYS days, newest day first; within a day, round-robin across feeds by each feed's own popularity order.
+const TREND_DAYS = 7, HOME_MIX = 24;
+let hl = new Map();   // meme id -> "top" | "trend" badge on the home mix
+function trendingList(pool) {
+  const cutoff = new Date(Date.now() - TREND_DAYS * 864e5).toISOString().slice(0, 10), pos = {}, feedN = {};
+  memes.forEach(m => { const f = m.feed || m.source; pos[m.id] = feedN[f] = (feedN[f] || 0) + 1; });
+  return pool.filter(m => (m.date_added || "") >= cutoff && !m.source.startsWith("Imgflip API") && m.feed !== "kym" && m.feed !== "kym-entry")
+    .sort((a, b) => (b.date_added || "").localeCompare(a.date_added || "") || pos[a.id] - pos[b.id] || a.rank - b.rank);
+}
+function topVotedList(pool) { return pool.filter(m => vcount(m) > 0).sort((a, b) => vcount(b) - vcount(a) || a.rank - b.rank); }
 function counts(list) { const c = {}; list.forEach(m => c[m.category] = (c[m.category] || 0) + 1); return c; }
 
 function buildSidebar() {
@@ -96,19 +109,28 @@ function buildSidebar() {
     const b = document.createElement("button");
     b.className = "cat" + ((state.cat === name) ? " on" : "");
     b.innerHTML = `<span class="ic">${icon}</span><span>${name || "All memes"}</span><span class="n">${n}</span>`;
-    b.onclick = () => { state.cat = name; state.tag = null; state.top = false; closeMenu(); update(); };
+    b.onclick = () => { state.cat = name; state.tag = null; state.top = false; state.trend = false; closeMenu(); update(); };
     cats.appendChild(b);
   };
   mk(null, pool.length, "✨");
   Object.keys(CAT_META).filter(k => c[k]).sort((a, b) => c[b] - c[a]).forEach(k => mk(k, c[k], CAT_META[k][0]));
 
   const spot = $("#spot"); spot.innerHTML = "";
+  {
+    const tr = trendingList(pool);
+    if (tr.length) {
+      const b = document.createElement("button"); b.className = state.trend ? "on" : "";
+      b.innerHTML = `<img src="${tr[0].thumb || tr[0].image}" alt=""><span>🔥 Trending <small>${tr.length} fresh memes · last ${TREND_DAYS} days</small></span>`;
+      b.onclick = () => { state.trend = !state.trend; state.top = false; state.tag = null; state.cat = null; closeMenu(); update(); };
+      spot.appendChild(b);
+    }
+  }
   if (votesOk) {
     const voted = pool.filter(m => vcount(m) > 0).sort((a, b) => vcount(b) - vcount(a));
     const b = document.createElement("button"); b.className = state.top ? "on" : "";
     b.innerHTML = `<span class="trophy">🏆</span><span>Top voted <small>${voted.length} memes with votes · community picks</small></span>`;
     if (voted[0]) b.querySelector(".trophy").outerHTML = `<img src="${voted[0].thumb || voted[0].image}" alt="">`;
-    b.onclick = () => { state.top = !state.top; state.tag = null; state.cat = null; closeMenu(); update(); };
+    b.onclick = () => { state.top = !state.top; state.trend = false; state.tag = null; state.cat = null; closeMenu(); update(); };
     spot.appendChild(b);
   }
   SPOTLIGHT.forEach(s => {
@@ -117,7 +139,7 @@ function buildSidebar() {
     const b = document.createElement("button");
     b.className = state.tag === s.key ? "on" : "";
     b.innerHTML = `<img src="${hits[0].thumb || hits[0].image}" alt=""><span>${s.label} <small>${hits.length} memes · ${s.sub}</small></span>`;
-    b.onclick = () => { state.tag = state.tag === s.key ? null : s.key; state.cat = null; state.top = false; closeMenu(); update(); };
+    b.onclick = () => { state.tag = state.tag === s.key ? null : s.key; state.cat = null; state.top = false; state.trend = false; closeMenu(); update(); };
     spot.appendChild(b);
   });
 
@@ -137,7 +159,12 @@ function tagEl(t, n) {
 }
 
 function filtered() {
+  hl = new Map();
   const terms = norm(state.q).split(/\s+/).filter(Boolean);
+  if (state.trend) {
+    const v = trendingList(visible()).filter(m => (!state.cat || m.category === state.cat) && (!state.tag || m.tags.includes(state.tag)) && terms.every(t => m.hay.includes(t)));
+    return state.sort === "popular" ? v : sortBy(v);
+  }
   let v = visible().filter(m => (!state.top || vcount(m) > 0) && (!state.cat || m.category === state.cat) && (!state.tag || m.tags.includes(state.tag))
     && terms.every(t => m.hay.includes(t)));
   if (state.sort === "popular" && !state.cat && !state.tag && !terms.length) {
@@ -147,10 +174,22 @@ function filtered() {
     for (let i = 0; out.length < v.length; i++) g.forEach((arr, k) => { const per = [2, 1, 1][k]; for (let j = 0; j < per; j++) { const x = arr[i * per + j]; if (x) out.push(x); } });
     v = out;
   } else if (state.sort === "popular") v.sort((a, b) => a.rank - b.rank);
+  if (state.sort === "popular" && !state.top && !state.cat && !state.tag && !terms.length) {
+    // Home page: alternate top-voted and trending memes (deduped), then the usual vote/popularity order
+    const tv = topVotedList(v).slice(0, HOME_MIX), tr = trendingList(v).slice(0, HOME_MIX), head = [], seen = new Set();
+    for (let i = 0; i < HOME_MIX; i++) [[tv[i], "top"], [tr[i], "trend"]].forEach(([m, k]) => {
+      if (m && !seen.has(m.id)) { seen.add(m.id); head.push(m); hl.set(m.id, k); }
+    });
+    const rest = v.filter(m => !seen.has(m.id)).sort((a, b) => vcount(b) - vcount(a));
+    return head.concat(rest);
+  }
   if (state.sort === "popular" || state.top) {
     // votes first; ties keep the curated popularity order (Array.sort is stable)
     return v.sort((a, b) => vcount(b) - vcount(a));
   }
+  return sortBy(v);
+}
+function sortBy(v) {
   if (state.sort === "az") v.sort((a, b) => a.title.localeCompare(b.title));
   else if (state.sort === "new") v.sort((a, b) => (b.date_added || "").localeCompare(a.date_added || "") || b.rank - a.rank);
   else if (state.sort === "shuffle") v.sort(() => Math.random() - .5);
@@ -163,25 +202,27 @@ function update() { writeHash(); buildSidebar(); render(); window.scrollTo({ top
 function render() {
   view = filtered();
   const grid = $("#grid"); grid.innerHTML = "";
-  $("#heading").textContent = state.top ? "🏆 Top voted" : state.tag ? `#${state.tag}` : (state.cat || "All memes");
+  $("#heading").textContent = state.trend ? "🔥 Trending" : state.top ? "🏆 Top voted" : state.tag ? `#${state.tag}` : (state.cat || "All memes");
   const cats = Object.keys(counts(view)).length;
   $("#sub").textContent = `${view.length} meme${view.length === 1 ? "" : "s"}` + (cats > 1 ? ` across ${cats} categories` : "") + (state.q ? ` matching “${state.q}”` : "");
   const act = $("#active"); act.innerHTML = "";
-  [["top", state.top && "🏆 Top voted"], ["cat", state.cat], ["tag", state.tag && "#" + state.tag], ["q", state.q && `“${state.q}”`]].forEach(([k, v]) => {
+  [["trend", state.trend && "🔥 Trending"], ["top", state.top && "🏆 Top voted"], ["cat", state.cat], ["tag", state.tag && "#" + state.tag], ["q", state.q && `“${state.q}”`]].forEach(([k, v]) => {
     if (!v) return;
     const s = document.createElement("span"); s.innerHTML = `${v}<button aria-label="remove">✕</button>`;
-    s.querySelector("button").onclick = () => { state[k] = k === "q" ? "" : k === "top" ? false : null; if (k === "q") $("#q").value = ""; update(); };
+    s.querySelector("button").onclick = () => { state[k] = k === "q" ? "" : (k === "top" || k === "trend") ? false : null; if (k === "q") $("#q").value = ""; update(); };
     act.appendChild(s);
   });
   $("#empty").hidden = view.length > 0;
-  const ncol = Math.max(1, Math.min(6, Math.floor((grid.clientWidth + 16) / 246)));
+  PAGE = isPhone() ? 16 : 60;
+  const ncol = isPhone() ? (grid.clientWidth < 330 ? 1 : 2) : Math.max(1, Math.min(6, Math.floor((grid.clientWidth + 16) / 246)));
   cols = [...Array(ncol)].map(() => { const d = document.createElement("div"); d.className = "col"; grid.appendChild(d); return d; });
   hts = Array(ncol).fill(0); shown = 0;
   renderMore();
 }
 
 // Incremental rendering: cards are appended in pages of PAGE as the user scrolls (keeps 1000+ items fast)
-const PAGE = 60;
+const isPhone = () => window.matchMedia("(max-width: 640px)").matches;
+let PAGE = isPhone() ? 16 : 60;
 let cols = [], hts = [], shown = 0;
 const sentinel = document.createElement("div"); sentinel.id = "sentinel";
 const io = new IntersectionObserver(es => { if (es.some(e => e.isIntersecting)) renderMore(); }, { rootMargin: "1200px 0px" });
@@ -193,8 +234,9 @@ function renderMore() {
     const c = document.createElement("article"); c.className = "card";
     c.style.animationDelay = Math.min((i % PAGE) * 15, 400) + "ms";
     const ratio = m.width && m.height ? `aspect-ratio:${m.width}/${m.height}` : "min-height:180px";
-    c.innerHTML = `<div class="ph" style="${ratio}"><img loading="lazy" alt="${esc(m.title)}" src="${m.thumb || m.image}"></div>
-      ${m.source.startsWith("Reddit") ? `<span class="badge">🔥 ${esc(m.source.replace("Reddit ", ""))}</span>` : ""}
+    c.innerHTML = `<div class="ph" style="${ratio}"><img ${i < 4 ? 'fetchpriority="high"' : 'loading="lazy"'} decoding="async" alt="${esc(m.title)}" src="${m.thumb || m.image}"></div>
+      ${hl.get(m.id) === "top" ? '<span class="badge hl top">🏆 Top</span>' : hl.get(m.id) === "trend" ? '<span class="badge hl trend">🔥 Trending</span>'
+        : m.source.startsWith("Reddit") ? `<span class="badge">${esc(m.source.replace("Reddit ", ""))}</span>` : ""}
       ${m.nsfw ? '<span class="badge nsfw">🌶️ NSFW</span>' : ""}
       <div class="meta"><h4>${esc(m.title)}</h4><div class="row"><span class="pill" style="--c:${color(m.category)}">${CAT_META[m.category]?.[0] || ""} ${m.category}</span>
       <span class="src">${esc(m.source.split(" ")[0] === "Know" ? "KYM" : m.source.split(" ")[0])}</span></div></div>`;
@@ -229,8 +271,28 @@ function openLb(i) {
   const lv = $("#lbVote"); lv.innerHTML = ""; const vb = voteBtn(m); vb.classList.add("big"); lv.appendChild(vb);
   $("#lb").hidden = false; document.body.style.overflow = "hidden";
 }
-function closeLb() { $("#lb").hidden = true; document.body.style.overflow = ""; }
-let rz; window.addEventListener("resize", () => { clearTimeout(rz); rz = setTimeout(render, 150); });
+function closeLb() { $("#lb").hidden = true; document.body.style.overflow = ""; $("#lbImg").style.transform = ""; }
+let rz, lastW = innerWidth;
+window.addEventListener("resize", () => {   // ignore height-only changes (mobile URL bar show/hide)
+  if (innerWidth === lastW) return; lastW = innerWidth; clearTimeout(rz); rz = setTimeout(render, 150);
+});
+// Lightbox touch gestures: swipe left/right = next/prev, swipe down or tap the dark area = close
+(() => {
+  const area = $(".lb-img"); let x0 = null, y0 = 0, t0 = 0;
+  area.addEventListener("touchstart", e => { if (e.touches.length !== 1) return x0 = null; x0 = e.touches[0].clientX; y0 = e.touches[0].clientY; t0 = Date.now(); }, { passive: true });
+  area.addEventListener("touchmove", e => {
+    if (x0 === null) return; const dx = e.touches[0].clientX - x0, dy = e.touches[0].clientY - y0;
+    $("#lbImg").style.transform = Math.abs(dx) > Math.abs(dy) ? `translateX(${dx}px)` : dy > 0 ? `translateY(${dy}px)` : "";
+  }, { passive: true });
+  area.addEventListener("touchend", e => {
+    if (x0 === null) return; const t = e.changedTouches[0], dx = t.clientX - x0, dy = t.clientY - y0; x0 = null;
+    $("#lbImg").style.transform = "";
+    if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy) * 1.2) openLb(idx + (dx < 0 ? 1 : -1));
+    else if (dy > 80 && dy > Math.abs(dx)) closeLb();
+    else if (Math.abs(dx) < 10 && Math.abs(dy) < 10 && Date.now() - t0 < 300 && e.target === area) closeLb();
+  });
+  area.addEventListener("click", e => { if (e.target === area) closeLb(); });
+})();
 $("#lbClose").onclick = closeLb;
 $("#lbPrev").onclick = () => openLb(idx - 1);
 $("#lbNext").onclick = () => openLb(idx + 1);
@@ -244,7 +306,8 @@ function toast(t) { const el = $("#toast"); el.textContent = t; el.classList.add
 document.addEventListener("keydown", e => {
   if (!$("#lb").hidden) {
     if (e.key === "Escape") closeLb(); if (e.key === "ArrowLeft") openLb(idx - 1); if (e.key === "ArrowRight") openLb(idx + 1);
-  } else if (e.key === "/" && document.activeElement !== $("#q")) { e.preventDefault(); $("#q").focus(); }
+  } else if (e.key === "Escape" && $("#sidebar").classList.contains("open")) closeMenu();
+  else if (e.key === "/" && document.activeElement !== $("#q")) { e.preventDefault(); $("#q").focus(); }
 });
 let t; $("#q").addEventListener("input", e => { clearTimeout(t); t = setTimeout(() => { state.q = e.target.value.trim(); writeHash(); render(); }, 120); });
 $("#nsfw").onchange = e => {
@@ -253,16 +316,35 @@ $("#nsfw").onchange = e => {
   update(); toast(state.nsfw ? "Crude memes shown 🌶️" : "Crude memes hidden 😇");
 };
 $("#sort").onchange = e => { state.sort = e.target.value; render(); };
-$("#reset").onclick = () => { Object.assign(state, { cat: null, tag: null, q: "", top: false }); $("#q").value = ""; update(); };
-$("#menuBtn").onclick = () => $("#sidebar").classList.toggle("open");
-function closeMenu() { $("#sidebar").classList.remove("open"); }
+$("#reset").onclick = () => { Object.assign(state, { cat: null, tag: null, q: "", top: false, trend: false }); $("#q").value = ""; update(); };
+function openMenu() {
+  $("#sidebar").classList.add("open"); $("#backdrop").hidden = false; document.body.classList.add("menu-open");
+  $("#menuBtn").setAttribute("aria-expanded", "true");
+}
+function closeMenu() {
+  $("#sidebar").classList.remove("open"); $("#backdrop").hidden = true; document.body.classList.remove("menu-open");
+  $("#menuBtn").setAttribute("aria-expanded", "false");
+}
+$("#menuBtn").onclick = () => $("#sidebar").classList.contains("open") ? closeMenu() : openMenu();
+$("#sbClose").onclick = closeMenu; $("#backdrop").onclick = closeMenu;
+// swipe the open sidebar left to close it; swipe right from the left screen edge to open it
+(() => {
+  let sx = null, sy = 0, fromEdge = false;
+  document.addEventListener("touchstart", e => { const t = e.touches[0]; sx = t.clientX; sy = t.clientY; fromEdge = sx < 24; }, { passive: true });
+  document.addEventListener("touchend", e => {
+    if (sx === null || !$("#lb").hidden) return; const t = e.changedTouches[0], dx = t.clientX - sx, dy = t.clientY - sy; sx = null;
+    if (Math.abs(dx) < 60 || Math.abs(dx) < Math.abs(dy) * 1.5) return;
+    const open = $("#sidebar").classList.contains("open");
+    if (open && dx < 0) closeMenu(); else if (!open && fromEdge && dx > 0 && matchMedia("(max-width: 900px)").matches) openMenu();
+  }, { passive: true });
+})();
 
 function writeHash() {
-  const p = new URLSearchParams(); if (state.top) p.set("top", "1"); if (state.cat) p.set("cat", state.cat); if (state.tag) p.set("tag", state.tag); if (state.q) p.set("q", state.q);
+  const p = new URLSearchParams(); if (state.top) p.set("top", "1"); if (state.trend) p.set("trending", "1"); if (state.cat) p.set("cat", state.cat); if (state.tag) p.set("tag", state.tag); if (state.q) p.set("q", state.q);
   history.replaceState(null, "", p.toString() ? "#" + p : location.pathname);
 }
 function readHash() {
   const p = new URLSearchParams(location.hash.slice(1));
-  state.top = p.get("top") === "1"; state.cat = p.get("cat"); state.tag = p.get("tag"); state.q = p.get("q") || ""; $("#q").value = state.q;
+  state.top = p.get("top") === "1"; state.trend = p.get("trending") === "1"; state.cat = p.get("cat"); state.tag = p.get("tag"); state.q = p.get("q") || ""; $("#q").value = state.q;
   if (p.get("open")) setTimeout(() => { const i = view.findIndex(m => m.id === p.get("open")); if (i >= 0) openLb(i); }, 0);
 }

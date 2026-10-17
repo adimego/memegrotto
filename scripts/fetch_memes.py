@@ -284,6 +284,15 @@ BLOCK_RX = re.compile(r"\b(n[i1]gg|f[a@]gg?ots?\b|f[a@]g\b|retard|tranny|trannie
 CRUDE_RX = re.compile(r"(fuck|shit|bitch|\bass\b|asshole|dick|cock|\bcum\b|pussy|\bdamn|piss|horny|\bsex|boob|tits|"
                       r"\bwtf\b|bastard|\bcrap|balls\b|penis|\bnsfw|thot|\bhoe\b|bullshit|motherf|stfu|lmfao|\bdie\b)", re.I)
 
+# Epstein jokes are allowed (conspiracy / "didn't kill himself" / cameras / client list / files), but anything
+# touching minors or abuse is dropped automatically and the rest is eyeballed.
+EPSTEIN_RX = re.compile(r"epstein|didn'?t kill himself|client list|lolita express|ghislaine|maxwell", re.I)
+MINOR_RX = re.compile(r"underage|minor|teen|\bkids?\b|child|little girl|\bgirls?\b|years? old|\byo\b|daughter|niece|loli|"
+                      r"pedo|age of consent|puberty|school|\bbaby|\b1[0-7]\b|grooming|rape|sex|massage|traffick|virgin", re.I)
+EPSTEIN_SUBS = ["memes", "dankmemes", "PoliticalHumor", "HistoryMemes", "me_irl", "AdviceAnimals", "PoliticalMemes",
+                "comedyheaven", "funny", "teenagers_not", "Funnymemes", "memesopdidnotlike"]
+EPSTEIN_READMIT = ["1r8wcyk", "1pu5pcp", "1r1vory", "1r8814z", "1qzok9o", "1p0mbcj"]
+
 # Ids that were eyeballed and rejected (explicit, gore, minors, hateful, low quality, not a meme). Removed on every run.
 EXCLUDE = {
     "imgflip-i-6zfay5",   # low quality
@@ -599,6 +608,16 @@ def imgflip_tag_page(tag, sort, page=1):
             if p.startswith("image tagged in "): itags = [x.strip() for x in p[16:].split(",")]
         yield img.group(1), img.group(2), html.unescape(t.group(2)).strip(), caption.replace(";", " /"), itags
 
+def _reddit_entries(url):
+    for e in re.findall(r"<entry>(.*?)</entry>", get(url), re.S):
+        img = re.findall(r"https://i\.redd\.it/\w+\.(?:jpe?g|png|gif)", e)
+        if not img: continue
+        title = html.unescape(html.unescape(re.search(r"<title>(.*?)</title>", e, re.S).group(1))).strip()
+        link = re.search(r'<link href="([^"]+)"', e).group(1)
+        author = re.search(r"<name>(.*?)</name>", e)
+        pid = re.search(r"/comments/(\w+)/", link)
+        if pid: yield pid.group(1), title, link, img[0], author.group(1) if author else "unknown"
+
 def reddit_feed(sub, period, limit=100, pages=1):
     entries, after = [], ""
     for pg in range(pages):
@@ -822,6 +841,56 @@ def main():
                  "attribution": "Entry image via Know Your Meme"}, img)
             time.sleep(1.5)
 
+    if "epstein" in a.sources:
+        print("Epstein memes...")
+        def ep_ok(text):
+            return EPSTEIN_RX.search(text) and not MINOR_RX.search(text)
+        for tag in ["epstein", "jeffrey epstein", "epstein didnt kill himself", "epstein files", "epstein island",
+                    "epstein list", "epstein client list"]:
+            for page in (1, 2, 3):
+                try: units = list(imgflip_tag_page(tag, "top", page))
+                except Exception as e: problems.append(f"imgflip tag {tag}: {e}"); break
+                if not units: break
+                for iid, ext, title, caption, itags in units:
+                    if not ep_ok(" ".join([title, caption, tag])) or MINOR_RX.search(" ".join(itags)): continue
+                    add({"id": f"imgflip-i-{iid}", "title": title, "caption": caption, "category": "History & Politics",
+                         "feed": "epstein", "tags": ["epstein", "captioned", "history"],
+                         "source": "Imgflip", "source_url": f"https://imgflip.com/i/{iid}",
+                         "image_url": f"https://i.imgflip.com/{iid}.{ext}", "captioned": True,
+                         "attribution": f"User-made caption on Imgflip (tag: {tag})"}, f"https://i.imgflip.com/{iid}.{ext}")
+                time.sleep(0.5)
+        for slug_ in ["epstein-didnt-kill-himself", "jeffrey-epstein"]:
+            for page in (1, 2, 3):
+                try: s_ = get(f"https://knowyourmeme.com/memes/{slug_}/photos" + (f"/page/{page}" if page > 1 else ""))
+                except Exception as e: problems.append(f"KYM {slug_} photos p{page}: {e}"); break
+                for u in s_.split("<a ")[1:]:
+                    img = re.search(r"https://i\.kym-cdn\.com/photos/images/\w+/([\d/]+/[\w.-]+\.(?:jpe?g|png))", u)
+                    href = re.search(r'href="(/photos/\d+[^"]*)"', u); alt = re.search(r'alt="([^"]*)"', u)
+                    if not img: continue
+                    title = html.unescape(alt.group(1)).strip() if alt else "Epstein Didn't Kill Himself"
+                    if MINOR_RX.search(title): continue
+                    pid = re.sub(r"\W", "", img.group(1))[:20]
+                    full = "https://i.kym-cdn.com/photos/images/newsfeed/" + img.group(1)
+                    add({"id": f"kym-ep-{pid}", "title": title if len(title) > 3 else "Epstein Didn't Kill Himself",
+                         "category": "History & Politics", "feed": "epstein", "tags": ["epstein", "kym", "conspiracy"],
+                         "source": "Know Your Meme", "source_url": "https://knowyourmeme.com" + (href.group(1) if href else f"/memes/{slug_}"),
+                         "image_url": full, "captioned": True, "attribution": f"Gallery image via Know Your Meme ({slug_})"}, full)
+                time.sleep(2)
+        reddit_items = []
+        for pid in EPSTEIN_READMIT:
+            try: reddit_items += list(_reddit_entries(f"https://www.reddit.com/comments/{pid}/.rss"))[:1]
+            except Exception as e: problems.append(f"reddit readmit {pid}: {e}")
+        for sub in EPSTEIN_SUBS:
+            try: reddit_items += list(_reddit_entries(f"https://www.reddit.com/r/{sub}/search.rss?q=epstein&restrict_sr=1&sort=top&t=all&limit=100"))[:40]
+            except Exception as e: problems.append(f"reddit search r/{sub}: {e}")
+        for pid, title, link, img, author in reddit_items:
+            sub = re.search(r"/r/(\w+)/", link); sub = sub.group(1) if sub else "memes"
+            if pid not in EPSTEIN_READMIT and (MINOR_RX.search(title) or not EPSTEIN_RX.search(title + " epstein")): continue
+            add({"id": f"reddit-{pid}", "title": title, "category": "History & Politics", "feed": "epstein",
+                 "tags": ["epstein", "reddit", f"r/{sub.lower()}"], "source": f"Reddit r/{sub}", "source_url": link,
+                 "image_url": img, "captioned": True, "attribution": f"Posted by {author} on r/{sub}"}, img)
+        json.dump(db, open(DB + ".partial", "w"), ensure_ascii=False)
+
     if not a.no_imgflip_tags and "imgflip" in a.sources:
         print("Imgflip captioned memes from tag pages...")
         for tag, sort, n, cat, tags in IMGFLIP_TAG_FEEDS:
@@ -855,7 +924,7 @@ def main():
             print(f"Reddit r/{sub} top of {period} (RSS)...")
             try:
                 got = 0
-                for pid, title, link, img, author in reddit_feed(sub, period, pages=1):
+                for pid, title, link, img, author in reddit_feed(sub, os.environ.get("REDDIT_PERIOD", period), pages=1):
                     if got >= n: break
                     mid = f"reddit-{pid}"
                     if mid in have or mid in EXCLUDE: continue
@@ -901,6 +970,13 @@ def main():
         keep.append(m)
     db["memes"] = keep
     blocked = ocr_all(db["memes"], problems)
+    for m in db["memes"]:
+        text = " ".join([m["title"], m.get("caption", ""), m.get("ocr", "")])
+        if m.get("feed") == "epstein" or "epstein" in m["tags"] or re.search(r"epstein", text, re.I):
+            if "epstein" not in m["tags"]: m["tags"].insert(0, "epstein")
+            m["category"] = "History & Politics"
+            if m.get("feed") == "epstein" and MINOR_RX.search(text) and m["id"] not in OCR_ALLOW:
+                blocked.add(m["id"]); problems.append(f"Epstein/minors filter: {m['id']} :: {MINOR_RX.search(text).group(0)} :: {text[:80]}")
     if blocked and not a.no_auto_exclude:
         cur = json.load(open(CURATION)) if os.path.exists(CURATION) else {"exclude": [], "overrides": {}}
         cur["exclude"] = sorted(set(cur["exclude"]) | blocked)

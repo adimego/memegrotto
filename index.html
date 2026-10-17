@@ -2,14 +2,15 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#0f0e17">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Meme Vault — a library of internet memes</title>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐸</text></svg>">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
 <header class="top">
-  <button class="menu-btn" id="menuBtn" aria-label="Categories">☰</button>
+  <button class="menu-btn" id="menuBtn" aria-label="Open categories menu" aria-controls="sidebar" aria-expanded="false">☰</button>
   <a class="brand" href="#"><span class="logo">🐸</span><span>Meme<b>Vault</b></span></a>
   <div class="search">
     <span>🔎</span>
@@ -28,7 +29,8 @@
 </header>
 
 <div class="layout">
-  <aside class="sidebar" id="sidebar">
+  <aside class="sidebar" id="sidebar" aria-label="Browse">
+    <div class="sb-head"><span>Browse</span><button class="sb-close" id="sbClose" aria-label="Close menu">✕</button></div>
     <h3>Categories</h3>
     <nav id="cats"></nav>
     <h3>Spotlight</h3>
@@ -52,12 +54,14 @@
   </main>
 </div>
 
+<div class="backdrop" id="backdrop" hidden></div>
 <div class="lightbox" id="lb" hidden>
   <button class="lb-close" id="lbClose" aria-label="Close">✕</button>
   <button class="lb-nav prev" id="lbPrev" aria-label="Previous">‹</button>
   <div class="lb-body">
     <div class="lb-img"><img id="lbImg" alt=""></div>
     <div class="lb-info">
+      <p class="lb-hint">Swipe ← → for more · swipe down to close</p>
       <div class="lb-top"><span class="pill" id="lbCat"></span><span id="lbVote"></span></div>
       <h2 id="lbTitle"></h2>
       <div class="tags" id="lbTags"></div>
