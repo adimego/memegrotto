@@ -69,7 +69,11 @@
   "kym-i-can-count-to-potato",
   "kym-im-twelve-years-old-and-what-is-this",
   "kym-side-eyeing-chloe",
-  "kym-duck-face"
+  "kym-duck-face",
+  "imgflip-i-avawkg",
+  "reddit-1opipoz",
+  "reddit-1wlmtd1",
+  "reddit-1ry0syf"
  ],
  "overrides": {
   "kym-me-gusta": {
@@ -636,6 +640,19 @@
   },
   "kym-how-is-babby-formed": {
    "nsfw": true
+  },
+  "1qry72y": {
+   "nsfw": true
+  },
+  "1s5knew": {
+   "nsfw": true
+  },
+  "1uff949": {
+   "nsfw": true
+  },
+  "1x3n8ia": {
+   "nsfw": true
   }
- }
+ },
+ "ocr_allow": []
 }

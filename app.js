@@ -17,15 +17,73 @@ const SPOTLIGHT = [
   { key: "nsfw", label: "Crude & NSFW", sub: "Profanity & bad taste 🌶️" },
 ];
 const $ = s => document.querySelector(s);
-const state = { cat: null, tag: null, q: "", sort: "popular", nsfw: localStorage.getItem("mv-nsfw") !== "0" };
+
+// ---- Shared upvotes (Supabase; publishable key is public by design, writes only via the upvote RPC) ----
+const SB_URL = "https://zvdhsibcwkvahfqglgvz.supabase.co";
+const SB_KEY = "sb_publishable_t6UDizY_AOT9iTxrh9MxEQ_y4G46rG1";
+const SB_H = { apikey: SB_KEY, Authorization: `Bearer ${SB_KEY}` };
+const votes = new Map();            // vote id -> count
+let votesOk = false;
+const myVotes = new Set(JSON.parse(localStorage.getItem("mv-voted") || "[]"));
+function djb2(s) { let h = 5381; for (const ch of s) h = ((h << 5) + h + ch.codePointAt(0)) >>> 0; return h.toString(36); }
+const vid = m => m.id.length <= 64 ? m.id : m.id.slice(0, 55) + "~" + djb2(m.id);
+const vcount = m => votes.get(vid(m)) || 0;
+async function loadVotes() {
+  try {
+    for (let off = 0; ; off += 1000) {
+      const r = await fetch(`${SB_URL}/rest/v1/votes?select=meme_id,count&order=meme_id&limit=1000&offset=${off}`,
+                            { headers: SB_H, signal: AbortSignal.timeout(8000) });
+      if (!r.ok) throw new Error(r.status);
+      const rows = await r.json();
+      rows.forEach(x => { if (x.meme_id !== "__test__") votes.set(x.meme_id, x.count); });
+      if (rows.length < 1000) break;
+    }
+    votesOk = true; document.body.classList.remove("no-votes");
+  } catch (e) {
+    console.warn("Votes unavailable:", e); votesOk = false; document.body.classList.add("no-votes");
+  }
+}
+async function upvote(m, els) {
+  const id = vid(m);
+  if (!votesOk) return toast("Voting is offline right now");
+  if (myVotes.has(id)) return toast("You already upvoted this one ✅");
+  myVotes.add(id); localStorage.setItem("mv-voted", JSON.stringify([...myVotes]));
+  votes.set(id, vcount(m) + 1); paintVotes(m);                       // optimistic
+  try {
+    const r = await fetch(`${SB_URL}/rest/v1/rpc/upvote`, { method: "POST", headers: { ...SB_H, "Content-Type": "application/json" },
+                                                         body: JSON.stringify({ p_meme_id: id }), signal: AbortSignal.timeout(8000) });
+    if (!r.ok) throw new Error(r.status);
+    const n = await r.json(); if (typeof n === "number") votes.set(id, n);
+    paintVotes(m); toast("Upvoted ▲");
+  } catch (e) {
+    myVotes.delete(id); localStorage.setItem("mv-voted", JSON.stringify([...myVotes]));
+    votes.set(id, Math.max(0, vcount(m) - 1)); paintVotes(m); toast("Vote failed, try again later");
+  }
+}
+function voteBtn(m) {
+  const b = document.createElement("button");
+  b.className = "vote" + (myVotes.has(vid(m)) ? " voted" : ""); b.dataset.vid = vid(m);
+  b.title = myVotes.has(vid(m)) ? "You upvoted this" : "Upvote";
+  b.innerHTML = `▲ <span>${vcount(m)}</span>`;
+  b.onclick = e => { e.stopPropagation(); upvote(m); };
+  return b;
+}
+function paintVotes(m) {
+  document.querySelectorAll(`.vote[data-vid="${CSS.escape(vid(m))}"]`).forEach(b => {
+    b.querySelector("span").textContent = vcount(m);
+    b.classList.toggle("voted", myVotes.has(vid(m))); b.title = myVotes.has(vid(m)) ? "You upvoted this" : "Upvote";
+  });
+}
+const state = { cat: null, tag: null, q: "", sort: "popular", top: false, nsfw: localStorage.getItem("mv-nsfw") !== "0" };
 let memes = [], view = [], idx = -1;
 
 const norm = s => s.toLowerCase().normalize("NFKD").replace(/[\u0300-\u036f]/g, "");
 const color = c => (CAT_META[c] || ["", "#7f5af0"])[1];
 
 fetch("memes.json").then(r => r.json()).then(d => {
-  memes = d.memes.map((m, i) => ({ ...m, rank: i, hay: norm(m.title + " " + m.tags.join(" ") + " " + m.category + " " + (m.caption || "")) }));
+  memes = d.memes.map((m, i) => ({ ...m, rank: i, hay: norm(m.title + " " + m.tags.join(" ") + " " + m.category + " " + (m.caption || "") + " " + (m.ocr || "")) }));
   $("#nsfw").checked = state.nsfw; readHash(); buildSidebar(); render();
+  loadVotes().then(() => { if (votesOk) { buildSidebar(); if (state.sort === "popular" || state.top) render(); } });
 });
 
 const visible = () => memes.filter(m => state.nsfw || !m.nsfw);
@@ -38,20 +96,28 @@ function buildSidebar() {
     const b = document.createElement("button");
     b.className = "cat" + ((state.cat === name) ? " on" : "");
     b.innerHTML = `<span class="ic">${icon}</span><span>${name || "All memes"}</span><span class="n">${n}</span>`;
-    b.onclick = () => { state.cat = name; state.tag = null; closeMenu(); update(); };
+    b.onclick = () => { state.cat = name; state.tag = null; state.top = false; closeMenu(); update(); };
     cats.appendChild(b);
   };
   mk(null, pool.length, "✨");
   Object.keys(CAT_META).filter(k => c[k]).sort((a, b) => c[b] - c[a]).forEach(k => mk(k, c[k], CAT_META[k][0]));
 
   const spot = $("#spot"); spot.innerHTML = "";
+  if (votesOk) {
+    const voted = pool.filter(m => vcount(m) > 0).sort((a, b) => vcount(b) - vcount(a));
+    const b = document.createElement("button"); b.className = state.top ? "on" : "";
+    b.innerHTML = `<span class="trophy">🏆</span><span>Top voted <small>${voted.length} memes with votes · community picks</small></span>`;
+    if (voted[0]) b.querySelector(".trophy").outerHTML = `<img src="${voted[0].thumb || voted[0].image}" alt="">`;
+    b.onclick = () => { state.top = !state.top; state.tag = null; state.cat = null; closeMenu(); update(); };
+    spot.appendChild(b);
+  }
   SPOTLIGHT.forEach(s => {
     const hits = pool.filter(m => m.tags.includes(s.key));
     if (!hits.length) return;
     const b = document.createElement("button");
     b.className = state.tag === s.key ? "on" : "";
     b.innerHTML = `<img src="${hits[0].thumb || hits[0].image}" alt=""><span>${s.label} <small>${hits.length} memes · ${s.sub}</small></span>`;
-    b.onclick = () => { state.tag = state.tag === s.key ? null : s.key; state.cat = null; closeMenu(); update(); };
+    b.onclick = () => { state.tag = state.tag === s.key ? null : s.key; state.cat = null; state.top = false; closeMenu(); update(); };
     spot.appendChild(b);
   });
 
@@ -72,14 +138,18 @@ function tagEl(t, n) {
 
 function filtered() {
   const terms = norm(state.q).split(/\s+/).filter(Boolean);
-  let v = visible().filter(m => (!state.cat || m.category === state.cat) && (!state.tag || m.tags.includes(state.tag))
+  let v = visible().filter(m => (!state.top || vcount(m) > 0) && (!state.cat || m.category === state.cat) && (!state.tag || m.tags.includes(state.tag))
     && terms.every(t => m.hay.includes(t)));
   if (state.sort === "popular" && !state.cat && !state.tag && !terms.length) {
     // interleave sources so the front page mixes classics, captioned memes and fresh posts
     const groups = {}; v.forEach(m => (groups[m.source.startsWith("Imgflip API") ? "a" : m.source.startsWith("Reddit") ? "c" : "b"] ??= []).push(m));
     const out = [], g = [groups.a || [], groups.b || [], groups.c || []];
     for (let i = 0; out.length < v.length; i++) g.forEach((arr, k) => { const per = [2, 1, 1][k]; for (let j = 0; j < per; j++) { const x = arr[i * per + j]; if (x) out.push(x); } });
-    return out;
+    v = out;
+  } else if (state.sort === "popular") v.sort((a, b) => a.rank - b.rank);
+  if (state.sort === "popular" || state.top) {
+    // votes first; ties keep the curated popularity order (Array.sort is stable)
+    return v.sort((a, b) => vcount(b) - vcount(a));
   }
   if (state.sort === "az") v.sort((a, b) => a.title.localeCompare(b.title));
   else if (state.sort === "new") v.sort((a, b) => (b.date_added || "").localeCompare(a.date_added || "") || b.rank - a.rank);
@@ -93,14 +163,14 @@ function update() { writeHash(); buildSidebar(); render(); window.scrollTo({ top
 function render() {
   view = filtered();
   const grid = $("#grid"); grid.innerHTML = "";
-  $("#heading").textContent = state.tag ? `#${state.tag}` : (state.cat || "All memes");
+  $("#heading").textContent = state.top ? "🏆 Top voted" : state.tag ? `#${state.tag}` : (state.cat || "All memes");
   const cats = Object.keys(counts(view)).length;
   $("#sub").textContent = `${view.length} meme${view.length === 1 ? "" : "s"}` + (cats > 1 ? ` across ${cats} categories` : "") + (state.q ? ` matching “${state.q}”` : "");
   const act = $("#active"); act.innerHTML = "";
-  [["cat", state.cat], ["tag", state.tag && "#" + state.tag], ["q", state.q && `“${state.q}”`]].forEach(([k, v]) => {
+  [["top", state.top && "🏆 Top voted"], ["cat", state.cat], ["tag", state.tag && "#" + state.tag], ["q", state.q && `“${state.q}”`]].forEach(([k, v]) => {
     if (!v) return;
     const s = document.createElement("span"); s.innerHTML = `${v}<button aria-label="remove">✕</button>`;
-    s.querySelector("button").onclick = () => { state[k] = k === "q" ? "" : null; if (k === "q") $("#q").value = ""; update(); };
+    s.querySelector("button").onclick = () => { state[k] = k === "q" ? "" : k === "top" ? false : null; if (k === "q") $("#q").value = ""; update(); };
     act.appendChild(s);
   });
   $("#empty").hidden = view.length > 0;
@@ -128,6 +198,7 @@ function renderMore() {
       ${m.nsfw ? '<span class="badge nsfw">🌶️ NSFW</span>' : ""}
       <div class="meta"><h4>${esc(m.title)}</h4><div class="row"><span class="pill" style="--c:${color(m.category)}">${CAT_META[m.category]?.[0] || ""} ${m.category}</span>
       <span class="src">${esc(m.source.split(" ")[0] === "Know" ? "KYM" : m.source.split(" ")[0])}</span></div></div>`;
+    c.querySelector(".row").insertBefore(voteBtn(m), c.querySelector(".src"));
     const img = c.querySelector("img");
     img.onload = () => { img.classList.add("ld"); img.parentNode.classList.remove("ph"); };
     c.onclick = () => openLb(i);
@@ -155,6 +226,7 @@ function openLb(i) {
   $("#lbDate").textContent = m.date_added || "—";
   $("#lbSize").textContent = m.width ? `${m.width} × ${m.height}px` : "—";
   $("#lbOpen").href = m.source_url; $("#lbDl").href = m.image;
+  const lv = $("#lbVote"); lv.innerHTML = ""; const vb = voteBtn(m); vb.classList.add("big"); lv.appendChild(vb);
   $("#lb").hidden = false; document.body.style.overflow = "hidden";
 }
 function closeLb() { $("#lb").hidden = true; document.body.style.overflow = ""; }
@@ -181,16 +253,16 @@ $("#nsfw").onchange = e => {
   update(); toast(state.nsfw ? "Crude memes shown 🌶️" : "Crude memes hidden 😇");
 };
 $("#sort").onchange = e => { state.sort = e.target.value; render(); };
-$("#reset").onclick = () => { Object.assign(state, { cat: null, tag: null, q: "" }); $("#q").value = ""; update(); };
+$("#reset").onclick = () => { Object.assign(state, { cat: null, tag: null, q: "", top: false }); $("#q").value = ""; update(); };
 $("#menuBtn").onclick = () => $("#sidebar").classList.toggle("open");
 function closeMenu() { $("#sidebar").classList.remove("open"); }
 
 function writeHash() {
-  const p = new URLSearchParams(); if (state.cat) p.set("cat", state.cat); if (state.tag) p.set("tag", state.tag); if (state.q) p.set("q", state.q);
+  const p = new URLSearchParams(); if (state.top) p.set("top", "1"); if (state.cat) p.set("cat", state.cat); if (state.tag) p.set("tag", state.tag); if (state.q) p.set("q", state.q);
   history.replaceState(null, "", p.toString() ? "#" + p : location.pathname);
 }
 function readHash() {
   const p = new URLSearchParams(location.hash.slice(1));
-  state.cat = p.get("cat"); state.tag = p.get("tag"); state.q = p.get("q") || ""; $("#q").value = state.q;
+  state.top = p.get("top") === "1"; state.cat = p.get("cat"); state.tag = p.get("tag"); state.q = p.get("q") || ""; $("#q").value = state.q;
   if (p.get("open")) setTimeout(() => { const i = view.findIndex(m => m.id === p.get("open")); if (i >= 0) openLb(i); }, 0);
 }

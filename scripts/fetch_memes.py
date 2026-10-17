@@ -13,7 +13,7 @@ import argparse, datetime, html, json, os, re, sys, time, urllib.error, urllib.p
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 IMG_DIR = os.path.join(ROOT, "images")
-DB = os.path.join(ROOT, "memes.json")
+DB = os.environ.get("MEMES_DB", os.path.join(ROOT, "memes.json"))
 UA = "Mozilla/5.0 (meme-library/0.1; personal project)"
 TODAY = datetime.date.today().isoformat()
 
@@ -447,12 +447,16 @@ REDDIT_RULES = [  # applied to reddit titles before generic rules
     ("Relatable Life", r"sleep|aging|overthought|alarm|period|innocent|wild side|exceeded"),
 ]
 
+# OCR false positives (ids whose OCR text tripped BLOCK_RX but were checked by eye and are fine)
+OCR_ALLOW = set()
+
 # Bulk curation decisions (made while eyeballing contact sheets) live in scripts/curation.json:
 #   {"exclude": [ids...], "overrides": {id: {"category":..., "title":..., "nsfw":true, "add_tags":[...]}}}
 CURATION = os.path.join(os.path.dirname(os.path.abspath(__file__)), "curation.json")
 if os.path.exists(CURATION):
     _c = json.load(open(CURATION))
     EXCLUDE |= set(_c.get("exclude", []))
+    OCR_ALLOW |= set(_c.get("ocr_allow", []))
     for _k, _v in _c.get("overrides", {}).items():
         OVERRIDES.setdefault(_k, {}).update(_v)
 
@@ -490,17 +494,36 @@ def make_tags(title, cat, extra=()):
     tags.append(cat.split(" ")[0].lower())
     return list(dict.fromkeys(tags))[:7]
 
-def get(url, binary=False, tries=3):
+_RL = {"next": 0.0}  # reddit.com rate limit (RSS allows ~1 request per minute for anonymous clients)
+
+def _reddit_wait(headers):
+    try:
+        rem = float(headers.get("x-ratelimit-remaining", "1")); reset = float(headers.get("x-ratelimit-reset", "0"))
+    except ValueError:
+        return
+    if rem < 1:
+        _RL["next"] = time.time() + reset + 2
+
+def get(url, binary=False, tries=4):
+    is_reddit = "www.reddit.com" in url
+    err = None
     for i in range(tries):
+        if is_reddit and time.time() < _RL["next"]:
+            wait = _RL["next"] - time.time(); print(f"    (reddit rate limit: waiting {wait:.0f}s)", flush=True); time.sleep(wait)
         try:
             req = urllib.request.Request(url, headers={"User-Agent": UA})
             with urllib.request.urlopen(req, timeout=30) as r:
                 data = r.read()
+                if is_reddit: _reddit_wait(r.headers)
                 return data if binary else data.decode("utf-8", "replace")
         except urllib.error.HTTPError as e:
             err = e
             if e.code in (403, 404): break
-            time.sleep(20 * (i + 1) if e.code == 429 else 1 + i)
+            if e.code == 429 and is_reddit:
+                _reddit_wait(e.headers)
+                if time.time() >= _RL["next"]: _RL["next"] = time.time() + 60
+            else:
+                time.sleep(1 + i)
         except Exception as e:
             err = e; time.sleep(1 + i)
     raise err
@@ -585,7 +608,7 @@ def reddit_feed(sub, period, limit=100, pages=1):
         entries += es
         last = re.search(r"<id>t3_(\w+)</id>", es[-1])
         if not last: break
-        after = "t3_" + last.group(1); time.sleep(6)
+        after = "t3_" + last.group(1)
     for e in entries:
         img = re.findall(r"https://i\.redd\.it/\w+\.(?:jpe?g|png|gif)", e)
         if not img: continue
@@ -610,6 +633,38 @@ def dhash(path, n=16):
     im = Image.open(path).convert("L").resize((n + 1, n))
     px = list(im.get_flattened_data()) if hasattr(im, 'get_flattened_data') else list(im.getdata())
     return sum(1 << i for i in range(n * n) if px[(i // n) * (n + 1) + i % n] > px[(i // n) * (n + 1) + i % n + 1])
+
+def ocr_all(memes, problems):
+    """OCR caption text with tesseract (if installed). Used for search, NSFW flagging and the slur/hate filter."""
+    import shutil, subprocess
+    from concurrent.futures import ThreadPoolExecutor
+    if not shutil.which("tesseract"):
+        print("tesseract not installed; skipping OCR"); return set()
+    todo = [m for m in memes if "ocr" not in m and not m["image"].endswith(".gif")]
+    def run(m):
+        try:
+            out = subprocess.run(["tesseract", os.path.join(ROOT, m["image"]), "stdout", "--psm", "3"],
+                                 capture_output=True, text=True, timeout=60).stdout
+        except Exception:
+            out = ""
+        lines = [re.sub(r"\s+", " ", l).strip() for l in out.splitlines()]
+        lines = [l for l in lines if len(l) >= 3 and sum(c.isalpha() for c in l) / len(l) > 0.6]
+        m["ocr"] = " / ".join(lines)[:400]
+    if todo:
+        print(f"OCR on {len(todo)} images...")
+        with ThreadPoolExecutor(8) as ex: list(ex.map(run, todo))
+    blocked = set()
+    for m in memes:
+        t = m.get("ocr", "")
+        if not t: continue
+        if BLOCK_RX.search(t) and m["id"] not in OCR_ALLOW:
+            blocked.add(m["id"]); problems.append(f"OCR filter: {m['id']} :: {BLOCK_RX.search(t).group(0)} :: {t[:80]}")
+        if CRUDE_RX.search(t) and not m.get("nsfw"):
+            m["nsfw"] = True
+        if re.fullmatch(r"(2?me[_ ]?irl(4me[_ ]?irl)?|title\W*|untitled|\.+)", m["title"].strip().lower()):
+            first = next((l for l in t.split(" / ") if len(l) >= 12), None)
+            if first: m["title"] = first[:70]
+    return blocked
 
 def make_thumbs(memes, size=480):
     """Create small JPEG thumbnails in thumbs/ for fast grid loading (needs Pillow)."""
@@ -641,6 +696,7 @@ def main():
     ap.add_argument("--sources", nargs="*", default=["api", "curated", "kym", "imgflip", "reddit"],
                     help="subset of: api curated kym imgflip reddit")
     ap.add_argument("--kym-pages", type=int, default=KYM_PAGES)
+    ap.add_argument("--no-auto-exclude", action="store_true", help="report OCR filter hits instead of excluding")
     ap.add_argument("--recompress", action="store_true", help="shrink existing images to MAX_SIDE JPEG")
     ap.add_argument("--more", type=int, default=None,
                     help="add up to K NEW memes per feed (default: just top each feed up to its configured size)")
@@ -798,7 +854,7 @@ def main():
             print(f"Reddit r/{sub} top of {period} (RSS)...")
             try:
                 got = 0
-                for pid, title, link, img, author in reddit_feed(sub, period, pages=2 if n > 35 else 1):
+                for pid, title, link, img, author in reddit_feed(sub, period, pages=1):
                     if got >= n: break
                     mid = f"reddit-{pid}"
                     if mid in have or mid in EXCLUDE: continue
@@ -812,7 +868,7 @@ def main():
                     got += added - before
             except Exception as e:
                 problems.append(f"Reddit r/{sub}: {e}")
-            time.sleep(8)  # reddit rate-limits RSS hard (429)
+            json.dump(db, open(DB + ".partial", "w"), ensure_ascii=False)  # checkpoint
 
     for m in db["memes"]:
         key = str(m.get("template_id") or m["id"].replace("reddit-", ""))
@@ -843,6 +899,16 @@ def main():
         if m.get("nsfw") and "nsfw" not in m["tags"]: m["tags"].append("nsfw")
         keep.append(m)
     db["memes"] = keep
+    blocked = ocr_all(db["memes"], problems)
+    if blocked and not a.no_auto_exclude:
+        cur = json.load(open(CURATION)) if os.path.exists(CURATION) else {"exclude": [], "overrides": {}}
+        cur["exclude"] = sorted(set(cur["exclude"]) | blocked)
+        json.dump(cur, open(CURATION, "w"), indent=1, ensure_ascii=False)
+        for m in db["memes"]:
+            if m["id"] in blocked:
+                for f in (m.get("image"), m.get("thumb")):
+                    if f and os.path.exists(os.path.join(ROOT, f)): os.remove(os.path.join(ROOT, f))
+        db["memes"] = [m for m in db["memes"] if m["id"] not in blocked]
     make_thumbs(db["memes"])
     db["categories"] = CATEGORIES
     db["generated"] = datetime.datetime.now().isoformat(timespec="seconds")

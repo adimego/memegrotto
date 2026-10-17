@@ -108,3 +108,15 @@ dt{color:var(--muted)}dd{margin:0;word-break:break-word}
 .more{text-align:center;color:var(--muted);font-size:13px;margin:10px 0 0}
 #sentinel{height:1px}
 .sidebar nav .cat .n{font-variant-numeric:tabular-nums}
+
+/* upvotes */
+.vote{display:inline-flex;align-items:center;gap:4px;background:var(--panel2);border:1px solid var(--line);color:var(--muted);
+  border-radius:999px;padding:2px 9px;font-size:12px;font-weight:700;cursor:pointer;transition:all .15s;font-variant-numeric:tabular-nums}
+.vote:hover{color:#fff;border-color:var(--accent);transform:translateY(-1px)}
+.vote.voted{background:linear-gradient(90deg,var(--accent),var(--accent2));color:#fff;border-color:transparent}
+.vote.big{font-size:14px;padding:5px 14px}
+.card .row .vote{margin-left:auto}
+.card .row .vote + .src{margin-left:6px}
+.lb-top{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.no-votes .vote{display:none}
+.spot .trophy{font-size:26px;width:38px;text-align:center}
