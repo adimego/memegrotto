@@ -104,3 +104,7 @@ dt{color:var(--muted)}dd{margin:0;word-break:break-word}
 .caption{font-size:13px;color:var(--muted);background:var(--panel2);border-radius:10px;padding:8px 10px;margin:12px 0 0;font-style:italic}
 .caption:empty{display:none}
 @media (max-width:900px){.nsfw-toggle .lbl{display:none}}
+
+.more{text-align:center;color:var(--muted);font-size:13px;margin:10px 0 0}
+#sentinel{height:1px}
+.sidebar nav .cat .n{font-variant-numeric:tabular-nums}

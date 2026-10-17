@@ -1,0 +1,641 @@
+{
+ "exclude": [
+  "kym-events",
+  "kym-brazzers",
+  "kym-blue-whale-challenge",
+  "kym-people",
+  "kym-rule-63",
+  "kym-momo",
+  "kym-dat-ass",
+  "kym-i-sexually-identify-as-an-attack-helicopter",
+  "kym-fap",
+  "kym-ankha-zone",
+  "kym-high-expectations-asian-father",
+  "kym-homophobic-seal",
+  "kym-musically-oblivious-8th-grader",
+  "kym-katy-t3h-pengu1n-of-d00m",
+  "kym-notices-bulge-owo-whats-this",
+  "kym-bowsette",
+  "kym-chubby-bubbles-girl",
+  "kym-senor-changs-ha-gay",
+  "kym-241543903-heads-in-freezers",
+  "kym-thicc",
+  "kym-i-came",
+  "kym-bobs-and-vegana",
+  "kym-jeff-the-killer",
+  "kym-shadman",
+  "kym-the-bongcheon-dong-ghost",
+  "kym-idiot-nerd-girl",
+  "kym-third-world-success",
+  "kym-expand-dong",
+  "kym-trollface",
+  "kym-ermahgerd",
+  "kym-overly-attached-girlfriend",
+  "kym-scumbag-steve",
+  "kym-i-took-an-arrow-in-the-knee",
+  "kym-ancient-aliens",
+  "kym-bad-luck-brian",
+  "kym-philosoraptor",
+  "kym-harambe-the-gorilla",
+  "kym-hide-the-pain-harold",
+  "kym-grumpy-cat",
+  "kym-stonks",
+  "kym-surprised-pikachu",
+  "kym-futurama-fry-not-sure-if",
+  "kym-one-does-not-simply-walk-into-mordor",
+  "kym-mocking-spongebob",
+  "kym-this-is-fine",
+  "kym-disaster-girl",
+  "kym-distracted-boyfriend",
+  "kym-rickroll",
+  "kym-success-kid-i-hate-sandcastles",
+  "kym-kermit-sipping-tea-but-thats-none-of-my-business",
+  "kym-steven-crowders-change-my-mind-campus-sign",
+  "kym-is-this-a-pigeon",
+  "kym-crying-cat",
+  "kym-condescending-wonka-creepy-wonka",
+  "kym-arthurs-fist",
+  "kym-sites",
+  "kym-viral-videos",
+  "kym-memes",
+  "kym-reaction-images",
+  "kym-dank-memes",
+  "kym-copypasta",
+  "kym-creepypasta",
+  "kym-greentext-stories",
+  "kym-snowclone",
+  "kym-shitposting",
+  "kym-trolling-troll",
+  "kym-i-can-count-to-potato",
+  "kym-im-twelve-years-old-and-what-is-this",
+  "kym-side-eyeing-chloe",
+  "kym-duck-face"
+ ],
+ "overrides": {
+  "kym-me-gusta": {
+   "category": "Reaction"
+  },
+  "kym-yao-ming-face-bitch-please": {
+   "category": "Reaction",
+   "nsfw": true
+  },
+  "kym-you-dont-say--3": {
+   "category": "Reaction"
+  },
+  "kym-no-rage-face": {
+   "category": "Reaction"
+  },
+  "kym-derp": {
+   "category": "Reaction"
+  },
+  "kym-okay-guy": {
+   "category": "Reaction"
+  },
+  "kym-wat": {
+   "category": "Reaction"
+  },
+  "kym-facepalm": {
+   "category": "Reaction"
+  },
+  "kym-oh-crap-omg-rage-face": {
+   "category": "Reaction"
+  },
+  "kym-are-you-serious-face-seriously": {
+   "category": "Reaction"
+  },
+  "kym-cool-story-bro": {
+   "category": "Reaction"
+  },
+  "kym-true-story": {
+   "category": "Reaction"
+  },
+  "kym-aww-yea-guy": {
+   "category": "Reaction"
+  },
+  "kym-impossibru": {
+   "category": "Reaction"
+  },
+  "kym-stahp": {
+   "category": "Reaction"
+  },
+  "kym-dafuq": {
+   "category": "Reaction"
+  },
+  "kym-i-see-what-you-did-there": {
+   "category": "Reaction"
+  },
+  "kym-that-escalated-quickly": {
+   "category": "Reaction"
+  },
+  "kym-son-i-am-disappoint": {
+   "category": "Reaction"
+  },
+  "kym-your-argument-is-invalid": {
+   "category": "Reaction"
+  },
+  "kym-come-at-me-bro": {
+   "category": "Reaction"
+  },
+  "kym-sweet-jesus-face": {
+   "category": "Reaction"
+  },
+  "kym-confused-nick-young-swaggy-p": {
+   "category": "Reaction"
+  },
+  "kym-side-eyeing-chloe": {
+   "category": "Reaction"
+  },
+  "kym-lol-guy": {
+   "category": "Reaction"
+  },
+  "kym-staredad": {
+   "category": "Reaction"
+  },
+  "kym-oh-god-why": {
+   "category": "Reaction"
+  },
+  "kym-i-lied": {
+   "category": "Reaction"
+  },
+  "kym-pretty-cool-guy": {
+   "category": "Reaction"
+  },
+  "kym-feel-like-a-sir": {
+   "category": "Reaction"
+  },
+  "kym-i-dunno-lol-": {
+   "category": "Reaction"
+  },
+  "kym-smilejpg": {
+   "category": "Absurd & Surreal"
+  },
+  "kym-let-him-cook-let-that-boy-cook": {
+   "category": "Reaction"
+  },
+  "kym-i-can-count-to-potato": {
+   "category": "Reaction"
+  },
+  "kym-zerg-rush": {
+   "category": "Gaming"
+  },
+  "kym-do-a-barrel-roll": {
+   "category": "Gaming"
+  },
+  "kym-ugandan-knuckles": {
+   "category": "Gaming"
+  },
+  "kym-kappa": {
+   "category": "Gaming"
+  },
+  "kym-kekw": {
+   "category": "Gaming"
+  },
+  "kym-monkas": {
+   "category": "Gaming"
+  },
+  "kym-pogchamp": {
+   "category": "Gaming"
+  },
+  "kym-pepega": {
+   "category": "Gaming"
+  },
+  "kym-fus-ro-dah": {
+   "category": "Gaming"
+  },
+  "kym-leeroy-jenkins": {
+   "category": "Gaming"
+  },
+  "kym-then-who-was-phone": {
+   "category": "Gaming"
+  },
+  "kym-cheeki-breeki": {
+   "category": "Gaming"
+  },
+  "kym-thelegend27": {
+   "category": "Gaming"
+  },
+  "kym-all-your-base-are-belong-to-us": {
+   "category": "Gaming"
+  },
+  "kym-big-smokes-order": {
+   "category": "Gaming",
+   "add_tags": [
+    "food",
+    "gta"
+   ]
+  },
+  "kym-minecraft-creeper": {
+   "category": "Gaming"
+  },
+  "kym-git-gud": {
+   "category": "Gaming"
+  },
+  "kym-the-game": {
+   "category": "Gaming"
+  },
+  "kym-you-must-construct-additional-pylons": {
+   "category": "Gaming"
+  },
+  "kym-amogus": {
+   "category": "Gaming"
+  },
+  "kym-i-herd-u-liek-mudkips": {
+   "category": "Gaming"
+  },
+  "kym-slowpoke": {
+   "category": "Gaming"
+  },
+  "kym-t-pose": {
+   "category": "Gaming"
+  },
+  "kym-ah-shit-here-we-go-again": {
+   "category": "Gaming",
+   "nsfw": true
+  },
+  "kym-b-button-emoji-": {
+   "category": "Gaming"
+  },
+  "kym-hello-there": {
+   "category": "Movies & TV"
+  },
+  "kym-lord-marquaad-e": {
+   "category": "Movies & TV"
+  },
+  "kym-the-tragedy-of-darth-plagueis-the-wise": {
+   "category": "Movies & TV"
+  },
+  "kym-pepe-silvia": {
+   "category": "Movies & TV"
+  },
+  "kym-james-doakes-surprise-motherfucker": {
+   "category": "Movies & TV",
+   "nsfw": true
+  },
+  "kym-its-a-trap": {
+   "category": "Movies & TV"
+  },
+  "kym-draw-me-like-one-of-your-french-girls": {
+   "category": "Movies & TV"
+  },
+  "kym-baneposting": {
+   "category": "Movies & TV"
+  },
+  "kym-some-men-just-want-to-watch-the-world-burn": {
+   "category": "Movies & TV"
+  },
+  "kym-its-morbin-time": {
+   "category": "Movies & TV"
+  },
+  "kym-conspiracy-keanu": {
+   "category": "Movies & TV"
+  },
+  "kym-strutting-leo": {
+   "category": "Movies & TV"
+  },
+  "kym-record-scratch-freeze-frame-yep-thats-me": {
+   "category": "Movies & TV"
+  },
+  "kym-subcultures": {
+   "category": "Cartoons & Anime"
+  },
+  "kym-big-chungus": {
+   "category": "Cartoons & Anime"
+  },
+  "kym-60s-spider-man": {
+   "category": "Cartoons & Anime"
+  },
+  "kym-i-hope-senpai-will-notice-me": {
+   "category": "Cartoons & Anime"
+  },
+  "kym-its-over-9000": {
+   "category": "Cartoons & Anime"
+  },
+  "kym-oh-youre-approaching-me-jojo-approach": {
+   "category": "Cartoons & Anime"
+  },
+  "kym-yes-roundabout-to-be-continued": {
+   "category": "Cartoons & Anime"
+  },
+  "kym-spongegar-primitive-sponge-caveman-spongebob": {
+   "category": "Cartoons & Anime"
+  },
+  "kym-he-man-sings-heyyeyaaeyaaaeyaeyaa": {
+   "category": "Cartoons & Anime"
+  },
+  "kym-ultra-instinct-shaggy": {
+   "category": "Cartoons & Anime"
+  },
+  "kym-padoru": {
+   "category": "Cartoons & Anime"
+  },
+  "kym-za-warudo-wryyyyy": {
+   "category": "Cartoons & Anime"
+  },
+  "kym-my-name-is-yoshikage-kira": {
+   "category": "Cartoons & Anime"
+  },
+  "kym-menacing-": {
+   "category": "Cartoons & Anime"
+  },
+  "kym-reaction-guys-gaijin-4koma": {
+   "category": "Cartoons & Anime"
+  },
+  "kym-duwang": {
+   "category": "Cartoons & Anime"
+  },
+  "kym-i-came-out-to-have-a-good-time-and-im-honestly-feeling-so-attacked-right-now": {
+   "category": "Cartoons & Anime"
+  },
+  "kym-i-dont-want-to-live-on-this-planet-anymore": {
+   "category": "Cartoons & Anime"
+  },
+  "kym-weeaboo": {
+   "category": "Cartoons & Anime"
+  },
+  "kym-waifu": {
+   "category": "Cartoons & Anime"
+  },
+  "kym-dat-boi": {
+   "category": "Animals"
+  },
+  "kym-moon-moon": {
+   "category": "Animals"
+  },
+  "kym-absolute-unit": {
+   "category": "Animals"
+  },
+  "kym-yes-this-is-dog": {
+   "category": "Animals"
+  },
+  "kym-business-cat": {
+   "category": "Animals"
+  },
+  "kym-moth-lamp": {
+   "category": "Animals"
+  },
+  "kym-smudge-the-cat": {
+   "category": "Animals"
+  },
+  "kym-trash-doves": {
+   "category": "Animals"
+  },
+  "kym-it-is-wednesday-my-dudes": {
+   "category": "Animals"
+  },
+  "kym-i-have-no-idea-what-im-doing": {
+   "category": "Animals"
+  },
+  "kym-you-know-i-had-to-do-it-to-em": {
+   "category": "Celebrities & Pop Culture"
+  },
+  "kym-ridiculously-photogenic-guy": {
+   "category": "Celebrities & Pop Culture"
+  },
+  "kym-the-most-interesting-man-in-the-world": {
+   "category": "Celebrities & Pop Culture"
+  },
+  "kym-sad-keanu": {
+   "category": "Celebrities & Pop Culture"
+  },
+  "kym-cash-me-ousside-howbow-dah": {
+   "category": "Celebrities & Pop Culture"
+  },
+  "kym-gangnam-style": {
+   "category": "Celebrities & Pop Culture"
+  },
+  "kym-john-cena-speaking-chinese-and-eating-ice-cream-bing-chilling": {
+   "category": "Celebrities & Pop Culture"
+  },
+  "kym-bear-grylls-better-drink-my-own-piss": {
+   "category": "Celebrities & Pop Culture",
+   "nsfw": true
+  },
+  "kym-karen": {
+   "category": "Celebrities & Pop Culture"
+  },
+  "kym-rebecca-blacks-friday": {
+   "category": "Celebrities & Pop Culture"
+  },
+  "kym-this-is-so-sad-alexa-play-despacito": {
+   "category": "Celebrities & Pop Culture"
+  },
+  "kym-what-are-those": {
+   "category": "Celebrities & Pop Culture"
+  },
+  "kym-freddie-mercury-rage-pose": {
+   "category": "Celebrities & Pop Culture"
+  },
+  "kym-epic-sax-guy": {
+   "category": "Celebrities & Pop Culture"
+  },
+  "kym-hugh-mungus": {
+   "category": "Celebrities & Pop Culture"
+  },
+  "kym-brent-rambo": {
+   "category": "Celebrities & Pop Culture"
+  },
+  "kym-technoviking": {
+   "category": "Celebrities & Pop Culture"
+  },
+  "kym-unexpected-john-cena-and-his-name-is-john-cena": {
+   "category": "Celebrities & Pop Culture"
+  },
+  "kym-the-grifter": {
+   "category": "Celebrities & Pop Culture"
+  },
+  "kym-slender-man": {
+   "category": "Absurd & Surreal"
+  },
+  "kym-loss": {
+   "category": "Absurd & Surreal"
+  },
+  "kym-dolan": {
+   "category": "Absurd & Surreal"
+  },
+  "kym-has-anyone-really-been-far-even-as-decided-to-use-even-go-want-to-do-look-mo": {
+   "category": "Absurd & Surreal"
+  },
+  "kym-the-mandela-effect": {
+   "category": "Absurd & Surreal"
+  },
+  "kym-that-really-rustled-my-jimmies": {
+   "category": "Absurd & Surreal"
+  },
+  "kym-crazy-i-was-crazy-once-they-locked-me-in-a-room-a-rubber-room-a-rubber-room-": {
+   "category": "Absurd & Surreal"
+  },
+  "kym-9-10-21": {
+   "category": "Absurd & Surreal"
+  },
+  "kym-weird-flex-but-ok": {
+   "category": "Absurd & Surreal"
+  },
+  "kym-deez-nuts": {
+   "category": "Absurd & Surreal",
+   "nsfw": true
+  },
+  "kym-mr-bones-wild-ride": {
+   "category": "Absurd & Surreal"
+  },
+  "kym-inglip": {
+   "category": "Absurd & Surreal"
+  },
+  "kym-the-backrooms": {
+   "category": "Absurd & Surreal"
+  },
+  "kym-67-meme-six-seven": {
+   "category": "Absurd & Surreal"
+  },
+  "kym-meme-man": {
+   "category": "Absurd & Surreal"
+  },
+  "kym-teleports-behind-you-nothing-personal-kid": {
+   "category": "Absurd & Surreal"
+  },
+  "kym-my-brain-is-full-of-fuck": {
+   "category": "Absurd & Surreal",
+   "nsfw": true
+  },
+  "kym-in-this-moment-i-am-euphoric": {
+   "category": "Absurd & Surreal"
+  },
+  "kym-rain-drop-drop-top": {
+   "category": "Absurd & Surreal"
+  },
+  "kym-john-is-kill": {
+   "category": "Absurd & Surreal"
+  },
+  "kym-dont-talk-to-me-or-my-son-ever-again": {
+   "category": "Absurd & Surreal"
+  },
+  "kym-slaps-roof-of-car": {
+   "category": "Absurd & Surreal"
+  },
+  "kym-swag": {
+   "category": "Absurd & Surreal"
+  },
+  "kym-yolo": {
+   "category": "Absurd & Surreal"
+  },
+  "kym-nothing-to-do-here-jet-pack-guy": {
+   "category": "Absurd & Surreal"
+  },
+  "kym-delete-system32": {
+   "category": "Tech & Science"
+  },
+  "kym-divide-by-zero": {
+   "category": "Tech & Science"
+  },
+  "kym-48293": {
+   "category": "Tech & Science"
+  },
+  "kym-good-luck-im-behind-7-proxies": {
+   "category": "Tech & Science"
+  },
+  "kym-troll-science-troll-physics": {
+   "category": "Tech & Science"
+  },
+  "kym-computer-reaction-faces": {
+   "category": "Tech & Science"
+  },
+  "kym-genius": {
+   "category": "Tech & Science"
+  },
+  "kym-joseph-ducreux-archaic-rap": {
+   "category": "History & Politics"
+  },
+  "kym-jet-fuel-cant-melt-steel-beams": {
+   "category": "History & Politics"
+  },
+  "kym-thai-political-crisis-breakup": {
+   "category": "History & Politics"
+  },
+  "kym-saddam-husseins-hiding-place": {
+   "category": "History & Politics"
+  },
+  "kym-in-soviet-russia": {
+   "category": "History & Politics"
+  },
+  "kym-money-printer-go-brrr": {
+   "category": "History & Politics"
+  },
+  "kym-college-liberal": {
+   "category": "History & Politics"
+  },
+  "kym-spaghetti-stories": {
+   "category": "Food"
+  },
+  "kym-tendies-stories": {
+   "category": "Food"
+  },
+  "kym-burger-king-foot-lettuce": {
+   "category": "Food"
+  },
+  "kym-first-world-problems": {
+   "category": "Relatable Life"
+  },
+  "kym-i-know-that-feel-bro": {
+   "category": "Relatable Life"
+  },
+  "kym-feels-bad-man-sad-frog": {
+   "category": "Relatable Life"
+  },
+  "kym-feels": {
+   "category": "Relatable Life"
+  },
+  "kym-30-year-old-boomer": {
+   "category": "Relatable Life"
+  },
+  "kym-what-people-think-i-do-what-i-really-do": {
+   "category": "Work & School"
+  },
+  "kym-college-freshman": {
+   "category": "Work & School"
+  },
+  "kym-lazy-college-senior": {
+   "category": "Work & School"
+  },
+  "kym-he-protec-but-he-also-attac": {
+   "category": "Wholesome"
+  },
+  "kym-me-and-the-boys": {
+   "category": "Wholesome"
+  },
+  "kym-fuck-yea": {
+   "nsfw": true
+  },
+  "kym-ligma": {
+   "nsfw": true
+  },
+  "kym-look-at-all-the-fucks-i-give": {
+   "nsfw": true
+  },
+  "kym-are-you-fucking-kidding-me": {
+   "nsfw": true
+  },
+  "kym-and-not-a-single-fuck-was-given-that-day": {
+   "nsfw": true
+  },
+  "kym-born-to-die-world-is-a-fuck-kill-em-all-1989-i-am-trash-man-410757864530-dea": {
+   "nsfw": true
+  },
+  "kym-go-to-horny-jail": {
+   "nsfw": true
+  },
+  "kym-prepare-your-anus": {
+   "nsfw": true
+  },
+  "kym-guys-literally-only-want-one-thing-and-its-fucking-disgusting": {
+   "nsfw": true
+  },
+  "kym-no-bitches": {
+   "nsfw": true
+  },
+  "kym-if-you-know-what-i-mean": {
+   "nsfw": true
+  },
+  "kym-how-is-babby-formed": {
+   "nsfw": true
+  }
+ }
+}

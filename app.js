@@ -3,10 +3,13 @@ const CAT_META = {
   "Celebrities & Pop Culture": ["🌟", "#ff8906"], "Cartoons & Anime": ["📺", "#3da9fc"],
   "Work & School": ["💼", "#f25f4c"], "Gaming": ["🎮", "#16bfd6"], "Relatable Life": ["🛌", "#d4a017"],
   "Wholesome": ["💖", "#ff6fb5"], "Absurd & Surreal": ["🌀", "#9d4edd"],
+  "Movies & TV": ["🎬", "#f72585"], "Tech & Science": ["🧪", "#4cc9f0"], "Sports": ["🏀", "#fb8500"],
+  "Food": ["🍕", "#e9c46a"], "History & Politics": ["🏛️", "#8d99ae"],
 };
 const SPOTLIGHT = [
   { key: "harambe", label: "Harambe", sub: "Gone but not forgotten 🦍" },
   { key: "will smith", label: "Will Smith", sub: "Slaps, spaghetti & Fresh Prince" },
+  { key: "sonic", label: "Sonic the Hedgehog", sub: "Gotta go fast 💨" },
   { key: "spaghetti", label: "Spaghetti cinema", sub: "Somebody toucha my spaghet" },
   { key: "advice animal", label: "Advice animals", sub: "Old-school 2010s classics" },
   { key: "reddit", label: "Fresh from Reddit", sub: "Top posts from meme subs" },
@@ -102,11 +105,23 @@ function render() {
   });
   $("#empty").hidden = view.length > 0;
   const ncol = Math.max(1, Math.min(6, Math.floor((grid.clientWidth + 16) / 246)));
-  const cols = [...Array(ncol)].map(() => { const d = document.createElement("div"); d.className = "col"; grid.appendChild(d); return d; });
-  const hts = Array(ncol).fill(0);
-  view.forEach((m, i) => {
+  cols = [...Array(ncol)].map(() => { const d = document.createElement("div"); d.className = "col"; grid.appendChild(d); return d; });
+  hts = Array(ncol).fill(0); shown = 0;
+  renderMore();
+}
+
+// Incremental rendering: cards are appended in pages of PAGE as the user scrolls (keeps 1000+ items fast)
+const PAGE = 60;
+let cols = [], hts = [], shown = 0;
+const sentinel = document.createElement("div"); sentinel.id = "sentinel";
+const io = new IntersectionObserver(es => { if (es.some(e => e.isIntersecting)) renderMore(); }, { rootMargin: "1200px 0px" });
+function renderMore() {
+  if (shown >= view.length) { $("#more").hidden = true; return; }
+  const end = Math.min(view.length, shown + PAGE);
+  view.slice(shown, end).forEach((m, off) => {
+    const i = shown + off;
     const c = document.createElement("article"); c.className = "card";
-    c.style.animationDelay = Math.min(i * 18, 500) + "ms";
+    c.style.animationDelay = Math.min((i % PAGE) * 15, 400) + "ms";
     const ratio = m.width && m.height ? `aspect-ratio:${m.width}/${m.height}` : "min-height:180px";
     c.innerHTML = `<div class="ph" style="${ratio}"><img loading="lazy" alt="${esc(m.title)}" src="${m.thumb || m.image}"></div>
       ${m.source.startsWith("Reddit") ? `<span class="badge">🔥 ${esc(m.source.replace("Reddit ", ""))}</span>` : ""}
@@ -119,12 +134,17 @@ function render() {
     const k = hts.indexOf(Math.min(...hts));
     cols[k].appendChild(c); hts[k] += (m.height && m.width ? m.height / m.width : 1) + 0.35;
   });
+  shown = end;
+  const more = $("#more"); more.hidden = shown >= view.length;
+  more.textContent = `Showing ${shown} of ${view.length} · loading more…`;
+  if (!sentinel.isConnected) { $("main").appendChild(sentinel); io.observe(sentinel); }
 }
 
 function esc(s) { return s.replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c])); }
 
 function openLb(i) {
   idx = (i + view.length) % view.length; const m = view[idx];
+  while (shown <= idx && shown < view.length) renderMore();
   $("#lbImg").src = m.image; $("#lbImg").alt = m.title;
   $("#lbTitle").textContent = m.title;
   const cat = $("#lbCat"); cat.textContent = `${CAT_META[m.category]?.[0] || ""} ${m.category}`; cat.style.setProperty("--c", color(m.category));

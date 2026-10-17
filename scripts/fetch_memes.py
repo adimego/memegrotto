@@ -18,7 +18,8 @@ UA = "Mozilla/5.0 (meme-library/0.1; personal project)"
 TODAY = datetime.date.today().isoformat()
 
 CATEGORIES = ["Reaction", "Classic Templates", "Animals", "Celebrities & Pop Culture",
-              "Cartoons & Anime", "Work & School", "Gaming", "Relatable Life", "Wholesome", "Absurd & Surreal"]
+              "Cartoons & Anime", "Movies & TV", "Work & School", "Tech & Science", "Gaming", "Sports",
+              "Food", "History & Politics", "Relatable Life", "Wholesome", "Absurd & Surreal"]
 
 # ---------- curated spotlight sets (imgflip template id, title, category, tags) ----------
 CURATED = [
@@ -158,10 +159,90 @@ REDDIT_FEEDS = [
     ("dankmemes", "month", 22, None, False),
     ("antiwork", "month", 8, "Work & School", True),
     ("gaming", "month", 10, "Gaming", True),
+    # round 3 (year/all tops; strong=True means the sub decides the category)
+    ("memes", "year", 70, None, False),
+    ("dankmemes", "year", 50, None, False),
+    ("wholesomememes", "year", 45, "Wholesome", True),
+    ("me_irl", "year", 40, "Relatable Life", True),
+    ("2meirl4meirl", "year", 30, "Relatable Life", True),
+    ("ProgrammerHumor", "year", 45, "Tech & Science", True),
+    ("linuxmemes", "year", 20, "Tech & Science", True),
+    ("sciencememes", "year", 25, "Tech & Science", True),
+    ("mathmemes", "year", 20, "Tech & Science", True),
+    ("PrequelMemes", "year", 30, "Movies & TV", True),
+    ("lotrmemes", "year", 25, "Movies & TV", True),
+    ("marvelmemes", "year", 20, "Movies & TV", True),
+    ("DunderMifflin", "year", 20, "Movies & TV", True),
+    ("moviememes", "year", 20, "Movies & TV", True),
+    ("BikiniBottomTwitter", "year", 25, "Cartoons & Anime", True),
+    ("TheSimpsons", "year", 12, "Cartoons & Anime", True),
+    ("HistoryMemes", "year", 35, "History & Politics", True),
+    ("PoliticalHumor", "year", 25, "History & Politics", True),
+    ("sportsmemes", "year", 20, "Sports", True),
+    ("soccermemes", "year", 20, "Sports", True),
+    ("nbacirclejerk", "year", 15, "Sports", True),
+    ("nflmemes", "year", 15, "Sports", True),
+    ("foodmemes", "all", 25, "Food", True),
+    ("catmemes", "year", 30, "Animals", True),
+    ("dogmemes", "year", 20, "Animals", True),
+    ("AnimalMemes", "year", 20, "Animals", True),
+    ("Minecraftmemes", "year", 20, "Gaming", True),
+    ("pcmasterrace", "year", 20, "Gaming", True),
+    ("pokemonmemes", "year", 15, "Gaming", True),
+    ("gaming", "year", 15, "Gaming", True),
+    ("antiwork", "year", 25, "Work & School", True),
+    ("engineeringmemes", "year", 15, "Work & School", True),
+    ("AdviceAnimals", "year", 30, "Classic Templates", True),
+    ("MemeEconomy", "year", 15, "Classic Templates", True),
+    ("surrealmemes", "year", 20, "Absurd & Surreal", True),
+    ("comedyheaven", "year", 20, "Absurd & Surreal", True),
+    ("terriblefacebookmemes", "year", 20, "Absurd & Surreal", True),
+    ("funny", "year", 25, None, False),
+    ("SonicTheHedgehog", "year", 25, "Gaming", True),
+    ("SonicMemes", "year", 35, "Gaming", True),
 ]
 SUB_TAGS = {"ProgrammerHumor": ["programming", "dev"], "wholesomememes": ["wholesome"], "gamingmemes": ["gaming"],
             "me_irl": ["me_irl", "relatable"], "2meirl4meirl": ["2meirl4meirl", "relatable"], "dankmemes": ["dank"],
-            "antiwork": ["work", "antiwork"], "gaming": ["gaming", "video games"]}
+            "antiwork": ["work", "antiwork"], "gaming": ["gaming", "video games"],
+            "linuxmemes": ["linux", "tech"], "sciencememes": ["science"], "mathmemes": ["math"], "PrequelMemes": ["star wars", "prequels"],
+            "lotrmemes": ["lotr", "tolkien"], "marvelmemes": ["marvel"], "DunderMifflin": ["the office", "tv"], "moviememes": ["movies"],
+            "BikiniBottomTwitter": ["spongebob"], "TheSimpsons": ["simpsons"], "HistoryMemes": ["history"], "PoliticalHumor": ["politics"],
+            "sportsmemes": ["sports"], "soccermemes": ["soccer", "football"], "nbacirclejerk": ["nba", "basketball"],
+            "nflmemes": ["nfl", "football"], "foodmemes": ["food"], "catmemes": ["cat"], "dogmemes": ["dog"], "AnimalMemes": ["animals"],
+            "Minecraftmemes": ["minecraft"], "pcmasterrace": ["pc", "pcmr"], "pokemonmemes": ["pokemon"], "engineeringmemes": ["engineering"],
+            "AdviceAnimals": ["advice animal"], "MemeEconomy": ["meme economy"], "surrealmemes": ["surreal"], "comedyheaven": ["comedy heaven"],
+            "terriblefacebookmemes": ["facebook", "boomer"], "funny": ["funny"],
+            "SonicTheHedgehog": ["sonic"], "SonicMemes": ["sonic"]}
+
+# Know Your Meme "most viewed" listing (classic, well-documented memes with real names)
+KYM_PAGES = 22   # 16 entries per page
+
+# Specific Know Your Meme entries (image = the entry's og:image)
+SONIC = ["sonic", "sonic the hedgehog", "sega"]
+KYM_ENTRIES = [
+    ("sanic-hegehog", "Sanic Hegehog: Gotta Go Fast", "Gaming", SONIC + ["sanic", "gotta go fast"]),
+    ("gotta-go-fast", "Gotta Go Fast", "Gaming", SONIC + ["gotta go fast"]),
+    ("sonic-says", "Sonic Says", "Cartoons & Anime", SONIC + ["sonic says", "psa"]),
+    ("ugly-sonic", "Ugly Sonic", "Movies & TV", SONIC + ["ugly sonic", "movie", "chip n dale"]),
+    ("youre-too-slow", "You're Too Slow!", "Gaming", SONIC + ["too slow", "sonic adventure 2"]),
+    ("sonic-06", "Sonic '06", "Gaming", SONIC + ["sonic 06", "glitches"]),
+    ("shadow-the-hedgehog", "Shadow the Hedgehog (Edgelord)", "Gaming", SONIC + ["shadow", "edgy", "edgelord"]),
+    ("sonic-the-hedgehog", "Sonic the Hedgehog", "Gaming", SONIC),
+    ("sonic-adventure-pose", "Sonic Adventure Pose", "Gaming", SONIC + ["pose", "sonic adventure"]),
+    ("sonics-big-oof", "Sonic's Big Oof", "Gaming", SONIC + ["oof", "sonic 06"]),
+    ("its-no-use", "It's No Use! (Sonic 06)", "Gaming", SONIC + ["sonic 06", "it's no use", "take this"]),
+    ("fun-is-infinite-majin-sonic", "Fun Is Infinite (Majin Sonic)", "Absurd & Surreal", SONIC + ["majin sonic", "sonic cd"]),
+    ("zesty-sonic", "Zesty Sonic", "Absurd & Surreal", SONIC + ["zesty"]),
+    ("marias-death-sonic-the-hedgehog", "Maria's Death (Shadow the Hedgehog)", "Gaming", SONIC + ["shadow", "maria"]),
+    ("pingas", "Pingas (Robotnik)", "Cartoons & Anime", SONIC + ["robotnik", "eggman", "pingas"]),
+    ("the-tails-doll", "Tails Doll", "Absurd & Surreal", SONIC + ["tails doll", "creepy", "sonic r"]),
+    ("do-you-know-da-wae", "Do You Know Da Wae (Ugandan Knuckles)", "Gaming", SONIC + ["ugandan knuckles", "da wae", "knuckles"]),
+    ("sonic-r", "Sonic R / Can You Feel the Sunshine", "Gaming", SONIC + ["sonic r", "sunshine"]),
+    ("dr-robotnik", "Dr. Robotnik / Eggman", "Cartoons & Anime", SONIC + ["robotnik", "eggman"]),
+    ("big-the-cat-fishing", "Big the Cat", "Gaming", SONIC + ["big the cat", "froggy"]),
+    ("knuckles-approval-meter", "Knuckles Approves / Denies", "Reaction", SONIC + ["knuckles", "approved", "denied"]),
+    ("sonic-twitter", "Sonic Twitter (Brand Account)", "Celebrities & Pop Culture", SONIC + ["sonic twitter", "brand twitter"]),
+]
 
 # Imgflip captioned memes scraped from tag pages (title + caption text are filtered for slurs; eyeballed after)
 IMGFLIP_TAG_FEEDS = [
@@ -177,6 +258,22 @@ IMGFLIP_TAG_FEEDS = [
     ("minecraft", "top-365d", 4, "Gaming", ["minecraft"]),
     ("teachers", "top-365d", 4, "Work & School", ["teachers", "school"]),
     ("harambe", "top-2016", 0, "Animals", ["harambe"]),  # placeholder (curated list covers it)
+    # round 3
+    ("food", "top-365d", 12, "Food", ["food"]), ("pizza", "top-365d", 6, "Food", ["pizza"]),
+    ("sports", "top-365d", 10, "Sports", ["sports"]), ("football", "top-365d", 8, "Sports", ["football"]),
+    ("basketball", "top-365d", 6, "Sports", ["basketball"]), ("soccer", "top-365d", 6, "Sports", ["soccer"]),
+    ("star wars", "top-365d", 8, "Movies & TV", ["star wars"]), ("movies", "top-365d", 8, "Movies & TV", ["movies"]),
+    ("the office", "top-365d", 6, "Movies & TV", ["the office"]), ("marvel", "top-365d", 6, "Movies & TV", ["marvel"]),
+    ("programming", "top-365d", 10, "Tech & Science", ["programming"]), ("science", "top-365d", 8, "Tech & Science", ["science"]),
+    ("computers", "top-365d", 6, "Tech & Science", ["computers"]), ("history", "top-365d", 10, "History & Politics", ["history"]),
+    ("cats", "top-365d", 10, "Animals", ["cat"]), ("dogs", "top-365d", 8, "Animals", ["dog"]),
+    ("spongebob", "top-365d", 8, "Cartoons & Anime", ["spongebob"]), ("anime", "top-365d", 6, "Cartoons & Anime", ["anime"]),
+    ("college", "top-365d", 6, "Work & School", ["college"]), ("job", "top-365d", 6, "Work & School", ["job"]),
+    ("fortnite", "top-365d", 5, "Gaming", ["fortnite"]), ("pokemon", "top-365d", 6, "Gaming", ["pokemon"]),
+    ("reaction", "top-365d", 8, "Reaction", ["reaction"]), ("dank memes", "top-365d", 10, "Absurd & Surreal", ["dank"]),
+    ("wholesome memes", "top-365d", 8, "Wholesome", ["wholesome"]), ("relatable memes", "top-365d", 8, "Relatable Life", ["relatable"]),
+    ("sonic", "top-365d", 14, "Gaming", ["sonic"]), ("sanic", "top-2017", 5, "Gaming", ["sonic", "sanic"]),
+    ("shadow the hedgehog", "top-365d", 6, "Gaming", ["sonic", "shadow"]), ("knuckles", "top-365d", 6, "Gaming", ["sonic", "knuckles"]),
 ]
 
 # Never ingest: matched against title + caption. Hateful slurs are a hard reject.
@@ -350,8 +447,22 @@ REDDIT_RULES = [  # applied to reddit titles before generic rules
     ("Relatable Life", r"sleep|aging|overthought|alarm|period|innocent|wild side|exceeded"),
 ]
 
+# Bulk curation decisions (made while eyeballing contact sheets) live in scripts/curation.json:
+#   {"exclude": [ids...], "overrides": {id: {"category":..., "title":..., "nsfw":true, "add_tags":[...]}}}
+CURATION = os.path.join(os.path.dirname(os.path.abspath(__file__)), "curation.json")
+if os.path.exists(CURATION):
+    _c = json.load(open(CURATION))
+    EXCLUDE |= set(_c.get("exclude", []))
+    for _k, _v in _c.get("overrides", {}).items():
+        OVERRIDES.setdefault(_k, {}).update(_v)
+
 # ---------- heuristics for API / reddit items ----------
 RULES = [
+    ("Sports", r"\b(nba|nfl|soccer|football|basketball|baseball|hockey|messi|ronaldo|lebron|jordan|olympics?|world cup|super bowl|fifa|tennis|golf|ufc|boxing)\b"),
+    ("Food", r"\b(food|pizza|burger|taco|pasta|spaghetti|cheese|bread|cook|cooking|chef|kfc|mcdonald|snack|coffee|cake|fries|sandwich)\b"),
+    ("Tech & Science", r"\b(code|coding|programmer|programming|developer|python|javascript|linux|windows|computer|wifi|internet explorer|science|scientist|physics|chemistry|math|nasa|ai|chatgpt|robot)\b"),
+    ("History & Politics", r"\b(history|historical|war|ww2|wwii|rome|roman|napoleon|president|election|congress|politics|political|trump|biden|obama|soviet|medieval)\b"),
+    ("Movies & TV", r"\b(movie|film|star wars|marvel|avengers|thanos|lotr|lord of the rings|gandalf|shrek|office|michael scott|breaking bad|game of thrones|netflix|sitcom|tv show|harry potter|matrix|keanu)\b"),
     ("Gaming", r"\b(game|gamer|gaming|uno|minecraft|fortnite|xbox|playstation|nintendo|steam|gta|zelda|mario|pokemon|controller|console|wwe|undertaker|aj styles)\b"),
     ("Work & School", r"\b(boss|work|office|meeting|boardroom|school|teacher|exam|homework|college|paid|job|monday|salary|scroll of truth|student|class)\b"),
     ("Animals", r"\b(cat|dog|doge|cheems|pigeon|monkey|seagull|bird|gorilla|harambe|butterfly|frog|kermit|animal|dragon|pets?|puppy)\b"),
@@ -402,12 +513,40 @@ def download(url, mid):
     if ext == ".jpeg": ext = ".jpg"
     fn = f"{mid}{ext}"
     path = os.path.join(IMG_DIR, fn)
+    jpg = os.path.join(IMG_DIR, f"{mid}.jpg")
+    if ext != ".gif" and os.path.exists(jpg):
+        return f"images/{mid}.jpg"
     if not os.path.exists(path):
         data = get(url, binary=True)
         if len(data) < 1000:
             raise ValueError("image too small / blocked")
+        if ext == ".gif" and len(data) > 4_000_000:
+            raise ValueError("gif too large")
         with open(path, "wb") as f: f.write(data)
+    if ext != ".gif":
+        return compress(f"images/{fn}")
     return f"images/{fn}"
+
+MAX_SIDE, QUALITY = 1000, 80
+
+def compress(rel):
+    """Resize to MAX_SIDE and re-encode as JPEG; returns new relative path (images/<id>.jpg)."""
+    from PIL import Image
+    src = os.path.join(ROOT, rel)
+    out_rel = os.path.splitext(rel)[0] + ".jpg"; out = os.path.join(ROOT, out_rel)
+    im = Image.open(src)
+    if getattr(im, "is_animated", False):
+        return rel
+    if im.mode in ("RGBA", "LA", "P"):
+        im = im.convert("RGBA"); bg = Image.new("RGB", im.size, "white"); bg.paste(im, mask=im.split()[-1]); im = bg
+    else:
+        im = im.convert("RGB")
+    im.thumbnail((MAX_SIDE, MAX_SIDE))
+    tmp = out + ".tmp"
+    im.save(tmp, "JPEG", quality=QUALITY, optimize=True, progressive=True)
+    if os.path.exists(src) and src != out: os.remove(src)
+    os.replace(tmp, out)
+    return out_rel
 
 def imgflip_template_image(tid):
     page = get(f"https://imgflip.com/meme/{tid}")
@@ -437,9 +576,17 @@ def imgflip_tag_page(tag, sort, page=1):
             if p.startswith("image tagged in "): itags = [x.strip() for x in p[16:].split(",")]
         yield img.group(1), img.group(2), html.unescape(t.group(2)).strip(), caption.replace(";", " /"), itags
 
-def reddit_feed(sub, period, limit=100):
-    rss = get(f"https://www.reddit.com/r/{sub}/top/.rss?t={period}&limit={limit}")
-    for e in re.findall(r"<entry>(.*?)</entry>", rss, re.S):
+def reddit_feed(sub, period, limit=100, pages=1):
+    entries, after = [], ""
+    for pg in range(pages):
+        rss = get(f"https://www.reddit.com/r/{sub}/top/.rss?t={period}&limit={limit}" + (f"&after={after}" if after else ""))
+        es = re.findall(r"<entry>(.*?)</entry>", rss, re.S)
+        if not es: break
+        entries += es
+        last = re.search(r"<id>t3_(\w+)</id>", es[-1])
+        if not last: break
+        after = "t3_" + last.group(1); time.sleep(6)
+    for e in entries:
         img = re.findall(r"https://i\.redd\.it/\w+\.(?:jpe?g|png|gif)", e)
         if not img: continue
         title = html.unescape(html.unescape(re.search(r"<title>(.*?)</title>", e, re.S).group(1))).strip()
@@ -448,10 +595,20 @@ def reddit_feed(sub, period, limit=100):
         pid = re.search(r"/comments/(\w+)/", link).group(1)
         yield pid, title, link, img[0], author.group(1) if author else "unknown"
 
+def kym_page(page):
+    s = get(f"https://knowyourmeme.com/memes/all?sort=views&page={page}")
+    for u in s.split('<a class="item" ')[1:]:
+        t = re.search(r'data-title="([^"]*)"', u)
+        h = re.search(r'href="/memes/([a-z0-9-]+)"', u) or re.search(r'data-comments-link="/memes/([a-z0-9-]+)', u)
+        img = re.search(r'(?:data-src|src)="(https://i\.kym-cdn\.com/entries/icons/[^"]+\.(?:jpe?g|png))"', u)
+        alt = re.search(r'\balt="([^"]*)"', u)
+        if t and h and img:
+            yield h.group(1), html.unescape(t.group(1)).strip(), img.group(1).replace("/newsfeed/", "/original/"), html.unescape(alt.group(1)) if alt else ""
+
 def dhash(path, n=16):
     from PIL import Image
     im = Image.open(path).convert("L").resize((n + 1, n))
-    px = list(im.getdata())
+    px = list(im.get_flattened_data()) if hasattr(im, 'get_flattened_data') else list(im.getdata())
     return sum(1 << i for i in range(n * n) if px[(i // n) * (n + 1) + i % n] > px[(i // n) * (n + 1) + i % n + 1])
 
 def make_thumbs(memes, size=480):
@@ -481,6 +638,10 @@ def main():
     ap.add_argument("--no-reddit", action="store_true")
     ap.add_argument("--no-imgflip-tags", action="store_true")
     ap.add_argument("--reddit-only", nargs="*", help="only fetch these subreddits")
+    ap.add_argument("--sources", nargs="*", default=["api", "curated", "kym", "imgflip", "reddit"],
+                    help="subset of: api curated kym imgflip reddit")
+    ap.add_argument("--kym-pages", type=int, default=KYM_PAGES)
+    ap.add_argument("--recompress", action="store_true", help="shrink existing images to MAX_SIDE JPEG")
     ap.add_argument("--more", type=int, default=None,
                     help="add up to K NEW memes per feed (default: just top each feed up to its configured size)")
     a = ap.parse_args()
@@ -525,27 +686,34 @@ def main():
         db["memes"].append(entry); have.add(entry["id"]); added += 1
         print("  +", entry["category"], "|", entry["title"])
 
+    if a.recompress:
+        print("Recompressing existing images...")
+        for m in db["memes"]:
+            if not m["image"].endswith(".gif"):
+                try: m["image"] = compress(m["image"])
+                except Exception as e: problems.append(f"recompress {m['id']}: {e}")
     print("Imgflip API top templates...")
-    try:
-        api = json.loads(get("https://api.imgflip.com/get_memes"))["data"]["memes"]
-        for m in api:
-            name = html.unescape(m["name"]); cat = categorize(name, m.get("box_count"))
-            seen_tpl.add(int(m["id"]))
-            add({"id": f"imgflip-{m['id']}-{slug(name)}", "template_id": int(m["id"]), "title": name,
-                 "category": cat, "tags": make_tags(name, cat, ["template"]),
-                 "source": "Imgflip API", "source_url": f"https://imgflip.com/meme/{m['id']}",
-                 "image_url": m["url"], "width": m.get("width"), "height": m.get("height"),
-                 "attribution": "Template via Imgflip (imgflip.com)"}, m["url"])
-    except Exception as e:
-        problems.append(f"Imgflip API: {e}")
+    if "api" in a.sources:
+      try:
+          api = json.loads(get("https://api.imgflip.com/get_memes"))["data"]["memes"]
+          for m in api:
+              name = html.unescape(m["name"]); cat = categorize(name, m.get("box_count"))
+              seen_tpl.add(int(m["id"]))
+              add({"id": f"imgflip-{m['id']}-{slug(name)}", "template_id": int(m["id"]), "title": name,
+                   "category": cat, "tags": make_tags(name, cat, ["template"]),
+                   "source": "Imgflip API", "source_url": f"https://imgflip.com/meme/{m['id']}",
+                   "image_url": m["url"], "width": m.get("width"), "height": m.get("height"),
+                   "attribution": "Template via Imgflip (imgflip.com)"}, m["url"])
+      except Exception as e:
+          problems.append(f"Imgflip API: {e}")
 
     print("Curated spotlight + classic searches...")
-    items = list(CURATED)
-    for q, title, cat, tags in CLASSIC_QUERIES:
+    items = list(CURATED) if "curated" in a.sources else []
+    for q, title, cat, tags in (CLASSIC_QUERIES if "curated" in a.sources else []):
         try: items.append((imgflip_search_first(q), title, cat, tags))
         except Exception as e: problems.append(f"search '{q}': {e}")
         time.sleep(0.3)
-    for tid, title, cat, tags in items:
+    for tid, title, cat, tags in (items if "curated" in a.sources else []):
         if tid in seen_tpl: continue
         mid = f"imgflip-{tid}-{slug(title)}"
         if mid in have: continue
@@ -561,13 +729,43 @@ def main():
         time.sleep(0.3)
 
     print("Curated captioned memes (Harambe etc.)...")
-    for c in CURATED_URLS:
+    for c in (CURATED_URLS if "curated" in a.sources else []):
         add({"id": c["id"], "title": c["title"], "category": c["cat"],
              "tags": list(dict.fromkeys(c["tags"] + [c["cat"].split(" ")[0].lower()])),
              "source": c["source"], "source_url": c["src"], "image_url": c["url"], "nsfw": c.get("nsfw", False),
              "attribution": f"Via {c['source']}", "captioned": True}, c["url"])
 
-    if not a.no_imgflip_tags:
+    if "kym" in a.sources:
+        print("Know Your Meme most-viewed...")
+        for page in range(1, a.kym_pages + 1):
+            try: items_k = list(kym_page(page))
+            except Exception as e: problems.append(f"KYM page {page}: {e}"); break
+            for slug_, title, img, alt in items_k:
+                mid = f"kym-{slug_}"[:80]
+                if mid in have or mid in EXCLUDE: continue
+                cat = categorize(title + " " + alt) if any(re.search(rx, (title + " " + alt).lower()) for _, rx in RULES) else "Classic Templates"
+                add({"id": mid, "title": title, "caption": alt, "category": cat, "feed": "kym",
+                     "tags": make_tags(title, cat, ["kym", "classic"]), "source": "Know Your Meme",
+                     "source_url": f"https://knowyourmeme.com/memes/{slug_}", "image_url": img,
+                     "attribution": "Entry image via Know Your Meme"}, img)
+            time.sleep(2)
+        for slug_, title, cat, tags in KYM_ENTRIES:
+            mid = f"kym-{slug_}"
+            if mid in have or mid in EXCLUDE: continue
+            try:
+                page = get(f"https://knowyourmeme.com/memes/{slug_}")
+                og = re.search(r"og:image' content='([^']+)'", page) or re.search(r'og:image" content="([^"]+)"', page)
+                if not og: raise ValueError("no og:image")
+                img = og.group(1)
+            except Exception as e:
+                problems.append(f"KYM {slug_}: {e}"); continue
+            add({"id": mid, "title": title, "category": cat, "feed": "kym-entry",
+                 "tags": list(dict.fromkeys(tags + ["kym", cat.split(" ")[0].lower()])), "source": "Know Your Meme",
+                 "source_url": f"https://knowyourmeme.com/memes/{slug_}", "image_url": img,
+                 "attribution": "Entry image via Know Your Meme"}, img)
+            time.sleep(1.5)
+
+    if not a.no_imgflip_tags and "imgflip" in a.sources:
         print("Imgflip captioned memes from tag pages...")
         for tag, sort, n, cat, tags in IMGFLIP_TAG_FEEDS:
             existing = sum(1 for m in db["memes"] if m.get("feed") == f"imgflip-tag:{tag}")
@@ -591,7 +789,7 @@ def main():
                     got += added - before
                 time.sleep(0.5)
 
-    if not a.no_reddit:
+    if not a.no_reddit and "reddit" in a.sources:
         for sub, period, n, dcat, strong in REDDIT_FEEDS:
             if a.reddit_only and sub not in a.reddit_only: continue
             existing = sum(1 for m in db["memes"] if m.get("feed") == f"reddit:{sub}")
@@ -600,7 +798,7 @@ def main():
             print(f"Reddit r/{sub} top of {period} (RSS)...")
             try:
                 got = 0
-                for pid, title, link, img, author in reddit_feed(sub, period):
+                for pid, title, link, img, author in reddit_feed(sub, period, pages=2 if n > 35 else 1):
                     if got >= n: break
                     mid = f"reddit-{pid}"
                     if mid in have or mid in EXCLUDE: continue
@@ -637,6 +835,11 @@ def main():
                 if f and os.path.exists(os.path.join(ROOT, f)): os.remove(os.path.join(ROOT, f))
             continue
         if "nsfw" in m["tags"]: m["nsfw"] = True
+        if re.search(r"\b(sonic|sanic|eggman|robotnik|big the cat|shadow the hedgehog|knuckles)\b",
+                     (m["title"] + " " + m.get("caption", "") + " " + " ".join(m["tags"])).lower()) and "sonic" not in m["tags"]:
+            m["tags"].append("sonic")
+        if m["category"] == "Work & School" and ("programming" in m["tags"] or "r/programmerhumor" in m["tags"]):
+            m["category"] = "Tech & Science"
         if m.get("nsfw") and "nsfw" not in m["tags"]: m["tags"].append("nsfw")
         keep.append(m)
     db["memes"] = keep
