@@ -644,7 +644,8 @@ def ocr_all(memes, problems):
     def run(m):
         try:
             out = subprocess.run(["tesseract", os.path.join(ROOT, m["image"]), "stdout", "--psm", "3"],
-                                 capture_output=True, text=True, timeout=60).stdout
+                                 capture_output=True, text=True, timeout=60,
+                                 env={**os.environ, "OMP_THREAD_LIMIT": "1"}).stdout
         except Exception:
             out = ""
         lines = [re.sub(r"\s+", " ", l).strip() for l in out.splitlines()]
