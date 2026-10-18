@@ -180,6 +180,12 @@ function filtered() {
     const out = [], g = [groups.a || [], groups.b || [], groups.c || []];
     for (let i = 0; out.length < v.length; i++) g.forEach((arr, k) => { const per = [2, 1, 1][k]; for (let j = 0; j < per; j++) { const x = arr[i * per + j]; if (x) out.push(x); } });
     v = out;
+  } else if (state.sort === "popular" && state.tag === "gif" && !state.cat && !terms.length) {
+    // GIFs & Videos spotlight: round-robin Imgflip GIF templates / Tenor reactions / Reddit clips so every source shows up top
+    const groups = {}; v.sort((a, b) => a.rank - b.rank).forEach(m => (groups[/^(gif:tenor)/.test(m.feed || "") ? "t" : m.source.startsWith("Reddit") ? "r" : "i"] ??= []).push(m));
+    const g = [groups.i || [], groups.t || [], groups.r || []], out = [];
+    for (let i = 0; out.length < v.length; i++) g.forEach(arr => { if (arr[i]) out.push(arr[i]); });
+    v = out;
   } else if (state.sort === "popular") v.sort((a, b) => a.rank - b.rank);
   if (state.sort === "popular" && !state.top && !state.cat && !state.tag && !terms.length) {
     // Home page: alternate top-voted and trending memes (deduped), then the usual vote/popularity order
