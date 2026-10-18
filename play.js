@@ -112,7 +112,9 @@
     const p = document.createElement("section"); p.id = "listPanel"; p.className = "lboard"; p.innerHTML = '<p class="muted">Loading…</p>'; $("#grid").before(p);
     const tab = lbTab;
     const done = html => { if (state.list === "leaderboard" && lbTab === tab && p.isConnected) p.innerHTML = html || '<p class="muted">Nothing here yet. Go vote! ▲</p>'; bind(p); };
-    const row = (n, m, right, sub) => `<li><button type="button" data-id="${esc(m.id)}"><span class="rk">${n}</span><img loading="lazy" src="${esc(m.thumb || m.image)}" alt=""><span class="tt">${esc(m.title)}${sub ? `<small>${sub}</small>` : ""}</span><b>${right}</b></button></li>`;
+    // community clips have no poster image: show the clip's first frame instead of a broken <img>
+    const thumbOf = m => !m.thumb && !m.image && m.video ? `<video src="${esc(m.video)}#t=0.1" muted playsinline preload="metadata" aria-hidden="true"></video>` : `<img loading="lazy" src="${esc(m.thumb || m.image)}" alt="">`;
+    const row = (n, m, right, sub) => `<li><button type="button" data-id="${esc(m.id)}"><span class="rk">${n}</span>${thumbOf(m)}<span class="tt">${esc(m.title)}${sub ? `<small>${sub}</small>` : ""}</span><b>${right}</b></button></li>`;
     if (tab === "creators") {
       fetchLb("creators", "leaderboard_creators", { p_limit: 25 }).then(rows => done(rows.length ? `<ol class="lb-list">${rows.map((r, i) =>
         `<li><div class="lb-row"><span class="rk">${i + 1}</span><span class="tt">${esc(r.creator)}<small>${r.approved} approved meme${r.approved == 1 ? "" : "s"}</small></span><b>▲ ${r.votes}</b></div></li>`).join("")}</ol>` : ""));

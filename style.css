@@ -436,7 +436,7 @@ button,.btn,a.btn,.tag,.cat{touch-action:manipulation;-webkit-tap-highlight-colo
 .lb-list button:hover{border-color:var(--accent)}
 .lb-list .rk{width:28px;text-align:center;font-weight:800;color:var(--muted);flex:none}
 .lb-list li:nth-child(1) .rk{color:#f5b700}.lb-list li:nth-child(2) .rk{color:#c0c4d6}.lb-list li:nth-child(3) .rk{color:#d08a4e}
-.lb-list img{width:48px;height:48px;object-fit:cover;border-radius:8px;flex:none}
+.lb-list img,.lb-list video{width:48px;height:48px;object-fit:cover;border-radius:8px;flex:none;background:var(--line)}
 .lb-list .tt{flex:1;min-width:0;display:flex;flex-direction:column;overflow:hidden}
 .lb-list .tt,.lb-list .tt small{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .lb-list small{color:var(--muted);font-size:12px}
