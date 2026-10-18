@@ -1,12 +1,12 @@
-// MemeVault service worker. VERSION is rewritten by scripts/stamp_assets.py on every deploy, so each deploy installs a
+// MemeSpire service worker. VERSION is rewritten by scripts/stamp_assets.py on every deploy, so each deploy installs a
 // new worker that drops old caches. Strategy:
 //  - pages (index.html) and data (*.json): network-first, revalidated (cache: "no-cache"), cached copy only when offline
 //    -> a new deploy is picked up on the next load, never stuck on a stale shell (stamped ?v= asset URLs change with it)
 //  - versioned assets (?v=...), fonts, icons: cache-first (the URL changes whenever the content does)
 //  - images/thumbs: cache-first as they are viewed, capped at MAX_IMG entries
 //  - other origins (Supabase API, Imgflip, etc.): not touched
-const VERSION = "83efae45d4";
-const SHELL = `mv-shell-${VERSION}`, DATA = `mv-data-${VERSION}`, IMG = "mv-img-v1", MAX_IMG = 600;
+const VERSION = "1b00366852";
+const SHELL = `ms-shell-${VERSION}`, DATA = `ms-data-${VERSION}`, IMG = "ms-img-v1", MAX_IMG = 600;
 const CORE = ["./", "index.html", "memes.json", "manifest.webmanifest", "icons/icon-192.png"];
 self.addEventListener("install", e => {
   e.waitUntil((async () => {
@@ -23,7 +23,12 @@ self.addEventListener("install", e => {
 });
 self.addEventListener("activate", e => {
   e.waitUntil((async () => {
-    for (const k of await caches.keys()) if (k.startsWith("mv-") && k !== SHELL && k !== DATA && k !== IMG) await caches.delete(k);
+    // keep the images viewed under the old MemeVault cache name (mv-img-v1) instead of re-downloading them
+    if (await caches.has("mv-img-v1")) {
+      const o = await caches.open("mv-img-v1"), n = await caches.open(IMG);
+      for (const r of (await o.keys()).slice(-MAX_IMG)) { const v = await o.match(r); if (v) await n.put(r, v); }
+    }
+    for (const k of await caches.keys()) if ((k.startsWith("mv-") || k.startsWith("ms-")) && k !== SHELL && k !== DATA && k !== IMG) await caches.delete(k);
     await self.clients.claim();
   })());
 });

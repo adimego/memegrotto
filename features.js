@@ -1,4 +1,4 @@
-// MemeVault extras: favorites & collections (localStorage), Meme of the Day, image-text search hints, "More like this".
+// MemeSpire extras: favorites & collections (localStorage), Meme of the Day, image-text search hints, "More like this".
 (() => {
   const KEY = "mv-lib";
   const load = () => { try { const d = JSON.parse(localStorage.getItem(KEY)); if (d && Array.isArray(d.fav) && Array.isArray(d.cols)) return d; } catch (e) {} return { fav: [], cols: [] }; };
@@ -66,9 +66,9 @@
 
   // ---- export / import
   function exportLib() {
-    const data = { app: "MemeVault", version: 1, exported: new Date().toISOString(), favorites: lib.fav, collections: lib.cols };
+    const data = { app: "MemeSpire", version: 1, exported: new Date().toISOString(), favorites: lib.fav, collections: lib.cols };
     const a = document.createElement("a"); a.href = URL.createObjectURL(new Blob([JSON.stringify(data, null, 2)], { type: "application/json" }));
-    a.download = `memevault-library-${new Date().toISOString().slice(0, 10)}.json`; document.body.appendChild(a); a.click(); a.remove();
+    a.download = `memespire-library-${new Date().toISOString().slice(0, 10)}.json`; document.body.appendChild(a); a.click(); a.remove();
     setTimeout(() => URL.revokeObjectURL(a.href), 2000); toast("Library exported ⬇️");
   }
   function importLib() {
@@ -85,7 +85,7 @@
           else { lib.cols.push({ id: uid(), name: clean(c.name), items: [...new Set(c.items.filter(ok))].slice(0, 5000) }); nc++; }
         });
         save(); refresh(); toast(`Imported ${nf} favorite${nf === 1 ? "" : "s"} and ${nc} collection${nc === 1 ? "" : "s"} ⬆️`);
-      } catch (e) { toast("That file isn't a MemeVault library export"); }
+      } catch (e) { toast("That file isn't a MemeSpire library export"); }
     };
     inp.click();
   }
@@ -134,7 +134,7 @@
       if (c) {
         tb.innerHTML = `<button class="btn" data-a="ren">✏️ Rename</button><button class="btn" data-a="del">🗑 Delete collection</button>`;
         tb.querySelector('[data-a="ren"]').onclick = () => { const nm = clean(prompt("Rename collection:", c.name)); if (nm) { c.name = nm; save(); buildSidebar(); render(); } };
-        tb.querySelector('[data-a="del"]').onclick = () => { if (confirm(`Delete the collection “${c.name}”? The memes stay in the vault.`)) { lib.cols = lib.cols.filter(x => x !== c); save(); go(null); toast("Collection deleted"); } };
+        tb.querySelector('[data-a="del"]').onclick = () => { if (confirm(`Delete the collection “${c.name}”? The memes stay on MemeSpire.`)) { lib.cols = lib.cols.filter(x => x !== c); save(); go(null); toast("Collection deleted"); } };
       } else if (state.list === "fav") tb.innerHTML = '<span class="muted">Tap ❤ on any meme to save it here. Favorites live in this browser; use Export in the sidebar to back them up.</span>';
       if (!view.length && !state.q) $("#empty").querySelector("p").firstChild.textContent = state.list === "fav" ? "No favorites yet. " : "This collection is empty. ";
     }
@@ -241,7 +241,7 @@
     let b = $("#installBtn");
     if (!b) {
       b = document.createElement("button"); b.id = "installBtn"; b.type = "button"; b.className = "install-btn";
-      b.innerHTML = '<img src="icons/icon-192.png" alt=""><span>Install MemeVault<small>Works offline · opens like an app</small></span>';
+      b.innerHTML = '<img src="icons/icon-192.png" alt=""><span>Install MemeSpire<small>Works offline · opens like an app</small></span>';
       $("#sidebar .sb-head").after(b);
       b.onclick = async () => {
         if (deferred) { deferred.prompt(); const r = await deferred.userChoice.catch(() => null); deferred = null; if (r?.outcome === "accepted") b.hidden = true; }
@@ -251,7 +251,7 @@
     b.hidden = standalone() || !(deferred || ios);
   }
   window.addEventListener("beforeinstallprompt", e => { e.preventDefault(); deferred = e; btn(); });
-  window.addEventListener("appinstalled", () => { deferred = null; const b = $("#installBtn"); if (b) b.hidden = true; toast("MemeVault installed 📲"); });
+  window.addEventListener("appinstalled", () => { deferred = null; const b = $("#installBtn"); if (b) b.hidden = true; toast("MemeSpire installed 📲"); });
   if (ios && !standalone()) btn();
   window.addEventListener("offline", () => toast("You're offline: cached memes still work 📴"));
 })();

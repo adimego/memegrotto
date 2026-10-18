@@ -328,7 +328,7 @@ function prefetchBlob(m) {
 }
 const touchy = () => matchMedia("(pointer: coarse)").matches;
 async function share(m, anchor) {
-  const url = deepLink(m), title = m.title + " · MemeVault";
+  const url = deepLink(m), title = m.title + " · MemeSpire";
   if (navigator.share && touchy()) {
     const b = blobCache.get(m.id);
     const data = { title, text: m.title, url };
@@ -437,7 +437,7 @@ function openById(id) {
   let i = view.findIndex(m => m.id === id);
   if (i < 0) {
     const m = memes.find(x => x.id === id);
-    if (!m) { if (id.startsWith("sub-") && window.MVCommunity && !MVCommunity.loaded()) return; return toast("That meme isn't in the vault anymore 🤷"); }
+    if (!m) { if (id.startsWith("sub-") && window.MVCommunity && !MVCommunity.loaded()) return; return toast("That meme isn't on MemeSpire anymore 🤷"); }
     Object.assign(state, { cat: null, tag: null, q: "", top: false, trend: false, list: m.community ? "community" : null }); $("#q").value = "";
     if (m.nsfw && !state.nsfw) { state.nsfw = true; $("#nsfw").checked = true; }
     buildSidebar(); render(); i = view.findIndex(x => x.id === id);
