@@ -132,7 +132,8 @@
     }
   }
   function bind(p) {
-    p.querySelectorAll("button[data-id]").forEach(b => b.onclick = () => openById(b.dataset.id));
+    const ids = [...p.querySelectorAll("button[data-id]")].map(x => x.dataset.id);   // prev/next walk the ranking shown
+    p.querySelectorAll("button[data-id]").forEach(b => b.onclick = () => typeof openList === "function" ? openList(ids, b.dataset.id) : openById(b.dataset.id));
     p.querySelectorAll("[data-go]").forEach(b => b.onclick = () => go(b.dataset.go));
   }
 

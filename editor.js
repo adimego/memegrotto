@@ -412,7 +412,7 @@
   }
   // Event delegation, so the buttons work even if a cached older app.js is running alongside this file.
   function memeFor(btn) {
-    if (btn.id === "lbEdit") return typeof view !== "undefined" && typeof idx !== "undefined" ? view[idx] : null;
+    if (btn.id === "lbEdit") return typeof lbCur === "function" ? lbCur() : typeof view !== "undefined" && typeof idx !== "undefined" ? view[idx] : null;
     const id = btn.dataset.edit;
     return typeof memes !== "undefined" ? memes.find(x => x.id === id) : null;
   }

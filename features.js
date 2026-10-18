@@ -11,7 +11,7 @@
   const uid = () => Date.now().toString(36) + Math.random().toString(36).slice(2, 6);
   const clean = s => String(s || "").replace(/\s+/g, " ").trim().slice(0, 60);
 
-  function refresh() { buildSidebar(); if (state.list) render(); paintHearts(); if (!$("#lb").hidden && view[idx]) lightbox(view[idx]); }
+  function refresh() { buildSidebar(); if (state.list) render(); paintHearts(); if (!$("#lb").hidden && lbCur()) lightbox(lbCur()); }
   function toggleFav(m) {
     const i = lib.fav.indexOf(m.id);
     if (i >= 0) lib.fav.splice(i, 1); else lib.fav.unshift(m.id);
@@ -192,7 +192,7 @@
   function votesReady() { votesSettled = true; motdPick = null; motd(); }
 
   // ---- lightbox: Save / Collections / More like this
-  let SIM = null; fetch("similar.json").then(r => r.ok ? r.json() : null).then(d => { SIM = d; if (!$("#lb").hidden && view[idx]) moreLike(view[idx]); }).catch(() => {});
+  let SIM = null; fetch("similar.json").then(r => r.ok ? r.json() : null).then(d => { SIM = d; if (!$("#lb").hidden && lbCur()) moreLike(lbCur()); }).catch(() => {});
   function lightbox(m) {
     const acts = $("#lbActions") || $(".lb-actions");
     acts.querySelectorAll(".fav-btn,.col-btn").forEach(b => b.remove());

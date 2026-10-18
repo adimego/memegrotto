@@ -227,6 +227,7 @@ function render() {
   cols = [...Array(ncol)].map(() => { const d = document.createElement("div"); d.className = "col"; grid.appendChild(d); return d; });
   hts = Array(ncol).fill(0); shown = 0;
   renderMore();
+  lbRebase();
 }
 
 // Incremental rendering: cards are appended in pages of PAGE as the user scrolls (keeps 1000+ items fast)
@@ -296,10 +297,27 @@ function stopClip(c) { const v = c && c.querySelector("video.clip"); if (v) { v.
 
 function esc(s) { return s.replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c])); }
 
-function openLb(i) {
-  idx = (i + view.length) % view.length; const m = view[idx];
+// The viewer walks a snapshot of the list it was opened from (lbList, by position idx) rather than the live `view`, so a
+// re-render while it is open (votes, the community gallery or similar.json finishing loading, a vote re-sorting the grid,
+// a resize) can't shift prev/next under it. Before the first hop the snapshot is re-based onto the freshly rendered order
+// (so next/prev match the grid behind it); after a hop it stays frozen until the viewer closes, so prev always returns.
+let lbList = [], lbHopped = false;
+const lbCur = () => lbList[idx] || null;
+const lbSkip = m => !m || (!state.nsfw && m.nsfw) || !!(window.MVPlay && MVPlay.isHidden(m));
+function lbStep(d) {
+  const n = lbList.length; if (!n || $("#lb").hidden) return;
+  for (let k = 1; k <= n; k++) { const j = (((idx + d * k) % n) + n) % n; if (!lbSkip(lbList[j])) { lbHopped = true; return openLb(j, true); } }
+}
+function lbRebase() {   // called after each render while the viewer is open
+  if ($("#lb").hidden || lbHopped || !lbCur()) return;
+  const id = lbCur().id, j = view.findIndex(m => m.id === id); if (j >= 0) { lbList = view.slice(); idx = j; }
+}
+// openLb(i): open view[i] (grid card, deep link, "more like this") and snapshot the current list; openLb(i, true): step within the snapshot
+function openLb(i, step) {
+  if (!step) { if (!view.length) return; lbList = view.slice(); lbHopped = false; i = ((i % view.length) + view.length) % view.length; }
+  idx = i; const m = lbList[idx]; if (!m) return;
   resetLbMedia();
-  while (shown <= idx && shown < view.length) renderMore();
+  const gi = view.indexOf(m); while (gi >= 0 && shown <= gi && shown < view.length) renderMore();
   const lv0 = $("#lbVid");
   if (m.video) { $("#lbImg").hidden = true; $("#lbImg").removeAttribute("src"); lv0.hidden = false; lv0.poster = m.image; lv0.src = m.video; lv0.play().catch(() => {}); }
   else { lv0.pause(); lv0.removeAttribute("src"); lv0.load(); lv0.hidden = true; $("#lbImg").hidden = false; $("#lbImg").src = m.image; $("#lbImg").alt = m.title; }
@@ -320,7 +338,7 @@ function openLb(i) {
 }
 let lbId = null;
 function resetLbMedia() { $("#lbImg").style.transform = ""; $("#lbVid").style.transform = ""; }
-function closeLb() { if (!$("#lb").hidden) { lbId = null; writeHash(); } closeShare(); $("#lbVid").pause(); $("#lb").hidden = true; document.body.style.overflow = ""; resetLbMedia(); }
+function closeLb() { if (!$("#lb").hidden) { lbId = null; writeHash(); } closeShare(); $("#lbVid").pause(); $("#lb").hidden = true; document.body.style.overflow = ""; resetLbMedia(); lbList = []; lbHopped = false; idx = -1; }
 let rz, lastW = innerWidth;
 window.addEventListener("resize", () => {   // ignore height-only changes (mobile URL bar show/hide)
   if (innerWidth === lastW) return; lastW = innerWidth; clearTimeout(rz); rz = setTimeout(render, 150);
@@ -338,17 +356,17 @@ window.addEventListener("resize", () => {   // ignore height-only changes (mobil
   area.addEventListener("touchend", e => {
     if (x0 === null) return; const t = e.changedTouches[0], dx = t.clientX - x0, dy = t.clientY - y0; x0 = null;
     resetLbMedia();
-    if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy) * 1.2) openLb(idx + (dx < 0 ? 1 : -1));
+    if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy) * 1.2) lbStep(dx < 0 ? 1 : -1);
     else if (dy > 80 && dy > Math.abs(dx)) closeLb();
     else if (Math.abs(dx) < 10 && Math.abs(dy) < 10 && Date.now() - t0 < 300 && e.target === area) closeLb();
   });
   area.addEventListener("click", e => { if (e.target === area) closeLb(); });
 })();
 $("#lbClose").onclick = closeLb;
-$("#lbPrev").onclick = () => openLb(idx - 1);
-$("#lbNext").onclick = () => openLb(idx + 1);
+$("#lbPrev").onclick = () => lbStep(-1);
+$("#lbNext").onclick = () => lbStep(1);
 $("#lb").onclick = e => { if (e.target.id === "lb") closeLb(); };
-$("#lbShare").onclick = e => { e.stopPropagation(); share(view[idx], e.currentTarget); };
+$("#lbShare").onclick = e => { e.stopPropagation(); share(lbCur(), e.currentTarget); };
 
 // ---- Sharing: Web Share API on phones/tablets (with the image file when supported), share menu elsewhere ----
 const blobCache = new Map();
@@ -419,7 +437,7 @@ function toast(t) { const el = $("#toast"); el.textContent = t; el.classList.add
 document.addEventListener("keydown", e => {
   if (e.key === "Escape" && !$("#shareMenu").hidden) return closeShare();
   if (!$("#lb").hidden) {
-    if (e.key === "Escape") closeLb(); if (e.key === "ArrowLeft") openLb(idx - 1); if (e.key === "ArrowRight") openLb(idx + 1);
+    if (e.key === "Escape") closeLb(); if (e.key === "ArrowLeft") lbStep(-1); if (e.key === "ArrowRight") lbStep(1);
   } else if (e.key === "Escape" && $("#sidebar").classList.contains("open")) closeMenu();
   else if (e.key === "/" && document.activeElement !== $("#q")) { e.preventDefault(); $("#q").focus(); }
 });
@@ -468,6 +486,12 @@ function readHash() {
   state.list = p.get("list"); state.top = p.get("top") === "1"; state.trend = p.get("trending") === "1"; state.cat = p.get("cat"); state.tag = p.get("tag"); state.q = p.get("q") || ""; $("#q").value = state.q;
   const mid = p.get("m") || p.get("open");
   if (mid) setTimeout(() => openById(mid), 0);
+}
+// Panels that aren't the card grid (leaderboards, stats): open a meme and walk that panel's own ranked list with prev/next
+function openList(ids, id) {
+  const list = ids.map(x => memes.find(m => m.id === x)).filter(Boolean), i = list.findIndex(m => m.id === id);
+  if (i < 0) return openById(id);
+  lbList = list; lbHopped = false; openLb(i, true);
 }
 // Deep links: #m=<meme id> opens that meme's lightbox (filters are cleared if it isn't in the current view)
 function openById(id) {

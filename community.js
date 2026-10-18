@@ -27,11 +27,12 @@
   window.MVTrack = (id, kind) => track(id, kind);
   const vidOf = m => (typeof vid === "function" ? vid(m) : m.id);
   // hook into the app: lightbox views, shares, downloads
-  const _openLb = openLb; openLb = function (i) { _openLb(i); const m = view[idx]; if (m) { track(vidOf(m), "view"); lbExtras(m); } };
+  const cur = () => typeof lbCur === "function" ? lbCur() : view[idx];
+  const _openLb = openLb; openLb = function (i, step) { _openLb(i, step); const m = cur(); if (m) { track(vidOf(m), "view"); lbExtras(m); } };
   const _share = share; share = function (m, a) { track(vidOf(m), "share"); return _share(m, a); };
   document.addEventListener("click", e => {
-    const a = e.target.closest && e.target.closest("#lbDl, #shareMenu [data-a=dl]"); if (!a || !view[idx]) return;
-    track(vidOf(view[idx]), "download");
+    const a = e.target.closest && e.target.closest("#lbDl, #shareMenu [data-a=dl]"); if (!a || !cur()) return;
+    track(vidOf(cur()), "download");
   }, true);
 
   // ---------- probe
@@ -43,7 +44,7 @@
     } catch (e) { return giveUp(); }
     document.body.classList.add("has-community");
     sidebarBlock(); editorButton(); loadGallery();
-    if (!$("#lb").hidden && view[idx]) lbExtras(view[idx]);
+    if (!$("#lb").hidden && cur()) lbExtras(cur());
   }
 
   // ---------- Community gallery
@@ -225,7 +226,10 @@
         const rows = res[i].map(r => [byVid.get(r.meme_id), r.count]).filter(x => x[0] && (state.nsfw || !x[0].nsfw));
         return `<div class="stat-col"><h3>${label}</h3>${rows.length ? `<ol>${rows.map(([m, n]) => `<li><button type="button" data-id="${esc(m.id)}"><img loading="lazy" src="${m.thumb || m.image}" alt=""><span>${esc(m.title)}</span><b>${n}</b></button></li>`).join("")}</ol>` : '<p class="muted">No data yet.</p>'}</div>`;
       }).join("");
-      p.querySelectorAll("button[data-id]").forEach(b => b.onclick = () => openById(b.dataset.id));
+      p.querySelectorAll("button[data-id]").forEach(b => b.onclick = () => {   // prev/next walk that stats column
+        const ids = [...b.closest("ol").querySelectorAll("button[data-id]")].map(x => x.dataset.id);
+        typeof openList === "function" ? openList(ids, b.dataset.id) : openById(b.dataset.id);
+      });
     } catch (e) { p.innerHTML = '<p class="muted">Stats are unavailable right now.</p>'; }
   }
 
