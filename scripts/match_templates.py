@@ -109,7 +109,7 @@ def fetch():
 def candidates(memes):
     out = []
     for m in memes:   # blank templates already in the library (Imgflip API / curated templates)
-        if m.get("template_id") and not m.get("captioned") and not m["image"].endswith(".gif"):
+        if m.get("template_id") and not m.get("captioned") and not m["image"].endswith(".gif") and not m.get("video"):   # animated: poster is not a blank
             out.append((os.path.join(ROOT, m["image"]), m["image"], m["title"]))
     tpl = load_json(os.path.join(CACHE, "imgflip_templates.json"), {})
     for k, v in tpl.items():
@@ -206,7 +206,7 @@ def match():
     from multiprocessing import Pool
     memes = json.load(open(MJ))["memes"]; cur = load_json(CUR_P, {})
     done = set(cur.get("blank_verified", {})) | set(cur.get("no_blank", []))
-    qs = [m for m in memes if m["id"] not in done and not m["image"].endswith(".gif") and not (m.get("template_id") and not m.get("captioned"))]
+    qs = [m for m in memes if m["id"] not in done and not m["image"].endswith(".gif") and not m.get("video") and not (m.get("template_id") and not m.get("captioned"))]
     _init(); print("candidates", len(_G["C"]), "queries", len(qs), flush=True)
     out = {}
     with Pool(os.cpu_count(), initializer=_init) as p:
