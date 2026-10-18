@@ -96,7 +96,7 @@ let hl = new Map();   // meme id -> "top" | "trend" badge on the home mix
 function trendingList(pool) {
   const cutoff = new Date(Date.now() - TREND_DAYS * 864e5).toISOString().slice(0, 10), pos = {}, feedN = {};
   memes.forEach(m => { const f = m.feed || m.source; pos[m.id] = feedN[f] = (feedN[f] || 0) + 1; });
-  return pool.filter(m => (m.date_added || "") >= cutoff && !m.source.startsWith("Imgflip API") && m.feed !== "kym" && m.feed !== "kym-entry")
+  return pool.filter(m => (m.date_added || "") >= cutoff && /^(reddit:|imgflip-tag:|kym-gallery:|epstein)/.test(m.feed || ""))
     .sort((a, b) => (b.date_added || "").localeCompare(a.date_added || "") || pos[a.id] - pos[b.id] || a.rank - b.rank);
 }
 function topVotedList(pool) { return pool.filter(m => vcount(m) > 0).sort((a, b) => vcount(b) - vcount(a) || a.rank - b.rank); }
@@ -241,6 +241,10 @@ function renderMore() {
       <div class="meta"><h4>${esc(m.title)}</h4><div class="row"><span class="pill" style="--c:${color(m.category)}">${CAT_META[m.category]?.[0] || ""} ${m.category}</span>
       <span class="src">${esc(m.source.split(" ")[0] === "Know" ? "KYM" : m.source.split(" ")[0])}</span></div></div>`;
     c.querySelector(".row").insertBefore(voteBtn(m), c.querySelector(".src"));
+    const sb = document.createElement("button"); sb.className = "share"; sb.title = "Share"; sb.setAttribute("aria-label", "Share " + m.title);
+    sb.innerHTML = '<svg viewBox="0 0 24 24" width="15" height="15" aria-hidden="true"><path fill="currentColor" d="M18 16a3 3 0 0 0-2.2 1l-7-4a3 3 0 0 0 0-2l7-4A3 3 0 1 0 15 5l-7 4a3 3 0 1 0 0 6l7 4a3 3 0 1 0 3-3z"/></svg>';
+    sb.onclick = e => { e.stopPropagation(); share(m, sb); };
+    c.querySelector(".row").insertBefore(sb, c.querySelector(".src"));
     const img = c.querySelector("img");
     img.onload = () => { img.classList.add("ld"); img.parentNode.classList.remove("ph"); };
     c.onclick = () => openLb(i);
@@ -270,8 +274,11 @@ function openLb(i) {
   $("#lbOpen").href = m.source_url; $("#lbDl").href = m.image;
   const lv = $("#lbVote"); lv.innerHTML = ""; const vb = voteBtn(m); vb.classList.add("big"); lv.appendChild(vb);
   $("#lb").hidden = false; document.body.style.overflow = "hidden";
+  lbId = m.id; history.replaceState(null, "", "#m=" + encodeURIComponent(m.id));
+  prefetchBlob(m);
 }
-function closeLb() { $("#lb").hidden = true; document.body.style.overflow = ""; $("#lbImg").style.transform = ""; }
+let lbId = null;
+function closeLb() { if (!$("#lb").hidden) { lbId = null; writeHash(); } closeShare(); $("#lb").hidden = true; document.body.style.overflow = ""; $("#lbImg").style.transform = ""; }
 let rz, lastW = innerWidth;
 window.addEventListener("resize", () => {   // ignore height-only changes (mobile URL bar show/hide)
   if (innerWidth === lastW) return; lastW = innerWidth; clearTimeout(rz); rz = setTimeout(render, 150);
@@ -297,13 +304,76 @@ $("#lbClose").onclick = closeLb;
 $("#lbPrev").onclick = () => openLb(idx - 1);
 $("#lbNext").onclick = () => openLb(idx + 1);
 $("#lb").onclick = e => { if (e.target.id === "lb") closeLb(); };
-$("#lbCopy").onclick = () => {
-  const url = new URL(view[idx].image, location.href).href;
-  (navigator.clipboard ? navigator.clipboard.writeText(url) : Promise.reject()).then(() => toast("Link copied 📋"), () => toast(url));
-};
+$("#lbShare").onclick = e => { e.stopPropagation(); share(view[idx], e.currentTarget); };
+
+// ---- Sharing: Web Share API on phones/tablets (with the image file when supported), share menu elsewhere ----
+const blobCache = new Map();
+function prefetchBlob(m) {
+  if (blobCache.has(m.id) || !navigator.canShare) return;
+  const p = fetch(m.image).then(r => r.ok ? r.blob() : null).catch(() => null);
+  blobCache.set(m.id, p); p.then(b => blobCache.set(m.id, b));
+}
+const touchy = () => matchMedia("(pointer: coarse)").matches;
+async function share(m, anchor) {
+  const url = deepLink(m), title = m.title + " · MemeVault";
+  if (navigator.share && touchy()) {
+    const b = blobCache.get(m.id);
+    const data = { title, text: m.title, url };
+    if (b instanceof Blob) {
+      const f = new File([b], m.image.split("/").pop(), { type: b.type || "image/jpeg" });
+      if (navigator.canShare && navigator.canShare({ files: [f] })) data.files = [f];
+    } else prefetchBlob(m);
+    try { await navigator.share(data); return; }
+    catch (e) { if (e.name === "AbortError") return; if (data.files) { try { delete data.files; await navigator.share(data); return; } catch (e2) { if (e2.name === "AbortError") return; } } }
+  }
+  openShare(m, anchor);
+}
+function copyText(s) {
+  if (navigator.clipboard?.writeText) return navigator.clipboard.writeText(s);
+  const ta = document.createElement("textarea"); ta.value = s; ta.style.position = "fixed"; ta.style.opacity = "0";
+  document.body.appendChild(ta); ta.select(); const ok = document.execCommand("copy"); ta.remove();
+  return ok ? Promise.resolve() : Promise.reject();
+}
+function pngBlob(src) {
+  return fetch(src).then(r => r.blob()).then(b => b.type === "image/png" ? b : createImageBitmap(b).then(bm => {
+    const c = document.createElement("canvas"); c.width = bm.width; c.height = bm.height; c.getContext("2d").drawImage(bm, 0, 0);
+    return new Promise(res => c.toBlob(res, "image/png"));
+  }));
+}
+function openShare(m, anchor) {
+  const menu = $("#shareMenu"), url = deepLink(m), u = encodeURIComponent(url), t = encodeURIComponent(m.title);
+  const nets = [["𝕏", "X / Twitter", `https://twitter.com/intent/tweet?text=${t}&url=${u}`], ["👽", "Reddit", `https://www.reddit.com/submit?url=${u}&title=${t}`],
+    ["📘", "Facebook", `https://www.facebook.com/sharer/sharer.php?u=${u}`], ["💬", "WhatsApp", `https://wa.me/?text=${t}%20${u}`],
+    ["✈️", "Telegram", `https://t.me/share/url?url=${u}&text=${t}`]];
+  menu.innerHTML = `<div class="sm-head"><b>Share meme</b><button class="sm-x" aria-label="Close share menu">✕</button></div>
+    <div class="sm-url"><input readonly value="${esc(url)}" aria-label="Meme link"></div>
+    <button data-a="link">🔗 Copy link</button>
+    ${navigator.clipboard?.write && window.ClipboardItem ? '<button data-a="img">🖼️ Copy image</button>' : ""}
+    <a data-a="dl" href="${m.image}" download>⬇️ Download</a>
+    ${navigator.share ? '<button data-a="native">📲 More apps…</button>' : ""}
+    <div class="sm-nets">${nets.map(([i, n, h]) => `<a href="${h}" target="_blank" rel="noopener" title="Share to ${n}"><span>${i}</span>${n}</a>`).join("")}</div>`;
+  menu.querySelector(".sm-x").onclick = closeShare;
+  menu.querySelector('[data-a="link"]').onclick = () => copyText(url).then(() => { toast("Link copied 🔗"); closeShare(); }, () => toast(url));
+  const ib = menu.querySelector('[data-a="img"]');
+  if (ib) ib.onclick = () => navigator.clipboard.write([new ClipboardItem({ "image/png": pngBlob(m.image) })])
+    .then(() => { toast("Image copied 🖼️"); closeShare(); }, () => toast("Couldn't copy the image here, try Download"));
+  const nb = menu.querySelector('[data-a="native"]');
+  if (nb) nb.onclick = () => navigator.share({ title: m.title, url }).catch(() => {});
+  menu.querySelectorAll(".sm-nets a, [data-a=dl]").forEach(a => a.addEventListener("click", () => setTimeout(closeShare, 50)));
+  menu.hidden = false; $("#shareBackdrop").hidden = false;
+  if (!isPhone() && anchor) {   // desktop: popover next to the button, kept on screen
+    const r = anchor.getBoundingClientRect(), w = menu.offsetWidth, h = menu.offsetHeight;
+    menu.style.left = Math.max(8, Math.min(innerWidth - w - 8, r.right - w)) + "px";
+    menu.style.top = (r.bottom + h + 8 < innerHeight ? r.bottom + 6 : Math.max(8, r.top - h - 6)) + "px";
+  } else { menu.style.left = ""; menu.style.top = ""; }
+  menu.querySelector('[data-a="link"]').focus({ preventScroll: true });
+}
+function closeShare() { $("#shareMenu").hidden = true; $("#shareBackdrop").hidden = true; }
+$("#shareBackdrop").onclick = e => { e.stopPropagation(); closeShare(); };
 function toast(t) { const el = $("#toast"); el.textContent = t; el.classList.add("show"); setTimeout(() => el.classList.remove("show"), 1800); }
 
 document.addEventListener("keydown", e => {
+  if (e.key === "Escape" && !$("#shareMenu").hidden) return closeShare();
   if (!$("#lb").hidden) {
     if (e.key === "Escape") closeLb(); if (e.key === "ArrowLeft") openLb(idx - 1); if (e.key === "ArrowRight") openLb(idx + 1);
   } else if (e.key === "Escape" && $("#sidebar").classList.contains("open")) closeMenu();
@@ -346,5 +416,19 @@ function writeHash() {
 function readHash() {
   const p = new URLSearchParams(location.hash.slice(1));
   state.top = p.get("top") === "1"; state.trend = p.get("trending") === "1"; state.cat = p.get("cat"); state.tag = p.get("tag"); state.q = p.get("q") || ""; $("#q").value = state.q;
-  if (p.get("open")) setTimeout(() => { const i = view.findIndex(m => m.id === p.get("open")); if (i >= 0) openLb(i); }, 0);
+  const mid = p.get("m") || p.get("open");
+  if (mid) setTimeout(() => openById(mid), 0);
 }
+// Deep links: #m=<meme id> opens that meme's lightbox (filters are cleared if it isn't in the current view)
+function openById(id) {
+  let i = view.findIndex(m => m.id === id);
+  if (i < 0) {
+    const m = memes.find(x => x.id === id); if (!m) return toast("That meme isn't in the vault anymore 🤷");
+    Object.assign(state, { cat: null, tag: null, q: "", top: false, trend: false }); $("#q").value = "";
+    if (m.nsfw && !state.nsfw) { state.nsfw = true; $("#nsfw").checked = true; }
+    buildSidebar(); render(); i = view.findIndex(x => x.id === id);
+  }
+  if (i >= 0) openLb(i);
+}
+window.addEventListener("hashchange", () => { const id = new URLSearchParams(location.hash.slice(1)).get("m"); if (id && (lbId !== id)) openById(id); });
+const deepLink = m => location.origin + location.pathname + "#m=" + encodeURIComponent(m.id);

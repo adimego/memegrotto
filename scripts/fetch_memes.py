@@ -293,6 +293,38 @@ EPSTEIN_SUBS = ["memes", "dankmemes", "PoliticalHumor", "HistoryMemes", "me_irl"
                 "comedyheaven", "funny", "teenagers_not", "Funnymemes", "memesopdidnotlike"]
 EPSTEIN_READMIT = ["1r8wcyk", "1pu5pcp", "1r1vory", "1r8814z", "1qzok9o", "1p0mbcj"]
 
+# Know Your Meme photo galleries: user-made variants of famous formats (slug, display name, category, tags, pages)
+KYM_GALLERIES = [
+    ("surprised-pikachu", "Surprised Pikachu", "Reaction", ["pikachu", "reaction"], 2),
+    ("woman-yelling-at-a-cat", "Woman Yelling at a Cat", "Animals", ["cat", "smudge"], 2),
+    ("this-is-fine", "This Is Fine", "Cartoons & Anime", ["this is fine", "dog"], 1),
+    ("drakeposting", "Drakeposting", "Celebrities & Pop Culture", ["drake"], 2),
+    ("distracted-boyfriend", "Distracted Boyfriend", "Classic Templates", ["distracted boyfriend"], 2),
+    ("daily-struggle", "Two Buttons", "Classic Templates", ["two buttons"], 1),
+    ("galaxy-brain", "Expanding Brain", "Classic Templates", ["galaxy brain"], 1),
+    ("is-this-a-pigeon", "Is This a Pigeon?", "Cartoons & Anime", ["anime", "pigeon"], 1),
+    ("stonks", "Stonks", "Work & School", ["stonks", "money"], 1),
+    ("panik-kalm-panik", "Panik Kalm Panik", "Reaction", ["panik"], 1),
+    ("trade-offer", "Trade Offer", "Reaction", ["trade offer"], 1),
+    ("bernie-sanders-i-am-once-again-asking-for-your-financial-support", "Bernie Once Again Asking", "Celebrities & Pop Culture", ["bernie"], 1),
+    ("wait-its-all-ohio-always-has-been", "Always Has Been", "Absurd & Surreal", ["always has been", "space"], 1),
+    ("yes-chad", "Yes Chad", "Reaction", ["chad", "wojak"], 1),
+    ("spider-man-pointing-at-spider-man", "Spider-Man Pointing", "Movies & TV", ["spider-man"], 1),
+    ("they-had-us-in-the-first-half", "They Had Us in the First Half", "Sports", ["sports"], 1),
+    ("me-and-the-boys", "Me and the Boys", "Relatable Life", ["the boys"], 1),
+    ("doge", "Doge", "Animals", ["doge", "dog"], 1),
+    ("swole-doge-vs-cheems", "Swole Doge vs. Cheems", "Animals", ["doge", "cheems"], 1),
+    ("for-the-better-right", "Anakin and Padme", "Movies & TV", ["star wars", "anakin"], 1),
+    ("hide-the-pain-harold", "Hide the Pain Harold", "Work & School", ["harold"], 1),
+    ("polite-cat", "Polite Cat", "Animals", ["cat"], 1),
+    ("gordon-ramsay", "Gordon Ramsay", "Food", ["gordon ramsay", "food", "cooking"], 1),
+    ("nobody-is-going-to-know", "Nobody Is Going to Know", "Relatable Life", ["sus"], 1),
+    ("wholesome-memes", "Wholesome Memes", "Wholesome", ["wholesome"], 1),
+    ("they-dont-know", "They Don't Know", "Relatable Life", ["party", "wojak"], 1),
+    ("waiting-skeleton", "Waiting Skeleton", "Relatable Life", ["skeleton", "waiting"], 1),
+    ("monkey-puppet", "Monkey Puppet", "Reaction", ["monkey", "awkward"], 1),
+]
+
 # Ids that were eyeballed and rejected (explicit, gore, minors, hateful, low quality, not a meme). Removed on every run.
 EXCLUDE = {
     "imgflip-i-6zfay5",   # low quality
@@ -889,6 +921,28 @@ def main():
             add({"id": f"reddit-{pid}", "title": title, "category": "History & Politics", "feed": "epstein",
                  "tags": ["epstein", "reddit", f"r/{sub.lower()}"], "source": f"Reddit r/{sub}", "source_url": link,
                  "image_url": img, "captioned": True, "attribution": f"Posted by {author} on r/{sub}"}, img)
+        json.dump(db, open(DB + ".partial", "w"), ensure_ascii=False)
+
+    if "kymg" in a.sources:
+        print("Know Your Meme galleries...")
+        for slug_, name, cat, tags, pages in KYM_GALLERIES:
+            for page in range(1, pages + 1):
+                try: s_ = get(f"https://knowyourmeme.com/memes/{slug_}/photos" + (f"/page/{page}" if page > 1 else ""))
+                except Exception as e: problems.append(f"KYM gallery {slug_} p{page}: {e}"); break
+                for u in s_.split("<a ")[1:]:
+                    img = re.search(r"https://i\.kym-cdn\.com/photos/images/\w+/([\d/]+/[\w.-]+\.(?:jpe?g|png))", u)
+                    if not img: continue
+                    href = re.search(r'href="(/photos/\d+[^"]*)"', u); alt = re.search(r'alt="([^"]*)"', u)
+                    cap = re.sub(r"\s+", " ", html.unescape(alt.group(1))).strip() if alt else ""
+                    if re.search(r"deviantart|made with mematic|^\W*$", cap, re.I) and len(cap) < 30: cap = ""
+                    short = (cap[:60].rsplit(" ", 1)[0] + "…") if len(cap) > 60 else cap
+                    pid = re.sub(r"\W", "", img.group(1))[:20]
+                    full = "https://i.kym-cdn.com/photos/images/newsfeed/" + img.group(1)
+                    add({"id": f"kym-g-{pid}", "title": f"{name}: {short}" if short else name, "caption": cap[:300],
+                         "category": cat, "feed": f"kym-gallery:{slug_}", "tags": list(dict.fromkeys(tags + ["kym", "captioned", cat.split(" ")[0].lower()])),
+                         "source": "Know Your Meme", "source_url": "https://knowyourmeme.com" + (href.group(1) if href else f"/memes/{slug_}"),
+                         "image_url": full, "captioned": True, "attribution": f"Fan-made variant via Know Your Meme ({name} gallery)"}, full)
+                time.sleep(1.5)
         json.dump(db, open(DB + ".partial", "w"), ensure_ascii=False)
 
     if not a.no_imgflip_tags and "imgflip" in a.sources:
