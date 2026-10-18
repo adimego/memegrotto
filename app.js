@@ -298,6 +298,7 @@ function esc(s) { return s.replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;",
 
 function openLb(i) {
   idx = (i + view.length) % view.length; const m = view[idx];
+  resetLbMedia();
   while (shown <= idx && shown < view.length) renderMore();
   const lv0 = $("#lbVid");
   if (m.video) { $("#lbImg").hidden = true; $("#lbImg").removeAttribute("src"); lv0.hidden = false; lv0.poster = m.image; lv0.src = m.video; lv0.play().catch(() => {}); }
@@ -318,7 +319,8 @@ function openLb(i) {
   window.Lib?.lightbox(m);
 }
 let lbId = null;
-function closeLb() { if (!$("#lb").hidden) { lbId = null; writeHash(); } closeShare(); $("#lbVid").pause(); $("#lb").hidden = true; document.body.style.overflow = ""; $("#lbImg").style.transform = ""; }
+function resetLbMedia() { $("#lbImg").style.transform = ""; $("#lbVid").style.transform = ""; }
+function closeLb() { if (!$("#lb").hidden) { lbId = null; writeHash(); } closeShare(); $("#lbVid").pause(); $("#lb").hidden = true; document.body.style.overflow = ""; resetLbMedia(); }
 let rz, lastW = innerWidth;
 window.addEventListener("resize", () => {   // ignore height-only changes (mobile URL bar show/hide)
   if (innerWidth === lastW) return; lastW = innerWidth; clearTimeout(rz); rz = setTimeout(render, 150);
@@ -327,13 +329,15 @@ window.addEventListener("resize", () => {   // ignore height-only changes (mobil
 (() => {
   const area = $(".lb-img"); let x0 = null, y0 = 0, t0 = 0;
   area.addEventListener("touchstart", e => { if (e.touches.length !== 1) return x0 = null; x0 = e.touches[0].clientX; y0 = e.touches[0].clientY; t0 = Date.now(); }, { passive: true });
+  const media = () => $("#lbImg").hidden ? $("#lbVid") : $("#lbImg");   // whichever one is showing
   area.addEventListener("touchmove", e => {
     if (x0 === null) return; const dx = e.touches[0].clientX - x0, dy = e.touches[0].clientY - y0;
-    $("#lbImg").style.transform = Math.abs(dx) > Math.abs(dy) ? `translateX(${dx}px)` : dy > 0 ? `translateY(${dy}px)` : "";
+    media().style.transform = Math.abs(dx) > Math.abs(dy) ? `translateX(${dx}px)` : dy > 0 ? `translateY(${dy}px)` : "";
   }, { passive: true });
+  area.addEventListener("touchcancel", () => { x0 = null; resetLbMedia(); }, { passive: true });
   area.addEventListener("touchend", e => {
     if (x0 === null) return; const t = e.changedTouches[0], dx = t.clientX - x0, dy = t.clientY - y0; x0 = null;
-    $("#lbImg").style.transform = "";
+    resetLbMedia();
     if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy) * 1.2) openLb(idx + (dx < 0 ? 1 : -1));
     else if (dy > 80 && dy > Math.abs(dx)) closeLb();
     else if (Math.abs(dx) < 10 && Math.abs(dy) < 10 && Date.now() - t0 < 300 && e.target === area) closeLb();

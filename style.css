@@ -62,8 +62,10 @@ main{padding:22px 26px 60px;min-width:0}
 .lightbox{position:fixed;inset:0;z-index:50;background:#07060ce8;backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center;padding:30px;animation:fade .2s}
 .lightbox[hidden]{display:none}
 .lb-body{display:grid;grid-template-columns:minmax(0,1fr) 340px;max-width:1200px;width:100%;max-height:calc(100vh - 60px);background:var(--panel);border:1px solid var(--line);border-radius:22px;overflow:hidden;box-shadow:0 30px 80px #000c;animation:pop .25s}
-.lb-img{background:#000;display:flex;align-items:center;justify-content:center;min-height:300px}
-.lb-img img{max-width:100%;max-height:calc(100vh - 60px);object-fit:contain}
+.lb-img{background:#000;display:flex;align-items:center;justify-content:center;min-height:300px;min-width:0;overflow:hidden}
+.lb-img img{max-width:100%;max-height:calc(100vh - 60px);object-fit:contain;min-width:0;flex:0 1 auto;display:block;margin:auto}
+/* only one of #lbImg / #lbVid is shown; [hidden] must win over the #lbVid display rule or the empty video takes up room and pushes the image off-centre */
+.lb-img > [hidden]{display:none!important}
 .lb-info{padding:24px;overflow:auto}
 .lb-info h2{margin:10px 0 10px;font-size:24px;line-height:1.2}
 .tags{display:flex;gap:6px;flex-wrap:wrap}
@@ -448,6 +450,8 @@ button,.btn,a.btn,.tag,.cat{touch-action:manipulation;-webkit-tap-highlight-colo
 .card video.clip.on{opacity:1}
 .anim-badge{position:absolute;left:8px;bottom:8px;z-index:2;background:#000b;color:#fff;font-size:11px;font-weight:700;letter-spacing:.04em;padding:2px 8px;border-radius:999px;pointer-events:none;transition:opacity .2s}
 .card video.clip.on ~ .anim-badge,.card .anim-badge:has(~ video.clip.on){opacity:0}
-#lbVid{max-width:100%;max-height:calc(100vh - 60px);background:#000;display:block}
+#lbVid{max-width:100%;max-height:calc(100vh - 60px);background:#000;display:block;object-fit:contain;min-width:0;flex:0 1 auto;margin:auto}
 @media (max-width:900px){#lbVid{max-height:55vh}}
-@media (max-width:640px){#lbVid{max-height:100%;width:100%}}
+@media (max-width:640px){#lbVid{max-height:100%;width:100%;height:auto;transition:transform .2s}}
+/* touch screens: swipe replaces the prev/next arrows, so they never sit over the image */
+@media (max-width:900px) and (pointer:coarse){.lb-nav{display:none}}
