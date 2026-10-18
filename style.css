@@ -356,3 +356,9 @@ button,.btn,a.btn,.tag,.cat{touch-action:manipulation;-webkit-tap-highlight-colo
   .col-menu{left:0;right:0;bottom:0;top:auto;width:auto;max-width:none;border-radius:20px 20px 0 0;padding:12px 14px calc(14px + env(safe-area-inset-bottom))}
   .col-list label{min-height:44px}
 }
+.install-btn{display:flex;align-items:center;gap:10px;width:100%;margin:0 0 14px;padding:10px 12px;border-radius:14px;border:1px solid var(--accent);
+  background:linear-gradient(90deg,#ff890622,#e5317022);color:var(--text);cursor:pointer;font:inherit;font-weight:600;font-size:14px;text-align:left}
+.install-btn[hidden]{display:none}
+.install-btn img{width:36px;height:36px;border-radius:9px}
+.install-btn span{display:flex;flex-direction:column}
+.install-btn small{font-weight:400;font-size:12px;color:var(--muted)}

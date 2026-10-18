@@ -220,3 +220,32 @@
   }
   window.Lib = { sidebar, label, items, afterRender, decorateCard, lightbox, votesReady, similar, _lib: () => lib };
 })();
+
+// ---- Installable app (PWA): service worker + install button
+(() => {
+  if ("serviceWorker" in navigator && location.protocol === "https:" || location.hostname === "localhost") {
+    window.addEventListener("load", () => navigator.serviceWorker?.register("sw.js", { updateViaCache: "none" }).then(reg => {
+      setInterval(() => reg.update().catch(() => {}), 30 * 60e3);   // long-lived tabs pick up new deploys too
+    }).catch(() => {}));
+  }
+  const standalone = () => matchMedia("(display-mode: standalone)").matches || navigator.standalone;
+  const ios = /iphone|ipad|ipod/i.test(navigator.userAgent) && !window.MSStream;
+  let deferred = null;
+  function btn() {
+    let b = $("#installBtn");
+    if (!b) {
+      b = document.createElement("button"); b.id = "installBtn"; b.type = "button"; b.className = "install-btn";
+      b.innerHTML = '<img src="icons/icon-192.png" alt=""><span>Install MemeVault<small>Works offline · opens like an app</small></span>';
+      $("#sidebar .sb-head").after(b);
+      b.onclick = async () => {
+        if (deferred) { deferred.prompt(); const r = await deferred.userChoice.catch(() => null); deferred = null; if (r?.outcome === "accepted") b.hidden = true; }
+        else if (ios) toast("On iPhone/iPad: tap Share ⬆️ then “Add to Home Screen”");
+      };
+    }
+    b.hidden = standalone() || !(deferred || ios);
+  }
+  window.addEventListener("beforeinstallprompt", e => { e.preventDefault(); deferred = e; btn(); });
+  window.addEventListener("appinstalled", () => { deferred = null; const b = $("#installBtn"); if (b) b.hidden = true; toast("MemeVault installed 📲"); });
+  if (ios && !standalone()) btn();
+  window.addEventListener("offline", () => toast("You're offline: cached memes still work 📴"));
+})();
