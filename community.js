@@ -109,13 +109,16 @@
     for (const qual of [0.9, 0.8, 0.65, 0.5]) { const b = await new Promise(r => c.toBlob(r, "image/jpeg", qual)); if (b && b.size <= MAX) return b; }
     throw new Error("That image is too big (max 5 MB)");
   }
-  async function submit({ blob, title, tags, category, kind }) {
+  const canCreator = () => !!(window.MVPlay && MVPlay.features.ok);
+  const creatorField = () => canCreator() ? `<label>Your name <small class="muted">(optional, shown on the leaderboards)</small> <input name="creator" maxlength="40" autocomplete="nickname" value="${esc(localStorage.getItem("mv-creator") || "")}"></label>` : "";
+  const creatorOf = f => { const c = f.creator ? f.creator.value.replace(/[<>]/g, "").trim().slice(0, 40) : ""; if (f.creator) localStorage.setItem("mv-creator", c); return c; };
+  async function submit({ blob, title, tags, category, kind, creator }) {
     const ext = TYPES[blob.type]; if (!ext) throw new Error("Use a PNG, JPEG, GIF or WebP image");
     const path = `pending/${rid()}.${ext}`;
     const up = await fetch(`${ST}/object/submissions/${path}`, { method: "POST", headers: { ...H, "Content-Type": blob.type, "x-upsert": "false", "cache-control": "3600" }, body: blob, signal: AbortSignal.timeout(60000) });
     if (!up.ok) throw new Error(up.status === 413 ? "That image is too big (max 5 MB)" : "Upload failed (" + up.status + "), try again later");
     const r = await fetch(`${SB}/rest/v1/submissions`, { method: "POST", headers: { ...H, "Content-Type": "application/json", Prefer: "return=minimal" },
-      body: JSON.stringify({ title: title.slice(0, 120), tags: tags.slice(0, 10).map(t => t.slice(0, 30)), category: category || null, image_path: path, kind }) });
+      body: JSON.stringify({ title: title.slice(0, 120), tags: tags.slice(0, 10).map(t => t.slice(0, 30)), category: category || null, image_path: path, kind, ...(creator && canCreator() ? { creator } : {}) }) });
     if (!r.ok) { const t = await r.text().catch(() => ""); throw new Error(/too many/.test(t) ? "You've posted a lot today, try again later" : "Couldn't save the submission (" + r.status + ")"); }
   }
   function modal(html, cls = "") {
@@ -136,6 +139,7 @@
       <label class="mv-drop"><input type="file" name="file" accept="image/png,image/jpeg,image/gif,image/webp" required><span>📷 Choose an image<small>PNG, JPEG, GIF or WebP · max 5 MB</small></span><img alt="" hidden></label>
       <label>Title <input name="title" maxlength="120" required placeholder="What's the meme?"></label>
       <label>Tags <input name="tags" maxlength="200" placeholder="comma, separated, tags"></label>
+      ${creatorField()}
       <label>Category <select name="category"><option value="">Pick one…</option>${catOpts()}</select></label>
       ${rules}<button class="btn primary" type="submit">Submit for review</button><p class="muted">Submissions are reviewed before they show up in the Community gallery.</p></form>`);
     m.querySelector("b").textContent = "＋ Submit a meme";
@@ -145,7 +149,7 @@
       e.preventDefault(); const btn = f.querySelector("[type=submit]"); btn.disabled = true; btn.textContent = "Uploading…";
       try {
         const blob = await shrink(f.file.files[0]);
-        await submit({ blob, title: f.title.value.trim(), tags: f.tags.value.split(",").map(t => t.trim()).filter(Boolean), category: f.category.value, kind: "upload" });
+        await submit({ blob, title: f.title.value.trim(), tags: f.tags.value.split(",").map(t => t.trim()).filter(Boolean), category: f.category.value, kind: "upload", creator: creatorOf(f) });
         closeModal(); toast("Thanks! Your meme is waiting for review 🙌");
       } catch (err) { btn.disabled = false; btn.textContent = "Submit for review"; toast(err.message || "Upload failed"); }
     };
@@ -157,14 +161,14 @@
       const t = MemeEditor.meme(); const blob = await MemeEditor.blob().catch(() => null); if (!blob) return;
       const m = modal(`<form class="mv-form"><img class="mv-prev" alt="" src="${URL.createObjectURL(blob)}">
         <label>Title <input name="title" maxlength="120" required value="${esc((t?.title || "My meme").slice(0, 120))}"></label>
-        ${rules}<button class="btn primary" type="submit">🌍 Post to gallery</button><p class="muted">Posts appear in the Community gallery after a quick review.</p></form>`);
+        ${creatorField()}${rules}<button class="btn primary" type="submit">🌍 Post to gallery</button><p class="muted">Posts appear in the Community gallery after a quick review.</p></form>`);
       m.querySelector("b").textContent = "🌍 Post to the Community gallery";
       const f = m.querySelector("form");
       f.onsubmit = async e => {
         e.preventDefault(); const btn = f.querySelector("[type=submit]"); btn.disabled = true; btn.textContent = "Posting…";
         try {
           const small = blob.size > MAX ? await shrink(new File([blob], "meme.png", { type: "image/png" })) : blob;
-          await submit({ blob: small, title: f.title.value.trim(), tags: (t?.tags || []).filter(x => !["reddit", "fresh", "blank template", "community", "submitted", "made on memespire", "made on memevault"].includes(x)).slice(0, 8), category: t?.category && CAT_META[t.category] ? t.category : "", kind: "creation" });
+          await submit({ blob: small, title: f.title.value.trim(), tags: (t?.tags || []).filter(x => !["reddit", "fresh", "blank template", "community", "submitted", "made on memespire", "made on memevault"].includes(x)).slice(0, 8), category: t?.category && CAT_META[t.category] ? t.category : "", kind: "creation", creator: creatorOf(f) });
           closeModal(); toast("Posted! It'll show in the gallery once approved 🎉"); if (t) track(vidOf(t), "caption");
         } catch (err) { btn.disabled = false; btn.textContent = "🌍 Post to gallery"; toast(err.message || "Posting failed"); }
       };

@@ -6,6 +6,14 @@ for f in ("style.css", "app.js", "features.js", "play.js", "community.js", "edit
     v = hashlib.sha1(open(os.path.join(ROOT, f), "rb").read()).hexdigest()[:10]
     h = re.sub(rf'(["\']){re.escape(f)}(\?v=[\w]+)?(["\'])', rf'\g<1>{f}?v={v}\g<3>', h)
 open(p, "w").write(h)
+# the (unlinked) moderation page
+mp = os.path.join(ROOT, "moderate.html")
+if os.path.exists(mp):
+    m = open(mp).read()
+    for f in ("style.css", "moderate.css", "moderate.js"):
+        v = hashlib.sha1(open(os.path.join(ROOT, f), "rb").read()).hexdigest()[:10]
+        m = re.sub(rf'(["\']){re.escape(f)}(\?v=[\w]+)?(["\'])', rf'\g<1>{f}?v={v}\g<3>', m)
+    open(mp, "w").write(m)
 # service worker version = hash of index.html + stamped assets + memes.json, so every deploy ships a new worker
 sw = os.path.join(ROOT, "sw.js")
 if os.path.exists(sw):

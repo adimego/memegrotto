@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#0f0e17">
+<title>Moderation · MemeSpire</title>
+<link rel="icon" href="icons/logo.svg" type="image/svg+xml">
+<link rel="stylesheet" href="style.css?v=fede7af7ef">
+<link rel="stylesheet" href="moderate.css?v=021f0f7969">
+</head>
+<body class="mod">
+<header class="mod-top">
+  <a class="brand" href="./"><span class="logo"><img src="icons/logo.svg" alt="" width="28" height="28"></span><span>Meme<b>Spire</b></span></a>
+  <span class="mod-badge">Moderation</span>
+  <button class="btn" id="modOut" hidden>Log out</button>
+</header>
+<main class="mod-main">
+  <section id="modMsg" class="mod-card" hidden></section>
+  <form id="modLogin" class="mod-card mv-form" hidden autocomplete="off">
+    <h2>🔐 Moderator login</h2>
+    <label>Passphrase <input type="password" name="p" required minlength="12" maxlength="200" autocomplete="current-password"></label>
+    <button class="btn primary" type="submit">Log in</button>
+    <p class="muted">The passphrase is kept only in this tab and is forgotten when you close it. 5 wrong tries lock this connection for an hour.</p>
+  </form>
+  <section id="modApp" hidden>
+    <nav class="lb-tabs mod-tabs" role="tablist">
+      <button type="button" data-t="pending" class="on">Pending <span class="n"></span></button>
+      <button type="button" data-t="reports">Reports <span class="n"></span></button>
+      <button type="button" data-t="hidden">Hidden memes</button>
+      <button type="button" class="mod-refresh" data-a="refresh" aria-label="Refresh">↻</button>
+    </nav>
+    <div id="modBody"></div>
+  </section>
+</main>
+<div class="toast" id="toast" hidden></div>
+<script src="moderate.js?v=62b89f2f1b"></script>
+</body>
+</html>
