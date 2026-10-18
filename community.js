@@ -87,7 +87,8 @@
     if (!box) {
       box = document.createElement("div"); box.id = "commBox"; box.className = "mylib";
       const h = document.createElement("h3"); h.textContent = "Community";
-      const spotH = [...document.querySelectorAll("#sidebar h3")].find(x => x.textContent === "Spotlight"); spotH.before(h, box);
+      h.id = "commHead"; const hs = [...document.querySelectorAll("#sidebar h3")];
+      (hs.find(x => x.textContent === "Categories") || hs[0]).before(h, box);   // community sits above Categories
     }
     const it = (list, ic, name, n) => `<button type="button" class="cat${state.list === list ? " on" : ""}" data-list="${list}"><span class="ic">${ic}</span><span>${name}</span><span class="n">${n}</span></button>`;
     box.innerHTML = it("community", "🌍", "Community gallery", gallery.length) + (F.stats ? it("stats", "📊", "Stats", "") : "") +
