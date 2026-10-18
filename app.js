@@ -88,7 +88,7 @@ fetch("memes.json").then(r => r.json()).then(d => {
   loadVotes().then(() => { if (votesOk) { buildSidebar(); if (state.sort === "popular" || state.top) render(); } window.Lib?.votesReady(); });
 });
 
-const visible = () => memes.filter(m => (state.nsfw || !m.nsfw) && (!m.community || state.list === "community"));
+const visible = () => memes.filter(m => (state.nsfw || !m.nsfw) && (!m.community || state.list === "community") && !(window.MVPlay && MVPlay.isHidden(m)));
 
 // ---- Trending: date-based. Fresh-source memes (Reddit / Imgflip captioned / KYM galleries) added in the last
 // TREND_DAYS days, newest day first; within a day, round-robin across feeds by each feed's own popularity order.
