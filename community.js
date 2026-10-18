@@ -199,13 +199,16 @@
   }
 
   // ---------- Stats page (aggregates only)
+  let statsP = null, statsT = 0;
   async function statsPage(tb) {
     tb.hidden = true; $("#sub").textContent = "What visitors view, share, caption and download most (all time)"; $("#empty").hidden = true; $("#grid").innerHTML = "";
     const p = document.createElement("section"); p.id = "listPanel"; p.className = "stats"; p.innerHTML = '<p class="muted">Loading stats…</p>';
     $("#grid").before(p);
     const kinds = [["view", "👀 Most viewed"], ["share", "↗ Most shared"], ["caption", "✏️ Most captioned"], ["download", "⬇️ Most downloaded"]];
     try {
-      const res = await Promise.all(kinds.map(([k]) => rpc("meme_stats", { p_kind: k, p_limit: 10 }).then(r => r.ok ? r.json() : [])));
+      // one fetch per 20 s even when the page re-renders (sidebar/gallery loads trigger extra renders)
+      if (!statsP || Date.now() - statsT > 20000) { statsT = Date.now(); statsP = Promise.all(kinds.map(([k]) => rpc("meme_stats", { p_kind: k, p_limit: 10 }).then(r => r.ok ? r.json() : []))); statsP.catch(() => { statsP = null; }); }
+      const res = await statsP;
       if (state.list !== "stats") return;
       const byVid = new Map(memes.map(m => [vidOf(m), m]));
       p.innerHTML = kinds.map(([k, label], i) => {
