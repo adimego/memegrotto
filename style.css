@@ -300,3 +300,59 @@ button,.btn,a.btn,.tag,.cat{touch-action:manipulation;-webkit-tap-highlight-colo
 .ed-blank.on .ed-switch i{transform:translateX(20px)}
 @media (max-width:800px){ .ed-tools button{min-height:52px} }
 .editor{touch-action:manipulation}.editor canvas{touch-action:none}
+
+/* ---- favorites, collections, meme of the day, more like this ---- */
+.imgwrap{position:relative}
+.fav-btn:not(.btn){position:absolute;right:8px;bottom:8px;width:34px;height:34px;border-radius:50%;border:0;background:#0f0e17b3;color:#fff;
+  display:flex;align-items:center;justify-content:center;font-size:16px;cursor:pointer;opacity:.85;transition:transform .15s,opacity .15s;backdrop-filter:blur(4px)}
+.fav-btn:not(.btn) span{filter:grayscale(1) brightness(2.2)}
+.fav-btn:not(.btn):hover{transform:scale(1.1);opacity:1}
+.fav-btn.on:not(.btn) span{filter:none;color:#ff3b6b}
+.fav-btn.on:not(.btn){opacity:1;background:#fff}
+.fav-btn.btn.on{border-color:#ff3b6b;background:#ff3b6b22}
+.card .badge.txt{top:auto;bottom:8px;left:8px;right:auto;background:#3da9fcd9}
+.mylib{display:flex;flex-direction:column;gap:2px}
+.mylib-tools{display:flex;gap:6px;flex-wrap:wrap;margin:6px 0 2px}
+.mylib-tools button{flex:1;min-height:32px;border-radius:10px;border:1px solid var(--line);background:var(--panel);color:var(--muted);cursor:pointer;font-size:12px;padding:4px 8px;white-space:nowrap}
+.mylib-tools button:hover{color:#fff;border-color:var(--accent)}
+.list-tools{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:-6px 0 14px}
+.list-tools[hidden]{display:none}
+.muted{color:var(--muted);font-size:13px}
+.col-menu{position:fixed;z-index:75;width:280px;max-width:calc(100vw - 16px);background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:12px;box-shadow:0 18px 50px #000a;display:flex;flex-direction:column;gap:10px}
+.col-list{display:flex;flex-direction:column;gap:2px;max-height:50vh;overflow:auto}
+.col-list label{display:flex;align-items:center;gap:8px;padding:8px 6px;border-radius:8px;cursor:pointer;font-size:14px}
+.col-list label:hover{background:var(--panel2)}
+.col-list label span{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.col-list small{color:var(--muted)}
+.col-list input{width:18px;height:18px;accent-color:var(--accent)}
+.motd{display:flex;gap:18px;align-items:center;padding:14px;margin:0 0 18px;border-radius:var(--radius);border:1px solid var(--line);
+  background:linear-gradient(120deg,#ff890622,#e5317022 50%,#7f5af022)}
+.motd[hidden]{display:none}
+.motd-img{flex:none;width:150px;height:150px;border-radius:12px;overflow:hidden;border:0;padding:0;cursor:zoom-in;background:var(--panel2)}
+.motd-img img{width:100%;height:100%;object-fit:cover;display:block}
+.motd-body{min-width:0}
+.motd-k{margin:0;font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--accent)}
+.motd h2{margin:4px 0 2px;font-size:22px;line-height:1.2}
+.motd-sub{margin:0 0 10px;color:var(--muted);font-size:13px}
+.motd-actions{display:flex;gap:8px;flex-wrap:wrap}
+.lb-more{margin-top:16px}
+.lb-more[hidden]{display:none}
+.lb-more h3{margin:0 0 8px;font-size:14px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+.lb-more-row{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+.lb-more-row button{aspect-ratio:1;border:1px solid var(--line);border-radius:10px;overflow:hidden;padding:0;background:var(--panel2);cursor:pointer}
+.lb-more-row button:hover{border-color:var(--accent)}
+.lb-more-row img{width:100%;height:100%;object-fit:cover;display:block}
+@media (max-width:640px){
+  .motd{gap:12px;padding:10px;margin-bottom:12px}
+  .motd-img{width:96px;height:96px}
+  .motd h2{font-size:17px}
+  .motd-actions .btn{min-height:40px;padding:0 12px;display:inline-flex;align-items:center}
+  .fav-btn:not(.btn){width:40px;height:40px;right:6px;bottom:6px}
+  .mylib-tools button{min-height:40px}
+}
+.col-menu .sm-head{display:flex;align-items:center;justify-content:space-between}
+.col-menu .sm-x{background:none;border:0;color:var(--muted);font-size:16px;cursor:pointer;width:36px;height:36px;border-radius:50%}
+@media (max-width:640px){
+  .col-menu{left:0;right:0;bottom:0;top:auto;width:auto;max-width:none;border-radius:20px 20px 0 0;padding:12px 14px calc(14px + env(safe-area-inset-bottom))}
+  .col-list label{min-height:44px}
+}

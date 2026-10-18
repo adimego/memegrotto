@@ -76,7 +76,7 @@ function paintVotes(m) {
     b.classList.toggle("voted", myVotes.has(vid(m))); b.title = myVotes.has(vid(m)) ? "You upvoted this" : "Upvote";
   });
 }
-const state = { cat: null, tag: null, q: "", sort: "popular", top: false, trend: false, nsfw: localStorage.getItem("mv-nsfw") !== "0" };
+const state = { cat: null, tag: null, q: "", sort: "popular", top: false, trend: false, list: null, nsfw: localStorage.getItem("mv-nsfw") !== "0" };
 let memes = [], view = [], idx = -1;
 
 const norm = s => s.toLowerCase().normalize("NFKD").replace(/[\u0300-\u036f]/g, "");
@@ -85,7 +85,7 @@ const color = c => (CAT_META[c] || ["", "#7f5af0"])[1];
 fetch("memes.json").then(r => r.json()).then(d => {
   memes = d.memes.map((m, i) => ({ ...m, tags: m.blank_template ? [...m.tags, "blank template"] : m.tags, rank: i, hay: norm(m.title + " " + m.tags.join(" ") + " " + m.category + " " + (m.caption || "") + " " + (m.ocr || "") + (m.blank_template ? " blank template" : "")) }));
   $("#nsfw").checked = state.nsfw; readHash(); buildSidebar(); render();
-  loadVotes().then(() => { if (votesOk) { buildSidebar(); if (state.sort === "popular" || state.top) render(); } });
+  loadVotes().then(() => { if (votesOk) { buildSidebar(); if (state.sort === "popular" || state.top) render(); } window.Lib?.votesReady(); });
 });
 
 const visible = () => memes.filter(m => state.nsfw || !m.nsfw);
@@ -110,7 +110,7 @@ function buildSidebar() {
     const b = document.createElement("button");
     b.className = "cat" + ((state.cat === name) ? " on" : "");
     b.innerHTML = `<span class="ic">${icon}</span><span>${name || "All memes"}</span><span class="n">${n}</span>`;
-    b.onclick = () => { state.cat = name; state.tag = null; state.top = false; state.trend = false; closeMenu(); update(); };
+    b.onclick = () => { state.cat = name; state.tag = null; state.top = false; state.trend = false; state.list = null; closeMenu(); update(); };
     cats.appendChild(b);
   };
   mk(null, pool.length, "✨");
@@ -122,7 +122,7 @@ function buildSidebar() {
     if (tr.length) {
       const b = document.createElement("button"); b.className = state.trend ? "on" : "";
       b.innerHTML = `<img src="${tr[0].thumb || tr[0].image}" alt=""><span>🔥 Trending <small>${tr.length} fresh memes · last ${TREND_DAYS} days</small></span>`;
-      b.onclick = () => { state.trend = !state.trend; state.top = false; state.tag = null; state.cat = null; closeMenu(); update(); };
+      b.onclick = () => { state.trend = !state.trend; state.list = null; state.top = false; state.tag = null; state.cat = null; closeMenu(); update(); };
       spot.appendChild(b);
     }
   }
@@ -131,7 +131,7 @@ function buildSidebar() {
     const b = document.createElement("button"); b.className = state.top ? "on" : "";
     b.innerHTML = `<span class="trophy">🏆</span><span>Top voted <small>${voted.length} memes with votes · community picks</small></span>`;
     if (voted[0]) b.querySelector(".trophy").outerHTML = `<img src="${voted[0].thumb || voted[0].image}" alt="">`;
-    b.onclick = () => { state.top = !state.top; state.trend = false; state.tag = null; state.cat = null; closeMenu(); update(); };
+    b.onclick = () => { state.top = !state.top; state.list = null; state.trend = false; state.tag = null; state.cat = null; closeMenu(); update(); };
     spot.appendChild(b);
   }
   SPOTLIGHT.forEach(s => {
@@ -140,7 +140,7 @@ function buildSidebar() {
     const b = document.createElement("button");
     b.className = state.tag === s.key ? "on" : "";
     b.innerHTML = `<img src="${hits[0].thumb || hits[0].image}" alt=""><span>${s.label} <small>${hits.length} memes · ${s.sub}</small></span>`;
-    b.onclick = () => { state.tag = state.tag === s.key ? null : s.key; state.cat = null; state.top = false; state.trend = false; closeMenu(); update(); };
+    b.onclick = () => { state.tag = state.tag === s.key ? null : s.key; state.cat = null; state.top = false; state.trend = false; state.list = null; closeMenu(); update(); };
     spot.appendChild(b);
   });
 
@@ -149,19 +149,24 @@ function buildSidebar() {
   $("#tagcloud").innerHTML = "";
   Object.entries(tc).filter(([t, n]) => n >= 3 && !skip.has(t)).sort((a, b) => b[1] - a[1]).slice(0, 26)
     .forEach(([t, n]) => $("#tagcloud").appendChild(tagEl(t, n)));
+  window.Lib?.sidebar();
 }
 
 function tagEl(t, n) {
   const s = document.createElement("span");
   s.className = "tag" + (state.tag === t ? " on" : "");
   s.textContent = "#" + t + (n ? ` ${n}` : "");
-  s.onclick = e => { e.stopPropagation(); state.tag = state.tag === t ? null : t; closeLb(); update(); };
+  s.onclick = e => { e.stopPropagation(); state.tag = state.tag === t ? null : t; state.list = null; closeLb(); update(); };
   return s;
 }
 
 function filtered() {
   hl = new Map();
   const terms = norm(state.q).split(/\s+/).filter(Boolean);
+  if (state.list && window.Lib) {
+    const v = Lib.items(state.list).filter(m => (state.nsfw || !m.nsfw) && (!state.cat || m.category === state.cat) && (!state.tag || m.tags.includes(state.tag)) && terms.every(t => m.hay.includes(t)));
+    return state.sort === "popular" ? v : sortBy(v);
+  }
   if (state.trend) {
     const v = trendingList(visible()).filter(m => (!state.cat || m.category === state.cat) && (!state.tag || m.tags.includes(state.tag)) && terms.every(t => m.hay.includes(t)));
     return state.sort === "popular" ? v : sortBy(v);
@@ -200,20 +205,22 @@ function sortBy(v) {
 
 function update() { writeHash(); buildSidebar(); render(); window.scrollTo({ top: 0, behavior: "smooth" }); }
 
+const isHome = () => !state.list && !state.trend && !state.top && !state.cat && !state.tag && !state.q;
 function render() {
   view = filtered();
   const grid = $("#grid"); grid.innerHTML = "";
-  $("#heading").textContent = state.trend ? "🔥 Trending" : state.top ? "🏆 Top voted" : state.tag ? `#${state.tag}` : (state.cat || "All memes");
+  $("#heading").textContent = state.list && window.Lib ? Lib.label(state.list) : state.trend ? "🔥 Trending" : state.top ? "🏆 Top voted" : state.tag ? `#${state.tag}` : (state.cat || "All memes");
   const cats = Object.keys(counts(view)).length;
   $("#sub").textContent = `${view.length} meme${view.length === 1 ? "" : "s"}` + (cats > 1 ? ` across ${cats} categories` : "") + (state.q ? ` matching “${state.q}”` : "");
   const act = $("#active"); act.innerHTML = "";
-  [["trend", state.trend && "🔥 Trending"], ["top", state.top && "🏆 Top voted"], ["cat", state.cat], ["tag", state.tag && "#" + state.tag], ["q", state.q && `“${state.q}”`]].forEach(([k, v]) => {
+  [["list", state.list && window.Lib && Lib.label(state.list)], ["trend", state.trend && "🔥 Trending"], ["top", state.top && "🏆 Top voted"], ["cat", state.cat], ["tag", state.tag && "#" + state.tag], ["q", state.q && `“${state.q}”`]].forEach(([k, v]) => {
     if (!v) return;
     const s = document.createElement("span"); s.innerHTML = `${v}<button aria-label="remove">✕</button>`;
     s.querySelector("button").onclick = () => { state[k] = k === "q" ? "" : (k === "top" || k === "trend") ? false : null; if (k === "q") $("#q").value = ""; update(); };
     act.appendChild(s);
   });
   $("#empty").hidden = view.length > 0;
+  window.Lib?.afterRender();
   PAGE = isPhone() ? 16 : 60;
   const ncol = isPhone() ? (grid.clientWidth < 330 ? 1 : 2) : Math.max(1, Math.min(6, Math.floor((grid.clientWidth + 16) / 246)));
   cols = [...Array(ncol)].map(() => { const d = document.createElement("div"); d.className = "col"; grid.appendChild(d); return d; });
@@ -249,6 +256,7 @@ function renderMore() {
     const eb = document.createElement("button"); eb.className = "share edit"; eb.title = "Make your own caption"; eb.setAttribute("aria-label", "Caption " + m.title);
     eb.textContent = "✏️"; eb.dataset.edit = m.id; eb.type = "button";   // click handled by editor.js (delegated)
     c.querySelector(".row").insertBefore(eb, c.querySelector(".src"));
+    if (window.Lib) Lib.decorateCard(c, m);
     const img = c.querySelector("img");
     img.onload = () => { img.classList.add("ld"); img.parentNode.classList.remove("ph"); };
     c.onclick = () => openLb(i);
@@ -280,6 +288,7 @@ function openLb(i) {
   $("#lb").hidden = false; document.body.style.overflow = "hidden";
   lbId = m.id; history.replaceState(null, "", "#m=" + encodeURIComponent(m.id));
   prefetchBlob(m);
+  window.Lib?.lightbox(m);
 }
 let lbId = null;
 function closeLb() { if (!$("#lb").hidden) { lbId = null; writeHash(); } closeShare(); $("#lb").hidden = true; document.body.style.overflow = ""; $("#lbImg").style.transform = ""; }
@@ -390,7 +399,7 @@ $("#nsfw").onchange = e => {
   update(); toast(state.nsfw ? "Crude memes shown 🌶️" : "Crude memes hidden 😇");
 };
 $("#sort").onchange = e => { state.sort = e.target.value; render(); };
-$("#reset").onclick = () => { Object.assign(state, { cat: null, tag: null, q: "", top: false, trend: false }); $("#q").value = ""; update(); };
+$("#reset").onclick = () => { Object.assign(state, { cat: null, tag: null, q: "", top: false, trend: false, list: null }); $("#q").value = ""; update(); };
 function openMenu() {
   $("#sidebar").classList.add("open"); $("#backdrop").hidden = false; document.body.classList.add("menu-open");
   $("#menuBtn").setAttribute("aria-expanded", "true");
@@ -414,12 +423,12 @@ $("#sbClose").onclick = closeMenu; $("#backdrop").onclick = closeMenu;
 })();
 
 function writeHash() {
-  const p = new URLSearchParams(); if (state.top) p.set("top", "1"); if (state.trend) p.set("trending", "1"); if (state.cat) p.set("cat", state.cat); if (state.tag) p.set("tag", state.tag); if (state.q) p.set("q", state.q);
+  const p = new URLSearchParams(); if (state.list) p.set("list", state.list); if (state.top) p.set("top", "1"); if (state.trend) p.set("trending", "1"); if (state.cat) p.set("cat", state.cat); if (state.tag) p.set("tag", state.tag); if (state.q) p.set("q", state.q);
   history.replaceState(null, "", p.toString() ? "#" + p : location.pathname);
 }
 function readHash() {
   const p = new URLSearchParams(location.hash.slice(1));
-  state.top = p.get("top") === "1"; state.trend = p.get("trending") === "1"; state.cat = p.get("cat"); state.tag = p.get("tag"); state.q = p.get("q") || ""; $("#q").value = state.q;
+  state.list = p.get("list"); state.top = p.get("top") === "1"; state.trend = p.get("trending") === "1"; state.cat = p.get("cat"); state.tag = p.get("tag"); state.q = p.get("q") || ""; $("#q").value = state.q;
   const mid = p.get("m") || p.get("open");
   if (mid) setTimeout(() => openById(mid), 0);
 }
@@ -428,7 +437,7 @@ function openById(id) {
   let i = view.findIndex(m => m.id === id);
   if (i < 0) {
     const m = memes.find(x => x.id === id); if (!m) return toast("That meme isn't in the vault anymore 🤷");
-    Object.assign(state, { cat: null, tag: null, q: "", top: false, trend: false }); $("#q").value = "";
+    Object.assign(state, { cat: null, tag: null, q: "", top: false, trend: false, list: null }); $("#q").value = "";
     if (m.nsfw && !state.nsfw) { state.nsfw = true; $("#nsfw").checked = true; }
     buildSidebar(); render(); i = view.findIndex(x => x.id === id);
   }
