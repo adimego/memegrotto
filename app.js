@@ -98,7 +98,7 @@ let hl = new Map();   // meme id -> "top" | "trend" badge on the home mix
 function trendingList(pool) {
   const cutoff = new Date(Date.now() - TREND_DAYS * 864e5).toISOString().slice(0, 10), pos = {}, feedN = {};
   memes.forEach(m => { const f = m.feed || m.source; pos[m.id] = feedN[f] = (feedN[f] || 0) + 1; });
-  return pool.filter(m => (m.date_added || "") >= cutoff && /^(reddit:|imgflip-tag:|kym-gallery:|epstein)/.test(m.feed || ""))
+  return pool.filter(m => (m.date_added || "") >= cutoff && /^(reddit:|imgflip-tag:|kym-gallery:|epstein|gif:)/.test(m.feed || ""))
     .sort((a, b) => (b.date_added || "").localeCompare(a.date_added || "") || pos[a.id] - pos[b.id] || a.rank - b.rank);
 }
 function topVotedList(pool) { return pool.filter(m => vcount(m) > 0).sort((a, b) => vcount(b) - vcount(a) || a.rank - b.rank); }
@@ -244,7 +244,7 @@ function renderMore() {
     const c = document.createElement("article"); c.className = "card";
     c.style.animationDelay = Math.min((i % PAGE) * 15, 400) + "ms";
     const ratio = m.width && m.height ? `aspect-ratio:${m.width}/${m.height}` : "min-height:180px";
-    c.innerHTML = `<div class="ph" style="${ratio}">${!m.thumb && !m.image && m.video ? `<video class="clip on poster" muted playsinline loop preload="metadata" src="${esc(m.video)}#t=0.1"></video><img hidden alt="">` : `<img ${i < 4 ? 'fetchpriority="high"' : 'loading="lazy"'} decoding="async" alt="${esc(m.title)}" src="${m.thumb || m.image}">`}${m.video || /\.gif$/i.test(m.image) ? '<span class="anim-badge" aria-label="Animated">▶ GIF</span>' : ""}</div>
+    c.innerHTML = `<div class="ph" style="${ratio}">${!m.thumb && !m.image && m.video ? `<video class="clip on poster" muted playsinline loop preload="metadata" src="${esc(m.video)}#t=0.1"></video><img hidden alt="">` : `<img ${i < 4 ? 'fetchpriority="high"' : 'loading="lazy"'} decoding="async" alt="${esc(m.title)}" src="${m.thumb || m.image}">`}${m.video || /\.gif$/i.test(m.image) ? (m.audio ? '<span class="anim-badge" aria-label="Video with sound">▶ 🔊</span>' : '<span class="anim-badge" aria-label="Animated">▶ GIF</span>') : ""}</div>
       ${hl.get(m.id) === "top" ? '<span class="badge hl top">🏆 Top</span>' : hl.get(m.id) === "trend" ? '<span class="badge hl trend">🔥 Trending</span>'
         : m.source.startsWith("Reddit") ? `<span class="badge">${esc(m.source.replace("Reddit ", ""))}</span>` : ""}
       ${m.nsfw ? '<span class="badge nsfw">🌶️ NSFW</span>' : ""}
@@ -319,7 +319,7 @@ function openLb(i, step) {
   resetLbMedia();
   const gi = view.indexOf(m); while (gi >= 0 && shown <= gi && shown < view.length) renderMore();
   const lv0 = $("#lbVid");
-  if (m.video) { $("#lbImg").hidden = true; $("#lbImg").removeAttribute("src"); lv0.hidden = false; lv0.poster = m.image; lv0.src = m.video; lv0.play().catch(() => {}); }
+  if (m.video) { $("#lbImg").hidden = true; $("#lbImg").removeAttribute("src"); lv0.hidden = false; lv0.poster = m.image; lv0.muted = true; lv0.src = m.video; lv0.play().catch(() => {}); }
   else { lv0.pause(); lv0.removeAttribute("src"); lv0.load(); lv0.hidden = true; $("#lbImg").hidden = false; $("#lbImg").src = m.image; $("#lbImg").alt = m.title; }
   $("#lbTitle").textContent = m.title;
   const cat = $("#lbCat"); cat.textContent = `${CAT_META[m.category]?.[0] || ""} ${m.category}`; cat.style.setProperty("--c", color(m.category));

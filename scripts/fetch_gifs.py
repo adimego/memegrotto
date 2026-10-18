@@ -286,6 +286,10 @@ def review(ids=None, per=10):
             im.paste(s.crop((0, 0, min(W, s.width), s.height)), (0, y + 20)); y += s.height + 22
         im.save(os.path.join(STAGE, f"review-{g // per:02d}.png")); print("review", g // per, [r["cid"] for r in chunk])
 
+def feed_of(r):
+    """Trending-mix feed (app.js trendingList round-robins fresh memes across feeds): reddit:<sub> or gif:<source>."""
+    return "reddit:" + r["source"].split("r/")[-1] if r["source"].startswith("Reddit r/") else "gif:" + r["source"].lower()
+
 def add(picks):
     """Copy reviewed clips into the repo and append entries. picks: list of cid strings or {"cid", overrides...}."""
     man = load_manifest(); d = load_db(); have = {m["id"] for m in d["memes"]}; new = []
@@ -302,7 +306,7 @@ def add(picks):
         e = {"id": eid, **({"template_id": r["template_id"]} if r.get("template_id") else {}), "title": r["title"], "category": r["category"],
              "source": r["source"], "source_url": r["source_url"], "image_url": r["media_url"], "attribution": r["attribution"], "tags": tags,
              "image": f"images/{eid}.jpg", "thumb": f"thumbs/{eid}.jpg", "video": f"videos/{eid}.mp4", "duration": r["dur"],
-             "width": r["w"], "height": r["h"], "date_added": r.get("date_added", TODAY)}
+             "width": r["w"], "height": r["h"], "date_added": r.get("date_added", TODAY), "feed": feed_of(r)}
         if r.get("nsfw"): e["nsfw"] = True
         if r.get("has_audio"): e["audio"] = True
         new.append(e); have.add(eid); man[eid]["status"] = "added"

@@ -60,6 +60,8 @@ Thumbnails need Pillow (`pip install pillow`).
   r/me_irl, r/2meirl4meirl and r/antiwork, plus a Reddit search for "dicks out for harambe". The `.json` endpoints return
   HTTP 403, and RSS rate-limits (429), so the script sleeps 8s between subreddits
 - Know Your Meme (Harambe entry images)
+- GIFs & videos: Imgflip GIF templates (imgflip.com/gif-templates), Tenor public search pages (tenor.com/search/...), Reddit RSS of
+  r/reactiongifs, r/HighQualityGifs, r/gifs, r/MemeVideos, r/dankvideos and r/SonicTheHedgehog (each entry keeps its source URL and credit)
 
 All memes belong to their respective creators; each entry records its source URL.
 
@@ -72,12 +74,27 @@ for the `mv_features()` function). To moderate, open the Supabase dashboard → 
 table. `scripts/moderate.py` does the same from the command line if you ever want to use a service key (optional).
 
 ## GIFs & videos
-Animated memes are stored as small H.264 MP4s in `videos/` (no audio, ≤720p, ≤15 s) with a poster frame in `images/` and a
-480 px thumbnail in `thumbs/`; entries carry `video`, `duration` and the `gif` tag (sidebar Spotlight "GIFs & Videos", `#tag=gif`).
+Animated memes are stored as small H.264 MP4s in `videos/` (main profile, yuv420p, even dimensions, ≤540 px on the long side,
+≤20 s, aim ≤1.5 MB, hard max 4 MB, +faststart) with a poster frame in `images/` and a 480 px thumbnail in `thumbs/`; entries
+carry `video`, `duration`, `width`, `height` and the `gif` + `animated` tags (sidebar Spotlight "GIFs & Videos", `#tag=gif`).
+Clips are muted unless the meme needs its sound (`"audio": true`, mostly Reddit meme videos); every player still starts muted
+so it can autoplay (the lightbox has controls to unmute, audio cards show a 🔊 badge).
 The grid shows the poster and plays the clip muted on hover (mouse) or while on screen (touch, at most two at once); the
-lightbox plays it with controls. The caption editor captions the poster (still) frame. Add more with
-`scripts/fetch_gifs.py` (Imgflip GIF templates, Reddit GIF/v.redd.it posts; big GIFs are converted to MP4) and review the poster
-frames before committing.
+lightbox plays it with controls. The caption editor captions the poster (still) frame.
+
+Add more with `scripts/fetch_gifs.py` (nothing touches the repo until `add`; staging lives in /workspace/gifstage):
+```bash
+python3 scripts/fetch_gifs.py discover imgflip --pages 40                 # Imgflip GIF templates not yet in the library
+python3 scripts/fetch_gifs.py discover tenor "kombucha girl" "stonks" --n 2  # Tenor public search pages (no API key)
+python3 scripts/fetch_gifs.py discover reddit reactiongifs MemeVideos --t year --n 50   # Reddit RSS (i.redd.it, imgur, giphy, v.redd.it)
+python3 scripts/fetch_gifs.py stage /workspace/gifstage/cands-tenor.json  # download, encode, poster/thumb, contact sheet, dedupe
+python3 scripts/fetch_gifs.py review                                       # labelled review grids (4 frames per clip): LOOK at them
+python3 scripts/fetch_gifs.py add picks.json        # [{"cid": ..., optional "title"/"category"/"tags"/"nsfw"}] -> repo
+```
+Dedupe is by title, Imgflip template id, source URL and a dHash of 3 frames against the existing clips; it misses re-crops of the
+same clip, so the review step matters. Content rules are the same as for stills (`BLOCK_RX` / `CRUDE_RX` / Epstein + minors are
+applied to titles and tags; crude = `nsfw: true`). v.redd.it videos are read from the DASH playlist and video + audio are merged
+with ffmpeg. Run `scripts/stamp_assets.py` (and `build_similar.py`) before committing. `match_templates.py` skips animated entries.
 
 ## Battles, leaderboards, moderation (supabase/features2.sql)
 `#battle` shows two memes side by side; picks update Elo ratings through `battle_vote()`. `#leaderboard` has Today / This week /
