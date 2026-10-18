@@ -399,6 +399,12 @@ $("#nsfw").onchange = e => {
   update(); toast(state.nsfw ? "Crude memes shown 🌶️" : "Crude memes hidden 😇");
 };
 $("#sort").onchange = e => { state.sort = e.target.value; render(); };
+// Phones: shorter sort labels so the whole label fits in the header (full labels stay on wider screens)
+(() => {
+  const mq = matchMedia("(max-width: 640px)");
+  const apply = () => document.querySelectorAll("#sort option").forEach(o => { o.dataset.full ??= o.textContent; o.textContent = mq.matches && o.dataset.short ? o.dataset.short : o.dataset.full; });
+  apply(); mq.addEventListener?.("change", apply);
+})();
 $("#reset").onclick = () => { Object.assign(state, { cat: null, tag: null, q: "", top: false, trend: false, list: null }); $("#q").value = ""; update(); };
 function openMenu() {
   $("#sidebar").classList.add("open"); $("#backdrop").hidden = false; document.body.classList.add("menu-open");

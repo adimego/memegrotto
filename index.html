@@ -28,7 +28,7 @@
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="MemeSpire">
 <link rel="canonical" href="https://adimego.github.io/memespire/">
-<link rel="stylesheet" href="style.css?v=9ac4cc37aa">
+<link rel="stylesheet" href="style.css?v=b2079fd34e">
 </head>
 <body>
 <header class="top">
@@ -43,10 +43,10 @@
     <input type="checkbox" id="nsfw" checked><span class="sw"></span><span class="lbl">🌶️ Crude</span>
   </label>
   <select id="sort" aria-label="Sort">
-    <option value="popular">Most popular ▲</option>
-    <option value="az">A → Z</option>
-    <option value="new">Recently added</option>
-    <option value="shuffle">Shuffle 🎲</option>
+    <option value="popular" data-short="🔥 Popular">Most popular ▲</option>
+    <option value="az" data-short="🔤 A → Z">A → Z</option>
+    <option value="new" data-short="🆕 Newest">Recently added</option>
+    <option value="shuffle" data-short="🎲 Shuffle">Shuffle 🎲</option>
   </select>
 </header>
 
@@ -107,7 +107,7 @@
 <div class="share-backdrop" id="shareBackdrop" hidden></div>
 <div class="share-menu" id="shareMenu" role="dialog" aria-label="Share meme" hidden></div>
 <div id="toast" class="toast"></div>
-<script src="app.js?v=5015948dcc"></script>
+<script src="app.js?v=deed061b6d"></script>
 <script src="features.js?v=808191580a"></script>
 <script src="community.js?v=84102b0c56"></script>
 <script src="editor.js?v=d4d966573d"></script>
