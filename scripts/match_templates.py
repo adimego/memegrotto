@@ -14,9 +14,13 @@ def feat(m):
         return None
 tpls = [m for m in memes if m.get("template_id") and not m.get("captioned") and not m["image"].endswith(".gif")]
 tf = [(m, feat(m)) for m in tpls]; tf = [(m, f) for m, f in tf if f]
-NO = set(json.load(open(os.path.join(ROOT, "scripts", "curation.json"))).get("no_blank", []))  # eyeballed false matches
+CUR = json.load(open(os.path.join(ROOT, "scripts", "curation.json")))
+NO = set(CUR.get("no_blank", []))  # eyeballed false matches
+VER = CUR.get("blank_verified", {})  # visually verified pairs (kept as-is)
 n = 0; thr = float(sys.argv[1]) if len(sys.argv) > 1 else 14
 for m in memes:
+    if m["id"] in VER:
+        v = VER[m["id"]]; m["blank_template"], m["blank_template_title"], m["blank_template_source"] = v["blank"], v["title"], v["from"]; n += 1; continue
     m.pop("blank_template", None)
     if m in tpls or m["image"].endswith(".gif") or m["id"] in NO: continue
     f = feat(m)

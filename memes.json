@@ -3772,7 +3772,10 @@
       "height": 1046,
       "thumb": "thumbs/reddit-1x5akbp.jpg",
       "feed": "reddit:memes",
-      "ocr": "WATCHING PEOPLE POST ON / A SUB YOU'RE WRONGFULLY / BANNED FROM"
+      "ocr": "WATCHING PEOPLE POST ON / A SUB YOU'RE WRONGFULLY / BANNED FROM",
+      "blank_template": "images/imgflip-67452763-squidward-window.jpg",
+      "blank_template_title": "Squidward window",
+      "blank_template_source": "MemeVault library (Imgflip template)"
     },
     {
       "id": "reddit-1x52q5p",
@@ -3944,7 +3947,10 @@
       "width": 1067,
       "height": 1200,
       "thumb": "thumbs/reddit-dicksout-simpsons.jpg",
-      "ocr": ""
+      "ocr": "",
+      "blank_template": "images/blank-imgflip-2lhzmp.jpg",
+      "blank_template_title": "Homer Simpson's Back Fat",
+      "blank_template_source": "https://imgflip.com/memetemplate/157043617/Homer-Simpsons-Back-Fat"
     },
     {
       "id": "reddit-dicksout-ape",
@@ -4114,7 +4120,10 @@
       "width": 500,
       "height": 500,
       "thumb": "thumbs/imgflip-i-1bt5ak.jpg",
-      "ocr": ""
+      "ocr": "",
+      "blank_template": "images/blank-imgflip-1bgs.jpg",
+      "blank_template_title": "Philosoraptor",
+      "blank_template_source": "https://imgflip.com/memetemplate/Philosoraptor"
     },
     {
       "id": "imgflip-i-19ykyc",
@@ -4280,7 +4289,10 @@
       "width": 420,
       "height": 316,
       "thumb": "thumbs/imgflip-i-1azojq.jpg",
-      "ocr": "THE AMOUNT OF HARAMBE JOKES / _ ARETOO DAMN DIE"
+      "ocr": "THE AMOUNT OF HARAMBE JOKES / _ ARETOO DAMN DIE",
+      "blank_template": "images/blank-imgflip-1bik.jpg",
+      "blank_template_title": "Too Damn High",
+      "blank_template_source": "https://imgflip.com/memetemplate/Too-Damn-High"
     },
     {
       "id": "imgflip-i-1by5ay",
@@ -4625,7 +4637,10 @@
       "height": 500,
       "thumb": "thumbs/imgflip-i-b25d5y.jpg",
       "feed": "imgflip-tag:work",
-      "ocr": "When the group / assignment gets so awkward / to work on so you try to / small talk with the / third guy but it fails / mid-sentence as the boss watches:"
+      "ocr": "When the group / assignment gets so awkward / to work on so you try to / small talk with the / third guy but it fails / mid-sentence as the boss watches:",
+      "blank_template": "images/imgflip-316466202-where-monkey.jpg",
+      "blank_template_title": "where monkey",
+      "blank_template_source": "MemeVault library (Imgflip template)"
     },
     {
       "id": "imgflip-i-azplnz",
@@ -4803,7 +4818,10 @@
       "height": 543,
       "thumb": "thumbs/imgflip-i-azle7z.jpg",
       "feed": "imgflip-tag:gaming",
-      "ocr": "iy GAMES) / t like y"
+      "ocr": "iy GAMES) / t like y",
+      "blank_template": "images/blank-imgflip-2t9nz6.jpg",
+      "blank_template_title": "You Guys always act like you're better than me",
+      "blank_template_source": "https://imgflip.com/memetemplate/170092194/You-Guys-always-act-like-youre-better-than-me"
     },
     {
       "id": "imgflip-i-awn7ao",
@@ -4876,7 +4894,10 @@
       "height": 500,
       "thumb": "thumbs/imgflip-i-b30jpa.jpg",
       "feed": "imgflip-tag:gaming",
-      "ocr": "Start / of the game / the / ending"
+      "ocr": "Start / of the game / the / ending",
+      "blank_template": "images/blank-imgflip-5l1ue4.jpg",
+      "blank_template_title": "Happy Wojak vs Depressed Wojak",
+      "blank_template_source": "https://imgflip.com/memetemplate/337688860/Happy-Wojak-vs-Depressed-Wojak"
     },
     {
       "id": "imgflip-i-5xqlsh",
@@ -5081,7 +5102,10 @@
       "height": 523,
       "thumb": "thumbs/reddit-1x72x3b.jpg",
       "feed": "reddit:memes",
-      "ocr": ""
+      "ocr": "",
+      "blank_template": "images/blank-imgflip-3o5ffh.jpg",
+      "blank_template_title": "Funeral",
+      "blank_template_source": "https://imgflip.com/memetemplate/221962589/Funeral"
     },
     {
       "id": "reddit-1x5no3t",
@@ -5159,7 +5183,10 @@
       "height": 957,
       "thumb": "thumbs/reddit-1x37h65.jpg",
       "feed": "reddit:memes",
-      "ocr": "When you yawn and it / magically unclogs / your ear"
+      "ocr": "When you yawn and it / magically unclogs / your ear",
+      "blank_template": "images/blank-imgflip-yp6kp.jpg",
+      "blank_template_title": "When X just right",
+      "blank_template_source": "https://imgflip.com/memetemplate/58281865/When-X-just-right"
     },
     {
       "id": "reddit-1x4lqq7",
@@ -5681,7 +5708,10 @@
       "height": 700,
       "thumb": "thumbs/reddit-1wxbooo.jpg",
       "feed": "reddit:ProgrammerHumor",
-      "ocr": "SNOW | CAN'T Doi WI WITHOUT BEING. / “SUSPECTED OF BEING A VIBE CODER:"
+      "ocr": "SNOW | CAN'T Doi WI WITHOUT BEING. / “SUSPECTED OF BEING A VIBE CODER:",
+      "blank_template": "images/blank-imgflip-25wb.jpg",
+      "blank_template_title": "Confession Bear",
+      "blank_template_source": "https://imgflip.com/memetemplate/Confession-Bear"
     },
     {
       "id": "reddit-1x186i5",
@@ -5781,7 +5811,10 @@
       "height": 834,
       "thumb": "thumbs/reddit-1wtjznl.jpg",
       "feed": "reddit:ProgrammerHumor",
-      "ocr": "Except ; / yaaa / raN obody, / “born cool / \"Para ers that / Whie. S / In On them / mM, / help ne / y Withoug trash;"
+      "ocr": "Except ; / yaaa / raN obody, / “born cool / \"Para ers that / Whie. S / In On them / mM, / help ne / y Withoug trash;",
+      "blank_template": "images/blank-imgflip-2z403x.jpg",
+      "blank_template_title": "Nobody is born cool",
+      "blank_template_source": "https://imgflip.com/memetemplate/179905677/Nobody-is-born-cool"
     },
     {
       "id": "reddit-1x2hy01",
@@ -6024,7 +6057,10 @@
       "height": 352,
       "thumb": "thumbs/reddit-1wu26u0.jpg",
       "feed": "reddit:me_irl",
-      "ocr": "No immigrant has / taken your job / ouverte acantatst ving / {ook advantage of hat immuprant to / Increase his profits ane natn mses / Thmhappier than tohear youre / fuchang lot ose stun mad atthe / irmirant anda"
+      "ocr": "No immigrant has / taken your job / ouverte acantatst ving / {ook advantage of hat immuprant to / Increase his profits ane natn mses / Thmhappier than tohear youre / fuchang lot ose stun mad atthe / irmirant anda",
+      "blank_template": "images/blank-imgflip-3rsxfo.jpg",
+      "blank_template_title": "Jim Halpert Explains",
+      "blank_template_source": "https://imgflip.com/memetemplate/228097860/Jim-Halpert-Explains"
     },
     {
       "id": "reddit-1wp5evn",
@@ -6048,8 +6084,7 @@
       "height": 978,
       "thumb": "thumbs/reddit-1wp5evn.jpg",
       "feed": "reddit:2meirl4meirl",
-      "ocr": "- Post Mo / @doloyeung / The funnest thing to do after taking time out to / work on yourself is to return completely / unimproved, or if anything, slightly worse / Most relevant replies v",
-      "blank_template_title": "Marked Safe From"
+      "ocr": "- Post Mo / @doloyeung / The funnest thing to do after taking time out to / work on yourself is to return completely / unimproved, or if anything, slightly worse / Most relevant replies v"
     },
     {
       "id": "reddit-1x0zcnu",
@@ -6171,8 +6206,7 @@
       "height": 375,
       "thumb": "thumbs/reddit-1wlbodz.jpg",
       "feed": "reddit:2meirl4meirl",
-      "ocr": "Tweet Wl / Ivan Martinez @ / @imartinezp_ / Stop saying \"| wish\" start saying \"I will\" / AUSTIN / @avstino / | will wasn't broke",
-      "blank_template_title": "Marked Safe From"
+      "ocr": "Tweet Wl / Ivan Martinez @ / @imartinezp_ / Stop saying \"| wish\" start saying \"I will\" / AUSTIN / @avstino / | will wasn't broke"
     },
     {
       "id": "reddit-1ws3j6i",
@@ -6566,7 +6600,10 @@
       "thumb": "thumbs/imgflip-i-6fvnwm.jpg",
       "feed": "imgflip-tag:will smith slap",
       "ocr": "BWHAT WOULD OU) DONE, / VOUCOULDTRAVENBACKIN|TIME a / E ee we / Ferme sex »",
-      "nsfw": true
+      "nsfw": true,
+      "blank_template": "images/imgflip-380032248-will-smith-slapping-chris-rock.jpg",
+      "blank_template_title": "Will Smith Slapping Chris Rock",
+      "blank_template_source": "MemeVault library (Imgflip template)"
     },
     {
       "id": "imgflip-i-86wkdg",
@@ -6590,7 +6627,10 @@
       "height": 692,
       "thumb": "thumbs/imgflip-i-86wkdg.jpg",
       "feed": "imgflip-tag:wholesome",
-      "ocr": "Hey you there! If your / having a bad day, here is a cute / catto. He hopes you have a good day!"
+      "ocr": "Hey you there! If your / having a bad day, here is a cute / catto. He hopes you have a good day!",
+      "blank_template": "images/blank-imgflip-4xgqu.jpg",
+      "blank_template_title": "Cute Cat",
+      "blank_template_source": "https://imgflip.com/memetemplate/Cute-Cat"
     },
     {
       "id": "imgflip-i-5vd5ga",
@@ -6764,7 +6804,10 @@
       "height": 1049,
       "thumb": "thumbs/imgflip-i-ari5hu.jpg",
       "feed": "imgflip-tag:work",
-      "ocr": ""
+      "ocr": "",
+      "blank_template": "images/imgflip-27813981-hide-the-pain-harold.jpg",
+      "blank_template_title": "Hide the Pain Harold",
+      "blank_template_source": "MemeVault library (Imgflip template)"
     },
     {
       "id": "imgflip-i-b2sji5",
@@ -6789,7 +6832,10 @@
       "height": 999,
       "thumb": "thumbs/imgflip-i-b2sji5.jpg",
       "feed": "imgflip-tag:video games",
-      "ocr": "Playing / games on PC / Playing / games / on mobile / using / imgflip / on mobile / using | / imgflip on PC y"
+      "ocr": "Playing / games on PC / Playing / games / on mobile / using / imgflip / on mobile / using | / imgflip on PC y",
+      "blank_template": "images/blank-imgflip-9985e5.jpg",
+      "blank_template_title": "Squid Game (Season 1 vs Season 2)",
+      "blank_template_source": "https://imgflip.com/memetemplate/559692365/Squid-Game-Season-1-vs-Season-2"
     },
     {
       "id": "imgflip-i-b2zuz4",
@@ -6864,7 +6910,10 @@
       "height": 494,
       "thumb": "thumbs/imgflip-i-aj4b63.jpg",
       "feed": "imgflip-tag:video games",
-      "ocr": "When adults say video games rot your / brain while doomscrolling on Facebook 24/7:"
+      "ocr": "When adults say video games rot your / brain while doomscrolling on Facebook 24/7:",
+      "blank_template": "images/blank-imgflip-oqii0.jpg",
+      "blank_template_title": "Nick Young",
+      "blank_template_source": "https://imgflip.com/memetemplate/41547816/Nick-Young"
     },
     {
       "id": "imgflip-i-azh40n",
@@ -6938,7 +6987,9 @@
       "thumb": "thumbs/imgflip-i-ay59k3.jpg",
       "feed": "imgflip-tag:minecraft",
       "ocr": "Playing / Actively participating / in a 3-D digital platform that / geometrically simplifies materials, / weaponry, and organisms into mere / cubes while allowing myself to / possess a character that harnesses / the power to destroy, spawn, or craft / these materials, weaponry, or organisms.",
-      "blank_template_title": "Tuxedo Winnie The Pooh"
+      "blank_template_title": "Tuxedo Winnie The Pooh",
+      "blank_template": "images/imgflip-178591752-tuxedo-winnie-the-pooh.jpg",
+      "blank_template_source": "MemeVault library (Imgflip template)"
     },
     {
       "id": "imgflip-i-b193ua",
@@ -7017,7 +7068,9 @@
       "thumb": "thumbs/imgflip-i-aj19yw.jpg",
       "feed": "imgflip-tag:teachers",
       "ocr": "Teachers: If you need any help with the test let me know / Also Teachers (when student asks for help): No talking during the test / Student:",
-      "blank_template_title": "Surprised Pikachu"
+      "blank_template_title": "Surprised Pikachu",
+      "blank_template": "images/imgflip-155067746-surprised-pikachu.jpg",
+      "blank_template_source": "MemeVault library (Imgflip template)"
     },
     {
       "id": "imgflip-i-6g9izi",
@@ -7350,7 +7403,10 @@
       "width": 473,
       "height": 266,
       "thumb": "thumbs/kym-ugandan-knuckles.jpg",
-      "ocr": ""
+      "ocr": "",
+      "blank_template": "images/blank-memegen-ugandanknuck.jpg",
+      "blank_template_title": "Ugandan Knuckles",
+      "blank_template_source": "https://api.memegen.link/images/ugandanknuck.jpg"
     },
     {
       "id": "kym-dolan",
@@ -7447,7 +7503,10 @@
       "width": 711,
       "height": 400,
       "thumb": "thumbs/kym-has-anyone-really-been-far-even-as-decided-to-use-even-go-want-to-do-look-mo.jpg",
-      "ocr": "Haslanyonejreally been: / farjasidecided| to use / evenygo) wantto:do / look morejlike?"
+      "ocr": "Haslanyonejreally been: / farjasidecided| to use / evenygo) wantto:do / look morejlike?",
+      "blank_template": "images/blank-imgflip-1bgs.jpg",
+      "blank_template_title": "Philosoraptor",
+      "blank_template_source": "https://imgflip.com/memetemplate/Philosoraptor"
     },
     {
       "id": "kym-pepe-the-frog",
@@ -7587,7 +7646,10 @@
       "width": 750,
       "height": 422,
       "thumb": "thumbs/kym-good-guy-greg.jpg",
-      "ocr": ""
+      "ocr": "",
+      "blank_template": "images/blank-memegen-ggg.jpg",
+      "blank_template_title": "Good Guy Greg",
+      "blank_template_source": "https://api.memegen.link/images/ggg.jpg"
     },
     {
       "id": "kym-no-rage-face",
@@ -8008,7 +8070,9 @@
       "height": 300,
       "thumb": "thumbs/kym-challenge-accepted.jpg",
       "ocr": "",
-      "blank_template_title": "Bell Curve"
+      "blank_template_title": "Challenge Accepted Rage Face",
+      "blank_template": "images/blank-imgflip-j4o.jpg",
+      "blank_template_source": "https://imgflip.com/memetemplate/Challenge-Accepted-Rage-Face"
     },
     {
       "id": "kym-joseph-ducreux-archaic-rap",
@@ -8127,7 +8191,10 @@
       "width": 737,
       "height": 415,
       "thumb": "thumbs/kym-i-know-that-feel-bro.jpg",
-      "ocr": "| KNOW THAT FEEL BRO"
+      "ocr": "| KNOW THAT FEEL BRO",
+      "blank_template": "images/blank-imgflip-39a10.jpg",
+      "blank_template_title": "I Know That Feel Bro",
+      "blank_template_source": "https://imgflip.com/memetemplate/I-Know-That-Feel-Bro"
     },
     {
       "id": "kym-oh-crap-omg-rage-face",
@@ -8179,7 +8246,10 @@
       "height": 250,
       "thumb": "thumbs/kym-if-you-know-what-i-mean.jpg",
       "nsfw": true,
-      "ocr": ""
+      "ocr": "",
+      "blank_template": "images/blank-imgflip-ci4t.jpg",
+      "blank_template_title": "If You Know What I Mean Bean",
+      "blank_template_source": "https://imgflip.com/memetemplate/If-You-Know-What-I-Mean-Bean"
     },
     {
       "id": "kym-kek",
@@ -8461,7 +8531,10 @@
       "width": 1000,
       "height": 563,
       "thumb": "thumbs/kym-true-story.jpg",
-      "ocr": ""
+      "ocr": "",
+      "blank_template": "images/blank-imgflip-775g.jpg",
+      "blank_template_title": "True Story",
+      "blank_template_source": "https://imgflip.com/memetemplate/True-Story"
     },
     {
       "id": "kym-waifu",
@@ -8605,7 +8678,10 @@
       "width": 1000,
       "height": 563,
       "thumb": "thumbs/kym-virgin-vs-chad.jpg",
-      "ocr": ""
+      "ocr": "",
+      "blank_template": "images/blank-imgflip-2b5ggz.jpg",
+      "blank_template_title": "Virgin and Chad",
+      "blank_template_source": "https://imgflip.com/memetemplate/258651081/Penguin-pointing-at-shipping-label"
     },
     {
       "id": "kym-i-hope-senpai-will-notice-me",
@@ -9387,7 +9463,10 @@
       "width": 1000,
       "height": 563,
       "thumb": "thumbs/kym-pepe-silvia.jpg",
-      "ocr": ""
+      "ocr": "",
+      "blank_template": "images/imgflip-92084495-charlie-conspiracy-always-sunny-in-philidelphia.jpg",
+      "blank_template_title": "Charlie Conspiracy (Always Sunny in Philidelphia)",
+      "blank_template_source": "MemeVault library (Imgflip template)"
     },
     {
       "id": "kym-yes-this-is-dog",
@@ -9549,7 +9628,10 @@
       "width": 1000,
       "height": 560,
       "thumb": "thumbs/kym-friendship-ended-with-mudasir.jpg",
-      "ocr": "a lay WIth MUDASIK"
+      "ocr": "a lay WIth MUDASIK",
+      "blank_template": "images/imgflip-137501417-friendship-ended.jpg",
+      "blank_template_title": "Friendship ended",
+      "blank_template_source": "MemeVault library (Imgflip template)"
     },
     {
       "id": "kym-thats-racist",
@@ -10206,7 +10288,10 @@
       "width": 681,
       "height": 445,
       "thumb": "thumbs/kym-confused-math-lady.jpg",
-      "ocr": ""
+      "ocr": "",
+      "blank_template": "images/blank-imgflip-1c81c1.jpg",
+      "blank_template_title": "Math lady/Confused lady",
+      "blank_template_source": "https://imgflip.com/memetemplate/80996545/Math-ladyConfused-lady"
     },
     {
       "id": "kym-its-a-trap",
@@ -10837,7 +10922,10 @@
       "width": 624,
       "height": 351,
       "thumb": "thumbs/kym-business-cat.jpg",
-      "ocr": ""
+      "ocr": "",
+      "blank_template": "images/blank-imgflip-1bh7.jpg",
+      "blank_template_title": "Business Cat",
+      "blank_template_source": "https://imgflip.com/memetemplate/210959447/Sweating-Jordan-Peele"
     },
     {
       "id": "kym-advice-dog",
@@ -10911,7 +10999,10 @@
       "width": 1000,
       "height": 563,
       "thumb": "thumbs/kym-no-bitches.jpg",
-      "ocr": "NO BITCHES?"
+      "ocr": "NO BITCHES?",
+      "blank_template": "images/imgflip-370867422-megamind-peeking.jpg",
+      "blank_template_title": "Megamind peeking",
+      "blank_template_source": "MemeVault library (Imgflip template)"
     },
     {
       "id": "kym-420-blaze-it",
@@ -11225,7 +11316,10 @@
       "width": 250,
       "height": 154,
       "thumb": "thumbs/kym-spongegar-primitive-sponge-caveman-spongebob.jpg",
-      "ocr": ""
+      "ocr": "",
+      "blank_template": "images/blank-imgflip-14wa6i.jpg",
+      "blank_template_title": "Spongegar",
+      "blank_template_source": "https://imgflip.com/memetemplate/Spongegar"
     },
     {
       "id": "kym-go-to-horny-jail",
@@ -11441,7 +11535,10 @@
       "width": 1000,
       "height": 563,
       "thumb": "thumbs/kym-ah-shit-here-we-go-again.jpg",
-      "ocr": "‘whe / Ce Ah s®, here we go again."
+      "ocr": "‘whe / Ce Ah s®, here we go again.",
+      "blank_template": "images/blank-imgflip-2z2mls.jpg",
+      "blank_template_title": "Ah shit here we go again",
+      "blank_template_source": "https://imgflip.com/memetemplate/179841520/Ah-shit-here-we-go-again"
     },
     {
       "id": "kym-lavender-town-syndrome-creepypasta",
@@ -12057,7 +12154,10 @@
       "width": 500,
       "height": 375,
       "thumb": "thumbs/kym-nothing-to-do-here-jet-pack-guy.jpg",
-      "ocr": "NOTHING TO / ce*"
+      "ocr": "NOTHING TO / ce*",
+      "blank_template": "images/blank-memegen-jetpack.jpg",
+      "blank_template_title": "Nothing To Do Here",
+      "blank_template_source": "https://api.memegen.link/images/jetpack.jpg"
     },
     {
       "id": "kym-good-luck-im-behind-7-proxies",
@@ -12224,7 +12324,10 @@
       "width": 191,
       "height": 120,
       "thumb": "thumbs/kym-computer-reaction-faces.jpg",
-      "ocr": ""
+      "ocr": "",
+      "blank_template": "images/blank-imgflip-2zj3.jpg",
+      "blank_template_title": "Computer Guy",
+      "blank_template_source": "https://imgflip.com/memetemplate/Computer-Guy"
     },
     {
       "id": "kym-i-dunno-lol-",
@@ -12271,7 +12374,10 @@
       "width": 800,
       "height": 450,
       "thumb": "thumbs/kym-slaps-roof-of-car.jpg",
-      "ocr": ""
+      "ocr": "",
+      "blank_template": "images/blank-imgflip-2d3al6.jpg",
+      "blank_template_title": "Car Salesman Slaps Roof Of Car",
+      "blank_template_source": "https://imgflip.com/memetemplate/Car-Salesman-Slaps-Roof-Of-Car"
     },
     {
       "id": "kym-in-soviet-russia",
@@ -12371,7 +12477,10 @@
       "width": 625,
       "height": 564,
       "thumb": "thumbs/kym-in-this-moment-i-am-euphoric.jpg",
-      "ocr": ""
+      "ocr": "",
+      "blank_template": "images/blank-imgflip-269s.jpg",
+      "blank_template_title": "10 Guy",
+      "blank_template_source": "https://imgflip.com/memetemplate/10-Guy"
     },
     {
       "id": "kym-duwang",
@@ -13316,7 +13425,10 @@
       "width": 889,
       "height": 500,
       "thumb": "thumbs/imgflip-i-azbsyw.jpg",
-      "ocr": "Ah & here we go again."
+      "ocr": "Ah & here we go again.",
+      "blank_template": "images/blank-imgflip-2uxhp3.jpg",
+      "blank_template_title": "Here we go again",
+      "blank_template_source": "https://imgflip.com/memetemplate/172883415/Here-we-go-again"
     },
     {
       "id": "imgflip-i-avnjj9",
@@ -13599,7 +13711,10 @@
       "width": 663,
       "height": 500,
       "thumb": "thumbs/imgflip-i-atletx.jpg",
-      "ocr": ""
+      "ocr": "",
+      "blank_template": "images/blank-imgflip-2mspu2.jpg",
+      "blank_template_title": "milking the cow",
+      "blank_template_source": "https://imgflip.com/memetemplate/159223754/milking-the-cow"
     },
     {
       "id": "imgflip-i-af87ea",
@@ -13625,7 +13740,10 @@
       "width": 597,
       "height": 418,
       "thumb": "thumbs/imgflip-i-af87ea.jpg",
-      "ocr": "MEWHEN| HAVE AlS00)WORD / ESSAY/DUE/AND)IONLY/HAVE400)WORDS"
+      "ocr": "MEWHEN| HAVE AlS00)WORD / ESSAY/DUE/AND)IONLY/HAVE400)WORDS",
+      "blank_template": "images/blank-imgflip-4b5jf0.jpg",
+      "blank_template_title": "Random Bullshit Go",
+      "blank_template_source": "https://imgflip.com/memetemplate/260598924/Random-Bullshit-Go"
     },
     {
       "id": "imgflip-i-53gwkw",
@@ -13776,7 +13894,10 @@
       "width": 500,
       "height": 500,
       "thumb": "thumbs/imgflip-i-an0czp.jpg",
-      "ocr": "€ Wrong way of saying it / | wrongly invoked the function instead / of passing it as an argument / ny 4 Correct way of saying it / | wrongly used the vocative case / instead of the nominative case"
+      "ocr": "€ Wrong way of saying it / | wrongly invoked the function instead / of passing it as an argument / ny 4 Correct way of saying it / | wrongly used the vocative case / instead of the nominative case",
+      "blank_template": "images/imgflip-161865971-marked-safe-from.jpg",
+      "blank_template_title": "Marked Safe From",
+      "blank_template_source": "MemeVault library (Imgflip template)"
     },
     {
       "id": "imgflip-i-9epl80",
@@ -14161,7 +14282,10 @@
       "width": 500,
       "height": 510,
       "thumb": "thumbs/imgflip-i-b2ykq1.jpg",
-      "ocr": ""
+      "ocr": "",
+      "blank_template": "images/blank-imgflip-5leqpb.jpg",
+      "blank_template_title": "he man skeleton advices",
+      "blank_template_source": "https://imgflip.com/memetemplate/338290607/he-man-skeleton-advices"
     },
     {
       "id": "imgflip-i-av33xb",
@@ -14211,7 +14335,10 @@
       "width": 500,
       "height": 503,
       "thumb": "thumbs/imgflip-i-6cxrr3.jpg",
-      "ocr": "Isn't it weird / that a computer / freezes when it overheats"
+      "ocr": "Isn't it weird / that a computer / freezes when it overheats",
+      "blank_template": "images/blank-imgflip-34vt4i.jpg",
+      "blank_template_title": "Brain Before Sleep",
+      "blank_template_source": "https://imgflip.com/memetemplate/189601074/Brain-Before-Sleep"
     },
     {
       "id": "imgflip-i-7fr5m3",
@@ -14491,7 +14618,10 @@
       "width": 500,
       "height": 516,
       "thumb": "thumbs/imgflip-i-apswak.jpg",
-      "ocr": ""
+      "ocr": "",
+      "blank_template": "images/blank-imgflip-1jdj7f.jpg",
+      "blank_template_title": "spongebob fire",
+      "blank_template_source": "https://imgflip.com/memetemplate/93010299/spongebob-fire"
     },
     {
       "id": "imgflip-i-5bhumr",
@@ -14515,7 +14645,10 @@
       "width": 500,
       "height": 666,
       "thumb": "thumbs/imgflip-i-5bhumr.jpg",
-      "ocr": "college iin a letter: WIE) / WANT YOU! Come jjetin our ftaniihy) / me: “submis am application / tine colleges"
+      "ocr": "college iin a letter: WIE) / WANT YOU! Come jjetin our ftaniihy) / me: “submis am application / tine colleges",
+      "blank_template": "images/blank-imgflip-2yn2xy.jpg",
+      "blank_template_title": "Bugs Bunny No",
+      "blank_template_source": "https://imgflip.com/memetemplate/179116198/Bugs-Bunny-No"
     },
     {
       "id": "imgflip-i-aryy9a",
@@ -14540,7 +14673,10 @@
       "width": 500,
       "height": 598,
       "thumb": "thumbs/imgflip-i-aryy9a.jpg",
-      "ocr": "DON'T TAKE YOUR / PROTRACTOR TO COLLEGE! / ITALREADY HAS"
+      "ocr": "DON'T TAKE YOUR / PROTRACTOR TO COLLEGE! / ITALREADY HAS",
+      "blank_template": "images/blank-imgflip-fecg.jpg",
+      "blank_template_title": "Back In My Day",
+      "blank_template_source": "https://imgflip.com/memetemplate/Back-In-My-Day"
     },
     {
       "id": "imgflip-i-5z09a8",
@@ -14642,7 +14778,9 @@
       "height": 500,
       "thumb": "thumbs/imgflip-i-5f6b61.jpg",
       "ocr": "Me: *breathes* / My grandparents:",
-      "blank_template_title": "Surprised Pikachu"
+      "blank_template_title": "Surprised Pikachu",
+      "blank_template": "images/imgflip-155067746-surprised-pikachu.jpg",
+      "blank_template_source": "MemeVault library (Imgflip template)"
     },
     {
       "id": "imgflip-i-4xznjp",
@@ -14692,7 +14830,10 @@
       "width": 503,
       "height": 500,
       "thumb": "thumbs/imgflip-i-6gx5v6.jpg",
-      "ocr": "These are / Dragonboy and Dopamine. / WUTHIHTIEHS ESL ISL Y / Yeah, you stole mine there, buddy. / Was it a coincidence? Sorry, | jumped to a / conclusion too quick / They are smart. Be / like them. Make Imgflip a / better place for you and I."
+      "ocr": "These are / Dragonboy and Dopamine. / WUTHIHTIEHS ESL ISL Y / Yeah, you stole mine there, buddy. / Was it a coincidence? Sorry, | jumped to a / conclusion too quick / They are smart. Be / like them. Make Imgflip a / better place for you and I.",
+      "blank_template": "images/blank-imgflip-xh3me.jpg",
+      "blank_template_title": "Be Like Bill",
+      "blank_template_source": "https://imgflip.com/memetemplate/Be-Like-Bill"
     },
     {
       "id": "imgflip-i-3b1lpc",
@@ -15079,7 +15220,9 @@
       "thumb": "thumbs/reddit-1x5mjx2.jpg",
       "ocr": "imaftip.com / FIRST YOU NEED TO SET UPA / MULTI-AGENTIC WORKFLOW BLA / BLA BLA BLA BLA BLA BLA BLA BLA / BLA BLA BLABLA BLA... / 34% Just write the fucking code",
       "nsfw": true,
-      "blank_template_title": "Bell Curve"
+      "blank_template_title": "Bell Curve",
+      "blank_template": "images/imgflip-533936279-bell-curve.jpg",
+      "blank_template_source": "MemeVault library (Imgflip template)"
     },
     {
       "id": "reddit-1wuersg",
@@ -15225,7 +15368,10 @@
       "width": 601,
       "height": 500,
       "thumb": "thumbs/reddit-1wqn7n2.jpg",
-      "ocr": "How life feels after | realize that if / things become too difficult | can just kill myself"
+      "ocr": "How life feels after | realize that if / things become too difficult | can just kill myself",
+      "blank_template": "images/blank-imgflip-8hf4qw.jpg",
+      "blank_template_title": "Happy dolphin rainbow",
+      "blank_template_source": "https://imgflip.com/memetemplate/512988872/Happy-dolphin-rainbow"
     },
     {
       "id": "reddit-1wxx1w6",
@@ -15376,7 +15522,10 @@
       "width": 710,
       "height": 500,
       "thumb": "thumbs/reddit-1wypvnh.jpg",
-      "ocr": "THE USA IF THEY PROTESTED LIKE FRANCE / EVERYTIME THERE WAS A POLITICAL SCANDAL"
+      "ocr": "THE USA IF THEY PROTESTED LIKE FRANCE / EVERYTIME THERE WAS A POLITICAL SCANDAL",
+      "blank_template": "images/blank-imgflip-2ynjel.jpg",
+      "blank_template_title": "The future world if",
+      "blank_template_source": "https://imgflip.com/memetemplate/179137533/The-future-world-if"
     },
     {
       "id": "reddit-1wldnd0",
@@ -16198,7 +16347,10 @@
       "width": 496,
       "height": 599,
       "thumb": "thumbs/reddit-1r0e13p.jpg",
-      "ocr": "(Cop / YOUR FACE, / OR ID"
+      "ocr": "(Cop / YOUR FACE, / OR ID",
+      "blank_template": "images/blank-imgflip-2bc2vf.jpg",
+      "blank_template_title": "Spongebob Burning Paper",
+      "blank_template_source": "https://imgflip.com/memetemplate/139971723/Spongebob-Burning-Paper"
     },
     {
       "id": "reddit-1v14mns",
@@ -16528,7 +16680,10 @@
       "width": 850,
       "height": 731,
       "thumb": "thumbs/reddit-1uq2tm7.jpg",
-      "ocr": "with only a few \\@e4 / minutes left / Argentina |. / goals"
+      "ocr": "with only a few \\@e4 / minutes left / Argentina |. / goals",
+      "blank_template": "images/blank-imgflip-43plhr.jpg",
+      "blank_template_title": "Happy / Shock",
+      "blank_template_source": "https://imgflip.com/memetemplate/248097807/Happy--Shock"
     },
     {
       "id": "reddit-1ssw5bo",
@@ -16577,7 +16732,10 @@
       "width": 640,
       "height": 588,
       "thumb": "thumbs/reddit-1u7rxnv.jpg",
-      "ocr": ""
+      "ocr": "",
+      "blank_template": "images/blank-imgflip-qep4.jpg",
+      "blank_template_title": "Pepperidge Farm Remembers",
+      "blank_template_source": "https://imgflip.com/memetemplate/Pepperidge-Farm-Remembers"
     },
     {
       "id": "reddit-1r4dncl",
@@ -16833,7 +16991,10 @@
       "width": 1000,
       "height": 892,
       "thumb": "thumbs/reddit-1oeub11.jpg",
-      "ocr": "\"We only / accent / cash\" / help us / with / tax evasion"
+      "ocr": "\"We only / accent / cash\" / help us / with / tax evasion",
+      "blank_template": "images/blank-imgflip-2jay5q.jpg",
+      "blank_template_title": "Spiderman Glasses",
+      "blank_template_source": "https://imgflip.com/memetemplate/153355886/Spiderman-Glasses"
     },
     {
       "id": "reddit-1t0vu8t",
@@ -16986,7 +17147,10 @@
       "width": 556,
       "height": 754,
       "thumb": "thumbs/reddit-1sozzmt.jpg",
-      "ocr": "pitas"
+      "ocr": "pitas",
+      "blank_template": "images/blank-imgflip-3tstcd.jpg",
+      "blank_template_title": "Phoebe Joey",
+      "blank_template_source": "https://imgflip.com/memetemplate/231451789/Phoebe-Joey"
     },
     {
       "id": "reddit-1quo39f",
@@ -17012,8 +17176,7 @@
       "width": 1000,
       "height": 811,
       "thumb": "thumbs/reddit-1quo39f.jpg",
-      "ocr": "The People The Elite / what the f*ck / Mmm yes... Children",
-      "blank_template_title": "Marked Safe From"
+      "ocr": "The People The Elite / what the f*ck / Mmm yes... Children"
     },
     {
       "id": "reddit-1ro5fz0",
@@ -17135,7 +17298,10 @@
       "width": 1000,
       "height": 997,
       "thumb": "thumbs/reddit-1pjmczi.jpg",
-      "ocr": "ariana grande just ate"
+      "ocr": "ariana grande just ate",
+      "blank_template": "images/imgflip-208915813-george-bush-9-11.jpg",
+      "blank_template_title": "George Bush 9/11",
+      "blank_template_source": "MemeVault library (Imgflip template)"
     },
     {
       "id": "reddit-1p84ibf",
@@ -17213,7 +17379,10 @@
       "width": 881,
       "height": 1000,
       "thumb": "thumbs/reddit-1pj846u.jpg",
-      "ocr": ""
+      "ocr": "",
+      "blank_template": "images/blank-imgflip-2lhzmp.jpg",
+      "blank_template_title": "Homer Simpson's Back Fat",
+      "blank_template_source": "https://imgflip.com/memetemplate/157043617/Homer-Simpsons-Back-Fat"
     },
     {
       "id": "reddit-1qwmv5y",
@@ -17415,7 +17584,10 @@
       "width": 660,
       "height": 506,
       "thumb": "thumbs/reddit-1rkko0r.jpg",
-      "ocr": "OZEMPIC @ rich fat people"
+      "ocr": "OZEMPIC @ rich fat people",
+      "blank_template": "images/blank-imgflip-4mbm66.jpg",
+      "blank_template_title": "fat man drinking from pipe",
+      "blank_template_source": "https://imgflip.com/memetemplate/279358206/fat-man-drinking-from-pipe"
     },
     {
       "id": "reddit-1p12r2y",
@@ -17860,7 +18032,10 @@
       "width": 854,
       "height": 762,
       "thumb": "thumbs/reddit-1sqs2go.jpg",
-      "ocr": ""
+      "ocr": "",
+      "blank_template": "images/blank-imgflip-4flche.jpg",
+      "blank_template_title": "Sure grandma let's get you to bed",
+      "blank_template_source": "https://imgflip.com/memetemplate/268054898/Sure-grandma-lets-get-you-to-bed"
     },
     {
       "id": "reddit-1qkrxzj",
@@ -18308,7 +18483,10 @@
       "width": 1000,
       "height": 885,
       "thumb": "thumbs/reddit-1sil84w.jpg",
-      "ocr": "WHAT GivES PEOPLE / FEELINGS OF POWER"
+      "ocr": "WHAT GivES PEOPLE / FEELINGS OF POWER",
+      "blank_template": "images/blank-imgflip-2xytmc.jpg",
+      "blank_template_title": "What Gives People Feelings of Power",
+      "blank_template_source": "https://imgflip.com/memetemplate/177984372/What-Gives-People-Feelings-of-Power"
     },
     {
       "id": "reddit-1wam3wi",
@@ -18913,7 +19091,10 @@
       "width": 500,
       "height": 756,
       "thumb": "thumbs/reddit-1syz6s2.jpg",
-      "ocr": "QA weet je / 1 a cetloyal citizen"
+      "ocr": "QA weet je / 1 a cetloyal citizen",
+      "blank_template": "images/blank-imgflip-4qntuo.jpg",
+      "blank_template_title": "Both Buttons Pressed",
+      "blank_template_source": "https://imgflip.com/memetemplate/286646496/Both-Buttons-Pressed"
     },
     {
       "id": "reddit-1puzeyx",
@@ -19898,8 +20079,7 @@
       "width": 1000,
       "height": 979,
       "thumb": "thumbs/reddit-1of3l3e.jpg",
-      "ocr": "| Julia Ture @ @juliarturc - 16h / We need an official name for / not-vibe-coding. My top candidates so far: / - boomer coding / - chewgy coding / - trad coding / - Coding with capital C / Suggestions are welcome. / Gabor Varadi @ / @Zhuinden / Replying to @juliarturc / \"software engineering\"",
-      "blank_template_title": "It's Dangerous to Go Alone"
+      "ocr": "| Julia Ture @ @juliarturc - 16h / We need an official name for / not-vibe-coding. My top candidates so far: / - boomer coding / - chewgy coding / - trad coding / - Coding with capital C / Suggestions are welcome. / Gabor Varadi @ / @Zhuinden / Replying to @juliarturc / \"software engineering\""
     },
     {
       "id": "reddit-1paisov",
@@ -19949,8 +20129,7 @@
       "width": 1000,
       "height": 1000,
       "thumb": "thumbs/reddit-1tbzih8.jpg",
-      "ocr": "T'M LIGHTER / Now, I CAN / RUN FASTER.",
-      "blank_template_title": "They don't know"
+      "ocr": "T'M LIGHTER / Now, I CAN / RUN FASTER."
     },
     {
       "id": "reddit-1pi66m3",
@@ -20636,7 +20815,10 @@
       "width": 460,
       "height": 518,
       "thumb": "thumbs/reddit-1r96xu2.jpg",
-      "ocr": "Which came / first, the"
+      "ocr": "Which came / first, the",
+      "blank_template": "images/blank-memegen-jim.jpg",
+      "blank_template_title": "Jim Halpert Pointing to Whiteboard",
+      "blank_template_source": "https://api.memegen.link/images/jim.jpg"
     },
     {
       "id": "reddit-1onywu8",
@@ -21260,8 +21442,7 @@
       "width": 748,
       "height": 854,
       "thumb": "thumbs/reddit-1tgen3v.jpg",
-      "ocr": "Top 10 best mathematicians / 9.Rank them / 8.Because the / 7.Importance of / 6.Their contributions / 4.Relative to / 3.Their respective / 2.Fields / 1. Euler",
-      "blank_template_title": "c'mon do something"
+      "ocr": "Top 10 best mathematicians / 9.Rank them / 8.Because the / 7.Importance of / 6.Their contributions / 4.Relative to / 3.Their respective / 2.Fields / 1. Euler"
     },
     {
       "id": "reddit-1rjuqtr",
@@ -22739,7 +22920,10 @@
       "width": 800,
       "height": 1000,
       "thumb": "thumbs/reddit-1pqur55.jpg",
-      "ocr": "ihave read the: hobbit, the lord{of| / 4 the rings, even ha sthnenilsn / that was likef20\\ Coyears agoe / you dc don't/remember, a"
+      "ocr": "ihave read the: hobbit, the lord{of| / 4 the rings, even ha sthnenilsn / that was likef20\\ Coyears agoe / you dc don't/remember, a",
+      "blank_template": "images/blank-imgflip-8gcgl.jpg",
+      "blank_template_title": "Jack Sparrow you have heard of me",
+      "blank_template_source": "https://imgflip.com/memetemplate/14199573/Jack-Sparrow-you-have-heard-of-me"
     },
     {
       "id": "reddit-1sx3aha",
@@ -27326,7 +27510,10 @@
       "width": 903,
       "height": 998,
       "thumb": "thumbs/reddit-1ud69uz.jpg",
-      "ocr": ""
+      "ocr": "",
+      "blank_template": "images/imgflip-299167033-doge-vs-godzilla.jpg",
+      "blank_template_title": "Doge vs Godzilla",
+      "blank_template_source": "MemeVault library (Imgflip template)"
     },
     {
       "id": "reddit-1u5tmot",
@@ -28593,8 +28780,7 @@
       "width": 1000,
       "height": 834,
       "thumb": "thumbs/reddit-1mrxnen.jpg",
-      "ocr": "Next time you think of eating a chicken, / remember that they had a family—just / like you. / This is why | order a family bucket at / KFC. No one is left behind",
-      "blank_template_title": "Marked Safe From"
+      "ocr": "Next time you think of eating a chicken, / remember that they had a family—just / like you. / This is why | order a family bucket at / KFC. No one is left behind"
     },
     {
       "id": "reddit-1lyxkwt",
@@ -28718,7 +28904,10 @@
       "width": 800,
       "height": 1000,
       "thumb": "thumbs/reddit-1q8frjs.jpg",
-      "ocr": "Kennedy Flips Food Pyramid to / Emphasize Red Meat and Whole Milk / The Trump administration released new dietary guidelines on / Wednesday, pushing Americans to prioritize protein and cut back / on added sugars and processed foods."
+      "ocr": "Kennedy Flips Food Pyramid to / Emphasize Red Meat and Whole Milk / The Trump administration released new dietary guidelines on / Wednesday, pushing Americans to prioritize protein and cut back / on added sugars and processed foods.",
+      "blank_template": "images/imgflip-197671929-kombucha-girl.jpg",
+      "blank_template_title": "Kombucha Girl",
+      "blank_template_source": "MemeVault library (Imgflip template)"
     },
     {
       "id": "reddit-1vgwmwe",
@@ -29318,8 +29507,7 @@
       "width": 1000,
       "height": 964,
       "thumb": "thumbs/reddit-1tl9m6d.jpg",
-      "ocr": "David AttenBruh / @AlHendiify / Havin a cat is great. If you make the right / sound a cool little guy comes out from an / unexpected location. / 976 Reposts 27 Quotes / 5.9K Likes 147 Bookmarks",
-      "blank_template_title": "It's Dangerous to Go Alone"
+      "ocr": "David AttenBruh / @AlHendiify / Havin a cat is great. If you make the right / sound a cool little guy comes out from an / unexpected location. / 976 Reposts 27 Quotes / 5.9K Likes 147 Bookmarks"
     },
     {
       "id": "reddit-1s0wtqb",
@@ -31145,7 +31333,10 @@
       "width": 931,
       "height": 1000,
       "thumb": "thumbs/reddit-1qfbr7a.jpg",
-      "ocr": "reality / fiction / NOO!! HYTALE Oh, Hytale released? / WILL RUIN Guess we'll hold off on / MINECRAFT!!!! the end update so we / don't hinder Hytale's / rise to popularity."
+      "ocr": "reality / fiction / NOO!! HYTALE Oh, Hytale released? / WILL RUIN Guess we'll hold off on / MINECRAFT!!!! the end update so we / don't hinder Hytale's / rise to popularity.",
+      "blank_template": "images/blank-imgflip-3umnr3.jpg",
+      "blank_template_title": "Soyboy Vs Yes Chad",
+      "blank_template_source": "https://imgflip.com/memetemplate/232844223/Soyboy-Vs-Yes-Chad"
     },
     {
       "id": "reddit-1v70mof",
@@ -31379,7 +31570,10 @@
       "width": 751,
       "height": 1000,
       "thumb": "thumbs/reddit-1rm5t3s.jpg",
-      "ocr": ""
+      "ocr": "",
+      "blank_template": "images/blank-imgflip-3tstcd.jpg",
+      "blank_template_title": "Phoebe Joey",
+      "blank_template_source": "https://imgflip.com/memetemplate/231451789/Phoebe-Joey"
     },
     {
       "id": "reddit-1r8ui0c",
@@ -32300,8 +32494,7 @@
       "width": 800,
       "height": 936,
       "thumb": "thumbs/reddit-1qct1i3.jpg",
-      "ocr": "g Daniel Abrahams [) / @daniel-abrahams / Boss: “We can't afford the pay rise / he wants.” / HR Mgr: “Then we should pay it.” / HR Mor: “If we can't afford his / increase, then we can't afford to / advertise, interview, hire, pay and / train his replacement.” / It costs less to keep staff than / replace them.",
-      "blank_template_title": "c'mon do something"
+      "ocr": "g Daniel Abrahams [) / @daniel-abrahams / Boss: “We can't afford the pay rise / he wants.” / HR Mgr: “Then we should pay it.” / HR Mor: “If we can't afford his / increase, then we can't afford to / advertise, interview, hire, pay and / train his replacement.” / It costs less to keep staff than / replace them."
     },
     {
       "id": "reddit-1op25vz",
@@ -32326,7 +32519,10 @@
       "width": 519,
       "height": 570,
       "thumb": "thumbs/reddit-1op25vz.jpg",
-      "ocr": "Linkedin / You appeared in 367 / searches this week"
+      "ocr": "Linkedin / You appeared in 367 / searches this week",
+      "blank_template": "images/blank-imgflip-2jd0vg.jpg",
+      "blank_template_title": "This is Worthless",
+      "blank_template_source": "https://imgflip.com/memetemplate/153452716/This-is-Worthless"
     },
     {
       "id": "reddit-1tax7bh",
@@ -32352,7 +32548,10 @@
       "width": 915,
       "height": 1000,
       "thumb": "thumbs/reddit-1tax7bh.jpg",
-      "ocr": "Most people don't / want to be rich / They just want / enough money to / not worry anymore"
+      "ocr": "Most people don't / want to be rich / They just want / enough money to / not worry anymore",
+      "blank_template": "images/blank-imgflip-3rsxfo.jpg",
+      "blank_template_title": "Jim Halpert Explains",
+      "blank_template_source": "https://imgflip.com/memetemplate/228097860/Jim-Halpert-Explains"
     },
     {
       "id": "reddit-1ro6u0i",
@@ -32663,7 +32862,10 @@
       "width": 999,
       "height": 800,
       "thumb": "thumbs/reddit-1qq80tc.jpg",
-      "ocr": "Mechanical Engineers Nuclear Engineers"
+      "ocr": "Mechanical Engineers Nuclear Engineers",
+      "blank_template": "images/blank-imgflip-5kc7ce.jpg",
+      "blank_template_title": "Mr. Incredible Becoming Uncanny",
+      "blank_template_source": "https://imgflip.com/memetemplate/345987437/Pedro-Pascal-crying"
     },
     {
       "id": "reddit-1sq90sm",
@@ -32687,8 +32889,7 @@
       "width": 307,
       "height": 314,
       "thumb": "thumbs/reddit-1sq90sm.jpg",
-      "ocr": "@bejewelledbud / Can you guys please recommend / books that made you cry? / Frease / @FreaseDaddy / Engineering / Mechanics: Statics / (14th Edition) Russell / C. Hibbeler",
-      "blank_template_title": "They don't know"
+      "ocr": "@bejewelledbud / Can you guys please recommend / books that made you cry? / Frease / @FreaseDaddy / Engineering / Mechanics: Statics / (14th Edition) Russell / C. Hibbeler"
     },
     {
       "id": "reddit-1qjn6x9",
@@ -32763,8 +32964,7 @@
       "height": 1000,
       "thumb": "thumbs/reddit-1qqv7ab.jpg",
       "ocr": "Babe | want to try CNC Yes my queen. / What the fuck is this You said you wanted to try CNC.",
-      "nsfw": true,
-      "blank_template_title": "They don't know"
+      "nsfw": true
     },
     {
       "id": "reddit-1u9aez2",
@@ -32894,8 +33094,7 @@
       "width": 1000,
       "height": 1000,
       "thumb": "thumbs/reddit-1u9zjru.jpg",
-      "ocr": "Maths Skill / Elementary / Numbers and / 123 counting Ask AI / Jea=xie / Trignometric / Functions / Spreadsheet / | Sates / Basic Operations / Balance / School College Job / Stage OF Life ———> / Expense | / Fearls Of [Raw Nevdism",
-      "blank_template_title": "They don't know"
+      "ocr": "Maths Skill / Elementary / Numbers and / 123 counting Ask AI / Jea=xie / Trignometric / Functions / Spreadsheet / | Sates / Basic Operations / Balance / School College Job / Stage OF Life ———> / Expense | / Fearls Of [Raw Nevdism"
     },
     {
       "id": "reddit-1okpmx5",
@@ -33028,7 +33227,10 @@
       "width": 734,
       "height": 1000,
       "thumb": "thumbs/reddit-1oieu2l.jpg",
-      "ocr": "indian s subreddits PM a cae / stor shout me / 1? 9 aap bhaarateey saamagree / indian Bacredaits . / dekhanagchaahate hain! | / fi\""
+      "ocr": "indian s subreddits PM a cae / stor shout me / 1? 9 aap bhaarateey saamagree / indian Bacredaits . / dekhanagchaahate hain! | / fi\"",
+      "blank_template": "images/blank-imgflip-3tstcd.jpg",
+      "blank_template_title": "Phoebe Joey",
+      "blank_template_source": "https://imgflip.com/memetemplate/231451789/Phoebe-Joey"
     },
     {
       "id": "reddit-1wdowzc",
@@ -33106,7 +33308,10 @@
       "width": 599,
       "height": 437,
       "thumb": "thumbs/reddit-1sd8j6v.jpg",
-      "ocr": "WHEN |THE CHRISTIAN.US/PRESIDENT / USES)THE/MOST SACRED DAY/OF, FAITH / TOTIRENTEN THER RATIONS WIT PELTON / FE TT ene te"
+      "ocr": "WHEN |THE CHRISTIAN.US/PRESIDENT / USES)THE/MOST SACRED DAY/OF, FAITH / TOTIRENTEN THER RATIONS WIT PELTON / FE TT ene te",
+      "blank_template": "images/blank-imgflip-86vlk.jpg",
+      "blank_template_title": "Awkward Moment Sealion",
+      "blank_template_source": "https://imgflip.com/memetemplate/Awkward-Moment-Sealion"
     },
     {
       "id": "reddit-1qns5pm",
@@ -33160,7 +33365,10 @@
       "width": 582,
       "height": 428,
       "thumb": "thumbs/reddit-1q7kjsq.jpg",
-      "ocr": ""
+      "ocr": "",
+      "blank_template": "images/blank-imgflip-bgsvd.jpg",
+      "blank_template_title": "Cat newspaper",
+      "blank_template_source": "https://imgflip.com/memetemplate/19259689/Cat-newspaper"
     },
     {
       "id": "reddit-1wqzd2z",
@@ -33212,7 +33420,10 @@
       "width": 1000,
       "height": 575,
       "thumb": "thumbs/reddit-1qbrzfu.jpg",
-      "ocr": "The Unite ietes fs going to get / booedsEVERY TIMEIMEVERY SPORT / atthe Olymipicsithis year / WARANHEE IT"
+      "ocr": "The Unite ietes fs going to get / booedsEVERY TIMEIMEVERY SPORT / atthe Olymipicsithis year / WARANHEE IT",
+      "blank_template": "images/blank-imgflip-6cqrj.jpg",
+      "blank_template_title": "I Guarantee It",
+      "blank_template_source": "https://imgflip.com/memetemplate/I-Guarantee-It"
     },
     {
       "id": "reddit-1p7gzua",
@@ -37667,7 +37878,10 @@
       "ocr": "",
       "width": 500,
       "height": 991,
-      "thumb": "thumbs/imgflip-i-95kgtl.jpg"
+      "thumb": "thumbs/imgflip-i-95kgtl.jpg",
+      "blank_template": "images/blank-imgflip-7yk6.jpg",
+      "blank_template_title": "Simba Shadowy Place",
+      "blank_template_source": "https://imgflip.com/memetemplate/Simba-Shadowy-Place"
     },
     {
       "id": "imgflip-i-afqz6t",
@@ -37690,7 +37904,10 @@
       "ocr": "",
       "width": 500,
       "height": 756,
-      "thumb": "thumbs/imgflip-i-afqz6t.jpg"
+      "thumb": "thumbs/imgflip-i-afqz6t.jpg",
+      "blank_template": "images/blank-imgflip-2iuafo.jpg",
+      "blank_template_title": "two buttons 1 blue",
+      "blank_template_source": "https://imgflip.com/memetemplate/152578644/two-buttons-1-blue"
     },
     {
       "id": "imgflip-i-9zm6ia",
@@ -38388,7 +38605,10 @@
       "ocr": "Epstein / killed himself / Epstein was / assassinated / Epstein / killed himself / before the / assassins could",
       "width": 500,
       "height": 525,
-      "thumb": "thumbs/kym-ep-00165079532apng.jpg"
+      "thumb": "thumbs/kym-ep-00165079532apng.jpg",
+      "blank_template": "images/blank-imgflip-24rhyz.jpg",
+      "blank_template_title": "Expanding brain 3 panels",
+      "blank_template_source": "https://imgflip.com/memetemplate/128933819/Expanding-brain-3-panels"
     },
     {
       "id": "kym-ep-001650794731png",
@@ -38454,7 +38674,10 @@
       "ocr": "all the billionaires showing up to / kill epstein at the same time",
       "width": 680,
       "height": 524,
-      "thumb": "thumbs/kym-ep-001650792ff6jpg.jpg"
+      "thumb": "thumbs/kym-ep-001650792ff6jpg.jpg",
+      "blank_template": "images/imgflip-110133729-spiderman-pointing-at-spiderman.jpg",
+      "blank_template_title": "spiderman pointing at spiderman",
+      "blank_template_source": "MemeVault library (Imgflip template)"
     },
     {
       "id": "kym-ep-0016507915e5png",
@@ -38962,7 +39185,10 @@
       "ocr": "",
       "width": 688,
       "height": 692,
-      "thumb": "thumbs/reddit-1ovi7ik.jpg"
+      "thumb": "thumbs/reddit-1ovi7ik.jpg",
+      "blank_template": "images/blank-imgflip-3ex8oy.jpg",
+      "blank_template_title": "Sad Cat Holding Dog",
+      "blank_template_source": "https://imgflip.com/memetemplate/206464066/Sad-Cat-Holding-Dog"
     },
     {
       "id": "reddit-19766ke",
@@ -39096,8 +39322,7 @@
       "ocr": "You were You Died / born (Deathday) / ( Birthday ) / Anxiety / Hi, I’m a Glass Sponge / and ] Can live up to / Release the / Epstein Files.",
       "width": 945,
       "height": 1000,
-      "thumb": "thumbs/reddit-1m7l2ju.jpg",
-      "blank_template_title": "Clown Applying Makeup"
+      "thumb": "thumbs/reddit-1m7l2ju.jpg"
     },
     {
       "id": "reddit-10lcufd",
@@ -39141,7 +39366,10 @@
       "ocr": "The Epstein files =r / Wendy’s launching their revamped / Spicy Chicken sandwich today that / people are saying brings it back to / its glory days:",
       "width": 775,
       "height": 1000,
-      "thumb": "thumbs/reddit-1s83hs4.jpg"
+      "thumb": "thumbs/reddit-1s83hs4.jpg",
+      "blank_template": "images/imgflip-252758727-mother-ignoring-kid-drowning-in-a-pool.jpg",
+      "blank_template_title": "Mother Ignoring Kid Drowning In A Pool",
+      "blank_template_source": "MemeVault library (Imgflip template)"
     },
     {
       "id": "reddit-11enu1p",
@@ -39273,7 +39501,10 @@
       "ocr": "me unfollowing every / single person on social / media who was mentioned / in Epstein files / “But irstncpest wonky}",
       "width": 512,
       "height": 503,
-      "thumb": "thumbs/reddit-1s0ieic.jpg"
+      "thumb": "thumbs/reddit-1s0ieic.jpg",
+      "blank_template": "images/blank-imgflip-2qcsd2.jpg",
+      "blank_template_title": "It ain't much, but it's honest work",
+      "blank_template_source": "https://imgflip.com/memetemplate/165198998/It-aint-much-but-its-honest-work"
     },
     {
       "id": "reddit-1ps715n",
@@ -39361,7 +39592,10 @@
       "ocr": "diddy party epsteimisland",
       "width": 761,
       "height": 745,
-      "thumb": "thumbs/reddit-1onkhzz.jpg"
+      "thumb": "thumbs/reddit-1onkhzz.jpg",
+      "blank_template": "images/imgflip-309668311-two-paths.jpg",
+      "blank_template_title": "Two Paths",
+      "blank_template_source": "MemeVault library (Imgflip template)"
     },
     {
       "id": "reddit-18viopv",
@@ -39519,7 +39753,10 @@
       "ocr": "no longer / care what",
       "width": 546,
       "height": 768,
-      "thumb": "thumbs/reddit-z17x6l.jpg"
+      "thumb": "thumbs/reddit-z17x6l.jpg",
+      "blank_template": "images/blank-imgflip-3ieqls.jpg",
+      "blank_template_title": "Pink Guy vs Bane",
+      "blank_template_source": "https://imgflip.com/memetemplate/212319280/Pink-Guy-vs-Bane"
     },
     {
       "id": "reddit-18v5eck",
@@ -39541,7 +39778,10 @@
       "ocr": "Australians waiting for / Epstein's list to be released",
       "width": 607,
       "height": 777,
-      "thumb": "thumbs/reddit-18v5eck.jpg"
+      "thumb": "thumbs/reddit-18v5eck.jpg",
+      "blank_template": "images/blank-imgflip-21ajtl.jpg",
+      "blank_template_title": "Mr bean waiting",
+      "blank_template_source": "https://imgflip.com/memetemplate/123104217/Mr-bean-waiting"
     },
     {
       "id": "reddit-1q4a67t",
@@ -39563,7 +39803,10 @@
       "ocr": "",
       "width": 736,
       "height": 779,
-      "thumb": "thumbs/reddit-1q4a67t.jpg"
+      "thumb": "thumbs/reddit-1q4a67t.jpg",
+      "blank_template": "images/imgflip-80707627-sad-pablo-escobar.jpg",
+      "blank_template_title": "Sad Pablo Escobar",
+      "blank_template_source": "MemeVault library (Imgflip template)"
     },
     {
       "id": "reddit-1sash1x",
@@ -39721,7 +39964,10 @@
       "ocr": "WE WILL RELEASE / THE EPSTEIN LIST / WE JUST NEED / MORE TIME / THE EPSTEIN / LIST IS ON / MY DESK / THERE IS NO / EPSTEIN LIST",
       "width": 936,
       "height": 1000,
-      "thumb": "thumbs/reddit-1lvgs92.jpg"
+      "thumb": "thumbs/reddit-1lvgs92.jpg",
+      "blank_template": "images/imgflip-195515965-clown-applying-makeup.jpg",
+      "blank_template_title": "Clown Applying Makeup",
+      "blank_template_source": "MemeVault library (Imgflip template)"
     },
     {
       "id": "reddit-1r1mq46",
@@ -39767,7 +40013,10 @@
       "ocr": "",
       "width": 500,
       "height": 764,
-      "thumb": "thumbs/reddit-1r88cov.jpg"
+      "thumb": "thumbs/reddit-1r88cov.jpg",
+      "blank_template": "images/blank-imgflip-2sc2jl.jpg",
+      "blank_template_title": "Bro Not Cool",
+      "blank_template_source": "https://imgflip.com/memetemplate/168524769/Bro-Not-Cool"
     },
     {
       "id": "reddit-18z6nzm",
@@ -39813,7 +40062,10 @@
       "ocr": "_ Epstein and | / “Trump on the, 4 / Elon who got / PP rejected fi / made with mematic",
       "width": 998,
       "height": 1000,
-      "thumb": "thumbs/reddit-1qrz0s0.jpg"
+      "thumb": "thumbs/reddit-1qrz0s0.jpg",
+      "blank_template": "images/blank-imgflip-3ex8oy.jpg",
+      "blank_template_title": "Sad Cat Holding Dog",
+      "blank_template_source": "https://imgflip.com/memetemplate/206464066/Sad-Cat-Holding-Dog"
     },
     {
       "id": "reddit-1mieaux",
@@ -39835,7 +40087,10 @@
       "ocr": "THOUSANDS OF GOONS / GIVINGILNIATAY: MILLIONS; / SSON|HERMSTH BIRTHORY / + ME WANTING THE / EPSTEIN LIST. PUBLIC",
       "width": 445,
       "height": 743,
-      "thumb": "thumbs/reddit-1mieaux.jpg"
+      "thumb": "thumbs/reddit-1mieaux.jpg",
+      "blank_template": "images/blank-imgflip-4xovax.jpg",
+      "blank_template_title": "Fantasy Painting",
+      "blank_template_source": "https://imgflip.com/memetemplate/298452345/Fantasy-Painting"
     },
     {
       "id": "reddit-1m1955n",
@@ -40059,7 +40314,10 @@
       "ocr": "| “Files",
       "width": 588,
       "height": 785,
-      "thumb": "thumbs/reddit-1rj993j.jpg"
+      "thumb": "thumbs/reddit-1rj993j.jpg",
+      "blank_template": "images/blank-imgflip-3tstcd.jpg",
+      "blank_template_title": "Phoebe Joey",
+      "blank_template_source": "https://imgflip.com/memetemplate/231451789/Phoebe-Joey"
     },
     {
       "id": "reddit-1u94a6t",
@@ -40169,7 +40427,10 @@
       "ocr": "The Epstein list / got published / Your name is in it / It’s in top 5",
       "width": 900,
       "height": 1000,
-      "thumb": "thumbs/reddit-18yd2n0.jpg"
+      "thumb": "thumbs/reddit-18yd2n0.jpg",
+      "blank_template": "images/blank-imgflip-23znef.jpg",
+      "blank_template_title": "Mr. McMahon reaction",
+      "blank_template_source": "https://imgflip.com/memetemplate/127634487/Mr-McMahon-reaction"
     },
     {
       "id": "reddit-1lye2nt",
@@ -40791,7 +41052,10 @@
       "ocr": "Republicans / blocking the release / of the Epstein files = / made‘with mematic",
       "width": 882,
       "height": 1000,
-      "thumb": "thumbs/reddit-1m0hzw9.jpg"
+      "thumb": "thumbs/reddit-1m0hzw9.jpg",
+      "blank_template": "images/blank-imgflip-3rsxfo.jpg",
+      "blank_template_title": "Jim Halpert Explains",
+      "blank_template_source": "https://imgflip.com/memetemplate/228097860/Jim-Halpert-Explains"
     },
     {
       "id": "reddit-1r90iu1",
@@ -40945,7 +41209,10 @@
       "ocr": "",
       "width": 800,
       "height": 800,
-      "thumb": "thumbs/reddit-1rg73u2.jpg"
+      "thumb": "thumbs/reddit-1rg73u2.jpg",
+      "blank_template": "images/blank-memegen-cmm.jpg",
+      "blank_template_title": "Change My Mind",
+      "blank_template_source": "https://api.memegen.link/images/cmm.jpg"
     },
     {
       "id": "reddit-1lup3ed",
@@ -40989,7 +41256,10 @@
       "ocr": "TRUMELUSES EXECUTIVE / POWER TOUNLEASH",
       "width": 501,
       "height": 499,
-      "thumb": "thumbs/reddit-1mobnb7.jpg"
+      "thumb": "thumbs/reddit-1mobnb7.jpg",
+      "blank_template": "images/blank-imgflip-3w3mmx.jpg",
+      "blank_template_title": "angry flower",
+      "blank_template_source": "https://imgflip.com/memetemplate/235315545/angry-flower"
     },
     {
       "id": "reddit-1qi2hya",
@@ -41167,7 +41437,10 @@
       "ocr": "You / realize your / son Uday / is a loser / Uday / starts / torturing / players / You give / him control / of the / Iraqi national / football team / Uday / starts / torturing / players",
       "width": 700,
       "height": 428,
-      "thumb": "thumbs/reddit-1qxpov7.jpg"
+      "thumb": "thumbs/reddit-1qxpov7.jpg",
+      "blank_template": "images/imgflip-131940431-gru-s-plan.jpg",
+      "blank_template_title": "Gru's Plan",
+      "blank_template_source": "MemeVault library (Imgflip template)"
     },
     {
       "id": "reddit-1tm4w5z",
@@ -41459,7 +41732,10 @@
       "ocr": "US History be like: / CHATTEL SLAVERY, | ~ JIM CROW LAWS; / BLACK CODES, MCCARTHYISM, / AnD GENOCIDE AND GENOCIDE",
       "width": 500,
       "height": 552,
-      "thumb": "thumbs/reddit-1wgebge.jpg"
+      "thumb": "thumbs/reddit-1wgebge.jpg",
+      "blank_template": "images/imgflip-309668311-two-paths.jpg",
+      "blank_template_title": "Two Paths",
+      "blank_template_source": "MemeVault library (Imgflip template)"
     },
     {
       "id": "reddit-1w67pnq",
@@ -41771,7 +42047,10 @@
       "ocr": "HAS COME OUT,TO / == SAY<WOW! THAD NO IDEA / WHAT WAS HAPPENING ON / THAT ISLAND - HOW CAN I HELP”",
       "width": 677,
       "height": 664,
-      "thumb": "thumbs/reddit-1spt72u.jpg"
+      "thumb": "thumbs/reddit-1spt72u.jpg",
+      "blank_template": "images/imgflip-17478852-kermit-sipping-tea.jpg",
+      "blank_template_title": "Kermit Sipping Tea",
+      "blank_template_source": "MemeVault library (Imgflip template)"
     },
     {
       "id": "reddit-1vsoo4p",
@@ -41906,7 +42185,9 @@
       "width": 445,
       "height": 1000,
       "thumb": "thumbs/reddit-1ug7zt9.jpg",
-      "blank_template_title": "Inhaling Seagull"
+      "blank_template_title": "Inhaling Seagull",
+      "blank_template": "images/imgflip-114585149-inhaling-seagull.jpg",
+      "blank_template_source": "MemeVault library (Imgflip template)"
     },
     {
       "id": "reddit-1sbm3u4",
@@ -41972,7 +42253,10 @@
       "ocr": "",
       "width": 667,
       "height": 500,
-      "thumb": "thumbs/reddit-coitqx.jpg"
+      "thumb": "thumbs/reddit-coitqx.jpg",
+      "blank_template": "images/blank-imgflip-136hly.jpg",
+      "blank_template_title": "Dr Evil air quotes",
+      "blank_template_source": "https://imgflip.com/memetemplate/65807782/Dr-Evil-air-quotes"
     },
     {
       "id": "reddit-1mqapn2",
@@ -42132,7 +42416,10 @@
       "ocr": "der / ISA SYNONYM FOR’ “EPSTEIN ISLAND\"",
       "width": 677,
       "height": 368,
-      "thumb": "thumbs/reddit-1r0b2we.jpg"
+      "thumb": "thumbs/reddit-1r0b2we.jpg",
+      "blank_template": "images/blank-imgflip-25w4.jpg",
+      "blank_template_title": "Sudden Clarity Clarence",
+      "blank_template_source": "https://imgflip.com/memetemplate/Sudden-Clarity-Clarence"
     },
     {
       "id": "reddit-1m6bxfi",
@@ -42176,7 +42463,10 @@
       "ocr": "TROLLS TRUMP FOR / BEING IN THE.EPSTEIN FILES",
       "width": 500,
       "height": 591,
-      "thumb": "thumbs/reddit-1nrtagn.jpg"
+      "thumb": "thumbs/reddit-1nrtagn.jpg",
+      "blank_template": "images/imgflip-61585-bad-luck-brian.jpg",
+      "blank_template_title": "Bad Luck Brian",
+      "blank_template_source": "MemeVault library (Imgflip template)"
     },
     {
       "id": "reddit-1oyrlbo",
@@ -42220,7 +42510,10 @@
       "ocr": "MAGA has said: \"There is / mounting evidence\" of a / \"connection between / acetaminophen use during / pregnancy and autism\" / There's \"mounting / evidence\" of a / \"connection between\" / Trump and Epstein / too, but they ignore",
       "width": 888,
       "height": 1000,
-      "thumb": "thumbs/reddit-1ns5cav.jpg"
+      "thumb": "thumbs/reddit-1ns5cav.jpg",
+      "blank_template": "images/blank-imgflip-3rsxfo.jpg",
+      "blank_template_title": "Jim Halpert Explains",
+      "blank_template_source": "https://imgflip.com/memetemplate/228097860/Jim-Halpert-Explains"
     },
     {
       "id": "reddit-1gie32o",
@@ -42242,7 +42535,10 @@
       "ocr": "TRUMPIS)THE ONE WHO HAD EPSTEIN KILLED",
       "width": 1000,
       "height": 595,
-      "thumb": "thumbs/reddit-1gie32o.jpg"
+      "thumb": "thumbs/reddit-1gie32o.jpg",
+      "blank_template": "images/blank-imgflip-6cqrj.jpg",
+      "blank_template_title": "I Guarantee It",
+      "blank_template_source": "https://imgflip.com/memetemplate/I-Guarantee-It"
     },
     {
       "id": "reddit-1p1pw44",
@@ -42264,7 +42560,10 @@
       "ocr": "IT, T.COULD GETYOU AGOOD PLEADER DEAL / ITLUGET|THE ATTENTION OFFYOU:",
       "width": 586,
       "height": 426,
-      "thumb": "thumbs/reddit-1p1pw44.jpg"
+      "thumb": "thumbs/reddit-1p1pw44.jpg",
+      "blank_template": "images/blank-imgflip-t2sg.jpg",
+      "blank_template_title": "Actual Advice Mallard",
+      "blank_template_source": "https://imgflip.com/memetemplate/Actual-Advice-Mallard"
     },
     {
       "id": "reddit-1ndawxo",
@@ -42310,7 +42609,10 @@
       "ocr": "DON'T ALWAYS / | INVADE OTHER COUNTRIES / BUTWHENIDOITISTO™ | / DISTRACT FROM THE EPSTEIN FILES)",
       "width": 500,
       "height": 627,
-      "thumb": "thumbs/reddit-1q2u81g.jpg"
+      "thumb": "thumbs/reddit-1q2u81g.jpg",
+      "blank_template": "images/blank-imgflip-1bh8.jpg",
+      "blank_template_title": "The Most Interesting Man In The World",
+      "blank_template_source": "https://imgflip.com/memetemplate/The-Most-Interesting-Man-In-The-World"
     },
     {
       "id": "reddit-1oq1s8e",
@@ -42378,7 +42680,10 @@
       "ocr": "THERE'S ARUMOR / THAT TRUMP MADE 4725 / WIRE TRANSFERS TO / EPSTEIN TOTALING $1.1B / Noe / ALL WE KNOW q / IS THAT TRUMP / SHUT DOWN THE / INVESTIGATION SO / IT’S HARDER TO / FOLLOW THE MONEY",
       "width": 500,
       "height": 568,
-      "thumb": "thumbs/reddit-1me1jf8.jpg"
+      "thumb": "thumbs/reddit-1me1jf8.jpg",
+      "blank_template": "images/blank-imgflip-3rsxfo.jpg",
+      "blank_template_title": "Jim Halpert Explains",
+      "blank_template_source": "https://imgflip.com/memetemplate/228097860/Jim-Halpert-Explains"
     },
     {
       "id": "reddit-1oxt6k9",
@@ -42400,7 +42705,10 @@
       "ocr": "TM STARTING TO THINK THIS™ / JEFFREY, EPSTEIN — KILL HIMSELF",
       "width": 509,
       "height": 499,
-      "thumb": "thumbs/reddit-1oxt6k9.jpg"
+      "thumb": "thumbs/reddit-1oxt6k9.jpg",
+      "blank_template": "images/blank-imgflip-emccr.jpg",
+      "blank_template_title": "Afraid To Ask Andy",
+      "blank_template_source": "https://imgflip.com/memetemplate/Afraid-To-Ask-Andy"
     },
     {
       "id": "reddit-15pu4vs",
@@ -43614,7 +43922,10 @@
       "ocr": "",
       "width": 1000,
       "height": 801,
-      "thumb": "thumbs/reddit-1qvvhh0.jpg"
+      "thumb": "thumbs/reddit-1qvvhh0.jpg",
+      "blank_template": "images/imgflip-135256802-epic-handshake.jpg",
+      "blank_template_title": "Epic Handshake",
+      "blank_template_source": "MemeVault library (Imgflip template)"
     },
     {
       "id": "reddit-1vdeaoy",
@@ -43966,7 +44277,9 @@
       "width": 1000,
       "height": 953,
       "thumb": "thumbs/reddit-1q93bmf.jpg",
-      "blank_template_title": "Sleeping Shaq"
+      "blank_template_title": "Sleeping Shaq",
+      "blank_template": "images/imgflip-99683372-sleeping-shaq.jpg",
+      "blank_template_source": "MemeVault library (Imgflip template)"
     },
     {
       "id": "reddit-1n7fjpf",
@@ -44010,8 +44323,7 @@
       "ocr": "Bears / Weinstien / Friends / Polygamy / Friends “W",
       "width": 645,
       "height": 483,
-      "thumb": "thumbs/reddit-11b5gft.jpg",
-      "blank_template_title": "Buff Doge vs. Cheems"
+      "thumb": "thumbs/reddit-11b5gft.jpg"
     },
     {
       "id": "reddit-190bff8",
@@ -44085,7 +44397,9 @@
       "width": 650,
       "height": 500,
       "thumb": "thumbs/imgflip-i-6du02t.jpg",
-      "blank_template_title": "Buff Doge vs. Cheems"
+      "blank_template_title": "Buff Doge vs. Cheems",
+      "blank_template": "images/imgflip-247375501-buff-doge-vs-cheems.jpg",
+      "blank_template_source": "MemeVault library (Imgflip template)"
     },
     {
       "id": "imgflip-i-6an7z6",
@@ -44325,7 +44639,10 @@
       "ocr": "",
       "width": 733,
       "height": 499,
-      "thumb": "thumbs/imgflip-i-8esvah.jpg"
+      "thumb": "thumbs/imgflip-i-8esvah.jpg",
+      "blank_template": "images/blank-imgflip-3umnr3.jpg",
+      "blank_template_title": "Soyboy Vs Yes Chad",
+      "blank_template_source": "https://imgflip.com/memetemplate/232844223/Soyboy-Vs-Yes-Chad"
     },
     {
       "id": "imgflip-i-8md4qa",
@@ -44855,7 +45172,10 @@
       "ocr": ". obodyiis Except / born cool “of course ™",
       "width": 677,
       "height": 500,
-      "thumb": "thumbs/imgflip-i-azzs24.jpg"
+      "thumb": "thumbs/imgflip-i-azzs24.jpg",
+      "blank_template": "images/blank-imgflip-2z403x.jpg",
+      "blank_template_title": "Nobody is born cool",
+      "blank_template_source": "https://imgflip.com/memetemplate/179905677/Nobody-is-born-cool"
     },
     {
       "id": "imgflip-i-86doxh",
@@ -44961,7 +45281,10 @@
       "ocr": "",
       "width": 560,
       "height": 445,
-      "thumb": "thumbs/imgflip-i-405z37.jpg"
+      "thumb": "thumbs/imgflip-i-405z37.jpg",
+      "blank_template": "images/imgflip-206151308-spider-man-triple.jpg",
+      "blank_template_title": "Spider Man Triple",
+      "blank_template_source": "MemeVault library (Imgflip template)"
     },
     {
       "id": "imgflip-i-8zlo0z",
@@ -45088,7 +45411,10 @@
       "ocr": "",
       "width": 500,
       "height": 500,
-      "thumb": "thumbs/imgflip-i-1a10s7.jpg"
+      "thumb": "thumbs/imgflip-i-1a10s7.jpg",
+      "blank_template": "images/blank-imgflip-1bgs.jpg",
+      "blank_template_title": "Philosoraptor",
+      "blank_template_source": "https://imgflip.com/memetemplate/Philosoraptor"
     },
     {
       "id": "imgflip-i-19prsa",
@@ -45490,7 +45816,10 @@
       "ocr": "",
       "width": 622,
       "height": 477,
-      "thumb": "thumbs/imgflip-i-b2iwxd.jpg"
+      "thumb": "thumbs/imgflip-i-b2iwxd.jpg",
+      "blank_template": "images/blank-imgflip-1bhm.jpg",
+      "blank_template_title": "Brace Yourselves X is Coming",
+      "blank_template_source": "https://imgflip.com/memetemplate/Brace-Yourselves-X-is-Coming"
     },
     {
       "id": "imgflip-i-515hty",
@@ -45515,7 +45844,10 @@
       "ocr": "You Don't Suck / At Making Memes / The Person / Viewing YourMemes == / Suck AtPressing [= / The Upvote Button",
       "width": 500,
       "height": 568,
-      "thumb": "thumbs/imgflip-i-515hty.jpg"
+      "thumb": "thumbs/imgflip-i-515hty.jpg",
+      "blank_template": "images/blank-imgflip-3rsxfo.jpg",
+      "blank_template_title": "Jim Halpert Explains",
+      "blank_template_source": "https://imgflip.com/memetemplate/228097860/Jim-Halpert-Explains"
     },
     {
       "id": "imgflip-i-50opov",
@@ -45618,7 +45950,10 @@
       "ocr": "Companies naming / their computer :",
       "width": 640,
       "height": 441,
-      "thumb": "thumbs/imgflip-i-7j53q6.jpg"
+      "thumb": "thumbs/imgflip-i-7j53q6.jpg",
+      "blank_template": "images/blank-imgflip-4b5jf0.jpg",
+      "blank_template_title": "Random Bullshit Go",
+      "blank_template_source": "https://imgflip.com/memetemplate/260598924/Random-Bullshit-Go"
     },
     {
       "id": "imgflip-i-ak0p6p",
@@ -45822,7 +46157,10 @@
       "ocr": "",
       "width": 618,
       "height": 500,
-      "thumb": "thumbs/imgflip-i-au8g9v.jpg"
+      "thumb": "thumbs/imgflip-i-au8g9v.jpg",
+      "blank_template": "images/blank-imgflip-2wifvo.jpg",
+      "blank_template_title": "Unsettled Tom",
+      "blank_template_source": "https://imgflip.com/memetemplate/Unsettled-Tom"
     },
     {
       "id": "imgflip-i-4k136r",
@@ -45872,7 +46210,10 @@
       "ocr": "Society if boath nostrils never clogged:",
       "width": 710,
       "height": 500,
-      "thumb": "thumbs/imgflip-i-b3d5b0.jpg"
+      "thumb": "thumbs/imgflip-i-b3d5b0.jpg",
+      "blank_template": "images/blank-imgflip-2ynjel.jpg",
+      "blank_template_title": "The future world if",
+      "blank_template_source": "https://imgflip.com/memetemplate/179137533/The-future-world-if"
     },
     {
       "id": "imgflip-i-b36xcz",
@@ -46348,7 +46689,10 @@
       "ocr": "Einstein / when he Me at 22 / Discovers / relativity, mass / energy / equivalence & / photoclectric / effect, confirms / existence of atom / mathematically / Why is this / array's / index / getting out / of bounds?",
       "width": 796,
       "height": 1000,
-      "thumb": "thumbs/reddit-1x45h9f.jpg"
+      "thumb": "thumbs/reddit-1x45h9f.jpg",
+      "blank_template": "images/imgflip-247375501-buff-doge-vs-cheems.jpg",
+      "blank_template_title": "Buff Doge vs. Cheems",
+      "blank_template_source": "MemeVault library (Imgflip template)"
     },
     {
       "id": "reddit-1x6ntbk",
@@ -48025,7 +48369,10 @@
       "ocr": "New math / result for a / cool problem / by OpenAl",
       "width": 800,
       "height": 796,
-      "thumb": "thumbs/reddit-1wzocqr.jpg"
+      "thumb": "thumbs/reddit-1wzocqr.jpg",
+      "blank_template": "images/blank-imgflip-2vblx1.jpg",
+      "blank_template_title": "Squidward chair",
+      "blank_template_source": "https://imgflip.com/memetemplate/173542069/Squidward-chair"
     },
     {
       "id": "reddit-1x4wjul",
@@ -48051,8 +48398,7 @@
       "ocr": "JZ. / NORMAL DISTRIBUTION / PARANORMAL DISTRIBUTION",
       "width": 555,
       "height": 553,
-      "thumb": "thumbs/reddit-1x4wjul.jpg",
-      "blank_template_title": "They don't know"
+      "thumb": "thumbs/reddit-1x4wjul.jpg"
     },
     {
       "id": "reddit-1x5s4j5",
@@ -51081,7 +51427,10 @@
       "ocr": "JUST ADD ALL",
       "width": 655,
       "height": 659,
-      "thumb": "thumbs/reddit-1x2x5ic.jpg"
+      "thumb": "thumbs/reddit-1x2x5ic.jpg",
+      "blank_template": "images/blank-imgflip-48sl64.jpg",
+      "blank_template_title": "Bilbo - Why shouldn’t I keep it?",
+      "blank_template_source": "https://imgflip.com/memetemplate/256635436/Bilbo---Why-shouldnt-I-keep-it"
     },
     {
       "id": "reddit-1wtq2jg",
@@ -51261,7 +51610,10 @@
       "ocr": "Starbucks when they / sell a $1 cup of boiled, / seasoned water, and",
       "width": 720,
       "height": 748,
-      "thumb": "thumbs/reddit-1wvqonc.jpg"
+      "thumb": "thumbs/reddit-1wvqonc.jpg",
+      "blank_template": "images/imgflip-193286698-stonks.jpg",
+      "blank_template_title": "Stonks",
+      "blank_template_source": "MemeVault library (Imgflip template)"
     },
     {
       "id": "reddit-1x5c7md",
@@ -51387,7 +51739,10 @@
       "ocr": "ING / THE YOIK ii / PREFERS TO ) / BREAK THE YOLK Pry {",
       "width": 680,
       "height": 765,
-      "thumb": "thumbs/reddit-1x48qe0.jpg"
+      "thumb": "thumbs/reddit-1x48qe0.jpg",
+      "blank_template": "images/blank-imgflip-2lhzmp.jpg",
+      "blank_template_title": "Homer Simpson's Back Fat",
+      "blank_template_source": "https://imgflip.com/memetemplate/157043617/Homer-Simpsons-Back-Fat"
     },
     {
       "id": "reddit-1x30t81",
@@ -51512,7 +51867,10 @@
       "ocr": "THE|WORLD|IF FOOD WAS|ACTUALLY / WHAT|WAS) SALAD a BO THE ROK ;",
       "width": 800,
       "height": 450,
-      "thumb": "thumbs/reddit-1wou2iy.jpg"
+      "thumb": "thumbs/reddit-1wou2iy.jpg",
+      "blank_template": "images/blank-imgflip-2ynjel.jpg",
+      "blank_template_title": "The future world if",
+      "blank_template_source": "https://imgflip.com/memetemplate/179137533/The-future-world-if"
     },
     {
       "id": "reddit-1wo14qh",
@@ -53311,8 +53669,7 @@
       "ocr": "QoQ QQ @ / Dispatched / In Transit / Delayed / Held By Carrier / Destroyed",
       "width": 1000,
       "height": 791,
-      "thumb": "thumbs/reddit-1ws1295.jpg",
-      "blank_template_title": "Marked Safe From"
+      "thumb": "thumbs/reddit-1ws1295.jpg"
     },
     {
       "id": "reddit-1wv17d1",

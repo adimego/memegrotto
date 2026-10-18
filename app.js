@@ -16,6 +16,7 @@ const SPOTLIGHT = [
   { key: "reddit", label: "Fresh from Reddit", sub: "Top posts from meme subs" },
   { key: "programming", label: "Programmer humor", sub: "It works on my machine" },
   { key: "nsfw", label: "Crude & NSFW", sub: "Profanity & bad taste 🌶️" },
+  { key: "blank template", label: "Blank templates", sub: "Clean, text-free version in the editor 🧼" },
 ];
 const $ = s => document.querySelector(s);
 
@@ -82,7 +83,7 @@ const norm = s => s.toLowerCase().normalize("NFKD").replace(/[\u0300-\u036f]/g, 
 const color = c => (CAT_META[c] || ["", "#7f5af0"])[1];
 
 fetch("memes.json").then(r => r.json()).then(d => {
-  memes = d.memes.map((m, i) => ({ ...m, rank: i, hay: norm(m.title + " " + m.tags.join(" ") + " " + m.category + " " + (m.caption || "") + " " + (m.ocr || "")) }));
+  memes = d.memes.map((m, i) => ({ ...m, tags: m.blank_template ? [...m.tags, "blank template"] : m.tags, rank: i, hay: norm(m.title + " " + m.tags.join(" ") + " " + m.category + " " + (m.caption || "") + " " + (m.ocr || "") + (m.blank_template ? " blank template" : "")) }));
   $("#nsfw").checked = state.nsfw; readHash(); buildSidebar(); render();
   loadVotes().then(() => { if (votesOk) { buildSidebar(); if (state.sort === "popular" || state.top) render(); } });
 });
@@ -144,7 +145,7 @@ function buildSidebar() {
   });
 
   const tc = {}; pool.forEach(m => m.tags.forEach(t => tc[t] = (tc[t] || 0) + 1));
-  const skip = new Set(Object.keys(CAT_META).map(k => k.split(" ")[0].toLowerCase()).concat(["template", "captioned", "nsfw", "reddit", "fresh"]));
+  const skip = new Set(Object.keys(CAT_META).map(k => k.split(" ")[0].toLowerCase()).concat(["template", "captioned", "nsfw", "reddit", "fresh", "blank template"]));
   $("#tagcloud").innerHTML = "";
   Object.entries(tc).filter(([t, n]) => n >= 3 && !skip.has(t)).sort((a, b) => b[1] - a[1]).slice(0, 26)
     .forEach(([t, n]) => $("#tagcloud").appendChild(tagEl(t, n)));
