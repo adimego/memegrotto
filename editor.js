@@ -22,6 +22,10 @@
       <div class="ed-main">
         <div class="ed-stage" id="edStage"><canvas id="edCanvas" aria-label="Meme preview, drag text to move it"></canvas></div>
         <div class="ed-panel">
+          <button type="button" class="ed-blank" id="edBlank" role="switch" aria-checked="false" hidden>
+            <span class="ed-blank-txt">🧼 Use blank template<small id="edBlankSub">Swap in the clean, text-free version</small></span>
+            <span class="ed-switch" aria-hidden="true"><i></i></span>
+          </button>
           <div class="ed-boxes" id="edBoxes"></div>
           <textarea id="edText" rows="2" placeholder="Type your caption…" aria-label="Caption text"></textarea>
           <div class="ed-row">
@@ -44,7 +48,6 @@
           <details class="ed-erase" id="edErase">
             <summary>🧽 Remove text from the image</summary>
             <div class="ed-row">
-              <button class="btn" id="edBlank" hidden>🧼 Use blank template</button>
               <button class="btn" id="edAuto">🔍 Auto-detect &amp; erase text</button>
             </div>
             <div class="ed-tools" role="group" aria-label="Image tools">
@@ -334,8 +337,8 @@
   }
   function syncBlank() {
     const b = $("#edBlank"); if (!b) return;
-    b.hidden = !meme.blank_template; b.classList.toggle("on", usingBlank);
-    b.textContent = usingBlank ? "↩ Use original image" : "🧼 Use blank template";
+    b.hidden = !meme.blank_template; b.classList.toggle("on", usingBlank); b.setAttribute("aria-checked", usingBlank ? "true" : "false");
+    $("#edBlankSub").textContent = usingBlank ? "On: showing the clean template" : "Swap in the clean, text-free version";
   }
   async function toggleBlank() {
     if (!meme.blank_template) return;
