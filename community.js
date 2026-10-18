@@ -67,7 +67,7 @@
                  hay: norm(x.title + " " + tags.join(" ") + " " + (x.category || "")) };
       });
       memes.push(...gallery); galleryLoaded = true;
-      sidebarBlock(); if (state.list === "community") render();
+      sidebarBlock(); if (state.list === "community" || state.list === "leaderboard") render();   // leaderboards can rank community memes too
       if (pendingId && $("#lb").hidden) openById(pendingId); pendingId = null;
     } catch (e) {}
     giveUp();
@@ -121,7 +121,7 @@
     const ext = extOf(blob.type); if (!ext) throw new Error(canVideo() ? "Use a PNG, JPEG, GIF, WebP, MP4 or WebM file" : "Use a PNG, JPEG, GIF or WebP image");
     const path = `pending/${rid()}.${ext}`;
     const up = await fetch(`${ST}/object/submissions/${path}`, { method: "POST", headers: { ...H, "Content-Type": blob.type, "x-upsert": "false", "cache-control": "3600" }, body: blob, signal: AbortSignal.timeout(60000) });
-    if (!up.ok) throw new Error(up.status === 413 ? "That image is too big (max 5 MB)" : "Upload failed (" + up.status + "), try again later");
+    if (!up.ok) throw new Error(up.status === 413 ? (VTYPES[blob.type] ? "That clip is too big (max 15 MB)" : "That image is too big (max 5 MB)") : "Upload failed (" + up.status + "), try again later");
     const r = await fetch(`${SB}/rest/v1/submissions`, { method: "POST", headers: { ...H, "Content-Type": "application/json", Prefer: "return=minimal" },
       body: JSON.stringify({ title: title.slice(0, 120), tags: tags.slice(0, 10).map(t => t.slice(0, 30)), category: category || null, image_path: path, kind, ...(creator && canCreator() ? { creator } : {}) }) });
     if (!r.ok) { const t = await r.text().catch(() => ""); throw new Error(/too many/.test(t) ? "You've posted a lot today, try again later" : "Couldn't save the submission (" + r.status + ")"); }
