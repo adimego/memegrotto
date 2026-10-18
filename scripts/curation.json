@@ -985,20 +985,10 @@
    "title": "Business Cat",
    "from": "https://i.imgflip.com/1bh7.jpg"
   },
-  "kym-challenge-accepted": {
-   "blank": "images/blank-imgflip-j4o.jpg",
-   "title": "Challenge Accepted Rage Face",
-   "from": "https://i.imgflip.com/j4o.jpg"
-  },
   "kym-computer-reaction-faces": {
    "blank": "images/blank-imgflip-2zj3.jpg",
    "title": "Computer Guy",
    "from": "https://i.imgflip.com/2zj3.jpg"
-  },
-  "kym-confused-math-lady": {
-   "blank": "images/blank-imgflip-1c81c1.jpg",
-   "title": "Math lady/Confused lady",
-   "from": "https://i.imgflip.com/1c81c1.jpg"
   },
   "kym-ep-001650792ff6jpg": {
    "blank": "images/imgflip-110133729-spiderman-pointing-at-spiderman.jpg",
@@ -1055,25 +1045,10 @@
    "title": "Charlie Conspiracy (Always Sunny in Philidelphia)",
    "from": "https://imgflip.com/meme/92084495"
   },
-  "kym-slaps-roof-of-car": {
-   "blank": "images/blank-imgflip-2d3al6.jpg",
-   "title": "Car Salesman Slaps Roof Of Car",
-   "from": "https://i.imgflip.com/2d3al6.jpg"
-  },
-  "kym-spongegar-primitive-sponge-caveman-spongebob": {
-   "blank": "images/blank-imgflip-14wa6i.jpg",
-   "title": "Spongegar",
-   "from": "https://i.imgflip.com/14wa6i.jpg"
-  },
   "kym-true-story": {
    "blank": "images/blank-imgflip-775g.jpg",
    "title": "True Story",
    "from": "https://i.imgflip.com/775g.jpg"
-  },
-  "kym-ugandan-knuckles": {
-   "blank": "images/blank-memegen-ugandanknuck.jpg",
-   "title": "Ugandan Knuckles",
-   "from": "https://api.memegen.link/images/ugandanknuck.jpg"
   },
   "kym-virgin-vs-chad": {
    "blank": "images/blank-imgflip-2b5ggz.jpg",
@@ -1935,11 +1910,6 @@
    "title": "Fk Yeah",
    "from": "https://i.imgflip.com/3ous.jpg"
   },
-  "kym-oh-crap-omg-rage-face": {
-   "blank": "images/blank-imgflip-2q4t.jpg",
-   "title": "Gasp Rage Face",
-   "from": "https://i.imgflip.com/2q4t.jpg"
-  },
   "imgflip-i-alifd9": {
    "blank": "images/blank-imgflip-7hqnt5.jpg",
    "title": "Go back to X stream.",
@@ -2149,6 +2119,26 @@
    "blank": "images/blank-imgflip-4l7kn4.jpg",
    "title": "First time?",
    "from": "https://i.imgflip.com/4l7kn4.jpg"
+  },
+  "reddit-1r8ui0c": {
+   "blank": "images/blank-imgflip-49su9f.jpg",
+   "title": "Bro Please Bro",
+   "from": "https://i.imgflip.com/49su9f.jpg"
+  },
+  "reddit-1q8dbs5": {
+   "blank": "images/blank-imgflip-2sp31u.jpg",
+   "title": "Meg Family Guy Better than me",
+   "from": "https://i.imgflip.com/2sp31u.jpg"
+  },
+  "reddit-1pqhu7x": {
+   "blank": "images/blank-imgflip-31fxdh.jpg",
+   "title": "Would you press the button?",
+   "from": "https://i.imgflip.com/31fxdh.jpg"
+  },
+  "reddit-1wdowzc": {
+   "blank": "images/blank-imgflip-2qtt28.jpg",
+   "title": "Im gonna say it",
+   "from": "https://i.imgflip.com/2qtt28.jpg"
   }
  },
  "blank_rejected": {
@@ -2274,6 +2264,22 @@
   "reddit-1twi5vg": "imgflip:4p8zx7:284274907/thank-you-for-changing-my-life",
   "reddit-1ugfqjf": "imgflip:4p8zx7:284274907/thank-you-for-changing-my-life",
   "reddit-1v4o6vk": "imgflip:4p8zx7:284274907/thank-you-for-changing-my-life",
-  "reddit-1vy6uhp": "imgflip:4p8zx7:284274907/thank-you-for-changing-my-life"
+  "reddit-1vy6uhp": "imgflip:4p8zx7:284274907/thank-you-for-changing-my-life",
+  "reddit-1p763g7": "imgflip:2zr0r3:180979599/At-home",
+  "reddit-1r71bhs": "imgflip:37b271:193671901/You-guys-are-getting-paid-template",
+  "reddit-1rx8fh2": "imgflip:5gu5:Cereal-Guy",
+  "reddit-1qmir0g": "imgflip:46mxhu:253012242/Chad-we-know",
+  "reddit-1qqv7ab": "imgflip:46mxhu:253012242/Chad-we-know",
+  "reddit-1qbl38u": "imgflip:2odckz:Marked-Safe-From",
+  "reddit-1r6v08o": "imgflip:7qpayf:468113847/Marked-Safe-From-Big",
+  "reddit-1u9zjru": "imgflip:2vzdu8:174651344/Wants-to-know-your-location",
+  "reddit-1sjp149": "imgflip:4p8zx7:284274907/thank-you-for-changing-my-life",
+  "reddit-1oqwt47": "imgflip:ah0jhj:633240487/worse-than-epstein",
+  "kym-challenge-accepted": "images/blank-imgflip-j4o.jpg (meme image is already text-free)",
+  "kym-confused-math-lady": "images/blank-imgflip-1c81c1.jpg (meme image is already text-free)",
+  "kym-slaps-roof-of-car": "images/blank-imgflip-2d3al6.jpg (meme image is already text-free)",
+  "kym-spongegar-primitive-sponge-caveman-spongebob": "images/blank-imgflip-14wa6i.jpg (meme image is already text-free)",
+  "kym-ugandan-knuckles": "images/blank-memegen-ugandanknuck.jpg (meme image is already text-free)",
+  "kym-oh-crap-omg-rage-face": "images/blank-imgflip-2q4t.jpg (meme image is already text-free)"
  }
 }

@@ -7460,10 +7460,7 @@
       "width": 473,
       "height": 266,
       "thumb": "thumbs/kym-ugandan-knuckles.jpg",
-      "ocr": "",
-      "blank_template": "images/blank-memegen-ugandanknuck.jpg",
-      "blank_template_title": "Ugandan Knuckles",
-      "blank_template_source": "https://api.memegen.link/images/ugandanknuck.jpg"
+      "ocr": ""
     },
     {
       "id": "kym-dolan",
@@ -8147,10 +8144,7 @@
       "width": 400,
       "height": 300,
       "thumb": "thumbs/kym-challenge-accepted.jpg",
-      "ocr": "",
-      "blank_template_title": "Challenge Accepted Rage Face",
-      "blank_template": "images/blank-imgflip-j4o.jpg",
-      "blank_template_source": "https://i.imgflip.com/j4o.jpg"
+      "ocr": ""
     },
     {
       "id": "kym-joseph-ducreux-archaic-rap",
@@ -8299,10 +8293,7 @@
       "width": 986,
       "height": 591,
       "thumb": "thumbs/kym-oh-crap-omg-rage-face.jpg",
-      "ocr": "",
-      "blank_template": "images/blank-imgflip-2q4t.jpg",
-      "blank_template_title": "Gasp Rage Face",
-      "blank_template_source": "https://i.imgflip.com/2q4t.jpg"
+      "ocr": ""
     },
     {
       "id": "kym-if-you-know-what-i-mean",
@@ -10411,10 +10402,7 @@
       "width": 681,
       "height": 445,
       "thumb": "thumbs/kym-confused-math-lady.jpg",
-      "ocr": "",
-      "blank_template": "images/blank-imgflip-1c81c1.jpg",
-      "blank_template_title": "Math lady/Confused lady",
-      "blank_template_source": "https://i.imgflip.com/1c81c1.jpg"
+      "ocr": ""
     },
     {
       "id": "kym-its-a-trap",
@@ -11454,10 +11442,7 @@
       "width": 250,
       "height": 154,
       "thumb": "thumbs/kym-spongegar-primitive-sponge-caveman-spongebob.jpg",
-      "ocr": "",
-      "blank_template": "images/blank-imgflip-14wa6i.jpg",
-      "blank_template_title": "Spongegar",
-      "blank_template_source": "https://i.imgflip.com/14wa6i.jpg"
+      "ocr": ""
     },
     {
       "id": "kym-go-to-horny-jail",
@@ -12515,10 +12500,7 @@
       "width": 800,
       "height": 450,
       "thumb": "thumbs/kym-slaps-roof-of-car.jpg",
-      "ocr": "",
-      "blank_template": "images/blank-imgflip-2d3al6.jpg",
-      "blank_template_title": "Car Salesman Slaps Roof Of Car",
-      "blank_template_source": "https://i.imgflip.com/2d3al6.jpg"
+      "ocr": ""
     },
     {
       "id": "kym-in-soviet-russia",
@@ -31852,7 +31834,10 @@
       "width": 1000,
       "height": 531,
       "thumb": "thumbs/reddit-1r8ui0c.jpg",
-      "ocr": "bro please just / upload your id. we're / committed to your / privacy. just one upload. / it's really easy bro / please. just upload it / and we'll protect your / data. we need this to / protect the children bro please."
+      "ocr": "bro please just / upload your id. we're / committed to your / privacy. just one upload. / it's really easy bro / please. just upload it / and we'll protect your / data. we need this to / protect the children bro please.",
+      "blank_template": "images/blank-imgflip-49su9f.jpg",
+      "blank_template_title": "Bro Please Bro",
+      "blank_template_source": "https://i.imgflip.com/49su9f.jpg"
     },
     {
       "id": "reddit-1r3fthr",
@@ -31955,7 +31940,10 @@
       "width": 720,
       "height": 324,
       "thumb": "thumbs/reddit-1pqhu7x.jpg",
-      "ocr": "RAM &storagge Al gets / prices return to normal deleted forever"
+      "ocr": "RAM &storagge Al gets / prices return to normal deleted forever",
+      "blank_template": "images/blank-imgflip-31fxdh.jpg",
+      "blank_template_title": "Would you press the button?",
+      "blank_template_source": "https://i.imgflip.com/31fxdh.jpg"
     },
     {
       "id": "reddit-1tc25sl",
@@ -33427,7 +33415,10 @@
       "width": 500,
       "height": 538,
       "thumb": "thumbs/reddit-1q8dbs5.jpg",
-      "ocr": ""
+      "ocr": "",
+      "blank_template": "images/blank-imgflip-2sp31u.jpg",
+      "blank_template_title": "Meg Family Guy Better than me",
+      "blank_template_source": "https://i.imgflip.com/2sp31u.jpg"
     },
     {
       "id": "reddit-1snn4ke",
@@ -33510,7 +33501,10 @@
       "width": 500,
       "height": 500,
       "thumb": "thumbs/reddit-1wdowzc.jpg",
-      "ocr": "YKNOW WHAT? / MJUST|GONNA SAY IT. / REDDIT|WAS BETTER WHEN, / WAS FULL OF GRAMMAR SNOBS."
+      "ocr": "YKNOW WHAT? / MJUST|GONNA SAY IT. / REDDIT|WAS BETTER WHEN, / WAS FULL OF GRAMMAR SNOBS.",
+      "blank_template": "images/blank-imgflip-2qtt28.jpg",
+      "blank_template_title": "Im gonna say it",
+      "blank_template_source": "https://i.imgflip.com/2qtt28.jpg"
     },
     {
       "id": "reddit-1p6lcbq",
