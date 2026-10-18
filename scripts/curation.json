@@ -796,5 +796,12 @@
    "nsfw": true
   }
  },
- "ocr_allow": []
+ "ocr_allow": [],
+ "no_blank": [
+  "imgflip-i-5f6b61",
+  "imgflip-i-aj19yw",
+  "reddit-1of3l3e",
+  "reddit-1tl9m6d",
+  "reddit-1ug7zt9"
+ ]
 }
