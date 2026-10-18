@@ -13,6 +13,7 @@ const SPOTLIGHT = [
   { key: "epstein", label: "Epstein didn't kill himself", sub: "Cameras off, guards asleep 📼" },
   { key: "spaghetti", label: "Spaghetti cinema", sub: "Somebody toucha my spaghet" },
   { key: "advice animal", label: "Advice animals", sub: "Old-school 2010s classics" },
+  { key: "classic", label: "Meme canon", sub: "All-time classic templates & formats 🏛️" },
   { key: "reddit", label: "Fresh from Reddit", sub: "Top posts from meme subs" },
   { key: "programming", label: "Programmer humor", sub: "It works on my machine" },
   { key: "nsfw", label: "Crude & NSFW", sub: "Profanity & bad taste 🌶️" },
