@@ -60,7 +60,8 @@
       gallery = rows.filter(x => urls[x.image_path]).map((x, i) => {
         const tags = [...(x.tags || []).map(t => String(t).toLowerCase().slice(0, 30)), "community", x.kind === "creation" ? "made on memespire" : "submitted"];
         return { id: "sub-" + x.id, title: x.title, category: x.category && CAT_META[x.category] ? x.category : "Community", tags, community: true, kind: x.kind,
-                 image: urls[x.image_path], thumb: urls[x.image_path], source: "Community", source_url: location.origin + location.pathname + "#m=sub-" + x.id,
+                 ...(/\.(mp4|webm)$/i.test(x.image_path) ? { video: urls[x.image_path], image: "", thumb: "", noEdit: true } : { image: urls[x.image_path], thumb: urls[x.image_path] }),
+                 source: "Community", source_url: location.origin + location.pathname + "#m=sub-" + x.id,
                  attribution: x.kind === "creation" ? "Made with the MemeSpire editor by a visitor" : "Submitted by a MemeSpire visitor",
                  date_added: (x.created_at || "").slice(0, 10), width: 0, height: 0, rank: 100000 + i,
                  hay: norm(x.title + " " + tags.join(" ") + " " + (x.category || "")) };
@@ -100,8 +101,12 @@
 
   // ---------- uploads
   const TYPES = { "image/png": "png", "image/jpeg": "jpg", "image/gif": "gif", "image/webp": "webp" }, MAX = 5 * 1024 * 1024;
+  const VTYPES = { "video/mp4": "mp4", "video/webm": "webm" }, VMAX = 15 * 1024 * 1024;
+  const canVideo = () => !!(window.MVPlay && MVPlay.features.video);   // needs supabase/features2.sql
+  const extOf = t => TYPES[t] || (canVideo() && VTYPES[t]);
   const rid = () => (crypto.randomUUID ? crypto.randomUUID() : Date.now().toString(36) + Math.random().toString(36).slice(2) + Math.random().toString(36).slice(2)).replace(/-/g, "");
   async function shrink(file) {   // keep uploads under 5 MB: re-encode big stills as JPEG, max 2000px
+    if (VTYPES[file.type]) { if (!canVideo()) throw new Error("Video uploads aren't available yet"); if (file.size > VMAX) throw new Error("Videos must be under 15 MB"); return file; }
     if (file.size <= MAX && TYPES[file.type]) return file;
     if (file.type === "image/gif") throw new Error("GIFs must be under 5 MB");
     const bm = await createImageBitmap(file), sc = Math.min(1, 2000 / Math.max(bm.width, bm.height));
@@ -113,7 +118,7 @@
   const creatorField = () => canCreator() ? `<label>Your name <small class="muted">(optional, shown on the leaderboards)</small> <input name="creator" maxlength="40" autocomplete="nickname" value="${esc(localStorage.getItem("mv-creator") || "")}"></label>` : "";
   const creatorOf = f => { const c = f.creator ? f.creator.value.replace(/[<>]/g, "").trim().slice(0, 40) : ""; if (f.creator) localStorage.setItem("mv-creator", c); return c; };
   async function submit({ blob, title, tags, category, kind, creator }) {
-    const ext = TYPES[blob.type]; if (!ext) throw new Error("Use a PNG, JPEG, GIF or WebP image");
+    const ext = extOf(blob.type); if (!ext) throw new Error(canVideo() ? "Use a PNG, JPEG, GIF, WebP, MP4 or WebM file" : "Use a PNG, JPEG, GIF or WebP image");
     const path = `pending/${rid()}.${ext}`;
     const up = await fetch(`${ST}/object/submissions/${path}`, { method: "POST", headers: { ...H, "Content-Type": blob.type, "x-upsert": "false", "cache-control": "3600" }, body: blob, signal: AbortSignal.timeout(60000) });
     if (!up.ok) throw new Error(up.status === 413 ? "That image is too big (max 5 MB)" : "Upload failed (" + up.status + "), try again later");
@@ -136,7 +141,7 @@
   function submitForm() {
     if (!F.ok) return toast("Submissions aren't open yet");
     const m = modal(`<form class="mv-form">
-      <label class="mv-drop"><input type="file" name="file" accept="image/png,image/jpeg,image/gif,image/webp" required><span>📷 Choose an image<small>PNG, JPEG, GIF or WebP · max 5 MB</small></span><img alt="" hidden></label>
+      <label class="mv-drop"><input type="file" name="file" accept="image/png,image/jpeg,image/gif,image/webp${canVideo() ? ",video/mp4,video/webm" : ""}" required><span>📷 Choose an image${canVideo() ? " or clip" : ""}<small>PNG, JPEG, GIF or WebP · max 5 MB${canVideo() ? "<br>MP4 or WebM clips · max 15 MB" : ""}</small></span><img alt="" hidden></label>
       <label>Title <input name="title" maxlength="120" required placeholder="What's the meme?"></label>
       <label>Tags <input name="tags" maxlength="200" placeholder="comma, separated, tags"></label>
       ${creatorField()}
@@ -144,7 +149,7 @@
       ${rules}<button class="btn primary" type="submit">Submit for review</button><p class="muted">Submissions are reviewed before they show up in the Community gallery.</p></form>`);
     m.querySelector("b").textContent = "＋ Submit a meme";
     const f = m.querySelector("form"), prev = m.querySelector(".mv-drop img");
-    f.file.onchange = () => { const x = f.file.files[0]; if (x) { prev.src = URL.createObjectURL(x); prev.hidden = false; if (!f.title.value) f.title.value = x.name.replace(/\.[^.]+$/, "").replace(/[-_]+/g, " ").slice(0, 120); } };
+    f.file.onchange = () => { const x = f.file.files[0]; if (x && x.type.startsWith("video/")) { prev.hidden = true; prev.insertAdjacentHTML("afterend", `<video class="mv-prev" src="${URL.createObjectURL(x)}" muted autoplay loop playsinline></video>`); if (!f.title.value) f.title.value = x.name.replace(/\.[^.]+$/, "").replace(/[-_]+/g, " ").slice(0, 120); } else if (x) { prev.src = URL.createObjectURL(x); prev.hidden = false; if (!f.title.value) f.title.value = x.name.replace(/\.[^.]+$/, "").replace(/[-_]+/g, " ").slice(0, 120); } };
     f.onsubmit = async e => {
       e.preventDefault(); const btn = f.querySelector("[type=submit]"); btn.disabled = true; btn.textContent = "Uploading…";
       try {

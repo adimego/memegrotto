@@ -387,6 +387,7 @@
   // slow or failing FontFace load in Safari can never block the editor from appearing).
   async function open(m) {
     if (!m) return;
+    if (m.noEdit || !m.image) return typeof toast === "function" && toast("This clip can't be captioned yet 🎞️");
     const el = $("#editor") || build(), seq = ++openSeq;
     meme = m; img = null; $("#edSrc").textContent = m.title + (m.video || /\.gif$/i.test(m.image) ? " · captions a still frame" : "");
     el.hidden = false; el.classList.add("loading"); document.body.style.overflow = "hidden";

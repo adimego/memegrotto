@@ -243,7 +243,7 @@ function renderMore() {
     const c = document.createElement("article"); c.className = "card";
     c.style.animationDelay = Math.min((i % PAGE) * 15, 400) + "ms";
     const ratio = m.width && m.height ? `aspect-ratio:${m.width}/${m.height}` : "min-height:180px";
-    c.innerHTML = `<div class="ph" style="${ratio}"><img ${i < 4 ? 'fetchpriority="high"' : 'loading="lazy"'} decoding="async" alt="${esc(m.title)}" src="${m.thumb || m.image}">${m.video || /\.gif$/i.test(m.image) ? '<span class="anim-badge" aria-label="Animated">▶ GIF</span>' : ""}</div>
+    c.innerHTML = `<div class="ph" style="${ratio}">${!m.thumb && !m.image && m.video ? `<video class="clip on poster" muted playsinline loop preload="metadata" src="${esc(m.video)}#t=0.1"></video><img hidden alt="">` : `<img ${i < 4 ? 'fetchpriority="high"' : 'loading="lazy"'} decoding="async" alt="${esc(m.title)}" src="${m.thumb || m.image}">`}${m.video || /\.gif$/i.test(m.image) ? '<span class="anim-badge" aria-label="Animated">▶ GIF</span>' : ""}</div>
       ${hl.get(m.id) === "top" ? '<span class="badge hl top">🏆 Top</span>' : hl.get(m.id) === "trend" ? '<span class="badge hl trend">🔥 Trending</span>'
         : m.source.startsWith("Reddit") ? `<span class="badge">${esc(m.source.replace("Reddit ", ""))}</span>` : ""}
       ${m.nsfw ? '<span class="badge nsfw">🌶️ NSFW</span>' : ""}
@@ -287,7 +287,7 @@ function playClip(c) {
   if (!v) {
     const wrap = c.querySelector("img").parentNode; v = document.createElement("video"); v.className = "clip";
     Object.assign(v, { muted: true, loop: true, playsInline: true, preload: "auto" }); v.setAttribute("muted", ""); v.setAttribute("playsinline", "");
-    v.poster = c._clip.thumb; v.src = c._clip.video; wrap.appendChild(v);
+    if (c._clip.thumb) v.poster = c._clip.thumb; v.src = c._clip.video; wrap.appendChild(v);
   }
   if (!hoverable) document.querySelectorAll("video.clip.on").forEach(o => { if (o !== v && document.querySelectorAll("video.clip.on").length >= 2) stopClip(o.closest(".card")); });
   v.classList.add("on"); v.play().catch(() => {});
