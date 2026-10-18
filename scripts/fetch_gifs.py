@@ -66,14 +66,14 @@ def encode(src, dst, ss=0, t=MAX_SECONDS, audio=False, audio_src=None):
     for side, crf, fps in ((MAX_SIDE, 26, 30), (MAX_SIDE, 30, 30), (432, 31, 24), (360, 33, 20)):
         f = min(fps, round(src_fps))
         vf = (f"scale='if(gt(iw,ih),min({side},iw),-2)':'if(gt(iw,ih),-2,min({side},ih))':flags=lanczos,"
-              f"pad=ceil(iw/2)*2:ceil(ih/2)*2,fps={f},format=yuv420p")
+              f"pad=ceil(iw/2)*2:ceil(ih/2)*2,fps={f},scale=out_range=tv,format=yuv420p")   # limited range: no yuvj420p
         cmd = ["ffmpeg", "-v", "error", "-y"] + (["-ss", str(ss)] if ss else []) + ["-i", src]
         if audio_src: cmd += (["-ss", str(ss)] if ss else []) + ["-i", audio_src]
         cmd += ["-t", str(min(t, MAX_SECONDS)), "-map", "0:v:0"]
         if audio and (audio_src or p["audio"]): cmd += ["-map", "1:a:0" if audio_src else "0:a:0", "-c:a", "aac", "-b:a", "64k", "-ac", "1"]
         else: cmd += ["-an"]
         cmd += ["-vf", vf, "-c:v", "libx264", "-profile:v", "main", "-level", "3.1", "-preset", "slow", "-crf", str(crf),
-                "-pix_fmt", "yuv420p", "-movflags", "+faststart", dst]
+                "-pix_fmt", "yuv420p", "-color_range", "tv", "-movflags", "+faststart", dst]
         subprocess.run(cmd, check=True)
         if os.path.getsize(dst) <= TARGET_BYTES: break
     if os.path.getsize(dst) > HARD_MAX_BYTES: raise RuntimeError(f"too big after re-encode: {os.path.getsize(dst)} bytes")
