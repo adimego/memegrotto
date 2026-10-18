@@ -60,3 +60,11 @@ Thumbnails need Pillow (`pip install pillow`).
 - Know Your Meme (Harambe entry images)
 
 All memes belong to their respective creators; each entry records its source URL.
+
+## Community features (Supabase)
+
+Submissions, the Community gallery, "Post to gallery" in the editor, reports, view/share/caption/download stats and the
+Stats page all stay hidden until `supabase/features.sql` has been run once in the Supabase SQL editor (the site checks
+for the `mv_features()` function). To moderate, open the Supabase dashboard → Table editor → `submissions`, and set
+`status` to `approved` (the meme shows up in the Community gallery) or `rejected`. Reports are in the `reports`
+table. `scripts/moderate.py` does the same from the command line if you ever want to use a service key (optional).
