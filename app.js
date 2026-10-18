@@ -246,7 +246,7 @@ function renderMore() {
     sb.onclick = e => { e.stopPropagation(); share(m, sb); };
     c.querySelector(".row").insertBefore(sb, c.querySelector(".src"));
     const eb = document.createElement("button"); eb.className = "share edit"; eb.title = "Make your own caption"; eb.setAttribute("aria-label", "Caption " + m.title);
-    eb.textContent = "✏️"; eb.onclick = e => { e.stopPropagation(); MemeEditor.open(m); };
+    eb.textContent = "✏️"; eb.dataset.edit = m.id; eb.type = "button";   // click handled by editor.js (delegated)
     c.querySelector(".row").insertBefore(eb, c.querySelector(".src"));
     const img = c.querySelector("img");
     img.onload = () => { img.classList.add("ld"); img.parentNode.classList.remove("ph"); };
@@ -307,7 +307,6 @@ $("#lbClose").onclick = closeLb;
 $("#lbPrev").onclick = () => openLb(idx - 1);
 $("#lbNext").onclick = () => openLb(idx + 1);
 $("#lb").onclick = e => { if (e.target.id === "lb") closeLb(); };
-$("#lbEdit").onclick = e => { e.stopPropagation(); MemeEditor.open(view[idx]); };
 $("#lbShare").onclick = e => { e.stopPropagation(); share(view[idx], e.currentTarget); };
 
 // ---- Sharing: Web Share API on phones/tablets (with the image file when supported), share menu elsewhere ----

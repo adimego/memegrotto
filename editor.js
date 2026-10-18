@@ -147,18 +147,21 @@
   }
   function up(e) { if (drag && e.pointerId === drag.id) drag = null; }
 
-  function blob() { draw(true); return new Promise(res => cv.toBlob(b => { draw(); res(b); }, "image/png")); }
+  function blob() { if (!img) { toast("Still loading…"); return Promise.reject(new Error("not ready")); } draw(true); return new Promise(res => cv.toBlob(b => { draw(); res(b); }, "image/png")); }
   const fname = () => "memevault-" + (meme ? meme.id.slice(0, 40) : "meme") + ".png";
   async function download() {
-    const b = await blob(), a = document.createElement("a"); a.href = URL.createObjectURL(b); a.download = fname();
+    const b = await blob().catch(() => null); if (!b) return;
+    const a = document.createElement("a"); a.href = URL.createObjectURL(b); a.download = fname();
     document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 4000); toast("Saved PNG ⬇️");
   }
   function copyImg() {
     if (!navigator.clipboard?.write || !window.ClipboardItem) return toast("Copying images isn't supported here, use Download");
+    if (!img) return toast("Still loading…");
     navigator.clipboard.write([new ClipboardItem({ "image/png": blob() })]).then(() => toast("Image copied 🖼️"), () => toast("Couldn't copy, try Download"));
   }
   async function shareImg() {
-    const b = await blob(), f = new File([b], fname(), { type: "image/png" });
+    const b = await blob().catch(() => null); if (!b) return;
+    const f = new File([b], fname(), { type: "image/png" });
     if (navigator.share && navigator.canShare && navigator.canShare({ files: [f] })) {
       try { await navigator.share({ files: [f], title: "My meme · MemeVault", text: "Made on MemeVault " + (typeof deepLink === "function" ? deepLink(meme) : location.href) }); return; }
       catch (e) { if (e.name === "AbortError") return; }
@@ -167,20 +170,46 @@
     download(); if (typeof openShare === "function") openShare(meme, $("#edShare"));
   }
 
+  let openSeq = 0;
+  // Show the editor immediately, then load the image + font in the background (font load is capped so a
+  // slow or failing FontFace load in Safari can never block the editor from appearing).
   async function open(m) {
-    const el = $("#editor") || build();
-    meme = m; $("#edSrc").textContent = m.title;
-    fontReady = fontReady || (document.fonts ? document.fonts.load(`40px MemeAnton`).catch(() => {}) : Promise.resolve());
-    const im = new Image(); im.decoding = "async";
-    await new Promise((res, rej) => { im.onload = res; im.onerror = rej; im.src = m.image; }).catch(() => null);
-    if (!im.naturalWidth) return toast("Couldn't load that image");
+    if (!m) return;
+    const el = $("#editor") || build(), seq = ++openSeq;
+    meme = m; img = null; $("#edSrc").textContent = m.title;
+    el.hidden = false; el.classList.add("loading"); document.body.style.overflow = "hidden";
+    boxes = []; select(-1);
+    cv.width = m.width || 600; cv.height = m.height || 600; ctx.clearRect(0, 0, cv.width, cv.height);
+    if (!fontReady) {
+      const load = document.fonts && document.fonts.load ? document.fonts.load("40px MemeAnton").catch(() => {}) : Promise.resolve();
+      fontReady = Promise.race([load, new Promise(r => setTimeout(r, 1500))]);
+    }
+    const im = new Image();
+    const ok = await new Promise(res => { im.onload = () => res(true); im.onerror = () => res(false); im.src = m.image; });
+    if (seq !== openSeq || el.hidden) return;               // user closed or opened another meme meanwhile
+    el.classList.remove("loading");
+    if (!ok || !im.naturalWidth) { toast("Couldn't load that image"); return; }
     await fontReady;
+    if (seq !== openSeq) return;
     img = im;
-    const s = Math.min(1, MAX_SIDE / Math.max(im.naturalWidth, im.naturalHeight));
-    cv.width = Math.round(im.naturalWidth * s); cv.height = Math.round(im.naturalHeight * s);
-    defaults(); el.hidden = false; document.body.style.overflow = "hidden"; select(0);
+    const sc = Math.min(1, MAX_SIDE / Math.max(im.naturalWidth, im.naturalHeight));
+    cv.width = Math.round(im.naturalWidth * sc); cv.height = Math.round(im.naturalHeight * sc);
+    defaults(); select(0);
     try { ctx.getImageData(0, 0, 1, 1); } catch (e) { toast("This image can't be exported (cross-origin)"); }
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => { if (img === im) draw(); });   // redraw once the font lands
   }
-  function close() { const el = $("#editor"); if (el) el.hidden = true; if ($("#lb").hidden) document.body.style.overflow = ""; drag = null; }
+  // Event delegation, so the buttons work even if a cached older app.js is running alongside this file.
+  function memeFor(btn) {
+    if (btn.id === "lbEdit") return typeof view !== "undefined" && typeof idx !== "undefined" ? view[idx] : null;
+    const id = btn.dataset.edit;
+    return typeof memes !== "undefined" ? memes.find(x => x.id === id) : null;
+  }
+  document.addEventListener("click", e => {
+    const btn = e.target.closest && e.target.closest("#lbEdit, [data-edit]");
+    if (!btn) return;
+    e.preventDefault(); e.stopPropagation();
+    open(memeFor(btn));
+  }, true);
+  function close() { openSeq++; const el = $("#editor"); if (el) el.hidden = true; if ($("#lb").hidden) document.body.style.overflow = ""; drag = null; }
   window.MemeEditor = { open, close, _state: () => ({ boxes, sel, w: cv && cv.width, h: cv && cv.height }) };
 })();

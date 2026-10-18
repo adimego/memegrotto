@@ -270,3 +270,8 @@ body{overflow-x:hidden}
   .ed-row .btn{flex:1;text-align:center}
 }
 .ed-stage canvas{width:auto;height:auto;object-fit:contain}
+
+button,.btn,a.btn,.tag,.cat{touch-action:manipulation;-webkit-tap-highlight-color:transparent}
+.editor.loading .ed-stage::after{content:"Loading image…";position:absolute;color:var(--muted);font-size:15px}
+.ed-stage{position:relative}
+.editor.loading canvas{opacity:.15}
