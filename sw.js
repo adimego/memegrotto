@@ -5,7 +5,7 @@
 //  - versioned assets (?v=...), fonts, icons: cache-first (the URL changes whenever the content does)
 //  - images/thumbs: cache-first as they are viewed, capped at MAX_IMG entries
 //  - other origins (Supabase API, Imgflip, etc.): not touched
-const VERSION = "0a667fce61";
+const VERSION = "e2eba028e6";
 const SHELL = `ms-shell-${VERSION}`, DATA = `ms-data-${VERSION}`, IMG = "ms-img-v1", MAX_IMG = 600;
 const CORE = ["./", "index.html", "memes.json", "manifest.webmanifest", "icons/icon-192.png"];
 self.addEventListener("install", e => {
@@ -61,6 +61,7 @@ self.addEventListener("fetch", e => {
   const p = url.pathname;
   if (req.mode === "navigate" || p.endsWith("/") || p.endsWith(".html")) return e.respondWith(networkFirst(req, SHELL));
   if (p.endsWith(".json") || p.endsWith(".webmanifest")) return e.respondWith(networkFirst(req, DATA));
+  if (/\/videos\//.test(p)) return;          // clips: let the browser stream them (range requests)
   if (/\/(images|thumbs)\//.test(p)) return e.respondWith(cacheFirst(req, IMG, MAX_IMG));
   if (url.search.includes("v=") || /\/(fonts|icons)\//.test(p)) return e.respondWith(cacheFirst(req, SHELL));
   if (p.endsWith("sw.js")) return;

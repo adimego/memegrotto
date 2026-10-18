@@ -166,7 +166,7 @@
   function pickMotd() {
     const day = today(), cached = JSON.parse(localStorage.getItem("mv-motd") || "null");
     if (cached && cached.day === day && byId(cached.id)) return byId(cached.id);
-    const safe = memes.filter(m => !m.nsfw && !m.community && !m.image.endsWith(".gif") && m.width >= 300);
+    const safe = memes.filter(m => !m.nsfw && !m.community && !m.image.endsWith(".gif") && !m.video && m.width >= 300);
     const pool = new Map();
     safe.filter(m => vcount(m) > 0).sort((a, b) => vcount(b) - vcount(a) || a.rank - b.rank).slice(0, 40).forEach(m => pool.set(m.id, m));
     safe.slice().sort((a, b) => a.rank - b.rank).slice(0, 160).forEach(m => pool.set(m.id, m));

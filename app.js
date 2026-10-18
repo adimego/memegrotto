@@ -17,6 +17,7 @@ const SPOTLIGHT = [
   { key: "programming", label: "Programmer humor", sub: "It works on my machine" },
   { key: "nsfw", label: "Crude & NSFW", sub: "Profanity & bad taste 🌶️" },
   { key: "blank template", label: "Blank templates", sub: "Clean, text-free version in the editor 🧼" },
+  { key: "gif", label: "GIFs & Videos", sub: "Animated reactions ▶" },
 ];
 const $ = s => document.querySelector(s);
 
@@ -83,7 +84,7 @@ const norm = s => s.toLowerCase().normalize("NFKD").replace(/[\u0300-\u036f]/g, 
 const color = c => (CAT_META[c] || ["", "#7f5af0"])[1];
 
 fetch("memes.json").then(r => r.json()).then(d => {
-  memes = d.memes.map((m, i) => ({ ...m, tags: m.blank_template ? [...m.tags, "blank template"] : m.tags, rank: i, hay: norm(m.title + " " + m.tags.join(" ") + " " + m.category + " " + (m.caption || "") + " " + (m.ocr || "") + (m.blank_template ? " blank template" : "")) }));
+  memes = d.memes.map((m, i) => ({ ...m, tags: [...m.tags, ...(m.blank_template ? ["blank template"] : []), ...((m.video || /\.gif$/i.test(m.image)) && !m.tags.includes("gif") ? ["gif"] : [])], rank: i, hay: norm(m.title + " " + m.tags.join(" ") + " " + m.category + " " + (m.caption || "") + " " + (m.ocr || "") + (m.blank_template ? " blank template" : "")) }));
   $("#nsfw").checked = state.nsfw; readHash(); buildSidebar(); render();
   loadVotes().then(() => { if (votesOk) { buildSidebar(); if (state.sort === "popular" || state.top) render(); } window.Lib?.votesReady(); });
 });
@@ -242,7 +243,7 @@ function renderMore() {
     const c = document.createElement("article"); c.className = "card";
     c.style.animationDelay = Math.min((i % PAGE) * 15, 400) + "ms";
     const ratio = m.width && m.height ? `aspect-ratio:${m.width}/${m.height}` : "min-height:180px";
-    c.innerHTML = `<div class="ph" style="${ratio}"><img ${i < 4 ? 'fetchpriority="high"' : 'loading="lazy"'} decoding="async" alt="${esc(m.title)}" src="${m.thumb || m.image}"></div>
+    c.innerHTML = `<div class="ph" style="${ratio}"><img ${i < 4 ? 'fetchpriority="high"' : 'loading="lazy"'} decoding="async" alt="${esc(m.title)}" src="${m.thumb || m.image}">${m.video || /\.gif$/i.test(m.image) ? '<span class="anim-badge" aria-label="Animated">▶ GIF</span>' : ""}</div>
       ${hl.get(m.id) === "top" ? '<span class="badge hl top">🏆 Top</span>' : hl.get(m.id) === "trend" ? '<span class="badge hl trend">🔥 Trending</span>'
         : m.source.startsWith("Reddit") ? `<span class="badge">${esc(m.source.replace("Reddit ", ""))}</span>` : ""}
       ${m.nsfw ? '<span class="badge nsfw">🌶️ NSFW</span>' : ""}
@@ -260,6 +261,7 @@ function renderMore() {
     const img = c.querySelector("img");
     img.onload = () => { img.classList.add("ld"); img.parentNode.classList.remove("ph"); };
     c.onclick = () => openLb(i);
+    if (m.video) clipCard(c, m);
     const k = hts.indexOf(Math.min(...hts));
     cols[k].appendChild(c); hts[k] += (m.height && m.width ? m.height / m.width : 1) + 0.35;
   });
@@ -269,12 +271,37 @@ function renderMore() {
   if (!sentinel.isConnected) { $("main").appendChild(sentinel); io.observe(sentinel); }
 }
 
+// Animated cards: a static poster in the grid; the clip plays muted on hover (mouse) or while on screen (touch)
+const hoverable = matchMedia("(hover: hover) and (pointer: fine)").matches;
+const clipIO = "IntersectionObserver" in window ? new IntersectionObserver(es => es.forEach(e => {
+  const c = e.target; if (e.isIntersecting && e.intersectionRatio >= 0.6) playClip(c); else stopClip(c);
+}), { threshold: [0, 0.6] }) : null;
+function clipCard(c, m) {
+  c.classList.add("has-clip"); c._clip = m;
+  if (hoverable) { c.addEventListener("mouseenter", () => playClip(c)); c.addEventListener("mouseleave", () => stopClip(c)); }
+  else clipIO?.observe(c);
+}
+function playClip(c) {
+  if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  let v = c.querySelector("video.clip");
+  if (!v) {
+    const wrap = c.querySelector("img").parentNode; v = document.createElement("video"); v.className = "clip";
+    Object.assign(v, { muted: true, loop: true, playsInline: true, preload: "auto" }); v.setAttribute("muted", ""); v.setAttribute("playsinline", "");
+    v.poster = c._clip.thumb; v.src = c._clip.video; wrap.appendChild(v);
+  }
+  if (!hoverable) document.querySelectorAll("video.clip.on").forEach(o => { if (o !== v && document.querySelectorAll("video.clip.on").length >= 2) stopClip(o.closest(".card")); });
+  v.classList.add("on"); v.play().catch(() => {});
+}
+function stopClip(c) { const v = c && c.querySelector("video.clip"); if (v) { v.pause(); v.classList.remove("on"); } }
+
 function esc(s) { return s.replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c])); }
 
 function openLb(i) {
   idx = (i + view.length) % view.length; const m = view[idx];
   while (shown <= idx && shown < view.length) renderMore();
-  $("#lbImg").src = m.image; $("#lbImg").alt = m.title;
+  const lv0 = $("#lbVid");
+  if (m.video) { $("#lbImg").hidden = true; $("#lbImg").removeAttribute("src"); lv0.hidden = false; lv0.poster = m.image; lv0.src = m.video; lv0.play().catch(() => {}); }
+  else { lv0.pause(); lv0.removeAttribute("src"); lv0.load(); lv0.hidden = true; $("#lbImg").hidden = false; $("#lbImg").src = m.image; $("#lbImg").alt = m.title; }
   $("#lbTitle").textContent = m.title;
   const cat = $("#lbCat"); cat.textContent = `${CAT_META[m.category]?.[0] || ""} ${m.category}`; cat.style.setProperty("--c", color(m.category));
   const tags = $("#lbTags"); tags.innerHTML = ""; m.tags.forEach(t => tags.appendChild(tagEl(t)));
@@ -282,8 +309,8 @@ function openLb(i) {
   $("#lbAttr").textContent = m.attribution || "—";
   $("#lbCaption").textContent = m.caption ? `“${m.caption}”` : "";
   $("#lbDate").textContent = m.date_added || "—";
-  $("#lbSize").textContent = m.width ? `${m.width} × ${m.height}px` : "—";
-  $("#lbOpen").href = m.source_url; $("#lbDl").href = m.image;
+  $("#lbSize").textContent = (m.width ? `${m.width} × ${m.height}px` : "—") + (m.duration ? ` · ${m.duration}s clip` : "");
+  $("#lbOpen").href = m.source_url; $("#lbDl").href = m.video || m.image;
   const lv = $("#lbVote"); lv.innerHTML = ""; const vb = voteBtn(m); vb.classList.add("big"); lv.appendChild(vb);
   $("#lb").hidden = false; document.body.style.overflow = "hidden";
   lbId = m.id; history.replaceState(null, "", "#m=" + encodeURIComponent(m.id));
@@ -291,7 +318,7 @@ function openLb(i) {
   window.Lib?.lightbox(m);
 }
 let lbId = null;
-function closeLb() { if (!$("#lb").hidden) { lbId = null; writeHash(); } closeShare(); $("#lb").hidden = true; document.body.style.overflow = ""; $("#lbImg").style.transform = ""; }
+function closeLb() { if (!$("#lb").hidden) { lbId = null; writeHash(); } closeShare(); $("#lbVid").pause(); $("#lb").hidden = true; document.body.style.overflow = ""; $("#lbImg").style.transform = ""; }
 let rz, lastW = innerWidth;
 window.addEventListener("resize", () => {   // ignore height-only changes (mobile URL bar show/hide)
   if (innerWidth === lastW) return; lastW = innerWidth; clearTimeout(rz); rz = setTimeout(render, 150);

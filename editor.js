@@ -388,7 +388,7 @@
   async function open(m) {
     if (!m) return;
     const el = $("#editor") || build(), seq = ++openSeq;
-    meme = m; img = null; $("#edSrc").textContent = m.title;
+    meme = m; img = null; $("#edSrc").textContent = m.title + (m.video || /\.gif$/i.test(m.image) ? " · captions a still frame" : "");
     el.hidden = false; el.classList.add("loading"); document.body.style.overflow = "hidden";
     boxes = []; base = null; stroke = null; select(-1);
     cv.width = m.width || 600; cv.height = m.height || 600; ctx.clearRect(0, 0, cv.width, cv.height);

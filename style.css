@@ -442,3 +442,12 @@ button,.btn,a.btn,.tag,.cat{touch-action:manipulation;-webkit-tap-highlight-colo
 .lb-list small{color:var(--muted);font-size:12px}
 .lb-list b{color:var(--accent);white-space:nowrap}
 @media (max-width:640px){.lb-tabs{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;margin:0 -2px}.lb-tabs button{flex:none;min-height:44px}}
+/* ---- GIF / video clips ---- */
+.card .imgwrap,.card .ph{position:relative}
+.card video.clip{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .2s;pointer-events:none;background:transparent}
+.card video.clip.on{opacity:1}
+.anim-badge{position:absolute;left:8px;bottom:8px;z-index:2;background:#000b;color:#fff;font-size:11px;font-weight:700;letter-spacing:.04em;padding:2px 8px;border-radius:999px;pointer-events:none;transition:opacity .2s}
+.card video.clip.on ~ .anim-badge,.card .anim-badge:has(~ video.clip.on){opacity:0}
+#lbVid{max-width:100%;max-height:calc(100vh - 60px);background:#000;display:block}
+@media (max-width:900px){#lbVid{max-height:55vh}}
+@media (max-width:640px){#lbVid{max-height:100%;width:100%}}

@@ -70,3 +70,16 @@ Stats page all stay hidden until `supabase/features.sql` has been run once in th
 for the `mv_features()` function). To moderate, open the Supabase dashboard → Table editor → `submissions`, and set
 `status` to `approved` (the meme shows up in the Community gallery) or `rejected`. Reports are in the `reports`
 table. `scripts/moderate.py` does the same from the command line if you ever want to use a service key (optional).
+
+## GIFs & videos
+Animated memes are stored as small H.264 MP4s in `videos/` (no audio, ≤720p, ≤15 s) with a poster frame in `images/` and a
+480 px thumbnail in `thumbs/`; entries carry `video`, `duration` and the `gif` tag (sidebar Spotlight "GIFs & Videos", `#tag=gif`).
+The grid shows the poster and plays the clip muted on hover (mouse) or while on screen (touch, at most two at once); the
+lightbox plays it with controls. The caption editor captions the poster (still) frame. Add more with
+`scripts/fetch_gifs.py` (Imgflip GIF templates, Reddit GIF/v.redd.it posts; big GIFs are converted to MP4) and review the poster
+frames before committing.
+
+## Battles, leaderboards, moderation (supabase/features2.sql)
+`#battle` shows two memes side by side; picks update Elo ratings through `battle_vote()`. `#leaderboard` has Today / This week /
+All time (votes), Creators and Battles tabs. `moderate.html` (not linked from the site) is the moderation page: log in with the
+passphrase set via `select public.mod_set_passphrase('…');` in the SQL editor.
