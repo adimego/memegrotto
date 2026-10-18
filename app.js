@@ -245,6 +245,9 @@ function renderMore() {
     sb.innerHTML = '<svg viewBox="0 0 24 24" width="15" height="15" aria-hidden="true"><path fill="currentColor" d="M18 16a3 3 0 0 0-2.2 1l-7-4a3 3 0 0 0 0-2l7-4A3 3 0 1 0 15 5l-7 4a3 3 0 1 0 0 6l7 4a3 3 0 1 0 3-3z"/></svg>';
     sb.onclick = e => { e.stopPropagation(); share(m, sb); };
     c.querySelector(".row").insertBefore(sb, c.querySelector(".src"));
+    const eb = document.createElement("button"); eb.className = "share edit"; eb.title = "Make your own caption"; eb.setAttribute("aria-label", "Caption " + m.title);
+    eb.textContent = "✏️"; eb.onclick = e => { e.stopPropagation(); MemeEditor.open(m); };
+    c.querySelector(".row").insertBefore(eb, c.querySelector(".src"));
     const img = c.querySelector("img");
     img.onload = () => { img.classList.add("ld"); img.parentNode.classList.remove("ph"); };
     c.onclick = () => openLb(i);
@@ -304,6 +307,7 @@ $("#lbClose").onclick = closeLb;
 $("#lbPrev").onclick = () => openLb(idx - 1);
 $("#lbNext").onclick = () => openLb(idx + 1);
 $("#lb").onclick = e => { if (e.target.id === "lb") closeLb(); };
+$("#lbEdit").onclick = e => { e.stopPropagation(); MemeEditor.open(view[idx]); };
 $("#lbShare").onclick = e => { e.stopPropagation(); share(view[idx], e.currentTarget); };
 
 // ---- Sharing: Web Share API on phones/tablets (with the image file when supported), share menu elsewhere ----
