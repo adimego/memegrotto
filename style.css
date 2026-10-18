@@ -362,3 +362,36 @@ button,.btn,a.btn,.tag,.cat{touch-action:manipulation;-webkit-tap-highlight-colo
 .install-btn img{width:36px;height:36px;border-radius:9px}
 .install-btn span{display:flex;flex-direction:column}
 .install-btn small{font-weight:400;font-size:12px;color:var(--muted)}
+/* ---- community: modals, forms, stats ---- */
+.mv-modal-bd{position:fixed;inset:0;z-index:90;background:#07060cb3}
+.mv-modal{position:fixed;z-index:91;left:50%;top:50%;transform:translate(-50%,-50%);width:min(440px,calc(100vw - 24px));max-height:calc(100vh - 32px);overflow:auto;
+  background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:14px 16px 16px;box-shadow:0 24px 60px #000c}
+.mv-modal .sm-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
+.mv-modal .sm-x{background:none;border:0;color:var(--muted);font-size:16px;cursor:pointer;width:36px;height:36px;border-radius:50%}
+.mv-form{display:flex;flex-direction:column;gap:12px}
+.mv-form > label{display:flex;flex-direction:column;gap:6px;font-size:13px;color:var(--muted)}
+.mv-form input:not([type=checkbox]):not([type=file]),.mv-form select,.mv-form textarea{background:var(--bg);border:1px solid var(--line);color:var(--text);border-radius:10px;padding:10px 12px;font:inherit;font-size:15px}
+.mv-form .btn{min-height:44px}
+.mv-form .muted{margin:0}
+.mv-check{flex-direction:row!important;align-items:flex-start;gap:10px!important;color:var(--text)!important}
+.mv-check input{width:20px;height:20px;flex:none;accent-color:var(--accent);margin-top:1px}
+.mv-drop{position:relative;border:2px dashed var(--line);border-radius:12px;padding:16px;text-align:center;cursor:pointer;color:var(--text)!important}
+.mv-drop input{position:absolute;inset:0;opacity:0;cursor:pointer}
+.mv-drop span{display:flex;flex-direction:column;gap:4px;font-weight:600}
+.mv-drop small{font-weight:400;color:var(--muted)}
+.mv-drop img,.mv-prev{max-width:100%;max-height:220px;border-radius:10px;margin:8px auto 0;display:block;object-fit:contain}
+.mv-drop img[hidden]{display:none}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;margin-bottom:24px}
+.stat-col{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:12px}
+.stat-col h3{margin:0 0 8px;font-size:15px}
+.stat-col ol{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:4px}
+.stat-col button{display:flex;align-items:center;gap:10px;width:100%;background:none;border:0;color:var(--text);padding:6px;border-radius:10px;cursor:pointer;text-align:left;font:inherit;font-size:13px}
+.stat-col button:hover{background:var(--panel2)}
+.stat-col img{width:40px;height:40px;object-fit:cover;border-radius:8px;flex:none}
+.stat-col span{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.stat-col b{color:var(--accent)}
+.rep-btn{color:var(--muted)}
+@media (max-width:640px){
+  .mv-modal{left:0;right:0;top:auto;bottom:0;transform:none;width:auto;max-height:90vh;border-radius:20px 20px 0 0;padding-bottom:calc(16px + env(safe-area-inset-bottom))}
+}
+#edPost[hidden],.btn[hidden]{display:none!important}

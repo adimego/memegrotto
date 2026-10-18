@@ -88,7 +88,7 @@ fetch("memes.json").then(r => r.json()).then(d => {
   loadVotes().then(() => { if (votesOk) { buildSidebar(); if (state.sort === "popular" || state.top) render(); } window.Lib?.votesReady(); });
 });
 
-const visible = () => memes.filter(m => state.nsfw || !m.nsfw);
+const visible = () => memes.filter(m => (state.nsfw || !m.nsfw) && (!m.community || state.list === "community"));
 
 // ---- Trending: date-based. Fresh-source memes (Reddit / Imgflip captioned / KYM galleries) added in the last
 // TREND_DAYS days, newest day first; within a day, round-robin across feeds by each feed's own popularity order.
@@ -436,8 +436,9 @@ function readHash() {
 function openById(id) {
   let i = view.findIndex(m => m.id === id);
   if (i < 0) {
-    const m = memes.find(x => x.id === id); if (!m) return toast("That meme isn't in the vault anymore 🤷");
-    Object.assign(state, { cat: null, tag: null, q: "", top: false, trend: false, list: null }); $("#q").value = "";
+    const m = memes.find(x => x.id === id);
+    if (!m) { if (id.startsWith("sub-") && window.MVCommunity && !MVCommunity.loaded()) return; return toast("That meme isn't in the vault anymore 🤷"); }
+    Object.assign(state, { cat: null, tag: null, q: "", top: false, trend: false, list: m.community ? "community" : null }); $("#q").value = "";
     if (m.nsfw && !state.nsfw) { state.nsfw = true; $("#nsfw").checked = true; }
     buildSidebar(); render(); i = view.findIndex(x => x.id === id);
   }

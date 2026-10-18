@@ -110,11 +110,14 @@
     box.querySelector('[data-a="exp"]').onclick = exportLib;
     box.querySelector('[data-a="imp"]').onclick = importLib;
   }
+  const LISTS = {};   // extra list views registered by other modules (community gallery, stats)
   function label(list) {
+    if (LISTS[list]) return LISTS[list].label();
     if (list === "fav") return "❤️ My favorites";
     const c = list.startsWith("c:") && col(list.slice(2)); return c ? "📁 " + c.name : "📁 Collection";
   }
   function items(list) {
+    if (LISTS[list]) return LISTS[list].items();
     const ids = list === "fav" ? lib.fav : (col(list.slice(2)) || { items: [] }).items;
     return ids.map(byId).filter(Boolean);
   }
@@ -124,7 +127,9 @@
     let tb = $("#listTools");
     if (!tb) { tb = document.createElement("div"); tb.id = "listTools"; tb.className = "list-tools"; $("#active").after(tb); }
     tb.innerHTML = ""; tb.hidden = !state.list;
-    if (state.list) {
+    $("#listPanel")?.remove();
+    if (state.list && LISTS[state.list]) { LISTS[state.list].render?.(tb); tb.hidden = !tb.childElementCount; }
+    else if (state.list) {
       const c = state.list.startsWith("c:") && col(state.list.slice(2));
       if (c) {
         tb.innerHTML = `<button class="btn" data-a="ren">✏️ Rename</button><button class="btn" data-a="del">🗑 Delete collection</button>`;
@@ -132,7 +137,8 @@
         tb.querySelector('[data-a="del"]').onclick = () => { if (confirm(`Delete the collection “${c.name}”? The memes stay in the vault.`)) { lib.cols = lib.cols.filter(x => x !== c); save(); go(null); toast("Collection deleted"); } };
       } else if (state.list === "fav") tb.innerHTML = '<span class="muted">Tap ❤ on any meme to save it here. Favorites live in this browser; use Export in the sidebar to back them up.</span>';
       if (!view.length && !state.q) $("#empty").querySelector("p").firstChild.textContent = state.list === "fav" ? "No favorites yet. " : "This collection is empty. ";
-    } else $("#empty").querySelector("p").firstChild.textContent = "No memes match that. ";
+    }
+    if (!state.list) $("#empty").querySelector("p").firstChild.textContent = "No memes match that. ";
     motd();
     const terms = norm(state.q).split(/\s+/).filter(Boolean);
     if (terms.length) document.querySelectorAll("#grid .card").forEach(markText);
@@ -160,7 +166,7 @@
   function pickMotd() {
     const day = today(), cached = JSON.parse(localStorage.getItem("mv-motd") || "null");
     if (cached && cached.day === day && byId(cached.id)) return byId(cached.id);
-    const safe = memes.filter(m => !m.nsfw && !m.image.endsWith(".gif") && m.width >= 300);
+    const safe = memes.filter(m => !m.nsfw && !m.community && !m.image.endsWith(".gif") && m.width >= 300);
     const pool = new Map();
     safe.filter(m => vcount(m) > 0).sort((a, b) => vcount(b) - vcount(a) || a.rank - b.rank).slice(0, 40).forEach(m => pool.set(m.id, m));
     safe.slice().sort((a, b) => a.rank - b.rank).slice(0, 160).forEach(m => pool.set(m.id, m));
@@ -199,7 +205,7 @@
     const tpl = m.blank_template || (m.template_id && !m.captioned ? m.image : null);
     const ph = SIM?.h?.[m.id], sc = [];
     for (const x of memes) {
-      if (x === m || (x.nsfw && !state.nsfw)) continue;
+      if (x === m || x.community || (x.nsfw && !state.nsfw)) continue;
       let s = 0;
       const xt = x.blank_template || (x.template_id && !x.captioned ? x.image : null);
       if (tpl && xt === tpl) s += 6;                                     // same template
@@ -218,7 +224,7 @@
     box.innerHTML = sims.length ? `<h3>More like this</h3><div class="lb-more-row">${sims.map(x => `<button type="button" data-id="${esc(x.id)}" title="${esc(x.title)}"><img loading="lazy" src="${x.thumb || x.image}" alt="${esc(x.title)}"></button>`).join("")}</div>` : "";
     box.querySelectorAll("button[data-id]").forEach(b => b.onclick = e => { e.stopPropagation(); openById(b.dataset.id); });
   }
-  window.Lib = { sidebar, label, items, afterRender, decorateCard, lightbox, votesReady, similar, _lib: () => lib };
+  window.Lib = { lists: LISTS, sidebar, label, items, afterRender, decorateCard, lightbox, votesReady, similar, _lib: () => lib };
 })();
 
 // ---- Installable app (PWA): service worker + install button

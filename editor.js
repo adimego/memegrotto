@@ -71,8 +71,9 @@
             <button class="btn primary" id="edDl">⬇️ Download PNG</button>
             <button class="btn" id="edCopy">🖼️ Copy image</button>
             <button class="btn" id="edShare">↗ Share</button>
+            <button class="btn" id="edPost" hidden>🌍 Post to gallery</button>
           </div>
-          <p class="ed-note">Drag text on the image to move it. Everything happens on your device; nothing is uploaded.</p>
+          <p class="ed-note" id="edNote">Drag text on the image to move it. Everything happens on your device; nothing is uploaded.</p>
         </div>
       </div>`;
     document.body.appendChild(el);
@@ -363,17 +364,18 @@
     const b = await blob().catch(() => null); if (!b) return;
     const a = document.createElement("a"); a.href = URL.createObjectURL(b); a.download = fname();
     document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 4000); toast("Saved PNG ⬇️");
+    window.MVTrack?.(meme.id, "caption");
   }
   function copyImg() {
     if (!navigator.clipboard?.write || !window.ClipboardItem) return toast("Copying images isn't supported here, use Download");
     if (!img) return toast("Still loading…");
-    navigator.clipboard.write([new ClipboardItem({ "image/png": blob() })]).then(() => toast("Image copied 🖼️"), () => toast("Couldn't copy, try Download"));
+    navigator.clipboard.write([new ClipboardItem({ "image/png": blob() })]).then(() => { toast("Image copied 🖼️"); window.MVTrack?.(meme.id, "caption"); }, () => toast("Couldn't copy, try Download"));
   }
   async function shareImg() {
     const b = await blob().catch(() => null); if (!b) return;
     const f = new File([b], fname(), { type: "image/png" });
     if (navigator.share && navigator.canShare && navigator.canShare({ files: [f] })) {
-      try { await navigator.share({ files: [f], title: "My meme · MemeVault", text: "Made on MemeVault " + (typeof deepLink === "function" ? deepLink(meme) : location.href) }); return; }
+      try { await navigator.share({ files: [f], title: "My meme · MemeVault", text: "Made on MemeVault " + (typeof deepLink === "function" ? deepLink(meme) : location.href) }); window.MVTrack?.(meme.id, "caption"); return; }
       catch (e) { if (e.name === "AbortError") return; }
     }
     // no file sharing here: save the image and open the normal share menu for the template link
@@ -395,6 +397,7 @@
       fontReady = Promise.race([load, new Promise(r => setTimeout(r, 1500))]);
     }
     const im = new Image();
+    if (/^https?:/.test(m.image) && !m.image.startsWith(location.origin)) im.crossOrigin = "anonymous";   // community uploads (Supabase)
     const ok = await new Promise(res => { im.onload = () => res(true); im.onerror = () => res(false); im.src = m.image; });
     if (seq !== openSeq || el.hidden) return;               // user closed or opened another meme meanwhile
     el.classList.remove("loading");
@@ -419,5 +422,5 @@
     open(memeFor(btn));
   }, true);
   function close() { openSeq++; const el = $("#editor"); if (el) el.hidden = true; if ($("#lb").hidden) document.body.style.overflow = ""; drag = null; }
-  window.MemeEditor = { open, close, _state: () => ({ boxes, sel, w: cv && cv.width, h: cv && cv.height, tool, hist: hist.length, fut: fut.length, blank: usingBlank, hasBlank: !!(meme && meme.blank_template) }) };
+  window.MemeEditor = { open, close, blob, meme: () => meme, _state: () => ({ boxes, sel, w: cv && cv.width, h: cv && cv.height, tool, hist: hist.length, fut: fut.length, blank: usingBlank, hasBlank: !!(meme && meme.blank_template) }) };
 })();

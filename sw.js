@@ -5,7 +5,7 @@
 //  - versioned assets (?v=...), fonts, icons: cache-first (the URL changes whenever the content does)
 //  - images/thumbs: cache-first as they are viewed, capped at MAX_IMG entries
 //  - other origins (Supabase API, Imgflip, etc.): not touched
-const VERSION = "71535d0f99";
+const VERSION = "83efae45d4";
 const SHELL = `mv-shell-${VERSION}`, DATA = `mv-data-${VERSION}`, IMG = "mv-img-v1", MAX_IMG = 600;
 const CORE = ["./", "index.html", "memes.json", "manifest.webmanifest", "icons/icon-192.png"];
 self.addEventListener("install", e => {
