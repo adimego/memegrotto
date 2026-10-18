@@ -50,6 +50,7 @@
   "kym-jet-fuel-cant-melt-steel-beams",
   "kym-katy-t3h-pengu1n-of-d00m",
   "kym-kermit-sipping-tea-but-thats-none-of-my-business",
+  "kym-malfoid-female-draco-malfoy",
   "kym-memes",
   "kym-mocking-spongebob",
   "kym-momo",
@@ -197,11 +198,24 @@
   "reddit-1wbcdni",
   "reddit-1wfxckm",
   "reddit-1wlmtd1",
+  "reddit-1wn9p2r",
+  "reddit-1wst51q",
   "reddit-1wx19db",
+  "reddit-1wzbi3k",
   "reddit-1wzvvx6",
+  "reddit-1x0ehca",
   "reddit-1x2nl6l",
   "reddit-1x35ael",
+  "reddit-1x3evkc",
+  "reddit-1x3nlzw",
+  "reddit-1x3r4ju",
+  "reddit-1x4qzv7",
+  "reddit-1x4zghr",
+  "reddit-1x6p3ax",
+  "reddit-1x6pxkm",
   "reddit-1x7e7dq",
+  "reddit-1x7hb3a",
+  "reddit-1x8h66m",
   "reddit-cpmuiw",
   "reddit-dph2gh",
   "reddit-dsg30j",
@@ -210,12 +224,7 @@
   "reddit-f7l9lh",
   "reddit-fgpqqn",
   "reddit-hwvxrc",
-  "reddit-tc3wyb",
-  "reddit-1x0ehca",
-  "reddit-1wzbi3k",
-  "reddit-1wst51q",
-  "reddit-1x4zghr",
-  "reddit-1wn9p2r"
+  "reddit-tc3wyb"
  ],
  "overrides": {
   "kym-me-gusta": {
@@ -794,6 +803,428 @@
   },
   "1x3n8ia": {
    "nsfw": true
+  },
+  "kym-biddy-blas-scrib-doon": {
+   "category": "Gaming",
+   "add_tags": [
+    "star wars",
+    "galactic racer",
+    "scrib doon"
+   ]
+  },
+  "kym-youre-blatantly-just-not-me-nan": {
+   "category": "Animals",
+   "add_tags": [
+    "tiktok",
+    "dog",
+    "big bad wolf"
+   ]
+  },
+  "kym-ai-rumpelstiltskin-tip-toein-in-my-jordans": {
+   "category": "Absurd & Surreal",
+   "add_tags": [
+    "ai",
+    "rumpelstiltskin",
+    "jordans",
+    "tiktok"
+   ]
+  },
+  "kym-black-cat-clapping": {
+   "category": "Reaction",
+   "add_tags": [
+    "cat",
+    "clapping",
+    "ai",
+    "green screen"
+   ]
+  },
+  "kym-shocked-katie-britt-katie-britt-face-meme": {
+   "category": "Reaction",
+   "add_tags": [
+    "katie britt",
+    "politics",
+    "shocked"
+   ]
+  },
+  "kym-you-play-games-we-dont-play-games": {
+   "category": "Celebrities & Pop Culture",
+   "nsfw": true,
+   "add_tags": [
+    "karen",
+    "viral video"
+   ]
+  },
+  "kym-jean-philanthrope-jean-phil": {
+   "category": "Celebrities & Pop Culture",
+   "add_tags": [
+    "jean phil",
+    "tiktok",
+    "french"
+   ]
+  },
+  "kym-wawario-and-wawaluigi": {
+   "category": "Gaming",
+   "add_tags": [
+    "wario",
+    "waluigi",
+    "mario",
+    "nintendo"
+   ]
+  },
+  "kym-if-you-log-out-its-still-2007": {
+   "category": "Relatable Life",
+   "add_tags": [
+    "youtube",
+    "2007",
+    "nostalgia"
+   ]
+  },
+  "kym-thoughts-on-lanterns": {
+   "category": "Movies & TV",
+   "add_tags": [
+    "green lantern",
+    "lanterns",
+    "dc",
+    "exploitable"
+   ]
+  },
+  "imgflip-i-90oj5v": {
+   "category": "Relatable Life",
+   "add_tags": [
+    "hide the pain harold",
+    "life"
+   ]
+  },
+  "imgflip-i-90tnio": {
+   "category": "Food",
+   "title": "When the restaurant has no outdoor seating",
+   "add_tags": [
+    "restaurant",
+    "car"
+   ]
+  },
+  "imgflip-i-b3oyiy": {
+   "category": "Animals",
+   "title": "Trying to sleep after watching something scary",
+   "add_tags": [
+    "dog",
+    "scary",
+    "sleep"
+   ]
+  },
+  "imgflip-i-b3p5ou": {
+   "category": "Food",
+   "title": "Wing / X-Wing",
+   "add_tags": [
+    "chicken wings",
+    "star wars",
+    "pun"
+   ]
+  },
+  "imgflip-i-b3pn0x": {
+   "category": "Celebrities & Pop Culture",
+   "title": "Liberty Biberty vs. LiMu Emu & Doug commercials",
+   "add_tags": [
+    "drake",
+    "commercials",
+    "liberty mutual"
+   ]
+  },
+  "imgflip-i-b3onca": {
+   "category": "Tech & Science",
+   "title": "When the police get the new Teslas",
+   "add_tags": [
+    "tesla",
+    "police",
+    "cars"
+   ]
+  },
+  "imgflip-i-b3p0tz": {
+   "category": "Gaming",
+   "title": "Minecraft: one creeper vs. me with half a heart",
+   "add_tags": [
+    "minecraft",
+    "creeper"
+   ]
+  },
+  "1x8rhi1": {
+   "category": "History & Politics",
+   "title": "Survivorship bias galaxy brain: just armor the bombers everywhere",
+   "add_tags": [
+    "galaxy brain",
+    "survivorship bias",
+    "ww2"
+   ]
+  },
+  "1x8r8ud": {
+   "category": "Relatable Life",
+   "title": "\"The worst she can say is no\" / FB Marketplace engagement ring",
+   "add_tags": [
+    "dating",
+    "facebook marketplace",
+    "ring"
+   ]
+  },
+  "1x8w0gd": {
+   "category": "Relatable Life",
+   "title": "Wife: did you use my expensive shampoo? My balls:",
+   "nsfw": true,
+   "add_tags": [
+    "shampoo",
+    "marriage"
+   ]
+  },
+  "1x8ekjg": {
+   "category": "Tech & Science",
+   "title": "Tesla makes a flying car / European Christmas markets",
+   "add_tags": [
+    "tesla",
+    "elon",
+    "christmas markets"
+   ]
+  },
+  "1x8qp16": {
+   "category": "Relatable Life",
+   "title": "Average male activities on a random Saturday",
+   "add_tags": [
+    "fire",
+    "men",
+    "saturday"
+   ]
+  },
+  "1x8l7x7": {
+   "category": "Movies & TV",
+   "title": "Therapist: you gotta pump those numbers up",
+   "add_tags": [
+    "wolf of wall street",
+    "rookie numbers",
+    "dating"
+   ]
+  },
+  "1x8l867": {
+   "category": "Food",
+   "title": "Economy so bad KitKat comes in single sticks now",
+   "add_tags": [
+    "kitkat",
+    "economy",
+    "candy"
+   ]
+  },
+  "1x8muyv": {
+   "category": "History & Politics",
+   "title": "Five Nights at the White House",
+   "add_tags": [
+    "fnaf",
+    "white house",
+    "politics"
+   ]
+  },
+  "1x8bt8u": {
+   "category": "Reaction",
+   "title": "My tank of high-purity helium after the slightest inconvenience",
+   "add_tags": [
+    "helium",
+    "science",
+    "smirk"
+   ]
+  },
+  "1x8njmz": {
+   "category": "History & Politics",
+   "title": "Trump will declassify UFO reports... October 2026",
+   "add_tags": [
+    "trump",
+    "ufo",
+    "aliens"
+   ]
+  },
+  "1x8n4w2": {
+   "category": "Gaming",
+   "title": "Piracy bell curve",
+   "add_tags": [
+    "bell curve",
+    "piracy",
+    "wojak"
+   ]
+  },
+  "1x8e5n3": {
+   "category": "Cartoons & Anime",
+   "title": "28,000-year-old dildo discovered / WILMA!!!",
+   "nsfw": true,
+   "add_tags": [
+    "flintstones",
+    "wilma",
+    "archaeology"
+   ]
+  },
+  "1x8nr19": {
+   "category": "Cartoons & Anime",
+   "title": "When she says she's Lebanese but then mentions her boyfriend",
+   "add_tags": [
+    "kratos",
+    "god of war",
+    "pun"
+   ]
+  },
+  "1x8nytu": {
+   "category": "Tech & Science",
+   "title": "Me in 2029 after pushing the wrong button in my used Tesla",
+   "add_tags": [
+    "tesla",
+    "flying",
+    "redbull"
+   ]
+  },
+  "1x8ewf4": {
+   "add_tags": [
+    "python",
+    "indentation"
+   ]
+  },
+  "1x5mryb": {
+   "title": "Everything is O(1) to God",
+   "add_tags": [
+    "3sum",
+    "algorithms",
+    "big o"
+   ]
+  },
+  "1x3ryml": {
+   "title": "Well, at least they are honest about it (app changelog)",
+   "add_tags": [
+    "ai",
+    "changelog",
+    "app"
+   ]
+  },
+  "1x4pa8a": {
+   "title": "Caught writing a line of C++ by hand",
+   "add_tags": [
+    "c++",
+    "ai",
+    "ned stark"
+   ]
+  },
+  "1x7eld2": {
+   "title": "How to recognize a stroke: \"coding without looking at the code\"",
+   "add_tags": [
+    "vibe coding",
+    "stroke"
+   ]
+  },
+  "1x4o2ed": {
+   "title": "Programmers who force users to use a date picker",
+   "add_tags": [
+    "family guy",
+    "date picker",
+    "ux"
+   ]
+  },
+  "1x8mvpc": {
+   "title": "Linus denied C++... now it's easy to generate crap with it",
+   "add_tags": [
+    "linus torvalds",
+    "c++",
+    "ai"
+   ]
+  },
+  "1x5c39t": {
+   "title": "Nothing in gaming has tormented me like this Zuma toad",
+   "add_tags": [
+    "zuma",
+    "toad",
+    "popcap"
+   ]
+  },
+  "1x3yut1": {
+   "title": "Playing Fallout 3, having a blast!!!",
+   "add_tags": [
+    "fallout",
+    "pun",
+    "megaton"
+   ]
+  },
+  "1x3c084": {
+   "title": "30-year-old Mario game in my head vs. actual 30-year-old Mario game",
+   "add_tags": [
+    "mario",
+    "mario 64",
+    "nostalgia"
+   ]
+  },
+  "1x4ax0e": {
+   "title": "Vice City blimp is upon us",
+   "add_tags": [
+    "gta",
+    "vice city",
+    "blimp"
+   ]
+  },
+  "1x8fiik": {
+   "title": "\"I have tea if you want some\" / \"about who???\"",
+   "add_tags": [
+    "tea",
+    "gossip",
+    "texts"
+   ]
+  },
+  "1x73o9x": {
+   "add_tags": [
+    "tattoos",
+    "personality"
+   ]
+  },
+  "1x8t9xn": {
+   "category": "Work & School",
+   "title": "9-5 workers as soon as it hits 6-7pm on Sunday",
+   "add_tags": [
+    "sunday scaries",
+    "work",
+    "tony stark"
+   ]
+  },
+  "1x75y7g": {
+   "category": "History & Politics",
+   "add_tags": [
+    "police",
+    "cops"
+   ]
+  },
+  "1x6sypf": {
+   "title": "I have decided that my 20s are actually from 25-35",
+   "add_tags": [
+    "squirtle",
+    "pokemon",
+    "age"
+   ]
+  },
+  "1x61hwy": {
+   "title": "\"Is there a slot for me to play tonight? It's okay, I can wait.\"",
+   "add_tags": [
+    "gaming",
+    "lonely",
+    "discord"
+   ]
+  },
+  "1x7j9m0": {
+   "title": "Shadow has never beaten Sonic - \"the Shadow glaze needs to end\"",
+   "add_tags": [
+    "shadow",
+    "tweet"
+   ]
+  },
+  "1x6bymg": {
+   "title": "Eggman's Father's Day gift (Artist: @2003Nekotenshi)",
+   "add_tags": [
+    "eggman",
+    "fathers day"
+   ]
+  },
+  "1x3c8gb": {
+   "add_tags": [
+    "link",
+    "zelda",
+    "surge"
+   ]
   }
  },
  "ocr_allow": [],
@@ -2209,6 +2640,16 @@
    "blank": "images/blank-imgflip-2yrchx.jpg",
    "title": "dog vs werewolf",
    "from": "https://i.imgflip.com/2yrchx.jpg"
+  },
+  "imgflip-i-b3p0tz": {
+   "blank": "images/imgflip-234202281-aj-styles-undertaker.jpg",
+   "title": "AJ Styles & Undertaker",
+   "from": "https://imgflip.com/meme/234202281"
+  },
+  "reddit-1x8n4w2": {
+   "blank": "images/imgflip-533936279-bell-curve.jpg",
+   "title": "Bell Curve",
+   "from": "https://imgflip.com/meme/533936279"
   }
  },
  "blank_rejected": {
@@ -2377,6 +2818,8 @@
   "reddit-1wtbm3w": "imgflip:5jnoty:335348854/Stop-giving-me-your-toughest-battles",
   "reddit-1wm739i": "imgflip:4p8zx7:284274907/thank-you-for-changing-my-life",
   "reddit-1wmebf5": "imgflip:4p8zx7:284274907/thank-you-for-changing-my-life",
-  "reddit-1wxgaid": "imgflip:4p8zx7:284274907/thank-you-for-changing-my-life"
+  "reddit-1wxgaid": "imgflip:4p8zx7:284274907/thank-you-for-changing-my-life",
+  "imgflip-i-b3pn0x": "images/imgflip-181913649-drake-hotline-bling.jpg",
+  "imgflip-i-90oj5v": "imgflip:18ps27"
  }
 }
