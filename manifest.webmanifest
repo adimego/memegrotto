@@ -1,6 +1,6 @@
 {
-  "name": "MemeSpire",
-  "short_name": "MemeSpire",
+  "name": "MemeGrotto",
+  "short_name": "MemeGrotto",
   "description": "2,000+ categorized internet memes: search, favorite, caption and share.",
   "start_url": "./?source=pwa",
   "scope": "./",

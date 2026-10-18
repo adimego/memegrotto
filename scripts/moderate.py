@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Optional command-line moderation for MemeSpire community submissions.
+"""Optional command-line moderation for MemeGrotto community submissions.
 
 You do NOT need this: moderating in the Supabase dashboard (Table editor -> submissions -> set status to
 'approved' or 'rejected') does exactly the same thing. This script is only a convenience if you ever choose to

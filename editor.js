@@ -1,4 +1,4 @@
-// MemeSpire caption editor: canvas-based, runs fully in the browser (nothing is uploaded or stored).
+// MemeGrotto caption editor: canvas-based, runs fully in the browser (nothing is uploaded or stored).
 (() => {
   const $ = s => document.querySelector(s);
   const FONT = 'Impact, MemeAnton, "Arial Narrow Bold", sans-serif';
@@ -359,7 +359,7 @@
   }
 
   function blob() { if (!img) { toast("Still loading…"); return Promise.reject(new Error("not ready")); } draw(true); return new Promise(res => cv.toBlob(b => { draw(); res(b); }, "image/png")); }
-  const fname = () => "memespire-" + (meme ? meme.id.slice(0, 40) : "meme") + ".png";
+  const fname = () => "memegrotto-" + (meme ? meme.id.slice(0, 40) : "meme") + ".png";
   async function download() {
     const b = await blob().catch(() => null); if (!b) return;
     const a = document.createElement("a"); a.href = URL.createObjectURL(b); a.download = fname();
@@ -375,7 +375,7 @@
     const b = await blob().catch(() => null); if (!b) return;
     const f = new File([b], fname(), { type: "image/png" });
     if (navigator.share && navigator.canShare && navigator.canShare({ files: [f] })) {
-      try { await navigator.share({ files: [f], title: "My meme · MemeSpire", text: "Made on MemeSpire " + (typeof deepLink === "function" ? deepLink(meme) : location.href) }); window.MVTrack?.(meme.id, "caption"); return; }
+      try { await navigator.share({ files: [f], title: "My meme · MemeGrotto", text: "Made on MemeGrotto " + (typeof deepLink === "function" ? deepLink(meme) : location.href) }); window.MVTrack?.(meme.id, "caption"); return; }
       catch (e) { if (e.name === "AbortError") return; }
     }
     // no file sharing here: save the image and open the normal share menu for the template link

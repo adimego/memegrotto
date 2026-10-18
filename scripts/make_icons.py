@@ -19,7 +19,7 @@ display:flex;align-items:center;justify-content:center;gap:28px;box-shadow:0 20p
 .l{{width:200px;height:200px;flex:none}} h1{{margin:0;font-size:104px;color:#fffffe;letter-spacing:-3px;line-height:1}}
 h1 b{{background:linear-gradient(90deg,#ff8906,#e53170);-webkit-background-clip:text;color:transparent}}
 p{{margin:14px 0 0;white-space:nowrap;font-size:26px;font-weight:700;color:#ff8906}}</style></head><body><div class="g">{cells}</div>
-<div class="p"><div class="l">{SVG}</div><div><h1>Meme<b>Spire</b></h1><p>2,000+ memes · search · upvote · share</p></div></div></body></html>"""
+<div class="p"><div class="l">{SVG}</div><div><h1>Meme<b>Grotto</b></h1><p>2,000+ memes · search · upvote · share</p></div></div></body></html>"""
 with sync_playwright() as p:
     b = p.chromium.launch(executable_path="/usr/bin/google-chrome", args=["--no-sandbox", "--allow-file-access-from-files"])
     for name, n, r, s, omit in (("icon-192.png", 192, 40, 150, True), ("icon-512.png", 512, 104, 400, True),

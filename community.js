@@ -1,4 +1,4 @@
-// MemeSpire community features (Supabase): submissions + Community gallery, editor "Post to gallery", reports,
+// MemeGrotto community features (Supabase): submissions + Community gallery, editor "Post to gallery", reports,
 // view/share/caption/download events and a Stats page. Everything stays hidden until supabase/features.sql has been
 // run (detected through the mv_features() RPC), so this file is safe to ship first.
 (() => {
@@ -58,11 +58,11 @@
       }
       memes = memes.filter(m => !m.community);
       gallery = rows.filter(x => urls[x.image_path]).map((x, i) => {
-        const tags = [...(x.tags || []).map(t => String(t).toLowerCase().slice(0, 30)), "community", x.kind === "creation" ? "made on memespire" : "submitted"];
+        const tags = [...(x.tags || []).map(t => String(t).toLowerCase().slice(0, 30)), "community", x.kind === "creation" ? "made on memegrotto" : "submitted"];
         return { id: "sub-" + x.id, title: x.title, category: x.category && CAT_META[x.category] ? x.category : "Community", tags, community: true, kind: x.kind,
                  ...(/\.(mp4|webm)$/i.test(x.image_path) ? { video: urls[x.image_path], image: "", thumb: "", noEdit: true } : { image: urls[x.image_path], thumb: urls[x.image_path] }),
                  source: "Community", source_url: location.origin + location.pathname + "#m=sub-" + x.id,
-                 attribution: x.kind === "creation" ? "Made with the MemeSpire editor by a visitor" : "Submitted by a MemeSpire visitor",
+                 attribution: x.kind === "creation" ? "Made with the MemeGrotto editor by a visitor" : "Submitted by a MemeGrotto visitor",
                  date_added: (x.created_at || "").slice(0, 10), width: 0, height: 0, rank: 100000 + i,
                  hay: norm(x.title + " " + tags.join(" ") + " " + (x.category || "")) };
       });
@@ -173,7 +173,7 @@
         e.preventDefault(); const btn = f.querySelector("[type=submit]"); btn.disabled = true; btn.textContent = "Posting…";
         try {
           const small = blob.size > MAX ? await shrink(new File([blob], "meme.png", { type: "image/png" })) : blob;
-          await submit({ blob: small, title: f.title.value.trim(), tags: (t?.tags || []).filter(x => !["reddit", "fresh", "blank template", "community", "submitted", "made on memespire", "made on memevault"].includes(x)).slice(0, 8), category: t?.category && CAT_META[t.category] ? t.category : "", kind: "creation", creator: creatorOf(f) });
+          await submit({ blob: small, title: f.title.value.trim(), tags: (t?.tags || []).filter(x => !["reddit", "fresh", "blank template", "community", "submitted", "made on memegrotto", "made on memespire", "made on memevault"].includes(x)).slice(0, 8), category: t?.category && CAT_META[t.category] ? t.category : "", kind: "creation", creator: creatorOf(f) });
           closeModal(); toast("Posted! It'll show in the gallery once approved 🎉"); if (t) track(vidOf(t), "caption");
         } catch (err) { btn.disabled = false; btn.textContent = "🌍 Post to gallery"; toast(err.message || "Posting failed"); }
       };

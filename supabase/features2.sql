@@ -1,4 +1,4 @@
--- MemeSpire features, part 2: moderation (passphrase), hidden memes, leaderboards (vote log, creators),
+-- MemeGrotto features, part 2: moderation (passphrase), hidden memes, leaderboards (vote log, creators),
 -- meme battles (Elo), GIF/video submissions.
 -- Run supabase/features.sql first (once). Then paste this whole file into Supabase → SQL Editor → Run.
 -- Safe to re-run. The site detects it through public.mv_features2(); until then the new parts stay hidden.

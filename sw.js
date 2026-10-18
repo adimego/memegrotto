@@ -1,12 +1,12 @@
-// MemeSpire service worker. VERSION is rewritten by scripts/stamp_assets.py on every deploy, so each deploy installs a
+// MemeGrotto service worker. VERSION is rewritten by scripts/stamp_assets.py on every deploy, so each deploy installs a
 // new worker that drops old caches. Strategy:
 //  - pages (index.html) and data (*.json): network-first, revalidated (cache: "no-cache"), cached copy only when offline
 //    -> a new deploy is picked up on the next load, never stuck on a stale shell (stamped ?v= asset URLs change with it)
 //  - versioned assets (?v=...), fonts, icons: cache-first (the URL changes whenever the content does)
 //  - images/thumbs: cache-first as they are viewed, capped at MAX_IMG entries
 //  - other origins (Supabase API, Imgflip, etc.): not touched
-const VERSION = "f015617df4";
-const SHELL = `ms-shell-${VERSION}`, DATA = `ms-data-${VERSION}`, IMG = "ms-img-v1", MAX_IMG = 600;
+const VERSION = "3533dbe91e";
+const SHELL = `mg-shell-${VERSION}`, DATA = `mg-data-${VERSION}`, IMG = "mg-img-v1", MAX_IMG = 600;
 const CORE = ["./", "index.html", "memes.json", "manifest.webmanifest", "icons/icon-192.png"];
 self.addEventListener("install", e => {
   e.waitUntil((async () => {
@@ -23,12 +23,16 @@ self.addEventListener("install", e => {
 });
 self.addEventListener("activate", e => {
   e.waitUntil((async () => {
-    // keep the images viewed under the old MemeVault cache name (mv-img-v1) instead of re-downloading them
-    if (await caches.has("mv-img-v1")) {
-      const o = await caches.open("mv-img-v1"), n = await caches.open(IMG);
-      for (const r of (await o.keys()).slice(-MAX_IMG)) { const v = await o.match(r); if (v) await n.put(r, v); }
+    // keep the images viewed under the old MemeSpire (ms-img-v1) / MemeVault (mv-img-v1) cache names instead of re-downloading them
+    for (const old of ["ms-img-v1", "mv-img-v1"]) {
+      if (!(await caches.has(old))) continue;
+      try {
+        const o = await caches.open(old), n = await caches.open(IMG);
+        for (const r of (await o.keys()).slice(-MAX_IMG)) { const v = await o.match(r); if (v && !(await n.match(r))) await n.put(r, v); }
+      } catch (err) {}
     }
-    for (const k of await caches.keys()) if ((k.startsWith("mv-") || k.startsWith("ms-")) && k !== SHELL && k !== DATA && k !== IMG) await caches.delete(k);
+    // drop every old shell/data/image cache (old mg-* versions and all ms-* / mv-* caches from the previous brands)
+    for (const k of await caches.keys()) if (/^(mg|ms|mv)-/.test(k) && k !== SHELL && k !== DATA && k !== IMG) await caches.delete(k);
     await self.clients.claim();
   })());
 });

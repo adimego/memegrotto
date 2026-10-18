@@ -1,4 +1,4 @@
-// MemeSpire moderation page. Needs supabase/features2.sql and a passphrase set with
+// MemeGrotto moderation page. Needs supabase/features2.sql and a passphrase set with
 //   select public.mod_set_passphrase('...');   (Supabase SQL editor)
 // Every request sends the passphrase to security-definer RPCs, which check it against a bcrypt hash.
 (() => {

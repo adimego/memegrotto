@@ -1,6 +1,6 @@
-# MemeSpire: a categorized meme library
+# MemeGrotto: a categorized meme library
 
-Live at https://adimego.github.io/memespire/ (formerly MemeVault at /memevault/, which now redirects here).
+Live at https://adimego.github.io/memespire/ (renamed from MemeSpire, and before that MemeVault at /memevault/, which now redirects here).
 
 A static site (plain HTML/CSS/JS, no build step) that stores and browses popular internet memes.
 

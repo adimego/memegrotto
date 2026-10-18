@@ -1,4 +1,4 @@
-// MemeSpire: meme battles (#battle), leaderboards (#leaderboard) and site-wide hidden memes.
+// MemeGrotto: meme battles (#battle), leaderboards (#leaderboard) and site-wide hidden memes.
 // Battles work without the database (picks just aren't saved); ratings, leaderboards and hidden memes need
 // supabase/features2.sql, detected through the mv_features2() RPC.
 (() => {

@@ -18,7 +18,7 @@ Review the poster frames (contact-sheet them) before committing: same content ru
 """
 import datetime, html, json, os, re, subprocess, sys, tempfile, urllib.request
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-UA = {"User-Agent": "Mozilla/5.0 (MemeSpire fetch script)"}
+UA = {"User-Agent": "Mozilla/5.0 (MemeGrotto fetch script)"}
 MAX_SIDE, MAX_SECONDS = 720, 15
 
 def get(url):
