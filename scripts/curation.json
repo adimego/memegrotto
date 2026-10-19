@@ -2927,12 +2927,12 @@
    "from": "https://i.imgflip.com/am2i.jpg"
   },
   "imgflip-i-7ahy6f": {
-   "blank": "images/imgflip-5471748-wojak-feels-guy.jpg",
+   "blank": "images/imgflip-5471748-i-know-that-feel-bro.jpg",
    "title": "I Know That Feel Bro",
    "from": "https://imgflip.com/meme/5471748"
   },
   "imgflip-i-57um3n": {
-   "blank": "images/imgflip-5471748-wojak-feels-guy.jpg",
+   "blank": "images/imgflip-5471748-i-know-that-feel-bro.jpg",
    "title": "I Know That Feel Bro",
    "from": "https://imgflip.com/meme/5471748"
   },
@@ -2977,12 +2977,12 @@
    "from": "https://imgflip.com/meme/175540452"
   },
   "imgflip-i-83b6fe": {
-   "blank": "images/imgflip-61546-brace-yourselves-winter-is-coming.jpg",
+   "blank": "images/imgflip-61546-brace-yourselves-x-is-coming.jpg",
    "title": "Brace Yourselves, X Is Coming",
    "from": "https://imgflip.com/meme/61546"
   },
   "imgflip-i-an57up": {
-   "blank": "images/imgflip-61546-brace-yourselves-winter-is-coming.jpg",
+   "blank": "images/imgflip-61546-brace-yourselves-x-is-coming.jpg",
    "title": "Brace Yourselves, X Is Coming",
    "from": "https://imgflip.com/meme/61546"
   },
@@ -3012,7 +3012,7 @@
    "from": "https://imgflip.com/meme/1509839"
   },
   "imgflip-i-7o4tsk": {
-   "blank": "images/imgflip-100947-matrix-morpheus-what-if-i-told-you.jpg",
+   "blank": "images/imgflip-100947-matrix-morpheus.jpg",
    "title": "Matrix Morpheus",
    "from": "https://imgflip.com/meme/100947"
   },
@@ -3030,6 +3030,36 @@
    "blank": "images/imgflip-132769734-hard-to-swallow-pills.jpg",
    "title": "Hard to Swallow Pills",
    "from": "https://imgflip.com/meme/132769734"
+  },
+  "kym-confused-math-lady": {
+   "blank": "images/imgflip-92828109-calculating-meme-math-lady.jpg",
+   "title": "Calculating Meme (Math Lady)",
+   "from": "https://imgflip.com/meme/92828109"
+  },
+  "kym-keep-calm-and-carry-on": {
+   "blank": "images/imgflip-1202623-keep-calm-and-carry-on.jpg",
+   "title": "Keep Calm and Carry On",
+   "from": "https://imgflip.com/meme/1202623"
+  },
+  "kym-shut-up-and-take-my-money": {
+   "blank": "images/imgflip-176908-shut-up-and-take-my-money.jpg",
+   "title": "Shut Up and Take My Money",
+   "from": "https://imgflip.com/meme/176908"
+  },
+  "kym-courage-wolf": {
+   "blank": "images/imgflip-61517-courage-wolf.jpg",
+   "title": "Courage Wolf",
+   "from": "https://imgflip.com/meme/61517"
+  },
+  "reddit-1x44bge": {
+   "blank": "images/imgflip-326899798-that-s-the-neat-part-you-don-t.jpg",
+   "title": "That's the Neat Part, You Don't",
+   "from": "https://imgflip.com/meme/326899798"
+  },
+  "reddit-15znt9i": {
+   "blank": "images/imgflip-139917843-lisa-simpson-s-presentation.jpg",
+   "title": "Lisa Simpson's Presentation",
+   "from": "https://imgflip.com/meme/139917843"
   }
  },
  "blank_rejected": {
@@ -3070,9 +3100,9 @@
   "reddit-1x7gjk8": "images/imgflip-533936279-bell-curve.jpg",
   "reddit-1mqapn2": "images/imgflip-61585-bad-luck-brian.jpg",
   "reddit-1x6naxp": "imgflip:11v00f:63592143/Peter-parker-reading-a-book",
-  "reddit-1qnvad0": "imgflip:17811q:72598094/Ew-i-stepped-in-shit",
+  "reddit-1qnvad0": "images/imgflip-255101-cereal-guy.jpg",
   "reddit-1ws6zwp": "imgflip:17811q:72598094/Ew-i-stepped-in-shit",
-  "kym-ep-001650788ddbjpg": "imgflip:1bh8:The-Most-Interesting-Man-In-The-World",
+  "kym-ep-001650788ddbjpg": "images/imgflip-61532-the-most-interesting-man.jpg",
   "reddit-1phl7w3": "imgflip:1z6xa5:119575805/I-fear-no-man",
   "reddit-1sjylja": "imgflip:22ph3f:125480139/More-likely-than-you-think",
   "reddit-1t8avdz": "imgflip:22ph3f:125480139/More-likely-than-you-think",
@@ -3101,14 +3131,14 @@
   "reddit-1py9jn5": "imgflip:3umnr3:232844223/Soyboy-Vs-Yes-Chad",
   "reddit-1qztlfm": "imgflip:3umnr3:232844223/Soyboy-Vs-Yes-Chad",
   "reddit-1x6ghkn": "imgflip:3umnr3:232844223/Soyboy-Vs-Yes-Chad",
-  "reddit-1qoxa48": "imgflip:48sl64:256635436/Bilbo---Why-shouldnt-I-keep-it",
+  "reddit-1qoxa48": "images/imgflip-256635436-bilbo-why-shouldn-t-i-keep-it.jpg",
   "reddit-1ns022z": "imgflip:49kihp:257938333/Tom-and-Jerry-swordfight",
   "reddit-1r1v872": "imgflip:4aw5cg:260160784/Blank-Bingo",
   "reddit-1rlxtl4": "imgflip:4e0s3l:265415745/Did-you-mean",
   "reddit-1qurasq": "imgflip:4lts08:278525960/Never-ask-a-woman-her-age",
   "reddit-1wlbodz": "imgflip:4lts08:278525960/Never-ask-a-woman-her-age",
   "reddit-1wr2zn8": "imgflip:4lts08:278525960/Never-ask-a-woman-her-age",
-  "kym-yes-chad": "imgflip:4s6qnw:289208444/crying-wojak-vs-chad",
+  "kym-yes-chad": "images/imgflip-232844223-yes-chad.jpg",
   "reddit-1wt10gu": "imgflip:4s6qnw:289208444/crying-wojak-vs-chad",
   "reddit-1x33f36": "imgflip:4xjduf:298196439/I-wish-all-x-a-very-y",
   "kym-feels": "imgflip:5l1ue4:337688860/Happy-Wojak-vs-Depressed-Wojak",
@@ -3140,11 +3170,11 @@
   "reddit-1x44bge": "imgflip:5emlhy:326899798/Thats-the-neat-part-you-dont",
   "reddit-1opents": "imgflip:4p8zx7:284274907/thank-you-for-changing-my-life",
   "reddit-1qkvy48": "imgflip:3gwdow:209783120/But-It-Might-Work-For-Us",
-  "reddit-1r07a2k": "imgflip:3vxl21:235033561/Doof-If-I-had-a-Nickel",
+  "reddit-1r07a2k": "images/imgflip-235033561-doof-if-i-had-a-nickel.jpg",
   "reddit-1rqfpja": "imgflip:6u9m:He-Will-Never-Get-A-Girlfriend",
   "reddit-1ttuwft": "imgflip:6u9m:He-Will-Never-Get-A-Girlfriend",
   "reddit-1occlch": "imgflip:7qpayf:468113847/Marked-Safe-From-Big",
-  "reddit-1sfhbp2": "imgflip:7qpayf:468113847/Marked-Safe-From-Big",
+  "reddit-1sfhbp2": "images/imgflip-179437650-mom-can-we-have.jpg",
   "reddit-1w48tlo": "imgflip:7qpayf:468113847/Marked-Safe-From-Big",
   "reddit-1tf2p91": "imgflip:5jnoty:335348854/Stop-giving-me-your-toughest-battles",
   "reddit-1mrxnen": "imgflip:4tzqeu:292240758/Thank-you-for-saving-my-life",
@@ -3204,6 +3234,28 @@
   "imgflip-i-5p58j3": "images/imgflip-1509839-captain-picard-facepalm.jpg",
   "imgflip-i-ar7zpx": "images/imgflip-188390779-woman-yelling-at-cat.jpg",
   "imgflip-i-9t644i": "images/imgflip-175540452-unsettled-tom.jpg",
-  "imgflip-i-apfu65": "imgflip:2zr0r3"
+  "imgflip-i-apfu65": "imgflip:2zr0r3",
+  "kym-joseph-ducreux-archaic-rap": "images/imgflip-61535-joseph-ducreux.jpg",
+  "kym-facepalm": "images/imgflip-1509839-captain-picard-facepalm.jpg",
+  "kym-socially-awkward-penguin": "images/imgflip-61584-socially-awesome-awkward-penguin.jpg",
+  "kym-its-over-9000": "images/imgflip-1489292-over-9000.jpg",
+  "kym-draw-me-like-one-of-your-french-girls": "images/imgflip-245847805-oh-no-anyway.jpg",
+  "kym-feels-bad-man-sad-frog": "images/imgflip-36383069-pepe-the-frog.jpg",
+  "reddit-1x4x5jh": "images/imgflip-562391530-chill-guy.jpg",
+  "kym-ridiculously-photogenic-guy": "images/imgflip-101270-ridiculously-photogenic-guy.jpg",
+  "kym-gigachad": "images/imgflip-190327839-gigachad.jpg",
+  "reddit-1x5kdvr": "images/imgflip-179437650-mom-can-we-have.jpg",
+  "kym-slowpoke": "images/imgflip-61530-slowpoke.jpg",
+  "imgflip-i-azltw0": "images/imgflip-134797956-american-chopper-argument.jpg",
+  "reddit-1tv3720": "images/imgflip-119575805-i-fear-no-man.jpg",
+  "reddit-1rbidkn": "images/imgflip-255101-cereal-guy.jpg",
+  "reddit-1wqy01t": "images/imgflip-179437650-mom-can-we-have.jpg",
+  "reddit-1t4edme": "images/imgflip-235033561-doof-if-i-had-a-nickel.jpg",
+  "reddit-1vp4u84": "images/imgflip-322540291-soyjak-pointing.jpg",
+  "imgflip-i-60na2j": "images/imgflip-137362128-elmo-fire.jpg",
+  "reddit-1x5udqo": "images/imgflip-179437650-mom-can-we-have.jpg",
+  "reddit-1ww5lz7": "images/imgflip-1009362-mother-of-god.jpg",
+  "reddit-1x5127g": "images/imgflip-179437650-mom-can-we-have.jpg",
+  "reddit-1ww3y7h": "images/imgflip-179437650-mom-can-we-have.jpg"
  }
 }

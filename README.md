@@ -63,6 +63,11 @@ Thumbnails need Pillow (`pip install pillow`).
 - GIFs & videos: Imgflip GIF templates (imgflip.com/gif-templates), Tenor public search pages (tenor.com/search/...), Reddit RSS of
   r/reactiongifs, r/HighQualityGifs, r/gifs, r/MemeVideos, r/dankvideos and r/SonicTheHedgehog (each entry keeps its source URL and credit)
 
+- Meme canon (Oct 2026): a checklist of ~320 famous formats (Imgflip top-all-time templates, KYM old-school/rage/advice-animal
+  entries) was checked against the library by title/tag regex and dHash; the gaps were filled with clean Imgflip templates
+  (`template_id`, ids `imgflip-<id>-<slug>`), the most-upvoted captions from each template's imgflip.com/meme page (`imgflip-i-<id>`)
+  and KYM entry images (`kym-<slug>`). They carry `"feed": "classics"` and the `classic` tag (sidebar Spotlight "Meme canon").
+
 All memes belong to their respective creators; each entry records its source URL.
 
 ## Community features (Supabase)
