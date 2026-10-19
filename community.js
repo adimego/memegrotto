@@ -29,9 +29,9 @@
   // hook into the app: lightbox views, shares, downloads
   const cur = () => typeof lbCur === "function" ? lbCur() : view[idx];
   const _openLb = openLb; openLb = function (i, step) { _openLb(i, step); const m = cur(); if (m) { track(vidOf(m), "view"); lbExtras(m); } };
-  const _share = share; share = function (m, a) { track(vidOf(m), "share"); return _share(m, a); };
+  const _share = share; share = function (m, a) { if (m) track(vidOf(m), "share"); return _share(m, a); };
   document.addEventListener("click", e => {
-    const a = e.target.closest && e.target.closest("#lbDl, #shareMenu [data-a=dl]"); if (!a || !cur()) return;
+    const a = e.target.closest && e.target.closest("#lbDl"); if (!a || !cur()) return;
     track(vidOf(cur()), "download");
   }, true);
 

@@ -105,3 +105,16 @@ with ffmpeg. Run `scripts/stamp_assets.py` (and `build_similar.py`) before commi
 `#battle` shows two memes side by side; picks update Elo ratings through `battle_vote()`. `#leaderboard` has Today / This week /
 All time (votes), Creators and Battles tabs. `moderate.html` (not linked from the site) is the moderation page: log in with the
 passphrase set via `select public.mod_set_passphrase('…');` in the SQL editor.
+
+## Emoji reactions (supabase/features3.sql)
+😂 💀 🔥 😭 ❤️ 👎 on every meme/clip/community submission (viewer row + top-2 summary on grid cards, "Most reacted" page
+under Play). Counts live in `public.reactions`, written only via the `react` / `unreact` RPCs (validated, never below 0,
+rate-limited per hashed client key through the private `reaction_log`). The site probes `mv_features3()` and keeps the UI
+hidden until the file has been run once in the Supabase SQL editor (safe to re-run).
+
+## Sharing
+One tap, image only: phones use the Web Share API with `{ files: [file] }` and nothing else (no title/text/url). Stills share
+the original JPG/PNG (WebP re-encoded to PNG if the platform refuses it), GIF clips share the GIF, clips with sound the MP4,
+the editor shares the rendered PNG. The file is prepared when the viewer opens / the finger goes down so `navigator.share`
+runs inside the tap. Without file sharing (desktop): copy the PNG to the clipboard ("Image copied"), else download. There is
+no link/text fallback and no share menu.

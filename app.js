@@ -260,7 +260,7 @@ function renderMore() {
     c.querySelector(".row").insertBefore(voteBtn(m), c.querySelector(".src"));
     const sb = document.createElement("button"); sb.className = "share"; sb.title = "Share"; sb.setAttribute("aria-label", "Share " + m.title);
     sb.innerHTML = '<svg viewBox="0 0 24 24" width="15" height="15" aria-hidden="true"><path fill="currentColor" d="M18 16a3 3 0 0 0-2.2 1l-7-4a3 3 0 0 0 0-2l7-4A3 3 0 1 0 15 5l-7 4a3 3 0 1 0 0 6l7 4a3 3 0 1 0 3-3z"/></svg>';
-    sb.onclick = e => { e.stopPropagation(); share(m, sb); };
+    sb.dataset.share = m.id; sb.onclick = e => { e.stopPropagation(); share(m); };
     c.querySelector(".row").insertBefore(sb, c.querySelector(".src"));
     const eb = document.createElement("button"); eb.className = "share edit"; eb.title = "Make your own caption"; eb.setAttribute("aria-label", "Caption " + m.title);
     eb.textContent = "✏️"; eb.dataset.edit = m.id; eb.type = "button";   // click handled by editor.js (delegated)
@@ -345,7 +345,7 @@ function openLb(i, step) {
 }
 let lbId = null;
 function resetLbMedia() { $("#lbImg").style.transform = ""; $("#lbVid").style.transform = ""; }
-function closeLb() { if (!$("#lb").hidden) { lbId = null; writeHash(); } closeShare(); $("#lbVid").pause(); $("#lb").hidden = true; document.body.style.overflow = ""; resetLbMedia(); lbList = []; lbHopped = false; idx = -1; }
+function closeLb() { if (!$("#lb").hidden) { lbId = null; writeHash(); } $("#lbVid").pause(); $("#lb").hidden = true; document.body.style.overflow = ""; resetLbMedia(); lbList = []; lbHopped = false; idx = -1; }
 let rz, lastW = innerWidth;
 window.addEventListener("resize", () => {   // ignore height-only changes (mobile URL bar show/hide)
   if (innerWidth === lastW) return; lastW = innerWidth; clearTimeout(rz); rz = setTimeout(render, 150);
@@ -373,76 +373,95 @@ $("#lbClose").onclick = closeLb;
 $("#lbPrev").onclick = () => lbStep(-1);
 $("#lbNext").onclick = () => lbStep(1);
 $("#lb").onclick = e => { if (e.target.id === "lb") closeLb(); };
-$("#lbShare").onclick = e => { e.stopPropagation(); share(lbCur(), e.currentTarget); };
+$("#lbShare").onclick = e => { e.stopPropagation(); share(lbCur()); };
 
-// ---- Sharing: Web Share API on phones/tablets (with the image file when supported), share menu elsewhere ----
-const blobCache = new Map();
-function prefetchBlob(m) {
-  if (blobCache.has(m.id) || !navigator.canShare) return;
-  const p = fetch(m.image).then(r => r.ok ? r.blob() : null).catch(() => null);
-  blobCache.set(m.id, p); p.then(b => blobCache.set(m.id, b));
+// ---- One-tap sharing: shares ONLY the image/clip file (no title, text or link). Phones/tablets: Web Share API Level 2
+// with files: [file]. The File is prepared ahead (viewer open, pointerdown on a share button) so navigator.share runs
+// straight from the tap (iOS Safari needs the user gesture). No file sharing (desktop): copy the image to the clipboard
+// as PNG, or download the file (GIFs/clips, or when the clipboard is unavailable). Never falls back to a link or text.
+const fileCache = new Map();          // source url -> File | Promise<File|null> | null
+const MIME = { jpg: "image/jpeg", jpeg: "image/jpeg", png: "image/png", gif: "image/gif", webp: "image/webp", mp4: "video/mp4", webm: "video/webm" };
+const EXT = Object.fromEntries(Object.entries(MIME).map(([k, v]) => [v, k === "jpeg" ? "jpg" : k]));
+// what to share: clips with sound -> the MP4; animated memes with a GIF -> the GIF (one animated image); else the image/clip
+const shareSrc = m => m.video && (m.audio || !/\.gif(\?|$)/i.test(m.image || "")) ? m.video : (m.image || m.video);
+const slug = m => (m.title || m.id || "meme").toLowerCase().normalize("NFKD").replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "").slice(0, 50) || "meme";
+const canShareFiles = f => { try { return !!(navigator.share && navigator.canShare && navigator.canShare({ files: [f] })); } catch (e) { return false; } };
+function prepFile(m) {
+  const src = m && shareSrc(m); if (!src) return Promise.resolve(null);
+  const c = fileCache.get(src); if (c !== undefined) return Promise.resolve(c);
+  const p = fetch(src).then(r => r.ok ? r.blob() : null).then(async b => {
+    if (!b) return null;
+    const ext0 = (src.split("?")[0].match(/\.(\w+)$/) || [])[1]?.toLowerCase();
+    let type = MIME[ext0] && (!b.type || b.type === "application/octet-stream" || b.type === "binary/octet-stream") ? MIME[ext0] : (b.type || MIME[ext0] || "image/jpeg");
+    let f = new File([b], `${slug(m)}.${EXT[type] || ext0 || "jpg"}`, { type });
+    // keep the original format when the platform accepts it; otherwise re-encode stills (e.g. WebP) as PNG
+    if (navigator.canShare && !canShareFiles(f) && type.startsWith("image/") && type !== "image/png" && type !== "image/gif") {
+      const png = await toPng(b).catch(() => null); if (png) f = new File([png], `${slug(m)}.png`, { type: "image/png" });
+    }
+    return f;
+  }).catch(() => null);
+  fileCache.set(src, p); p.then(f => fileCache.set(src, f));
+  return p;
+}
+const prefetchBlob = m => { if (m && navigator.share && navigator.canShare) prepFile(m); };   // viewer open: get the tap ready
+function toPng(b) {
+  return b.type === "image/png" ? Promise.resolve(b) : createImageBitmap(b).then(bm => {
+    const c = document.createElement("canvas"); c.width = bm.width; c.height = bm.height; c.getContext("2d").drawImage(bm, 0, 0);
+    return new Promise((res, rej) => c.toBlob(x => x ? res(x) : rej(new Error("png")), "image/png"));
+  });
 }
 const touchy = () => matchMedia("(pointer: coarse)").matches;
-async function share(m, anchor) {
-  const url = deepLink(m), title = m.title + " · MemeGrotto";
-  if (navigator.share && touchy()) {
-    const b = blobCache.get(m.id);
-    const data = { title, text: m.title, url };
-    if (b instanceof Blob) {
-      const f = new File([b], m.image.split("/").pop(), { type: b.type || "image/jpeg" });
-      if (navigator.canShare && navigator.canShare({ files: [f] })) data.files = [f];
-    } else prefetchBlob(m);
-    try { await navigator.share(data); return; }
-    catch (e) { if (e.name === "AbortError") return; if (data.files) { try { delete data.files; await navigator.share(data); return; } catch (e2) { if (e2.name === "AbortError") return; } } }
-  }
-  openShare(m, anchor);
+const wantsFileShare = () => !!(navigator.share && navigator.canShare) && touchy();
+function saveFile(f) {
+  const a = document.createElement("a"); a.href = URL.createObjectURL(f); a.download = f.name;
+  document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 4000);
 }
+// Share one File (already prepared). Used by the viewer, grid cards, Meme of the Day and the editor.
+function shareFile(f, after) {
+  return navigator.share({ files: [f] }).then(() => after && after(), e => {
+    if (e && e.name === "AbortError") return;                       // user closed the sheet
+    if (e && e.name === "NotAllowedError") return toast("Tap share again 📲");   // gesture expired while the file loaded
+    fallbackFile(f);
+  });
+}
+// No file sharing: stills -> clipboard PNG (toast "Image copied"), otherwise / on failure -> download
+function fallbackFile(f) {
+  if (f.type.startsWith("image/") && f.type !== "image/gif" && navigator.clipboard?.write && window.ClipboardItem)
+    return navigator.clipboard.write([new ClipboardItem({ "image/png": toPng(f) })]).then(() => toast("Image copied 🖼️"), () => { saveFile(f); toast("Image downloaded ⬇️"); });
+  saveFile(f); toast(f.type.startsWith("video/") ? "Clip downloaded ⬇️" : "Image downloaded ⬇️");
+}
+function share(m) {
+  if (!m) return;
+  const src = shareSrc(m), c = fileCache.get(src);
+  if (wantsFileShare()) {
+    if (c instanceof File && canShareFiles(c)) return shareFile(c);          // synchronous from the tap: works on iOS
+    return prepFile(m).then(f => {
+      if (!f) return toast("Couldn't load the image, try again");
+      return canShareFiles(f) ? shareFile(f) : fallbackFile(f);
+    });
+  }
+  // desktop: clipboard first; the ClipboardItem takes a promise so Safari keeps the gesture while the image loads
+  if (!m.video && !/\.gif(\?|$)/i.test(src) && navigator.clipboard?.write && window.ClipboardItem) {
+    const png = (c instanceof File ? Promise.resolve(c) : prepFile(m)).then(f => { if (!f) throw new Error("load"); return toPng(f); });
+    return navigator.clipboard.write([new ClipboardItem({ "image/png": png })]).then(() => toast("Image copied 🖼️"),
+      () => prepFile(m).then(f => { if (f) { saveFile(f); toast("Image downloaded ⬇️"); } else toast("Couldn't load the image"); }));
+  }
+  return prepFile(m).then(f => f ? fallbackFile(f) : toast("Couldn't load the image"));
+}
+// warm the file as the finger/mouse goes down on any share button (grid cards, MOTD), before the click fires
+document.addEventListener("pointerdown", e => {
+  const b = e.target.closest && e.target.closest("[data-share]"); if (!b) return;
+  const m = memes.find(x => x.id === b.dataset.share) || (b.id === "lbShare" && lbCur()); if (m) prepFile(m);
+}, true);
 function copyText(s) {
   if (navigator.clipboard?.writeText) return navigator.clipboard.writeText(s);
   const ta = document.createElement("textarea"); ta.value = s; ta.style.position = "fixed"; ta.style.opacity = "0";
   document.body.appendChild(ta); ta.select(); const ok = document.execCommand("copy"); ta.remove();
   return ok ? Promise.resolve() : Promise.reject();
 }
-function pngBlob(src) {
-  return fetch(src).then(r => r.blob()).then(b => b.type === "image/png" ? b : createImageBitmap(b).then(bm => {
-    const c = document.createElement("canvas"); c.width = bm.width; c.height = bm.height; c.getContext("2d").drawImage(bm, 0, 0);
-    return new Promise(res => c.toBlob(res, "image/png"));
-  }));
-}
-function openShare(m, anchor) {
-  const menu = $("#shareMenu"), url = deepLink(m), u = encodeURIComponent(url), t = encodeURIComponent(m.title);
-  const nets = [["𝕏", "X / Twitter", `https://twitter.com/intent/tweet?text=${t}&url=${u}`], ["👽", "Reddit", `https://www.reddit.com/submit?url=${u}&title=${t}`],
-    ["📘", "Facebook", `https://www.facebook.com/sharer/sharer.php?u=${u}`], ["💬", "WhatsApp", `https://wa.me/?text=${t}%20${u}`],
-    ["✈️", "Telegram", `https://t.me/share/url?url=${u}&text=${t}`]];
-  menu.innerHTML = `<div class="sm-head"><b>Share meme</b><button class="sm-x" aria-label="Close share menu">✕</button></div>
-    <div class="sm-url"><input readonly value="${esc(url)}" aria-label="Meme link"></div>
-    <button data-a="link">🔗 Copy link</button>
-    ${navigator.clipboard?.write && window.ClipboardItem ? '<button data-a="img">🖼️ Copy image</button>' : ""}
-    <a data-a="dl" href="${m.image}" download>⬇️ Download</a>
-    ${navigator.share ? '<button data-a="native">📲 More apps…</button>' : ""}
-    <div class="sm-nets">${nets.map(([i, n, h]) => `<a href="${h}" target="_blank" rel="noopener" title="Share to ${n}"><span>${i}</span>${n}</a>`).join("")}</div>`;
-  menu.querySelector(".sm-x").onclick = closeShare;
-  menu.querySelector('[data-a="link"]').onclick = () => copyText(url).then(() => { toast("Link copied 🔗"); closeShare(); }, () => toast(url));
-  const ib = menu.querySelector('[data-a="img"]');
-  if (ib) ib.onclick = () => navigator.clipboard.write([new ClipboardItem({ "image/png": pngBlob(m.image) })])
-    .then(() => { toast("Image copied 🖼️"); closeShare(); }, () => toast("Couldn't copy the image here, try Download"));
-  const nb = menu.querySelector('[data-a="native"]');
-  if (nb) nb.onclick = () => navigator.share({ title: m.title, url }).catch(() => {});
-  menu.querySelectorAll(".sm-nets a, [data-a=dl]").forEach(a => a.addEventListener("click", () => setTimeout(closeShare, 50)));
-  menu.hidden = false; $("#shareBackdrop").hidden = false;
-  if (!isPhone() && anchor) {   // desktop: popover next to the button, kept on screen
-    const r = anchor.getBoundingClientRect(), w = menu.offsetWidth, h = menu.offsetHeight;
-    menu.style.left = Math.max(8, Math.min(innerWidth - w - 8, r.right - w)) + "px";
-    menu.style.top = (r.bottom + h + 8 < innerHeight ? r.bottom + 6 : Math.max(8, r.top - h - 6)) + "px";
-  } else { menu.style.left = ""; menu.style.top = ""; }
-  menu.querySelector('[data-a="link"]').focus({ preventScroll: true });
-}
-function closeShare() { $("#shareMenu").hidden = true; $("#shareBackdrop").hidden = true; }
-$("#shareBackdrop").onclick = e => { e.stopPropagation(); closeShare(); };
 function toast(t) { const el = $("#toast"); el.textContent = t; el.classList.add("show"); setTimeout(() => el.classList.remove("show"), 1800); }
 
 document.addEventListener("keydown", e => {
-  if (e.key === "Escape" && !$("#shareMenu").hidden) return closeShare();
   if (!$("#lb").hidden) {
     if (e.key === "Escape") closeLb(); if (e.key === "ArrowLeft") lbStep(-1); if (e.key === "ArrowRight") lbStep(1);
   } else if (e.key === "Escape" && $("#sidebar").classList.contains("open")) closeMenu();

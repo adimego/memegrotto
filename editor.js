@@ -70,7 +70,7 @@
           <div class="ed-row ed-export">
             <button class="btn primary" id="edDl">⬇️ Download PNG</button>
             <button class="btn" id="edCopy">🖼️ Copy image</button>
-            <button class="btn" id="edShare">↗ Share</button>
+            <button class="btn" id="edShare">📲 Share</button>
             <button class="btn" id="edPost" hidden>🌍 Post to gallery</button>
           </div>
           <p class="ed-note" id="edNote">Drag text on the image to move it. Everything happens on your device; nothing is uploaded.</p>
@@ -371,15 +371,21 @@
     if (!img) return toast("Still loading…");
     navigator.clipboard.write([new ClipboardItem({ "image/png": blob() })]).then(() => { toast("Image copied 🖼️"); window.MVTrack?.(meme.id, "caption"); }, () => toast("Couldn't copy, try Download"));
   }
-  async function shareImg() {
-    const b = await blob().catch(() => null); if (!b) return;
-    const f = new File([b], fname(), { type: "image/png" });
-    if (navigator.share && navigator.canShare && navigator.canShare({ files: [f] })) {
-      try { await navigator.share({ files: [f], title: "My meme · MemeGrotto", text: "Made on MemeGrotto " + (typeof deepLink === "function" ? deepLink(meme) : location.href) }); window.MVTrack?.(meme.id, "caption"); return; }
-      catch (e) { if (e.name === "AbortError") return; }
-    }
-    // no file sharing here: save the image and open the normal share menu for the template link
-    download(); if (typeof openShare === "function") openShare(meme, $("#edShare"));
+  // Share ONLY the rendered image. The PNG is built synchronously (toDataURL) so navigator.share runs inside the tap
+  // (iOS Safari drops the user gesture across an async toBlob). No file sharing: copy the PNG, else download it.
+  function syncFile() {
+    draw(true); const u = cv.toDataURL("image/png"); draw();
+    const bin = atob(u.slice(u.indexOf(",") + 1)), a = new Uint8Array(bin.length);
+    for (let i = 0; i < bin.length; i++) a[i] = bin.charCodeAt(i);
+    return new File([a], fname(), { type: "image/png" });
+  }
+  function shareImg() {
+    if (!img) return toast("Still loading…");
+    const f = syncFile(), done = () => window.MVTrack?.(meme.id, "caption");
+    if (typeof wantsFileShare === "function" && wantsFileShare() && canShareFiles(f)) return shareFile(f, done);
+    if (navigator.clipboard?.write && window.ClipboardItem)
+      return navigator.clipboard.write([new ClipboardItem({ "image/png": f })]).then(() => { toast("Image copied 🖼️"); done(); }, () => download());
+    download();
   }
 
   let openSeq = 0;

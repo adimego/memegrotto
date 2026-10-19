@@ -214,26 +214,9 @@ body{overflow-x:hidden}
 .share:hover{color:#fff;border-color:var(--accent3)}
 .card .row .vote + .share{margin-left:4px}
 .share-backdrop{position:fixed;inset:0;z-index:70}
-.share-backdrop[hidden],.share-menu[hidden]{display:none}
-.share-menu{position:fixed;z-index:71;width:290px;background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:10px;
-  box-shadow:0 20px 60px #000c;display:flex;flex-direction:column;gap:4px;animation:pop .15s}
-.share-menu .sm-head{display:flex;align-items:center;justify-content:space-between;padding:2px 4px 6px}
-.share-menu .sm-x{background:none;border:0;color:var(--muted);font-size:16px;cursor:pointer;width:32px;height:32px;border-radius:50%}
-.share-menu .sm-url input{width:100%;background:var(--bg);border:1px solid var(--line);color:var(--muted);border-radius:10px;padding:7px 9px;font-size:12px}
-.share-menu > button,.share-menu > a{display:flex;align-items:center;gap:8px;background:none;border:0;color:var(--text);text-decoration:none;
-  font-size:14px;padding:9px 10px;border-radius:10px;cursor:pointer;text-align:left}
-.share-menu > button:hover,.share-menu > a:hover,.share-menu > button:focus-visible{background:var(--panel2);outline:none}
-.sm-nets{display:grid;grid-template-columns:repeat(5,1fr);gap:4px;border-top:1px solid var(--line);margin-top:4px;padding-top:8px}
-.sm-nets a{display:flex;flex-direction:column;align-items:center;gap:2px;font-size:10px;color:var(--muted);text-decoration:none;padding:6px 2px;border-radius:10px;text-align:center}
-.sm-nets a span{font-size:20px;line-height:1.2;color:var(--text)}
-.sm-nets a:hover{background:var(--panel2);color:#fff}
 @media (max-width:640px){
   .card .row .share{min-height:44px;min-width:44px;margin-left:4px}
   .card .row .share svg{width:18px;height:18px}
-  .share-menu{left:0;right:0;bottom:0;top:auto;width:auto;border-radius:20px 20px 0 0;padding:12px 14px calc(14px + env(safe-area-inset-bottom))}
-  .share-menu > button,.share-menu > a{min-height:48px;font-size:16px}
-  .share-menu .sm-url input{font-size:16px}
-  .sm-nets a{min-height:56px;font-size:11px}
   .share-backdrop{background:#0008}
 }
 
@@ -455,3 +438,26 @@ button,.btn,a.btn,.tag,.cat{touch-action:manipulation;-webkit-tap-highlight-colo
 @media (max-width:640px){#lbVid{max-height:100%;width:100%;height:auto;transition:transform .2s}}
 /* touch screens: swipe replaces the prev/next arrows, so they never sit over the image */
 @media (max-width:900px) and (pointer:coarse){.lb-nav{display:none}}
+
+/* emoji reactions (shown once supabase/features3.sql is live) */
+.reacts{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0 4px}
+.reacts[hidden]{display:none}
+.react{display:inline-flex;align-items:center;gap:4px;background:var(--panel2);border:1px solid var(--line);color:var(--text);border-radius:999px;
+  padding:4px 10px;min-height:34px;font:inherit;font-size:14px;cursor:pointer;transition:transform .1s,border-color .15s}
+.react .e{font-size:18px;line-height:1}
+.react .n{font-size:13px;color:var(--muted);min-width:0}
+.react.on{border-color:var(--accent);background:color-mix(in srgb,var(--accent) 22%,var(--panel2))}
+.react.on .n{color:#fff}
+.react:active{transform:scale(.92)}
+.rsum{display:flex;gap:8px;font-size:12px;margin-top:4px;color:var(--muted)}
+.rsum[hidden]{display:none}
+.rsum b{font-weight:600;margin-left:2px}
+.share-main{font-weight:700}
+@media (max-width:640px){
+  .reacts{gap:6px;justify-content:space-between}
+  .react{flex:1 1 0;justify-content:center;min-height:44px;padding:4px 6px}
+  .rsum span:nth-child(2){display:none}
+}
+.lb-top-r{display:inline-flex;align-items:center;gap:8px;flex:none}
+.share-main{white-space:nowrap;border-radius:999px;padding:7px 16px}
+@media (max-width:640px){ .share-main{min-height:44px;padding:0 18px;font-size:16px} }

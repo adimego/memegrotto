@@ -185,9 +185,9 @@
     el.innerHTML = `<button class="motd-img" type="button" aria-label="Open meme of the day"><img src="${m.thumb || m.image}" alt="${esc(m.title)}"></button>
       <div class="motd-body"><p class="motd-k">🌞 Meme of the Day · ${esc(d)}</p><h2>${esc(m.title)}</h2>
       <p class="motd-sub">${CAT_META[m.category]?.[0] || ""} ${esc(m.category)}${vcount(m) ? ` · ▲ ${vcount(m)}` : ""}</p>
-      <div class="motd-actions"><button class="btn primary" data-a="open">View</button><button class="btn" data-edit="${esc(m.id)}" type="button">✏️ Caption it</button><button class="btn" data-a="share">↗ Share</button></div></div>`;
+      <div class="motd-actions"><button class="btn primary" data-a="open">View</button><button class="btn" data-edit="${esc(m.id)}" type="button">✏️ Caption it</button><button class="btn" data-a="share" data-share="${esc(m.id)}">📲 Share</button></div></div>`;
     el.querySelector(".motd-img").onclick = el.querySelector('[data-a="open"]').onclick = () => openById(m.id);
-    el.querySelector('[data-a="share"]').onclick = e => share(m, e.currentTarget);
+    el.querySelector('[data-a="share"]').onclick = e => share(m);
   }
   function votesReady() { votesSettled = true; motdPick = null; motd(); }
 
