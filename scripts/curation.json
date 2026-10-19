@@ -6,6 +6,7 @@
   "imgflip-i-ajrtpc",
   "imgflip-i-avawkg",
   "imgflip-i-az4fo4",
+  "imgflip-i-b3rolw",
   "kym-241543903-heads-in-freezers",
   "kym-ancient-aliens",
   "kym-ankha-zone",
@@ -209,13 +210,23 @@
   "reddit-1x3evkc",
   "reddit-1x3nlzw",
   "reddit-1x3r4ju",
+  "reddit-1x4h69z",
   "reddit-1x4qzv7",
   "reddit-1x4zghr",
+  "reddit-1x50035",
+  "reddit-1x6i54l",
   "reddit-1x6p3ax",
   "reddit-1x6pxkm",
+  "reddit-1x6qpd9",
   "reddit-1x7e7dq",
   "reddit-1x7hb3a",
+  "reddit-1x7hm1t",
+  "reddit-1x7qyfn",
+  "reddit-1x7uole",
   "reddit-1x8h66m",
+  "reddit-1x9lzj1",
+  "reddit-1x9nltw",
+  "reddit-1x9uznv",
   "reddit-cpmuiw",
   "reddit-dph2gh",
   "reddit-dsg30j",
@@ -1224,6 +1235,164 @@
     "link",
     "zelda",
     "surge"
+   ]
+  },
+  "kym-scientists-reveal-the-hi": {
+   "category": "Animals",
+   "add_tags": [
+    "cat",
+    "hi"
+   ]
+  },
+  "imgflip-i-b3s2h9": {
+   "category": "Gaming",
+   "add_tags": [
+    "gta 6",
+    "gta"
+   ]
+  },
+  "imgflip-i-b3qjwp": {
+   "category": "History & Politics",
+   "add_tags": [
+    "sun tzu",
+    "fake quote"
+   ]
+  },
+  "imgflip-i-b3omqs": {
+   "category": "Classic Templates",
+   "add_tags": [
+    "batman slapping robin",
+    "attention span"
+   ]
+  },
+  "imgflip-i-b3qrxt": {
+   "category": "Relatable Life",
+   "add_tags": [
+    "good old days",
+    "parents"
+   ]
+  },
+  "imgflip-i-b3r0v9": {
+   "category": "Movies & TV",
+   "add_tags": [
+    "squid game",
+    "youtube comments"
+   ]
+  },
+  "imgflip-i-b3rk1y": {
+   "category": "Movies & TV",
+   "add_tags": [
+    "back to the future",
+    "batman slapping robin",
+    "mcfly"
+   ]
+  },
+  "1x9iayc": {
+   "category": "Tech & Science",
+   "add_tags": [
+    "statistics",
+    "math",
+    "mr incredible"
+   ]
+  },
+  "1x9to42": {
+   "add_tags": [
+    "currency",
+    "mr incredible"
+   ]
+  },
+  "1x9i2hv": {
+   "add_tags": [
+    "statistics",
+    "map"
+   ]
+  },
+  "1x9v265": {
+   "category": "Gaming",
+   "add_tags": [
+    "video games",
+    "pool noodle"
+   ]
+  },
+  "1x9jt8q": {
+   "category": "Relatable Life",
+   "nsfw": true,
+   "add_tags": [
+    "larry david",
+    "guys vs girls"
+   ]
+  },
+  "1x9t6oo": {
+   "category": "Cartoons & Anime",
+   "add_tags": [
+    "spongebob",
+    "comments"
+   ]
+  },
+  "1x9cejk": {
+   "category": "Relatable Life",
+   "add_tags": [
+    "posture",
+    "desk"
+   ]
+  },
+  "1x9ofc4": {
+   "category": "Work & School",
+   "add_tags": [
+    "job market",
+    "degree",
+    "pink panther"
+   ]
+  },
+  "1x97h7w": {
+   "category": "History & Politics",
+   "add_tags": [
+    "france",
+    "french",
+    "deodorant"
+   ]
+  },
+  "1x95wht": {
+   "category": "Relatable Life",
+   "add_tags": [
+    "siblings",
+    "wwe",
+    "punisher"
+   ]
+  },
+  "1x9kll7": {
+   "add_tags": [
+    "frankenstein",
+    "pedantic"
+   ]
+  },
+  "1x9inyg": {
+   "category": "Celebrities & Pop Culture",
+   "add_tags": [
+    "elon musk",
+    "melon tusk"
+   ]
+  },
+  "1x9jpx5": {
+   "category": "Gaming",
+   "add_tags": [
+    "hawkeye",
+    "don't give me hope"
+   ]
+  },
+  "1x9rnh8": {
+   "category": "Work & School",
+   "add_tags": [
+    "boss",
+    "zoom",
+    "meetings"
+   ]
+  },
+  "1x7ue24": {
+   "nsfw": true,
+   "add_tags": [
+    "capitalism",
+    "dystopian"
    ]
   }
  },
@@ -3060,6 +3229,36 @@
    "blank": "images/imgflip-139917843-lisa-simpson-s-presentation.jpg",
    "title": "Lisa Simpson's Presentation",
    "from": "https://imgflip.com/meme/139917843"
+  },
+  "imgflip-i-b3qjwp": {
+   "blank": "images/blank-imgflip-4xcmqa.jpg",
+   "title": "sun tsu fake quote",
+   "from": "https://i.imgflip.com/4xcmqa.jpg"
+  },
+  "imgflip-i-b3rk1y": {
+   "blank": "images/imgflip-438680-batman-slapping-robin.jpg",
+   "title": "Batman Slapping Robin",
+   "from": "https://imgflip.com/meme/438680"
+  },
+  "imgflip-i-b3omqs": {
+   "blank": "images/imgflip-438680-batman-slapping-robin.jpg",
+   "title": "Batman Slapping Robin",
+   "from": "https://imgflip.com/meme/438680"
+  },
+  "imgflip-i-b3r0v9": {
+   "blank": "images/blank-imgflip-9985e5.jpg",
+   "title": "Squid Game (Season 1 vs Season 2)",
+   "from": "https://i.imgflip.com/9985e5.jpg"
+  },
+  "reddit-1x9qnzc": {
+   "blank": "images/blank-imgflip-4cm6dj.jpg",
+   "title": "Peasants",
+   "from": "https://i.imgflip.com/4cm6dj.jpg"
+  },
+  "reddit-1x75cv4": {
+   "blank": "images/imgflip-47235368-goodfellas-hilarious.jpg",
+   "title": "Goodfellas Hilarious",
+   "from": "https://imgflip.com/meme/47235368"
   }
  },
  "blank_rejected": {
@@ -3256,6 +3455,9 @@
   "reddit-1x5udqo": "images/imgflip-179437650-mom-can-we-have.jpg",
   "reddit-1ww5lz7": "images/imgflip-1009362-mother-of-god.jpg",
   "reddit-1x5127g": "images/imgflip-179437650-mom-can-we-have.jpg",
-  "reddit-1ww3y7h": "images/imgflip-179437650-mom-can-we-have.jpg"
+  "reddit-1ww3y7h": "images/imgflip-179437650-mom-can-we-have.jpg",
+  "reddit-1x9kll7": "imgflip:9tpn17",
+  "reddit-1x6l7f4": "images/imgflip-114585149-inhaling-seagull.jpg",
+  "reddit-1x9rnh8": "imgflip:2dhurg"
  }
 }
