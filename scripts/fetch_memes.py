@@ -217,7 +217,8 @@ SUB_TAGS = {"ProgrammerHumor": ["programming", "dev"], "wholesomememes": ["whole
 # Know Your Meme "most viewed" listing (classic, well-documented memes with real names)
 KYM_PAGES = 22   # 16 entries per page
 
-# Specific Know Your Meme entries (image = the entry's og:image)
+# Specific Know Your Meme entries (image = the entry's og:image). Pruned 2026-10-20: do-you-know-da-wae, sonic-r,
+# dr-robotnik, big-the-cat-fishing, knuckles-approval-meter, sonic-twitter (all HTTP 404 on KYM).
 SONIC = ["sonic", "sonic the hedgehog", "sega"]
 KYM_ENTRIES = [
     ("sanic-hegehog", "Sanic Hegehog: Gotta Go Fast", "Gaming", SONIC + ["sanic", "gotta go fast"]),
@@ -236,12 +237,6 @@ KYM_ENTRIES = [
     ("marias-death-sonic-the-hedgehog", "Maria's Death (Shadow the Hedgehog)", "Gaming", SONIC + ["shadow", "maria"]),
     ("pingas", "Pingas (Robotnik)", "Cartoons & Anime", SONIC + ["robotnik", "eggman", "pingas"]),
     ("the-tails-doll", "Tails Doll", "Absurd & Surreal", SONIC + ["tails doll", "creepy", "sonic r"]),
-    ("do-you-know-da-wae", "Do You Know Da Wae (Ugandan Knuckles)", "Gaming", SONIC + ["ugandan knuckles", "da wae", "knuckles"]),
-    ("sonic-r", "Sonic R / Can You Feel the Sunshine", "Gaming", SONIC + ["sonic r", "sunshine"]),
-    ("dr-robotnik", "Dr. Robotnik / Eggman", "Cartoons & Anime", SONIC + ["robotnik", "eggman"]),
-    ("big-the-cat-fishing", "Big the Cat", "Gaming", SONIC + ["big the cat", "froggy"]),
-    ("knuckles-approval-meter", "Knuckles Approves / Denies", "Reaction", SONIC + ["knuckles", "approved", "denied"]),
-    ("sonic-twitter", "Sonic Twitter (Brand Account)", "Celebrities & Pop Culture", SONIC + ["sonic twitter", "brand twitter"]),
 ]
 
 # Imgflip captioned memes scraped from tag pages (title + caption text are filtered for slurs; eyeballed after)
@@ -864,7 +859,7 @@ def main():
                 page = get(f"https://knowyourmeme.com/memes/{slug_}")
                 og = re.search(r"og:image' content='([^']+)'", page) or re.search(r'og:image" content="([^"]+)"', page)
                 if not og: raise ValueError("no og:image")
-                img = og.group(1)
+                img = html.unescape(og.group(1))   # e.g. You&apos;re_Too_Slow_Banner.jpg
             except Exception as e:
                 problems.append(f"KYM {slug_}: {e}"); continue
             add({"id": mid, "title": title, "category": cat, "feed": "kym-entry",
