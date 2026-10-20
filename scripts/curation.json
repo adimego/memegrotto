@@ -214,6 +214,7 @@
   "reddit-1x4qzv7",
   "reddit-1x4zghr",
   "reddit-1x50035",
+  "reddit-1x50e7b",
   "reddit-1x6i54l",
   "reddit-1x6p3ax",
   "reddit-1x6pxkm",
@@ -224,9 +225,16 @@
   "reddit-1x7qyfn",
   "reddit-1x7uole",
   "reddit-1x8h66m",
+  "reddit-1x8k7bs",
+  "reddit-1x93k7t",
   "reddit-1x9lzj1",
   "reddit-1x9nltw",
   "reddit-1x9uznv",
+  "reddit-1x9xfhk",
+  "reddit-1xa9o15",
+  "reddit-1xac96z",
+  "reddit-1xadn3k",
+  "reddit-1xarjkj",
   "reddit-cpmuiw",
   "reddit-dph2gh",
   "reddit-dsg30j",
@@ -1393,6 +1401,246 @@
    "add_tags": [
     "capitalism",
     "dystopian"
+   ]
+  },
+  "1xapapa": {
+   "title": "Hotel Room Chair *Exists*",
+   "nsfw": true
+  },
+  "1x9yfc0": {
+   "title": "That's a Dude Btw (Saddam's Spider Hole CT Scan)",
+   "category": "History & Politics",
+   "nsfw": true,
+   "add_tags": [
+    "saddam hussein",
+    "ct scan"
+   ]
+  },
+  "1xaqlt6": {
+   "title": "What's Really Happening in France",
+   "category": "History & Politics",
+   "add_tags": [
+    "france",
+    "politics"
+   ]
+  },
+  "1xantti": {
+   "title": "Europe vs. America: Solving the Protest Problem",
+   "category": "History & Politics",
+   "add_tags": [
+    "walkable cities",
+    "urbanism"
+   ]
+  },
+  "1x86obv": {
+   "title": "Something Everyone Agrees With Until You Say Its Name",
+   "category": "History & Politics",
+   "add_tags": [
+    "jeopardy",
+    "socialism"
+   ]
+  },
+  "1x5afya": {
+   "title": "My Face Watching 'The Wrongfully Cancelled Comedian'",
+   "category": "Reaction",
+   "add_tags": [
+    "cringe",
+    "reaction"
+   ]
+  },
+  "1x7dssg": {
+   "title": "Listening to Rage Against the Machine on the Way to Work",
+   "add_tags": [
+    "rick and morty",
+    "rage against the machine"
+   ]
+  },
+  "1x5xruk": {
+   "title": "Instead of Texting 'On My Way' (Windswept Cat)",
+   "add_tags": [
+    "cat"
+   ]
+  },
+  "1x9zv7r": {
+   "title": "'What Are Your Hobbies?' (Stay-at-Home Hamster)",
+   "add_tags": [
+    "hamster",
+    "introvert"
+   ]
+  },
+  "1xa44xa": {
+   "title": "Wealth Seems to Have Solved Most of His Problems",
+   "category": "Movies & TV",
+   "add_tags": [
+    "keanu reeves",
+    "angel",
+    "money"
+   ]
+  },
+  "1xago9a": {
+   "title": "How Redditors Describe Gabe Newell",
+   "category": "Gaming",
+   "add_tags": [
+    "gaben",
+    "valve",
+    "giga chad"
+   ]
+  },
+  "1xae6ug": {
+   "title": "Game Corporations vs. Users Vibe-Coding Open Source",
+   "category": "Tech & Science",
+   "add_tags": [
+    "ai",
+    "jerry",
+    "vibe coding"
+   ]
+  },
+  "1xarr4b": {
+   "title": "Making Decisions in Life vs. in Game",
+   "category": "Gaming",
+   "add_tags": [
+    "cat",
+    "decisions"
+   ]
+  },
+  "1xacihd": {
+   "title": "One Piece Pacing Be Like",
+   "category": "Cartoons & Anime",
+   "add_tags": [
+    "one piece",
+    "anime"
+   ]
+  },
+  "1xacwb2": {
+   "title": "When That Hamstring Stretch Hits Just Right",
+   "add_tags": [
+    "hot dog",
+    "stretch"
+   ]
+  },
+  "1x9y18t": {
+   "title": "'I Fk Hate You' *Monster Noises* (Godzilla)",
+   "nsfw": true,
+   "add_tags": [
+    "godzilla",
+    "comic"
+   ]
+  },
+  "1xafdro": {
+   "title": "Brain: Saturday Morning Cartoons Are On in 4 Minutes",
+   "category": "Relatable Life",
+   "add_tags": [
+    "90s",
+    "brain",
+    "saturday morning cartoons"
+   ]
+  },
+  "1xakmxp": {
+   "title": "I Am Ready to Let Go (Shedding Dog)",
+   "add_tags": [
+    "dog",
+    "shedding"
+   ]
+  },
+  "1xam9gr": {
+   "title": "Tiny Gardener Tales: Even Better (Capybaras)",
+   "add_tags": [
+    "capybara",
+    "comic"
+   ]
+  },
+  "1x9z4fx": {
+   "title": "You're Way More Beautiful Than You Think"
+  },
+  "1xadii0": {
+   "title": "Little Mac vs. Super Macho Man: 27?!",
+   "add_tags": [
+    "punch-out",
+    "nintendo"
+   ]
+  },
+  "1xaauf6": {
+   "title": "Who Decided Skeletons Are Scary? (Nervous System)",
+   "category": "Absurd & Surreal",
+   "add_tags": [
+    "skeleton",
+    "nervous system"
+   ]
+  },
+  "1xabuei": {
+   "title": "When the Hangout Has Enough People to Go Nonverbal",
+   "category": "Relatable Life",
+   "add_tags": [
+    "introvert"
+   ]
+  },
+  "1xalfz9": {
+   "title": "'I Don't Vote for Unlucky People' (Coin Flip in the Voting Booth)",
+   "add_tags": [
+    "voting",
+    "snuggle bear"
+   ]
+  },
+  "1x6jyeo": {
+   "title": "'Didn't You Die?' 'That Was Weeks Ago, Dude'"
+  },
+  "imgflip-i-b3t5h3": {
+   "title": "People Suing Now: 'Hello, I Like Money' (Mr. Krabs)",
+   "category": "Cartoons & Anime",
+   "add_tags": [
+    "mr krabs",
+    "spongebob",
+    "lawsuit"
+   ]
+  },
+  "imgflip-i-a1j5pe": {
+   "title": "This Is Where I'd Put My Upvotes, If I Had Any",
+   "category": "Cartoons & Anime",
+   "add_tags": [
+    "fairly oddparents",
+    "upvotes"
+   ]
+  },
+  "imgflip-i-b3tu5t": {
+   "title": "Welcome to the Gang, Kid (Amourshipping Military)",
+   "category": "Cartoons & Anime",
+   "add_tags": [
+    "pokemon",
+    "comic"
+   ]
+  },
+  "imgflip-i-b3tzpx": {
+   "title": "Monday Bunday Post",
+   "category": "Animals",
+   "add_tags": [
+    "bunny",
+    "monday",
+    "cute"
+   ]
+  },
+  "imgflip-i-b3u7ip": {
+   "title": "Play Store: 'Listen Here, You Little Shit'",
+   "category": "Gaming",
+   "nsfw": true,
+   "add_tags": [
+    "offline games",
+    "play store"
+   ]
+  },
+  "imgflip-i-b3uhxz": {
+   "title": "Angry Tom Reading: 'You Only Live Once' (Scientologists)",
+   "category": "Cartoons & Anime",
+   "add_tags": [
+    "tom and jerry",
+    "scientology"
+   ]
+  },
+  "imgflip-i-b3v1al": {
+   "title": "I Told My Shoes I Was Going Jogging and They Laughed",
+   "category": "Relatable Life",
+   "add_tags": [
+    "shoes",
+    "jogging"
    ]
   }
  },
@@ -3259,6 +3507,26 @@
    "blank": "images/imgflip-47235368-goodfellas-hilarious.jpg",
    "title": "Goodfellas Hilarious",
    "from": "https://imgflip.com/meme/47235368"
+  },
+  "imgflip-i-a1j5pe": {
+   "blank": "images/imgflip-3218037-this-is-where-i-d-put-my-trophy-if-i-had-one.jpg",
+   "title": "This Is Where I'd Put My Trophy If I Had One",
+   "from": "https://imgflip.com/meme/3218037"
+  },
+  "imgflip-i-b3uhxz": {
+   "blank": "images/blank-imgflip-3j4ydg.jpg",
+   "title": "Angry Tom Reading Book",
+   "from": "https://i.imgflip.com/3j4ydg.jpg"
+  },
+  "reddit-1xapapa": {
+   "blank": "images/imgflip-119139145-blank-nut-button.jpg",
+   "title": "Blank Nut Button",
+   "from": "https://imgflip.com/meme/119139145"
+  },
+  "reddit-1xafdro": {
+   "blank": "images/imgflip-189601074-brain-before-sleep.jpg",
+   "title": "Brain Before Sleep",
+   "from": "https://imgflip.com/meme/189601074"
   }
  },
  "blank_rejected": {
@@ -3458,6 +3726,9 @@
   "reddit-1ww3y7h": "images/imgflip-179437650-mom-can-we-have.jpg",
   "reddit-1x9kll7": "imgflip:9tpn17",
   "reddit-1x6l7f4": "images/imgflip-114585149-inhaling-seagull.jpg",
-  "reddit-1x9rnh8": "imgflip:2dhurg"
+  "reddit-1x9rnh8": "imgflip:2dhurg",
+  "imgflip-i-b3t5h3": "imgflip:1fir92",
+  "imgflip-i-b3tu5t": "imgflip:29txgn",
+  "reddit-1x9boky": "imgflip:35njyw"
  }
 }
