@@ -256,7 +256,20 @@
   "reddit-f7l9lh",
   "reddit-fgpqqn",
   "reddit-hwvxrc",
-  "reddit-tc3wyb"
+  "reddit-tc3wyb",
+  "imgflip-i-b40y7w",
+  "imgflip-i-b413ig",
+  "imgflip-i-b3z6b8",
+  "reddit-1xcfj5t",
+  "reddit-1xc790s",
+  "reddit-1xbt9bc",
+  "reddit-1xbx4y4",
+  "reddit-1xbua5j",
+  "reddit-1xbfvl3",
+  "reddit-1xbyfoi",
+  "reddit-1xb7l76",
+  "reddit-1xb7unx",
+  "reddit-1xaykcu"
  ],
  "overrides": {
   "kym-me-gusta": {
@@ -1990,6 +2003,329 @@
     "fandom",
     "gif",
     "animated"
+   ]
+  },
+  "imgflip-i-b3z5ww": {
+   "title": "Scumbag Steve: Works From Home, Shows Up Late",
+   "category": "Work & School",
+   "add_tags": [
+    "work from home",
+    "late"
+   ]
+  },
+  "imgflip-i-b3zou0": {
+   "title": "When the Teacher Picks People Whose Hands Aren't Up",
+   "category": "Work & School",
+   "add_tags": [
+    "confused screaming",
+    "filthy frank"
+   ]
+  },
+  "imgflip-i-b3x1v2": {
+   "title": "Disaster Girl: Teacher Giving a Test Not on the Study Guide",
+   "category": "Work & School",
+   "add_tags": [
+    "test",
+    "study guide",
+    "disaster girl"
+   ]
+  },
+  "imgflip-i-b400ee": {
+   "title": "Live Paul Reaction",
+   "category": "Reaction",
+   "add_tags": [
+    "reaction",
+    "smoking"
+   ]
+  },
+  "1xbq3m7": {
+   "title": "How Your Tattoo Artist Looks at You When You Pay Exactly What They Asked",
+   "category": "Relatable Life",
+   "add_tags": [
+    "tattoo",
+    "tipping"
+   ]
+  },
+  "1xc8v9i": {
+   "title": "Cooking While Following a Recipe (Japanese Wagyu From a Grandma)",
+   "add_tags": [
+    "recipe",
+    "wagyu",
+    "food influencer"
+   ]
+  },
+  "1xcaeqz": {
+   "title": "Companies Use AI to Replace Employees, People Use REA to Replace Products",
+   "category": "Tech & Science",
+   "add_tags": [
+    "ai",
+    "saving private ryan",
+    "adobe",
+    "microsoft",
+    "piracy"
+   ]
+  },
+  "1xbxnif": {
+   "title": "A Fair Test for Suitors (Wife Asks About the Bow)",
+   "category": "Relatable Life",
+   "add_tags": [
+    "wife",
+    "bow",
+    "marriage",
+    "odyssey"
+   ]
+  },
+  "1xc59wv": {
+   "title": "The Endless Cycle of Suffering: One More Class, Lunch, Friday",
+   "category": "Work & School",
+   "add_tags": [
+    "wojak",
+    "cycle",
+    "school",
+    "friday"
+   ]
+  },
+  "1xcd4py": {
+   "title": "Looking at Anything on the Internet: That's AI",
+   "category": "Tech & Science",
+   "add_tags": [
+    "ai",
+    "mad max",
+    "ai slop",
+    "that's ai"
+   ]
+  },
+  "1xbu09o": {
+   "title": "EA Shutting Down BioWare: Train Hits School Bus",
+   "category": "Gaming",
+   "add_tags": [
+    "bioware",
+    "ea",
+    "mass effect",
+    "train hits bus"
+   ]
+  },
+  "1xbuqf4": {
+   "title": "Me on Halloween: Do You Want to Break a Flock Cam?",
+   "add_tags": [
+    "halloween",
+    "frozen",
+    "anna",
+    "flock camera",
+    "guy fawkes"
+   ]
+  },
+  "1xbsy6b": {
+   "title": "How the Jury Looks at Me When I Take a Cyanide Pill for a Speeding Ticket",
+   "nsfw": true,
+   "add_tags": [
+    "squid game",
+    "jury",
+    "dark humor",
+    "speeding ticket"
+   ]
+  },
+  "1xc3jf8": {
+   "title": "400 mg of Caffeine, Then: Why Would My Body Do This?",
+   "category": "Relatable Life",
+   "add_tags": [
+    "caffeine",
+    "eric andre",
+    "why would you do this",
+    "tired"
+   ]
+  },
+  "1xbo7cb": {
+   "title": "What If I Told You: Leave Earlier Instead of Getting a Flying Tesla",
+   "category": "Tech & Science",
+   "add_tags": [
+    "morpheus",
+    "what if i told you",
+    "tesla",
+    "tech bro"
+   ]
+  },
+  "1xbzn2x": {
+   "title": "Tech Companies: New Subscriptions to Boost Profits, Won't Fix Software",
+   "category": "Tech & Science",
+   "add_tags": [
+    "wojak",
+    "subscriptions",
+    "tech companies",
+    "updates"
+   ]
+  },
+  "1xcad09": {
+   "title": "Me in My Dorm After Failing the Midterm (Mitch McConnell)",
+   "category": "Work & School",
+   "nsfw": true,
+   "add_tags": [
+    "mitch mcconnell",
+    "midterm",
+    "college",
+    "dorm"
+   ]
+  },
+  "1xbsigd": {
+   "title": "Pete Cooper Revealing 2 Massive PHP Vulnerabilities",
+   "nsfw": true,
+   "add_tags": [
+    "php",
+    "rce",
+    "vulnerability",
+    "jay jay the jet plane"
+   ]
+  },
+  "1xbwyzm": {
+   "title": "AI Taking My Webdev Job vs AI Giving Me Security Patch Work",
+   "add_tags": [
+    "ai",
+    "webdev",
+    "security",
+    "jobs"
+   ]
+  },
+  "1xbqsmx": {
+   "title": "Gym Sign: Don't Vibe Code in Between Sets",
+   "add_tags": [
+    "vibe coding",
+    "gym",
+    "san francisco"
+   ]
+  },
+  "1xceusu": {
+   "title": "BBC Cyber Correspondent Didn't Know PHP Existed Until Yesterday",
+   "add_tags": [
+    "php",
+    "bbc",
+    "news",
+    "vulnerability"
+   ]
+  },
+  "1xc0089": {
+   "title": "Who Would Win? Spicy Math vs Oldest Web Framework (PHP)",
+   "add_tags": [
+    "who would win",
+    "php",
+    "math"
+   ]
+  },
+  "1xcawj4": {
+   "title": "PHP Devs Looking at Rust, Java, JS Devs Mocking PHP RCE",
+   "add_tags": [
+    "php",
+    "rust",
+    "java",
+    "javascript",
+    "rce"
+   ]
+  },
+  "1xbat13": {
+   "title": "Easy to Generate Private Key: Put It on Your Root Certificates",
+   "add_tags": [
+    "private key",
+    "certificates",
+    "security",
+    "olives"
+   ]
+  },
+  "1xc8cpl": {
+   "title": "I'm Going to Miss This Place (GTA Liquor Store, Real vs Game)",
+   "add_tags": [
+    "gta",
+    "gta v",
+    "liquor store",
+    "real life"
+   ]
+  },
+  "1xc2lnx": {
+   "title": "Enchantment? Thank You BioWare for the Memories",
+   "add_tags": [
+    "bioware",
+    "dragon age",
+    "enchantment",
+    "sandal"
+   ]
+  },
+  "1xc2x47": {
+   "title": "Remember There Was Another Person in the Plane When Amelia Earhart Went Missing",
+   "add_tags": [
+    "amelia earhart",
+    "forgotten",
+    "history"
+   ]
+  },
+  "1xc780e": {
+   "title": "Bernie: I Am Once Again Asking Where the Fuck Are the Epstein Files",
+   "category": "History & Politics",
+   "nsfw": true,
+   "add_tags": [
+    "bernie sanders",
+    "once again asking",
+    "epstein",
+    "epstein files"
+   ]
+  },
+  "1xbxmqh": {
+   "title": "Republicans: Swastika Flag vs Fare-Free Buses (Te Fiti / Te Ka)",
+   "category": "History & Politics",
+   "add_tags": [
+    "moana",
+    "te fiti",
+    "te ka",
+    "republicans",
+    "politics",
+    "new york",
+    "buses"
+   ]
+  },
+  "1xbjl6e": {
+   "title": "Lonely Cat: Don't Fucking Touch Me!",
+   "category": "Animals",
+   "nsfw": true,
+   "add_tags": [
+    "cat",
+    "lonely",
+    "comic"
+   ]
+  },
+  "1xbsmc0": {
+   "title": "Higher Education Than My Parents, but They Bought a House at My Age",
+   "add_tags": [
+    "housing",
+    "economy",
+    "melon",
+    "millennials"
+   ]
+  },
+  "1x8hvfx": {
+   "title": "Rockstar After GTA VI Gets Decompiled by AI",
+   "category": "Gaming",
+   "add_tags": [
+    "rockstar",
+    "gta vi",
+    "ai",
+    "shocked"
+   ]
+  },
+  "1xaofr1": {
+   "title": "Perfectionist and Procrastinator Cat",
+   "category": "Animals",
+   "add_tags": [
+    "cat",
+    "perfectionist",
+    "procrastination",
+    "stressed"
+   ]
+  },
+  "1xc3ap7": {
+   "title": "Sticks: The Government and Aliens Are Shit (Sticks x Shadow)",
+   "nsfw": true,
+   "add_tags": [
+    "sticks",
+    "shadow",
+    "comic",
+    "conspiracy"
    ]
   }
  },
@@ -3896,6 +4232,51 @@
    "blank": "images/blank-imgflip-3j3gvd.jpg",
    "title": "Cuphead Flower",
    "from": "https://i.imgflip.com/3j3gvd.jpg"
+  },
+  "imgflip-i-b3z5ww": {
+   "blank": "images/blank-imgflip-1bgy.jpg",
+   "title": "Scumbag Steve",
+   "from": "https://i.imgflip.com/1bgy.jpg"
+  },
+  "imgflip-i-b3zou0": {
+   "blank": "images/blank-imgflip-28z6cs.jpg",
+   "title": "filthy frank confused scream",
+   "from": "https://i.imgflip.com/28z6cs.jpg"
+  },
+  "imgflip-i-b3x1v2": {
+   "blank": "images/imgflip-97984-disaster-girl.jpg",
+   "title": "Disaster Girl",
+   "from": "https://imgflip.com/meme/97984"
+  },
+  "reddit-1xbu09o": {
+   "blank": "images/imgflip-247113703-a-train-hitting-a-school-bus.jpg",
+   "title": "A train hitting a school bus",
+   "from": "https://imgflip.com/meme/247113703"
+  },
+  "reddit-1xc59wv": {
+   "blank": "images/blank-imgflip-76oas3.jpg",
+   "title": "?Sad wojak cycle",
+   "from": "https://i.imgflip.com/76oas3.jpg"
+  },
+  "reddit-1xc3jf8": {
+   "blank": "images/imgflip-135678846-who-killed-hannibal.jpg",
+   "title": "Who Killed Hannibal",
+   "from": "https://imgflip.com/meme/135678846"
+  },
+  "reddit-1xbwyzm": {
+   "blank": "images/imgflip-197671929-kombucha-girl.jpg",
+   "title": "Kombucha Girl",
+   "from": "https://imgflip.com/meme/197671929"
+  },
+  "reddit-1xbsigd": {
+   "blank": "images/blank-imgflip-31k2h0.jpg",
+   "title": "Jay jay the plane",
+   "from": "https://i.imgflip.com/31k2h0.jpg"
+  },
+  "reddit-1xc780e": {
+   "blank": "images/imgflip-224015000-bernie-sanders-once-again-asking.jpg",
+   "title": "Bernie Sanders Once Again Asking",
+   "from": "https://imgflip.com/meme/224015000"
   }
  },
  "blank_rejected": {
@@ -4100,6 +4481,8 @@
   "imgflip-i-b3tu5t": "imgflip:29txgn",
   "reddit-1x9boky": "imgflip:35njyw",
   "reddit-1xbfwzc": "imgflip:7hyh5e",
-  "reddit-1xb3d2j": "imgflip:3e4kkg"
+  "reddit-1xb3d2j": "imgflip:3e4kkg",
+  "imgflip-i-b400ee": "imgflip:6u6ylb",
+  "reddit-1xc0089": "images/imgflip-101910402-who-would-win.jpg"
  }
 }
